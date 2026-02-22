@@ -1,25 +1,31 @@
-/* ===== ROYAL REGENT GLOBAL STYLES — Nature & Fresh Theme ===== */
+/* ===== ROYAL REGENT GLOBAL STYLES — Modern Green ===== */
 :root {
-    --g1: #4CAF50;
-    --g2: #2E7D32;
-    --g3: #1B5E20;
-    --green-light: #4CAF50;
-    --green-mid: #388E3C;
-    --green-dark: #1B5E20;
-    --yellow: #F9C74F;
-    --yellow-soft: #FFF8E1;
-    --gradient: linear-gradient(135deg, #6ABF69 0%, #4CAF50 50%, #2E7D32 100%);
-    --dark: #FFFFFF;
-    --dark-2: #F1F8F1;
-    --dark-3: #E8F5E9;
-    --surface: #F7FBF7;
-    --surface-2: #EEF7EE;
-    --border: rgba(76,175,80,0.2);
-    --text: #1a3a1a;
-    --text-muted: rgba(26,58,26,0.6);
+    --g1: #34d399;
+    --g2: #10b981;
+    --g3: #059669;
+    --green-light: #34d399;
+    --green-mid: #10b981;
+    --green-dark: #047857;
+    --mint: #a7f3d0;
+    --yellow: #fbbf24;
+    --yellow-soft: #fefce8;
+    --gradient: linear-gradient(135deg, #34d399 0%, #10b981 50%, #059669 100%);
+    --gradient-subtle: linear-gradient(135deg, rgba(52,211,153,0.12) 0%, rgba(16,185,129,0.06) 100%);
+    --dark: #fafdfb;
+    --dark-2: #f0faf4;
+    --dark-3: #e6f7ed;
+    --surface: #f5fbf7;
+    --surface-2: #ecf8f0;
+    --border: rgba(16,185,129,0.15);
+    --text: #0f2a1d;
+    --text-muted: rgba(15,42,29,0.55);
     --white: #ffffff;
     --max: 1200px;
     --nav-h: 72px;
+    --shadow-sm: 0 1px 3px rgba(16,185,129,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 16px rgba(16,185,129,0.08), 0 2px 6px rgba(0,0,0,0.04);
+    --shadow-lg: 0 12px 40px rgba(16,185,129,0.12), 0 4px 12px rgba(0,0,0,0.04);
+    --radius: 16px;
 }
 
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -28,7 +34,7 @@ body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--dark);color
 
 /* ===== NAVBAR ===== */
 #navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);transition:background 0.4s,box-shadow 0.4s;}
-#navbar.scrolled{background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);box-shadow:0 1px 0 var(--border);}
+#navbar.scrolled{background:rgba(250,253,251,0.88);backdrop-filter:blur(20px) saturate(1.4);box-shadow:0 1px 0 var(--border),0 4px 20px rgba(16,185,129,0.04);}
 .nav-container{max-width:var(--max);margin:0 auto;padding:0 32px;height:100%;display:flex;align-items:center;justify-content:space-between;}
 .nav-logo img{height:64px;display:block;}
 .nav-links{display:flex;list-style:none;gap:8px;align-items:center;}

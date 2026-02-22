@@ -17,12 +17,12 @@
     <ul class="nav-links" id="navLinks">
       <li><a href="about.html">About</a></li>
       <li class="has-dropdown">
-        <a href="capabilities.html">Capabilities <span class="arrow">&#8964;</span></a>
+        <a href="#" onclick="return false" style="cursor:default">Capabilities <span class="arrow">&#8964;</span></a>
         <ul class="dropdown">
-          <li><a href="capabilities/plastic-figures.html">Plastic Figures &amp; Functional Toys</a></li>
-          <li><a href="capabilities/plush-toys.html">Plush Figures &amp; Soft Toys</a></li>
+          <li><a href="capabilities/plastic-figures.html">Plastic</a></li>
+          <li><a href="capabilities/plush-toys.html">Plush</a></li>
           <li><a href="capabilities/dolls.html">Dolls</a></li>
-          <li><a href="capabilities/rc-vehicles.html">Remote Control Vehicles</a></li>
+          <li><a href="capabilities/rc-vehicles.html">RC</a></li>
           <li><a href="capabilities/costumes.html">Costumes</a></li>
         </ul>
       </li>
@@ -54,163 +54,202 @@
   </div>
 </section>
 
-<!-- HISTORY TIMELINE -->
-<section id="history" style="background:var(--dark-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:120px 0;">
-  <div class="container">
-    <div class="section-label reveal-up">Our History</div>
-    <h2 class="section-title reveal-up delay-1">Nearly four decades<br>of <span>continuous growth.</span></h2>
-    <div class="tl-layout">
+<!-- HISTORY TIMELINE — Scroll-Driven -->
+<div id="history" class="tl-scroll-outer">
+  <div class="tl-scroll-sticky">
+    <div class="tl-grid-bg"></div>
+    <div class="tl-watermark" id="tlWatermark">1987</div>
 
-      <!-- Left: Year Nav -->
-      <div class="tl-nav">
-        <div class="tl-track"></div>
-        <button class="tl-yr active" data-tl="0">1987</button>
-        <button class="tl-yr" data-tl="1">2000</button>
-        <button class="tl-yr" data-tl="2">2010</button>
-        <button class="tl-yr" data-tl="3">2016</button>
-        <button class="tl-yr" data-tl="4">2023</button>
-        <button class="tl-yr" data-tl="5">2025</button>
+    <div class="container tl-container">
+      <div class="tl-header">
+        <span class="section-label">Development History</span>
+        <h2 class="section-title">Nearly four decades<br>of <span>continuous growth.</span></h2>
       </div>
 
-      <!-- Right: Content -->
-      <div class="tl-panels">
-        <div class="tl-panel active" data-tl="0">
-          <div class="tl-big-year">1987</div>
-          <h3 class="tl-title">Founded in Sha Tau Kok</h3>
-          <p class="tl-desc">Royal Regent was established in Sha Tau Kok, Hong Kong — beginning as a focused plastic toy manufacturer. From the outset, the company built the quality systems, client relationships, and manufacturing discipline that continue to define it today.</p>
+      <div class="tl-body">
+
+        <!-- Left: Year Nav -->
+        <div class="tl-nav-col">
+          <div class="tl-line-wrap">
+            <div class="tl-line-bg"></div>
+            <div class="tl-line-fill" id="tlLineFill"></div>
+          </div>
+          <button class="tl-yr active" data-tl="0" data-year="1987"><span class="tl-dot"></span><span class="tl-yr-text">1987</span></button>
+          <button class="tl-yr" data-tl="1" data-year="1990"><span class="tl-dot"></span><span class="tl-yr-text">1990</span></button>
+          <button class="tl-yr" data-tl="2" data-year="1997"><span class="tl-dot"></span><span class="tl-yr-text">1997</span></button>
+          <button class="tl-yr" data-tl="3" data-year="2000"><span class="tl-dot"></span><span class="tl-yr-text">2000</span></button>
+          <button class="tl-yr" data-tl="4" data-year="2003"><span class="tl-dot"></span><span class="tl-yr-text">2003</span></button>
+          <button class="tl-yr" data-tl="5" data-year="2005"><span class="tl-dot"></span><span class="tl-yr-text">2005</span></button>
+          <button class="tl-yr" data-tl="6" data-year="2010"><span class="tl-dot"></span><span class="tl-yr-text">2010</span></button>
+          <button class="tl-yr" data-tl="7" data-year="2016"><span class="tl-dot"></span><span class="tl-yr-text">2016</span></button>
+          <button class="tl-yr" data-tl="8" data-year="2018"><span class="tl-dot"></span><span class="tl-yr-text">2018</span></button>
+          <button class="tl-yr" data-tl="9" data-year="2023"><span class="tl-dot"></span><span class="tl-yr-text">2023</span></button>
+          <button class="tl-yr" data-tl="10" data-year="2025"><span class="tl-dot"></span><span class="tl-yr-text">2025</span></button>
         </div>
-        <div class="tl-panel" data-tl="1">
-          <div class="tl-big-year">2000</div>
-          <h3 class="tl-title">Entering Plush & Soft Toys</h3>
-          <p class="tl-desc">Royal Regent expanded beyond plastic manufacturing by launching dedicated plush and soft toy production lines. This milestone opened entirely new product categories and allowed the company to serve a broader range of global brand partners.</p>
-        </div>
-        <div class="tl-panel" data-tl="2">
-          <div class="tl-big-year">2010</div>
-          <h3 class="tl-title">Doll Lines Integrated</h3>
-          <p class="tl-desc">Doll manufacturing was fully integrated, combining precision plastic molding with in-house sewing craftsmanship. The result was a complete production capability for fashion dolls and baby dolls — face painting, hair rooting, outfit assembly — all under one roof.</p>
-        </div>
-        <div class="tl-panel" data-tl="3">
-          <div class="tl-big-year">2016</div>
-          <h3 class="tl-title">Remote Control Vehicles</h3>
-          <p class="tl-desc">Royal Regent entered RC vehicle manufacturing — the company's most technically demanding category. This expansion required advanced electronics integration, structural engineering expertise, and compliance with FCC, CE, and ASTM F963 safety standards.</p>
-        </div>
-        <div class="tl-panel" data-tl="4">
-          <div class="tl-big-year">2023</div>
-          <h3 class="tl-title">Indonesia Phase I</h3>
-          <p class="tl-desc">A landmark year: Royal Regent established its first Southeast Asian manufacturing facility in Indonesia. Phase I marked a strategic step in supply chain diversification — reducing concentration risk and positioning the company closer to key international markets.</p>
-        </div>
-        <div class="tl-panel" data-tl="5">
-          <div class="tl-big-year">2025</div>
-          <h3 class="tl-title">Indonesia Phase II</h3>
-          <p class="tl-desc">Indonesia Phase II commenced, scaling production capacity and deepening Royal Regent's Southeast Asian footprint. This expansion strengthens our ability to serve international customers with faster lead times, greater flexibility, and a more resilient global supply chain.</p>
+
+        <!-- Right: Content -->
+        <div class="tl-content-area">
+
+          <div class="tl-panel active" data-tl="0">
+            <div class="tl-meta"><span class="tl-count-badge">01 &nbsp;/&nbsp; 11</span><span class="tl-loc-badge">&#127968; Hong Kong</span></div>
+            <div class="tl-big-yr">1987</div>
+            <h3 class="tl-title">Founded in Sha Tau Kok</h3>
+            <p class="tl-desc">The company was founded in Sha Tau Kok, marking the official beginning of its journey in manufacturing.</p>
+          </div>
+
+          <div class="tl-panel" data-tl="1">
+            <div class="tl-meta"><span class="tl-count-badge">02 &nbsp;/&nbsp; 11</span><span class="tl-loc-badge">&#127464;&#127475; China</span></div>
+            <div class="tl-big-yr">1990</div>
+            <h3 class="tl-title">Relocated to Longhua</h3>
+            <p class="tl-desc">Relocated to Longhua, significantly expanding production scale.</p>
+          </div>
+
+          <div class="tl-panel" data-tl="2">
+            <div class="tl-meta"><span class="tl-count-badge">03 &nbsp;/&nbsp; 11</span><span class="tl-loc-badge">&#127464;&#127475; China</span></div>
+            <div class="tl-big-yr">1997</div>
+            <h3 class="tl-title">Expanded to Dongguan</h3>
+            <p class="tl-desc">Expanded operations to Dongguan to meet rapidly growing market demand.</p>
+          </div>
+
+          <div class="tl-panel" data-tl="3">
+            <div class="tl-meta"><span class="tl-count-badge">04 &nbsp;/&nbsp; 11</span><span class="tl-loc-badge">&#127464;&#127475; China</span></div>
+            <div class="tl-big-yr">2000</div>
+            <h3 class="tl-title">Dongguan Factory Expansion</h3>
+            <p class="tl-desc">Completion and commissioning of the Dongguan factory expansion, introducing plush toys and costume production lines and marking the company&rsquo;s first entry into soft toy manufacturing.</p>
+          </div>
+
+          <div class="tl-panel" data-tl="4">
+            <div class="tl-meta"><span class="tl-count-badge">05 &nbsp;/&nbsp; 11</span><span class="tl-loc-badge">&#127464;&#127475; China</span></div>
+            <div class="tl-big-yr">2003</div>
+            <h3 class="tl-title">Extended to Heyuan</h3>
+            <p class="tl-desc">Extended manufacturing footprint to Heyuan, establishing a multi-location operation to enhance supply chain resilience.</p>
+          </div>
+
+          <div class="tl-panel" data-tl="5">
+            <div class="tl-meta"><span class="tl-count-badge">06 &nbsp;/&nbsp; 11</span><span class="tl-loc-badge">&#127464;&#127475; China</span></div>
+            <div class="tl-big-yr">2005</div>
+            <h3 class="tl-title">Heyuan Factory Expansion</h3>
+            <p class="tl-desc">Completion of the Heyuan factory expansion, effectively supporting product line diversification and capacity upgrades.</p>
+          </div>
+
+          <div class="tl-panel" data-tl="6">
+            <div class="tl-meta"><span class="tl-count-badge">07 &nbsp;/&nbsp; 11</span><span class="tl-loc-badge">&#127464;&#127475; China</span></div>
+            <div class="tl-big-yr">2010</div>
+            <h3 class="tl-title">Doll Production Lines</h3>
+            <p class="tl-desc">Launched doll production lines, integrating sewing craftsmanship with plastic molding technology.</p>
+          </div>
+
+          <div class="tl-panel" data-tl="7">
+            <div class="tl-meta"><span class="tl-count-badge">08 &nbsp;/&nbsp; 11</span><span class="tl-loc-badge">&#127464;&#127475; China</span></div>
+            <div class="tl-big-yr">2016</div>
+            <h3 class="tl-title">RC Vehicle Manufacturing</h3>
+            <p class="tl-desc">Entered remote control vehicle manufacturing, addressing higher technical requirements and enhancing capabilities in structural complexity and electronic integration.</p>
+          </div>
+
+          <div class="tl-panel" data-tl="8">
+            <div class="tl-meta"><span class="tl-count-badge">09 &nbsp;/&nbsp; 11</span><span class="tl-loc-badge">&#127464;&#127475; China</span></div>
+            <div class="tl-big-yr">2018</div>
+            <h3 class="tl-title">Expanded to Hunan</h3>
+            <p class="tl-desc">Expanded production to Hunan, significantly broadening manufacturing capacity and geographic coverage across China.</p>
+          </div>
+
+          <div class="tl-panel" data-tl="9">
+            <div class="tl-meta"><span class="tl-count-badge">10 &nbsp;/&nbsp; 11</span><span class="tl-loc-badge">&#127470;&#127465; Indonesia</span></div>
+            <div class="tl-big-yr">2023</div>
+            <h3 class="tl-title">Indonesia Phase I</h3>
+            <p class="tl-desc">Officially entered the Indonesian market, marking a key milestone in the company&rsquo;s global expansion strategy and promoting supply chain diversification.</p>
+          </div>
+
+          <div class="tl-panel" data-tl="10">
+            <div class="tl-meta"><span class="tl-count-badge">11 &nbsp;/&nbsp; 11</span><span class="tl-loc-badge">&#127470;&#127465; Indonesia</span></div>
+            <div class="tl-big-yr">2025</div>
+            <h3 class="tl-title">Indonesia Phase II</h3>
+            <p class="tl-desc">Phase II of the Indonesia factory commenced operations, further expanding regional production capacity and strengthening responsiveness to international markets.</p>
+          </div>
+
         </div>
       </div>
+    </div>
 
+    <!-- Scroll progress indicator -->
+    <div class="tl-scroll-progress">
+      <div class="tl-scroll-bar" id="tlScrollBar"></div>
     </div>
   </div>
-</section>
+</div>
 
 <style>
-.tl-layout{display:grid;grid-template-columns:180px 1fr;gap:80px;align-items:start;}
-.tl-nav{position:relative;padding-left:28px;}
-.tl-track{position:absolute;left:6px;top:12px;bottom:12px;width:2px;background:var(--border);}
-.tl-yr{display:block;width:100%;text-align:left;background:none;border:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:1rem;font-weight:700;color:var(--text-muted);padding:14px 0;position:relative;transition:all 0.3s;letter-spacing:-0.01em;}
-.tl-yr::before{content:'';position:absolute;left:-25px;top:50%;transform:translateY(-50%);width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid var(--border);transition:all 0.3s;}
-.tl-yr.active{font-size:1.9rem;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2;}
-.tl-yr.active::before{background:var(--green-mid);border-color:var(--green-mid);width:14px;height:14px;left:-27px;box-shadow:0 0 0 4px rgba(76,175,80,0.15);}
-.tl-yr:hover:not(.active){color:var(--text);}
-.tl-panels{position:relative;min-height:320px;}
-.tl-panel{display:none;}
-.tl-panel.active{display:block;animation:tlFade 0.4s ease;}
-@keyframes tlFade{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
-.tl-big-year{font-family:'Inter',sans-serif;font-size:clamp(4rem,8vw,7rem);font-weight:900;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:20px;letter-spacing:-0.04em;}
-.tl-title{font-family:'Inter',sans-serif;font-size:1.6rem;font-weight:800;color:var(--text);margin-bottom:16px;letter-spacing:-0.02em;}
-.tl-desc{font-size:1rem;color:var(--text-muted);line-height:1.8;max-width:560px;}
-@media(max-width:768px){.tl-layout{grid-template-columns:1fr;gap:40px;}.tl-nav{display:flex;flex-wrap:wrap;gap:8px;padding-left:0;}.tl-track{display:none;}.tl-yr{width:auto;padding:6px 14px;font-size:0.85rem!important;background:rgba(76,175,80,0.06)!important;border:1px solid var(--border)!important;border-radius:20px!important;-webkit-text-fill-color:var(--text-muted)!important;color:var(--text-muted)!important;}.tl-yr::before{display:none;}.tl-yr.active{background:var(--gradient)!important;-webkit-text-fill-color:white!important;color:white!important;border-color:transparent!important;}.tl-big-year{font-size:3.5rem;}}
+/* ===== SCROLL-DRIVEN TIMELINE ===== */
+.tl-scroll-outer{position:relative;height:calc(100vh * 11);}
+.tl-scroll-sticky{position:sticky;top:0;height:100vh;overflow:hidden;background:linear-gradient(160deg,#f0faf4 0%,#e6f7ed 60%,#f5fbf7 100%);}
+.tl-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(16,185,129,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(16,185,129,0.04) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;}
+.tl-watermark{position:absolute;right:-0.03em;top:50%;transform:translateY(-50%);font-family:'Inter',sans-serif;font-size:clamp(160px,20vw,280px);font-weight:900;color:rgba(16,185,129,0.06);letter-spacing:-0.05em;line-height:1;pointer-events:none;user-select:none;transition:opacity 0.4s;}
+.tl-container{position:relative;z-index:2;padding-top:100px;}
+.tl-header{margin-bottom:48px;}
+.tl-header .section-title{margin-bottom:0;}
+.tl-body{display:grid;grid-template-columns:180px 1fr;gap:60px;align-items:start;}
+
+/* Left nav column */
+.tl-nav-col{position:relative;padding-left:28px;}
+.tl-line-wrap{position:absolute;left:5px;top:10px;bottom:10px;width:2px;}
+.tl-line-bg{position:absolute;inset:0;background:rgba(16,185,129,0.15);border-radius:2px;}
+.tl-line-fill{position:absolute;top:0;left:0;width:100%;height:0%;background:var(--gradient);border-radius:2px;transition:height 0.5s cubic-bezier(0.4,0,0.2,1);}
+
+/* Year buttons */
+.tl-yr{display:flex;align-items:center;gap:14px;width:100%;background:none;border:none;cursor:pointer;padding:7px 0;position:relative;transition:all 0.3s;}
+.tl-dot{width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid rgba(16,185,129,0.25);flex-shrink:0;position:relative;z-index:2;transition:all 0.35s cubic-bezier(0.4,0,0.2,1);}
+.tl-yr-text{font-family:'Inter',sans-serif;font-size:0.82rem;font-weight:600;color:var(--text-muted);transition:all 0.35s;letter-spacing:-0.01em;line-height:1;}
+.tl-yr.active .tl-dot{width:14px;height:14px;background:var(--green-mid);border-color:var(--green-mid);box-shadow:0 0 0 4px rgba(16,185,129,0.18),0 0 0 9px rgba(16,185,129,0.07);}
+.tl-yr.active .tl-yr-text{font-size:1.15rem;font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-0.02em;}
+.tl-yr:hover:not(.active) .tl-dot{border-color:var(--green-mid);background:rgba(16,185,129,0.12);}
+.tl-yr:hover:not(.active) .tl-yr-text{color:var(--text);}
+
+/* Content panels */
+.tl-content-area{position:relative;min-height:380px;}
+.tl-panel{display:none;padding-bottom:40px;}
+.tl-panel.active{display:block;}
+.tl-panel.tl-enter{animation:tlEnter 0.5s cubic-bezier(0.4,0,0.2,1) forwards;}
+.tl-panel.tl-exit{animation:tlExit 0.25s ease forwards;}
+@keyframes tlEnter{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+@keyframes tlExit{from{opacity:1;transform:translateY(0);}to{opacity:0;transform:translateY(-14px);}}
+
+/* Meta row */
+.tl-meta{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.tl-count-badge{font-size:0.7rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--green-mid);background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:20px;padding:4px 12px;}
+.tl-loc-badge{font-size:0.82rem;font-weight:500;color:var(--text-muted);}
+
+/* Big year */
+.tl-big-yr{font-family:'Inter',sans-serif;font-size:clamp(4.5rem,10vw,8.5rem);font-weight:900;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:0.9;margin-bottom:20px;letter-spacing:-0.05em;}
+
+/* Title & desc */
+.tl-title{font-family:'Inter',sans-serif;font-size:clamp(1.3rem,2.5vw,1.8rem);font-weight:800;color:var(--text);margin-bottom:14px;letter-spacing:-0.025em;line-height:1.2;}
+.tl-desc{font-size:0.95rem;color:var(--text-muted);line-height:1.8;max-width:520px;}
+
+/* Scroll progress bar */
+.tl-scroll-progress{position:absolute;right:32px;top:50%;transform:translateY(-50%);width:3px;height:200px;background:rgba(16,185,129,0.12);border-radius:3px;}
+.tl-scroll-bar{position:absolute;top:0;left:0;width:100%;height:0%;background:var(--gradient);border-radius:3px;transition:height 0.3s ease;}
+
+/* Responsive */
+@media(max-width:900px){
+  .tl-scroll-outer{height:calc(100vh * 8);}
+  .tl-body{grid-template-columns:140px 1fr;gap:32px;}
+}
+@media(max-width:768px){
+  .tl-scroll-outer{height:calc(100vh * 6);}
+  .tl-body{grid-template-columns:1fr;gap:24px;}
+  .tl-nav-col{display:flex;flex-wrap:wrap;gap:6px;padding-left:0;}
+  .tl-line-wrap{display:none;}
+  .tl-yr{width:auto;padding:4px 10px;background:rgba(16,185,129,0.06);border:1px solid var(--border);border-radius:20px;gap:0;}
+  .tl-dot{display:none;}
+  .tl-yr-text{font-size:0.78rem!important;color:var(--text-muted)!important;-webkit-text-fill-color:var(--text-muted)!important;}
+  .tl-yr.active{background:var(--gradient);border-color:transparent;}
+  .tl-yr.active .tl-yr-text{-webkit-text-fill-color:white!important;font-size:0.78rem!important;}
+  .tl-big-yr{font-size:3.5rem;}
+  .tl-watermark{display:none;}
+  .tl-scroll-progress{display:none;}
+  .tl-container{padding-top:80px;}
+}
 </style>
-
-<!-- MANUFACTURING SITES -->
-<section style="background:#fff;">
-  <div class="container">
-    <div class="section-label reveal-up">Global Operations</div>
-    <h2 class="section-title reveal-up delay-1">Four sites.<br>One integrated <span>supply chain.</span></h2>
-    <div class="sites-grid">
-      <div class="site-card reveal-up delay-1">
-        <div class="site-num">01</div>
-        <h3>Dongguan, China</h3>
-        <p>Our flagship facility and operational headquarters. Home to in-house mold development, injection molding, and plastic figure production — the core of our manufacturing capability since our early years.</p>
-      </div>
-      <div class="site-card reveal-up delay-2">
-        <div class="site-num">02</div>
-        <h3>Heyuan, China</h3>
-        <p>Dedicated to plush and soft toy production. This facility handles material sourcing, pattern cutting, sewing, stuffing, and final quality inspection for all plush and character soft toy lines.</p>
-      </div>
-      <div class="site-card reveal-up delay-3">
-        <div class="site-num">03</div>
-        <h3>Hunan, China</h3>
-        <p>Specialising in doll and costume production. The Hunan site brings together skilled garment and assembly workers to produce fashion dolls, baby dolls, and dress-up costume ranges.</p>
-      </div>
-      <div class="site-card reveal-up delay-3">
-        <div class="site-num">04</div>
-        <h3>Indonesia</h3>
-        <p>Our newest and growing facility, established in 2023 with Phase I and expanded through Phase II in 2025. A strategic asset for supply chain diversification and proximity to key international markets.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- VALUES -->
-<section style="background:var(--surface);border-top:1px solid var(--border);">
-  <div class="container">
-    <div class="section-label reveal-up">What We Stand For</div>
-    <h2 class="section-title reveal-up delay-1">Principles that guide<br>everything we <span>manufacture.</span></h2>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px;">
-      <div class="site-card reveal-up delay-1">
-        <div style="width:48px;height:48px;background:rgba(76,175,80,0.12);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" stroke="#2E7D32" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="site-num">Quality</div>
-        <h3 style="font-size:1.3rem;font-weight:700;color:var(--text);margin-bottom:12px;">Built-in, not bolted-on</h3>
-        <p>Every product we manufacture is produced to ASTM F963 (US) and EN 71 (EU) safety standards. Quality is embedded at every stage — from material selection and mold design through assembly and final inspection — not added as an afterthought.</p>
-      </div>
-      <div class="site-card reveal-up delay-2">
-        <div style="width:48px;height:48px;background:rgba(76,175,80,0.12);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" stroke="#2E7D32" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="site-num">Partnership</div>
-        <h3 style="font-size:1.3rem;font-weight:700;color:var(--text);margin-bottom:12px;">Long-term, not transactional</h3>
-        <p>We work as an extension of our clients' teams — providing OEM and ODM services that go beyond manufacturing. From concept development and sampling to production planning and export logistics, we are a partner at every stage of the product journey.</p>
-      </div>
-      <div class="site-card reveal-up delay-3">
-        <div style="width:48px;height:48px;background:rgba(76,175,80,0.12);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" stroke="#2E7D32" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="site-num">Compliance</div>
-        <h3 style="font-size:1.3rem;font-weight:700;color:var(--text);margin-bottom:12px;">Every market, every standard</h3>
-        <p>Navigating safety regulations across the US, EU, and other markets is complex. Royal Regent maintains rigorous compliance processes across all manufacturing sites to ensure every product meets the regulatory requirements of its destination market.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA BANNER -->
-<section class="cta-banner">
-  <div class="container">
-    <div class="section-label reveal-up" style="text-align:center;">Start a Conversation</div>
-    <h2 class="reveal-up delay-1">Ready to start a project?</h2>
-    <p class="reveal-up delay-2">Tell us about your product. Whether you need OEM manufacturing, ODM development, or a sampling run — our team is ready to help bring your vision to life.</p>
-    <div class="reveal-up delay-3" style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
-      <a href="contact.html" class="btn btn-primary">Get In Touch &rarr;</a>
-      <a href="capabilities.html" class="btn btn-ghost">Explore Capabilities</a>
-    </div>
-  </div>
-</section>
 
 <!-- FOOTER -->
 <footer>
@@ -223,7 +262,7 @@
       <div class="footer-col">
         <h4>Company</h4>
         <a href="about.html">About Us</a>
-        <a href="capabilities.html">Capabilities</a>
+        <a href="capabilities/plastic-figures.html">Capabilities</a>
         <a href="careers.html">Careers</a>
         <a href="contact.html">Contact Us</a>
       </div>
@@ -255,15 +294,103 @@
 
 <script src="assets/main.js"></script>
 <script>
-  document.querySelectorAll('.tl-yr').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const idx = btn.dataset.tl;
-      document.querySelectorAll('.tl-yr').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.tl-panel').forEach(p => p.classList.remove('active'));
-      btn.classList.add('active');
-      document.querySelector(`.tl-panel[data-tl="${idx}"]`).classList.add('active');
+(function() {
+  const TOTAL = 11;
+  let current = 0;
+  let animating = false;
+
+  const outer     = document.querySelector('.tl-scroll-outer');
+  const watermark = document.getElementById('tlWatermark');
+  const lineFill  = document.getElementById('tlLineFill');
+  const scrollBar = document.getElementById('tlScrollBar');
+  const yrBtns    = document.querySelectorAll('.tl-yr');
+  const panels    = document.querySelectorAll('.tl-panel');
+
+  function goTo(idx, smooth) {
+    if (idx === current || idx < 0 || idx >= TOTAL) return;
+    if (smooth && animating) return;
+    animating = true;
+
+    const oldPanel = panels[current];
+    const newPanel = panels[idx];
+
+    oldPanel.classList.add('tl-exit');
+    setTimeout(() => {
+      oldPanel.classList.remove('active', 'tl-exit');
+      newPanel.classList.add('active', 'tl-enter');
+      setTimeout(() => {
+        newPanel.classList.remove('tl-enter');
+        animating = false;
+      }, 500);
+    }, 250);
+
+    yrBtns.forEach(b => b.classList.remove('active'));
+    yrBtns[idx].classList.add('active');
+
+    lineFill.style.height = (idx / (TOTAL - 1) * 100) + '%';
+
+    watermark.style.opacity = '0';
+    setTimeout(() => {
+      watermark.textContent = yrBtns[idx].dataset.year;
+      watermark.style.opacity = '1';
+    }, 180);
+
+    current = idx;
+  }
+
+  // Scroll-driven: detect scroll position within the outer container
+  let ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const rect = outer.getBoundingClientRect();
+      const outerH = outer.offsetHeight;
+      const scrolled = -rect.top;
+      const progress = Math.max(0, Math.min(1, scrolled / (outerH - window.innerHeight)));
+
+      // Update scroll bar
+      if (scrollBar) scrollBar.style.height = (progress * 100) + '%';
+
+      // Determine which milestone to show
+      const idx = Math.min(TOTAL - 1, Math.max(0, Math.floor(progress * TOTAL)));
+      if (idx !== current) goTo(idx, false);
+      ticking = false;
     });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Click navigation still works
+  yrBtns.forEach((btn, i) => btn.addEventListener('click', () => {
+    // Scroll to the right position for this milestone
+    const outerTop = outer.offsetTop;
+    const outerH = outer.offsetHeight;
+    const targetScroll = outerTop + (i / TOTAL) * (outerH - window.innerHeight);
+    window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+  }));
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    const rect = outer.getBoundingClientRect();
+    if (rect.top > window.innerHeight || rect.bottom < 0) return;
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+      e.preventDefault();
+      const nextIdx = Math.min(current + 1, TOTAL - 1);
+      const outerTop = outer.offsetTop;
+      const outerH = outer.offsetHeight;
+      const targetScroll = outerTop + (nextIdx / TOTAL) * (outerH - window.innerHeight);
+      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+    }
+    if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+      e.preventDefault();
+      const prevIdx = Math.max(current - 1, 0);
+      const outerTop = outer.offsetTop;
+      const outerH = outer.offsetHeight;
+      const targetScroll = outerTop + (prevIdx / TOTAL) * (outerH - window.innerHeight);
+      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+    }
   });
+})();
 </script>
 </body>
 </html>
