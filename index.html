@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Regent — Toy Manufacturing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-light: #8BC34A;
+            --green-mid: #5EA030;
+            --green-dark: #3D7B1C;
+            --gradient: linear-gradient(135deg, #8BC34A 0%, #4CAF50 50%, #2E7D32 100%);
+            --dark: #1a1a2e;
+            --dark-2: #16213e;
+            --gray-50: #f8f9fa;
+            --gray-100: #f0f2f5;
+            --gray-200: #e2e6ea;
+            --gray-600: #6c757d;
+            --gray-800: #343a40;
+            --white: #ffffff;
+            --shadow: 0 4px 24px rgba(0,0,0,0.08);
+            --shadow-lg: 0 12px 48px rgba(0,0,0,0.12);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: var(--gray-800);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ─── NAV ─── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--gray-200);
+            transition: box-shadow 0.3s;
+        }
+        nav.scrolled { box-shadow: var(--shadow); }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            height: 72px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--green-dark);
+        }
+        .nav-logo img { height: 44px; }
+        .nav-logo span { letter-spacing: 1px; }
+
+        .nav-links { display: flex; gap: 32px; list-style: none; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray-800);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--green-mid); }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0;
+            width: 0; height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-cta {
+            background: var(--gradient);
+            color: white !important;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        .nav-cta::after { display: none !important; }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        .hamburger span {
+            width: 24px; height: 2px;
+            background: var(--gray-800);
+            transition: 0.3s;
+        }
+
+        /* ─── HERO ─── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(160deg, var(--dark) 0%, var(--dark-2) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; right: -20%;
+            width: 800px; height: 800px;
+            background: radial-gradient(circle, rgba(139,195,74,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 120px 24px 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: white;
+            line-height: 1.15;
+            margin-bottom: 24px;
+        }
+        .hero-text h1 span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-text p {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 36px;
+            max-width: 500px;
+        }
+        .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+        .btn-primary { background: var(--gradient); color: white; }
+        .btn-outline { border: 2px solid rgba(255,255,255,0.3); color: white; background: transparent; }
+        .btn-outline:hover { border-color: var(--green-light); }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .hero-graphic {
+            width: 400px; height: 400px;
+            background: var(--gradient);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            animation: morph 8s ease-in-out infinite;
+            box-shadow: 0 20px 80px rgba(139,195,74,0.3);
+        }
+        @keyframes morph {
+            0%,100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            50% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; }
+        }
+
+        /* ─── STATS ─── */
+        .stats {
+            background: white;
+            padding: 60px 24px;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        .stats-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        /* ─── SECTIONS ─── */
+        section { padding: 100px 24px; }
+        .section-inner { max-width: 1200px; margin: 0 auto; }
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--gray-600);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .section-tag {
+            display: inline-block;
+            background: rgba(139,195,74,0.1);
+            color: var(--green-mid);
+            font-weight: 600;
+            font-size: 0.85rem;
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* ─── ABOUT ─── */
+        #about { background: var(--gray-50); }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .about-text h3 {
+            font-size: 1.6rem;
+            margin-bottom: 16px;
+            color: var(--green-dark);
+        }
+        .about-text p {
+            color: var(--gray-600);
+            margin-bottom: 16px;
+        }
+        .timeline {
+            position: relative;
+            padding-left: 32px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 3px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 32px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -38px; top: 6px;
+            width: 14px; height: 14px;
+            border-radius: 50%;
+            background: var(--green-mid);
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--green-light);
+        }
+        .timeline-year {
+            font-weight: 700;
+            color: var(--green-mid);
+            font-size: 0.9rem;
+        }
+        .timeline-desc {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+        }
+
+        /* ─── PRODUCTS ─── */
+        #products { background: white; }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+        .product-card {
+            background: var(--gray-50);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--gray-200);
+        }
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+        .product-img {
+            height: 220px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+        .product-info {
+            padding: 24px;
+        }
+        .product-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+        .product-info p {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+        }
+
+        /* ─── CAREERS ─── */
+        #careers { background: var(--gray-50); }
+        .careers-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        .careers-intro h3 {
+            font-size: 1.6rem;
+            margin-bottom: 16px;
+        }
+        .careers-intro p {
+            color: var(--gray-600);
+            margin-bottom: 24px;
+        }
+        .perk {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            margin-bottom: 24px;
+        }
+        .perk-icon {
+            width: 48px; height: 48px;
+            background: rgba(139,195,74,0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+        .perk h4 { font-size: 1rem; margin-bottom: 4px; }
+        .perk p { color: var(--gray-600); font-size: 0.9rem; }
+
+        .job-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 16px;
+            border: 1px solid var(--gray-200);
+            transition: border-color 0.2s;
+        }
+        .job-card:hover { border-color: var(--green-light); }
+        .job-card h4 { margin-bottom: 8px; }
+        .job-meta {
+            display: flex;
+            gap: 16px;
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            margin-bottom: 12px;
+        }
+        .job-meta span { display: flex; align-items: center; gap: 4px; }
+
+        /* ─── CONTACT ─── */
+        #contact { background: white; }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+        .contact-info h3 {
+            font-size: 1.6rem;
+            margin-bottom: 16px;
+        }
+        .contact-info p {
+            color: var(--gray-600);
+            margin-bottom: 32px;
+        }
+        .contact-detail {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .contact-icon {
+            width: 48px; height: 48px;
+            background: rgba(139,195,74,0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .contact-detail p { margin: 0; color: var(--gray-800); }
+        .contact-detail small { color: var(--gray-600); font-size: 0.85rem; }
+
+        .contact-form input,
+        .contact-form textarea,
+        .contact-form select {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid var(--gray-200);
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            transition: border-color 0.2s;
+            outline: none;
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--green-mid);
+        }
+        .contact-form textarea { height: 140px; resize: vertical; }
+        .contact-form .btn { width: 100%; justify-content: center; }
+
+        /* ─── FOOTER ─── */
+        footer {
+            background: var(--dark);
+            color: rgba(255,255,255,0.6);
+            padding: 60px 24px 30px;
+        }
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+        }
+        .footer-brand p {
+            margin-top: 16px;
+            font-size: 0.9rem;
+            max-width: 280px;
+        }
+        .footer-col h4 {
+            color: white;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+        .footer-col a {
+            display: block;
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            transition: color 0.2s;
+        }
+        .footer-col a:hover { color: var(--green-light); }
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 40px auto 0;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 72px; left: 0; right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 24px;
+                gap: 20px;
+                border-bottom: 1px solid var(--gray-200);
+            }
+            .nav-links.open { display: flex; }
+            .hero-inner { grid-template-columns: 1fr; text-align: center; }
+            .hero-text h1 { font-size: 2.5rem; }
+            .hero-text p { margin: 0 auto 36px; }
+            .hero-buttons { justify-content: center; }
+            .hero-visual { order: -1; }
+            .hero-graphic { width: 250px; height: 250px; font-size: 5rem; }
+            .stats-inner { grid-template-columns: repeat(2, 1fr); }
+            .about-grid,
+            .careers-grid,
+            .contact-grid,
+            .footer-inner { grid-template-columns: 1fr; }
+            .products-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+    <div class="nav-inner">
+        <a href="#" class="nav-logo">
+            <img src="assets/logo.png" alt="Royal Regent" onerror="this.style.display='none'">
+            <span>ROYAL REGENT</span>
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about">About</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#careers">Careers</a></li>
+            <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+        </ul>
+        <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-inner">
+        <div class="hero-text">
+            <h1>Crafting Joy,<br><span>One Toy at a Time</span></h1>
+            <p>Royal Regent is a leading toy manufacturer dedicated to creating safe, innovative, and inspiring toys that spark imagination in children worldwide.</p>
+            <div class="hero-buttons">
+                <a href="#products" class="btn btn-primary">Explore Products →</a>
+                <a href="#about" class="btn btn-outline">Our Story</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-graphic">🧸</div>
+        </div>
+    </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+    <div class="stats-inner">
+        <div>
+            <div class="stat-number">20+</div>
+            <div class="stat-label">Years of Excellence</div>
+        </div>
+        <div>
+            <div class="stat-number">500+</div>
+            <div class="stat-label">Products Designed</div>
+        </div>
+        <div>
+            <div class="stat-number">50+</div>
+            <div class="stat-label">Countries Served</div>
+        </div>
+        <div>
+            <div class="stat-number">1M+</div>
+            <div class="stat-label">Happy Children</div>
+        </div>
+    </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+    <div class="section-inner">
+        <div class="section-header">
+            <span class="section-tag">About Us</span>
+            <h2>Our Story</h2>
+            <p>From a small workshop to a global toy manufacturer — our passion for play has driven every step of the journey.</p>
+        </div>
+        <div class="about-grid">
+            <div class="about-text">
+                <h3>Building a Legacy of Play</h3>
+                <p>Royal Regent was founded with a simple belief: every child deserves toys that are safe, creative, and built to last. What started as a dream has grown into a trusted name in toy manufacturing.</p>
+                <p>Today, we combine cutting-edge manufacturing processes with timeless design principles to create products that parents trust and children love. Our commitment to quality and safety remains at the heart of everything we do.</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">Founded</div>
+                    <div class="timeline-desc">Royal Regent established with a vision to redefine toy manufacturing standards.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">First Product Line</div>
+                    <div class="timeline-desc">Launched our first collection of educational toys, winning industry recognition.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">Global Expansion</div>
+                    <div class="timeline-desc">Expanded operations internationally, serving markets across Asia, Europe, and the Americas.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">Innovation Hub</div>
+                    <div class="timeline-desc">Opened state-of-the-art R&D center focused on sustainable and smart toy design.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">Today</div>
+                    <div class="timeline-desc">Continuing to set the standard in toy safety, creativity, and manufacturing excellence.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+    <div class="section-inner">
+        <div class="section-header">
+            <span class="section-tag">Our Products</span>
+            <h2>Designed to Inspire</h2>
+            <p>Explore our range of thoughtfully designed toys crafted with premium materials and the highest safety standards.</p>
+        </div>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-img">🎨</div>
+                <div class="product-info">
+                    <h3>Creative & Arts</h3>
+                    <p>Art kits, building sets, and creative tools that encourage self-expression and imaginative play.</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #66BB6A, #2E7D32);">🧩</div>
+                <div class="product-info">
+                    <h3>Educational Toys</h3>
+                    <p>STEM-focused learning toys that make education fun and engaging for growing minds.</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #AED581, #558B2F);">🚗</div>
+                <div class="product-info">
+                    <h3>Action & Vehicles</h3>
+                    <p>Durable action figures and vehicle sets built for adventure and hours of active play.</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #81C784, #388E3C);">🧸</div>
+                <div class="product-info">
+                    <h3>Plush & Soft Toys</h3>
+                    <p>Cuddly companions made with child-safe, hypoallergenic materials for the littlest ones.</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #9CCC65, #33691E);">🎲</div>
+                <div class="product-info">
+                    <h3>Board Games</h3>
+                    <p>Family-friendly board games and puzzles that bring people together.</p>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="background: linear-gradient(135deg, #C5E1A5, #689F38);">🤖</div>
+                <div class="product-info">
+                    <h3>Smart Toys</h3>
+                    <p>Tech-integrated toys featuring interactive learning and programmable features.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CAREERS -->
+<section id="careers">
+    <div class="section-inner">
+        <div class="section-header">
+            <span class="section-tag">Careers</span>
+            <h2>Join Our Team</h2>
+            <p>Be part of a company that brings smiles to millions of children. We're always looking for passionate people.</p>
+        </div>
+        <div class="careers-grid">
+            <div class="careers-intro">
+                <h3>Why Royal Regent?</h3>
+                <p>We believe our people are our greatest asset. Join a collaborative, innovative environment where your work has real impact.</p>
+                <div class="perk">
+                    <div class="perk-icon">🌱</div>
+                    <div>
+                        <h4>Growth Opportunities</h4>
+                        <p>Continuous learning programs and clear career advancement paths.</p>
+                    </div>
+                </div>
+                <div class="perk">
+                    <div class="perk-icon">💡</div>
+                    <div>
+                        <h4>Innovation Culture</h4>
+                        <p>We encourage creative thinking and new ideas at every level.</p>
+                    </div>
+                </div>
+                <div class="perk">
+                    <div class="perk-icon">🤝</div>
+                    <div>
+                        <h4>Inclusive Workplace</h4>
+                        <p>A diverse, respectful environment where everyone belongs.</p>
+                    </div>
+                </div>
+                <div class="perk">
+                    <div class="perk-icon">⚖️</div>
+                    <div>
+                        <h4>Work-Life Balance</h4>
+                        <p>Flexible schedules, competitive benefits, and wellness programs.</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="job-card">
+                    <h4>Production Manager</h4>
+                    <div class="job-meta">
+                        <span>📍 On-site</span>
+                        <span>⏰ Full-time</span>
+                    </div>
+                    <p style="color: var(--gray-600); font-size: 0.9rem;">Oversee manufacturing operations and ensure quality standards across production lines.</p>
+                </div>
+                <div class="job-card">
+                    <h4>Product Designer</h4>
+                    <div class="job-meta">
+                        <span>📍 Hybrid</span>
+                        <span>⏰ Full-time</span>
+                    </div>
+                    <p style="color: var(--gray-600); font-size: 0.9rem;">Design innovative toy concepts from ideation through prototyping and production.</p>
+                </div>
+                <div class="job-card">
+                    <h4>Quality Assurance Engineer</h4>
+                    <div class="job-meta">
+                        <span>📍 On-site</span>
+                        <span>⏰ Full-time</span>
+                    </div>
+                    <p style="color: var(--gray-600); font-size: 0.9rem;">Ensure all products meet international safety and quality standards.</p>
+                </div>
+                <div class="job-card">
+                    <h4>Marketing Coordinator</h4>
+                    <div class="job-meta">
+                        <span>📍 Remote</span>
+                        <span>⏰ Full-time</span>
+                    </div>
+                    <p style="color: var(--gray-600); font-size: 0.9rem;">Drive brand awareness and manage campaigns across digital and traditional channels.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+    <div class="section-inner">
+        <div class="section-header">
+            <span class="section-tag">Contact</span>
+            <h2>Get in Touch</h2>
+            <p>Have questions about our products or want to discuss a partnership? We'd love to hear from you.</p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3>Let's Talk</h3>
+                <p>Whether you're a retailer, distributor, or potential partner, our team is ready to help.</p>
+                <div class="contact-detail">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <p>Headquarters</p>
+                        <small>123 Manufacturing Way, Industrial District</small>
+                    </div>
+                </div>
+                <div class="contact-detail">
+                    <div class="contact-icon">📧</div>
+                    <div>
+                        <p>info@royalregent.com</p>
+                        <small>General inquiries</small>
+                    </div>
+                </div>
+                <div class="contact-detail">
+                    <div class="contact-icon">📞</div>
+                    <div>
+                        <p>+1 (555) 000-0000</p>
+                        <small>Mon–Fri, 9 AM – 6 PM</small>
+                    </div>
+                </div>
+            </div>
+            <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you! We will get back to you shortly.');">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Email Address" required>
+                <input type="text" placeholder="Company (optional)">
+                <select>
+                    <option value="" disabled selected>Subject</option>
+                    <option>Product Inquiry</option>
+                    <option>Partnership / Distribution</option>
+                    <option>Careers</option>
+                    <option>Other</option>
+                </select>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit" class="btn btn-primary">Send Message →</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <a href="#" class="nav-logo" style="color: white;">
+                <span>ROYAL REGENT</span>
+            </a>
+            <p>Crafting joy through quality toy manufacturing since day one. Committed to safety, innovation, and inspiring the next generation.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Company</h4>
+            <a href="#about">About Us</a>
+            <a href="#about">Our History</a>
+            <a href="#careers">Careers</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+            <h4>Products</h4>
+            <a href="#products">Creative & Arts</a>
+            <a href="#products">Educational</a>
+            <a href="#products">Action & Vehicles</a>
+            <a href="#products">Plush Toys</a>
+        </div>
+        <div class="footer-col">
+            <h4>Resources</h4>
+            <a href="#">Safety Standards</a>
+            <a href="#">Certifications</a>
+            <a href="#">Sustainability</a>
+            <a href="#">Press Kit</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 Royal Regent. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+        document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // Smooth scroll for nav links & close mobile menu
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', () => {
+            document.getElementById('navLinks').classList.remove('open');
+        });
+    });
+</script>
+
+</body>
+</html>
