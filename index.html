@@ -1,480 +1,328 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Royal Regent — OEM Toy Manufacturer</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --green-light: #8BC34A;
-            --green-mid: #5EA030;
-            --green-dark: #3D7B1C;
-            --gradient: linear-gradient(135deg, #8BC34A 0%, #4CAF50 50%, #2E7D32 100%);
-            --dark: #1a1a2e;
-            --dark-2: #16213e;
-            --gray-50: #f8f9fa;
-            --gray-100: #f0f2f5;
-            --gray-200: #e2e6ea;
-            --gray-600: #6c757d;
-            --gray-800: #343a40;
-            --white: #ffffff;
-            --shadow: 0 4px 24px rgba(0,0,0,0.08);
-            --shadow-lg: 0 12px 48px rgba(0,0,0,0.12);
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Inter', -apple-system, sans-serif; color: var(--gray-800); line-height: 1.6; overflow-x: hidden; }
-
-        /* NAV */
-        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--gray-200); transition: box-shadow 0.3s; }
-        nav.scrolled { box-shadow: var(--shadow); }
-        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; height: 72px; }
-        .nav-logo { display: flex; align-items: center; gap: 0; text-decoration: none; font-weight: 700; font-size: 1.25rem; color: var(--green-dark); }
-        .nav-logo img { height: 80px; }
-        .nav-links { display: flex; gap: 32px; list-style: none; }
-        .nav-links a { text-decoration: none; color: var(--gray-800); font-weight: 500; font-size: 0.95rem; position: relative; transition: color 0.2s; }
-        .nav-links a:hover { color: var(--green-mid); }
-        .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--gradient); transition: width 0.3s; }
-        .nav-links a:hover::after { width: 100%; }
-        .nav-cta { background: var(--gradient); color: white !important; padding: 10px 24px; border-radius: 8px; font-weight: 600; }
-        .nav-cta::after { display: none !important; }
-        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
-        .hamburger span { width: 24px; height: 2px; background: var(--gray-800); transition: 0.3s; }
-
-        /* HERO */
-        .hero { min-height: 100vh; display: flex; align-items: center; background: linear-gradient(160deg, var(--dark) 0%, var(--dark-2) 100%); position: relative; overflow: hidden; }
-        .hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 800px; height: 800px; background: radial-gradient(circle, rgba(139,195,74,0.15) 0%, transparent 70%); border-radius: 50%; }
-        .hero-inner { max-width: 1200px; margin: 0 auto; padding: 120px 24px 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-        .hero-text h1 { font-size: 3.5rem; font-weight: 800; color: white; line-height: 1.15; margin-bottom: 24px; }
-        .hero-text h1 span { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .hero-text p { font-size: 1.2rem; color: rgba(255,255,255,0.7); margin-bottom: 36px; max-width: 500px; }
-        .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
-        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 10px; font-weight: 600; font-size: 1rem; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; border: none; }
-        .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
-        .btn-primary { background: var(--gradient); color: white; }
-        .btn-outline { border: 2px solid rgba(255,255,255,0.3); color: white; background: transparent; }
-        .btn-outline:hover { border-color: var(--green-light); }
-        .hero-visual { display: flex; justify-content: center; align-items: center; }
-
-        /* STATS */
-        .stats { background: white; padding: 60px 24px; border-bottom: 1px solid var(--gray-200); }
-        .stats-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; text-align: center; }
-        .stat-number { font-size: 2.5rem; font-weight: 800; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .stat-label { font-size: 0.9rem; color: var(--gray-600); margin-top: 4px; font-weight: 500; }
-
-        /* SECTIONS */
-        section { padding: 100px 24px; }
-        .section-inner { max-width: 1200px; margin: 0 auto; }
-        .section-header { text-align: center; margin-bottom: 60px; }
-        .section-header h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 16px; }
-        .section-header p { font-size: 1.1rem; color: var(--gray-600); max-width: 600px; margin: 0 auto; }
-        .section-tag { display: inline-block; background: rgba(139,195,74,0.1); color: var(--green-mid); font-weight: 600; font-size: 0.85rem; padding: 6px 16px; border-radius: 20px; margin-bottom: 16px; letter-spacing: 1px; text-transform: uppercase; }
-
-        /* ABOUT */
-        #about { background: var(--gray-50); }
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
-        .about-text h3 { font-size: 1.6rem; margin-bottom: 16px; color: var(--green-dark); }
-        .about-text p { color: var(--gray-600); margin-bottom: 16px; }
-        .timeline { position: relative; padding-left: 32px; }
-        .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--gradient); border-radius: 2px; }
-        .timeline-item { position: relative; margin-bottom: 24px; }
-        .timeline-item::before { content: ''; position: absolute; left: -38px; top: 6px; width: 14px; height: 14px; border-radius: 50%; background: var(--green-mid); border: 3px solid white; box-shadow: 0 0 0 3px var(--green-light); }
-        .timeline-year { font-weight: 700; color: var(--green-mid); font-size: 0.9rem; }
-        .timeline-desc { color: var(--gray-600); font-size: 0.92rem; }
-
-        /* CAPABILITIES */
-        #capabilities { background: white; }
-        .capabilities-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
-        .cap-card { background: var(--gray-50); border-radius: 16px; padding: 32px; border: 1px solid var(--gray-200); transition: transform 0.3s, box-shadow 0.3s; }
-        .cap-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
-        .cap-icon { font-size: 2.5rem; margin-bottom: 16px; }
-        .cap-card h3 { font-size: 1.2rem; margin-bottom: 10px; color: var(--green-dark); }
-        .cap-card p { color: var(--gray-600); font-size: 0.95rem; line-height: 1.7; }
-        .cap-badge { display: inline-block; background: rgba(139,195,74,0.12); color: var(--green-mid); font-size: 0.78rem; font-weight: 600; padding: 3px 10px; border-radius: 12px; margin-top: 12px; margin-right: 6px; }
-
-        /* PRODUCTS */
-        #products { background: var(--gray-50); }
-        .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-        .product-card { background: white; border-radius: 16px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; border: 1px solid var(--gray-200); }
-        .product-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
-        .product-img { height: 180px; background: var(--gradient); display: flex; align-items: center; justify-content: center; font-size: 3.5rem; }
-        .product-info { padding: 24px; }
-        .product-info h3 { font-size: 1.15rem; margin-bottom: 8px; }
-        .product-info p { color: var(--gray-600); font-size: 0.92rem; line-height: 1.65; }
-
-        /* CONTACT */
-        #contact { background: white; }
-        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
-        .contact-info h3 { font-size: 1.6rem; margin-bottom: 16px; }
-        .contact-info p { color: var(--gray-600); margin-bottom: 32px; }
-        .contact-detail { display: flex; gap: 16px; align-items: center; margin-bottom: 20px; }
-        .contact-icon { width: 48px; height: 48px; background: rgba(139,195,74,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
-        .contact-detail p { margin: 0; color: var(--gray-800); }
-        .contact-detail small { color: var(--gray-600); font-size: 0.85rem; }
-        .contact-form input, .contact-form textarea, .contact-form select { width: 100%; padding: 14px 18px; border: 1px solid var(--gray-200); border-radius: 10px; font-family: inherit; font-size: 0.95rem; margin-bottom: 16px; transition: border-color 0.2s; outline: none; }
-        .contact-form input:focus, .contact-form textarea:focus { border-color: var(--green-mid); }
-        .contact-form textarea { height: 140px; resize: vertical; }
-        .contact-form .btn { width: 100%; justify-content: center; }
-
-        /* FOOTER */
-        footer { background: var(--dark); color: rgba(255,255,255,0.6); padding: 60px 24px 30px; }
-        .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
-        .footer-brand p { margin-top: 16px; font-size: 0.9rem; max-width: 280px; }
-        .footer-col h4 { color: white; font-size: 0.95rem; margin-bottom: 20px; }
-        .footer-col a { display: block; color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.9rem; margin-bottom: 10px; transition: color 0.2s; }
-        .footer-col a:hover { color: var(--green-light); }
-        .footer-bottom { max-width: 1200px; margin: 40px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; font-size: 0.85rem; }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .hamburger { display: flex; }
-            .nav-links { display: none; position: absolute; top: 72px; left: 0; right: 0; background: white; flex-direction: column; padding: 24px; gap: 20px; border-bottom: 1px solid var(--gray-200); }
-            .nav-links.open { display: flex; }
-            .hero-inner { grid-template-columns: 1fr; text-align: center; }
-            .hero-text h1 { font-size: 2.5rem; }
-            .hero-text p { margin: 0 auto 36px; }
-            .hero-buttons { justify-content: center; }
-            .hero-visual { order: -1; }
-            .stats-inner { grid-template-columns: repeat(2, 1fr); }
-            .about-grid, .contact-grid, .footer-inner { grid-template-columns: 1fr; }
-            .capabilities-grid { grid-template-columns: 1fr; }
-            .products-grid { grid-template-columns: 1fr; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Royal Regent — OEM Toy Manufacturer Since 1987</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 
-<!-- NAV -->
+<!-- NAVBAR -->
 <nav id="navbar">
-    <div class="nav-inner">
-        <a href="#" class="nav-logo">
-            <img src="assets/logo.png" alt="Royal Regent" onerror="this.style.display='none'">
-        </a>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#about">About</a></li>
-            <li><a href="#capabilities">Capabilities</a></li>
-            <li><a href="#products">Products</a></li>
-            <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/logo.png" alt="Royal Regent">
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="about.html">About</a></li>
+      <li class="has-dropdown">
+        <a href="capabilities.html">Capabilities <span class="arrow">&#8964;</span></a>
+        <ul class="dropdown">
+          <li><a href="capabilities/plastic-figures.html">Plastic Figures &amp; Functional Toys</a></li>
+          <li><a href="capabilities/plush-toys.html">Plush Figures &amp; Soft Toys</a></li>
+          <li><a href="capabilities/pull-back.html">Pull-Back Figures</a></li>
+          <li><a href="capabilities/rc-vehicles.html">Remote Control Vehicles</a></li>
+          <li><a href="capabilities/electronic-toys.html">Electronic Plastic Toys</a></li>
         </ul>
-        <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
-            <span></span><span></span><span></span>
-        </button>
-    </div>
+      </li>
+      <li><a href="careers.html">Careers</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact Us</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-    <div class="hero-inner">
-        <div class="hero-text">
-            <h1>Your Trusted<br><span>OEM Toy Manufacturer</span></h1>
-            <p>Since 1987, Royal Regent has grown from a single factory in Sha Tau Kok into a multi-site manufacturing group — delivering safe, compliant, and expertly crafted toys to partners worldwide.</p>
-            <div class="hero-buttons">
-                <a href="#products" class="btn btn-primary">Our Products →</a>
-                <a href="#about" class="btn btn-outline">Our Story</a>
-            </div>
-        </div>
-        <div class="hero-visual">
-            <img src="image/IMG_4691.jpeg" alt="Royal Regent Factory" style="width: 100%; max-width: 380px; border-radius: 24px; box-shadow: 0 20px 60px rgba(139,195,74,0.4), 0 0 0 4px rgba(139,195,74,0.2); transform: rotate(2deg); transition: transform 0.4s, box-shadow 0.4s; border: 4px solid rgba(255,255,255,0.15);" onmouseover="this.style.transform='rotate(0deg) scale(1.03)'; this.style.boxShadow='0 24px 80px rgba(139,195,74,0.5), 0 0 0 6px rgba(139,195,74,0.3)'" onmouseout="this.style.transform='rotate(2deg)'; this.style.boxShadow='0 20px 60px rgba(139,195,74,0.4), 0 0 0 4px rgba(139,195,74,0.2)'">
-        </div>
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <div class="hero-particle" id="heroParticle"></div>
+    <div class="hero-grid"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-tag reveal-up">OEM Toy Manufacturer · Est. 1987</div>
+    <h1 class="hero-title reveal-up delay-1">
+      Precision.<br>
+      <span class="gradient-text">Craftsmanship.</span><br>
+      Global Scale.
+    </h1>
+    <p class="hero-sub reveal-up delay-2">From a single workshop in Sha Tau Kok to four manufacturing sites across Asia — Royal Regent delivers safe, compliant, and expertly engineered toys for the world's leading brands.</p>
+    <div class="hero-actions reveal-up delay-3">
+      <a href="capabilities.html" class="btn btn-primary">Explore Capabilities</a>
+      <a href="about.html" class="btn btn-ghost">Our Story →</a>
     </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
 </section>
 
-<!-- STATS -->
-<div class="stats">
-    <div class="stats-inner">
-        <div>
-            <div class="stat-number">38+</div>
-            <div class="stat-label">Years in Manufacturing</div>
-        </div>
-        <div>
-            <div class="stat-number">5</div>
-            <div class="stat-label">Product Categories</div>
-        </div>
-        <div>
-            <div class="stat-number">4</div>
-            <div class="stat-label">Production Sites</div>
-        </div>
-        <div>
-            <div class="stat-number">US &amp; EU</div>
-            <div class="stat-label">Safety Compliant</div>
-        </div>
-    </div>
+<!-- MARQUEE STRIP -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span>Plastic Figures</span><span class="dot">·</span>
+    <span>Plush Toys</span><span class="dot">·</span>
+    <span>Pull-Back Figures</span><span class="dot">·</span>
+    <span>RC Vehicles</span><span class="dot">·</span>
+    <span>Electronic Toys</span><span class="dot">·</span>
+    <span>OEM &amp; ODM</span><span class="dot">·</span>
+    <span>US &amp; EU Compliant</span><span class="dot">·</span>
+    <span>Since 1987</span><span class="dot">·</span>
+    <span>Plastic Figures</span><span class="dot">·</span>
+    <span>Plush Toys</span><span class="dot">·</span>
+    <span>Pull-Back Figures</span><span class="dot">·</span>
+    <span>RC Vehicles</span><span class="dot">·</span>
+    <span>Electronic Toys</span><span class="dot">·</span>
+    <span>OEM &amp; ODM</span><span class="dot">·</span>
+    <span>US &amp; EU Compliant</span><span class="dot">·</span>
+    <span>Since 1987</span><span class="dot">·</span>
+  </div>
 </div>
 
-<!-- ABOUT -->
-<section id="about">
-    <div class="section-inner">
-        <div class="section-header">
-            <span class="section-tag">About Us</span>
-            <h2>Built Over Decades</h2>
-            <p>From a single workshop in Sha Tau Kok to a globally expanding manufacturing group — our growth reflects a relentless commitment to quality, capacity, and craftsmanship.</p>
-        </div>
-        <div class="about-grid">
-            <div class="about-text">
-                <h3>A Manufacturing Legacy Since 1987</h3>
-                <p>Royal Regent was established in 1987 in Sha Tau Kok, Hong Kong — a modest beginning that would define decades of manufacturing excellence. Driven by consistent investment in capacity, technology, and product diversification, we have evolved into a vertically integrated OEM toy manufacturer with operations spanning mainland China and Southeast Asia.</p>
-                <p>Today, our factories in Dongguan, Heyuan, Hunan, and Indonesia give us the scale, resilience, and flexibility to meet the demands of international brands and retailers. Every production line we operate — whether for plastic figures, plush toys, remote control vehicles, or electronic toys — is built to meet the stringent safety standards of the US and EU markets.</p>
-                <p>We do not just manufacture toys. We build lasting partnerships with our clients by combining technical expertise, transparent communication, and an unwavering focus on quality at every stage of production.</p>
-            </div>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-year">1987 — Founded</div>
-                    <div class="timeline-desc">Established in Sha Tau Kok, marking the official beginning of our manufacturing journey.</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">1990 — Longhua Expansion</div>
-                    <div class="timeline-desc">Relocated to Longhua, significantly expanding production scale to meet growing demand.</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">1997 — Dongguan Operations</div>
-                    <div class="timeline-desc">Expanded to Dongguan to accommodate rapidly growing market demand.</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">2000 — Soft Toy Entry</div>
-                    <div class="timeline-desc">Commissioned the Dongguan factory expansion, launching plush toy and costume production lines — our first entry into soft toy manufacturing.</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">2003 — Heyuan Footprint</div>
-                    <div class="timeline-desc">Extended operations to Heyuan, establishing a multi-location structure to strengthen supply chain resilience.</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">2005 — Capacity Upgrade</div>
-                    <div class="timeline-desc">Completed the Heyuan factory expansion, supporting product line diversification and increased capacity.</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">2010 — Doll Production</div>
-                    <div class="timeline-desc">Launched doll production lines, integrating sewing craftsmanship with plastic molding technology.</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">2016 — RC Vehicles</div>
-                    <div class="timeline-desc">Entered remote control vehicle manufacturing, building capabilities in structural complexity and electronic integration.</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">2018 — Hunan Expansion</div>
-                    <div class="timeline-desc">Expanded production to Hunan, significantly increasing overall manufacturing capacity.</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">2023 — Indonesia Entry</div>
-                    <div class="timeline-desc">Officially entered the Indonesian market — a key milestone in our global expansion and supply chain diversification strategy.</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-year">2025 — Indonesia Phase II</div>
-                    <div class="timeline-desc">Phase II of the Indonesia factory commenced operations, further expanding regional production capacity and international market responsiveness.</div>
-                </div>
-            </div>
-        </div>
+<!-- STATS -->
+<section class="stats-section">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card reveal-up">
+        <div class="stat-num" data-count="38">0</div>
+        <div class="stat-plus">+</div>
+        <div class="stat-label">Years of Manufacturing</div>
+        <div class="stat-bar"></div>
+      </div>
+      <div class="stat-card reveal-up delay-1">
+        <div class="stat-num" data-count="5">0</div>
+        <div class="stat-plus"></div>
+        <div class="stat-label">Product Categories</div>
+        <div class="stat-bar"></div>
+      </div>
+      <div class="stat-card reveal-up delay-2">
+        <div class="stat-num" data-count="4">0</div>
+        <div class="stat-plus"></div>
+        <div class="stat-label">Production Sites Across Asia</div>
+        <div class="stat-bar"></div>
+      </div>
+      <div class="stat-card reveal-up delay-3">
+        <div class="stat-num" data-count="2">0</div>
+        <div class="stat-plus"></div>
+        <div class="stat-label">Markets: US &amp; EU Certified</div>
+        <div class="stat-bar"></div>
+      </div>
     </div>
+  </div>
 </section>
 
-<!-- CAPABILITIES -->
-<section id="capabilities">
-    <div class="section-inner">
-        <div class="section-header">
-            <span class="section-tag">Manufacturing Capabilities</span>
-            <h2>End-to-End OEM Expertise</h2>
-            <p>We offer full OEM and ODM manufacturing services across five product categories, all produced to meet US and EU toy safety regulations.</p>
-        </div>
-        <div class="capabilities-grid">
-            <div class="cap-card">
-                <div class="cap-icon">🏭</div>
-                <h3>Plastic Toys &amp; Figures</h3>
-                <p>We specialise in plastic toy manufacturing with strong in-house capabilities in mold development and injection molding. Our products include character figures and functional toys, produced in strict compliance with international toy safety standards. Customisation based on customer-provided designs and artwork is fully supported.</p>
-                <span class="cap-badge">Mold Development</span>
-                <span class="cap-badge">Injection Molding</span>
-                <span class="cap-badge">OEM / ODM</span>
-            </div>
-            <div class="cap-card">
-                <div class="cap-icon">🧸</div>
-                <h3>Plush Figures &amp; Soft Toys</h3>
-                <p>Our plush figures are widely used for gifts, branded merchandise, and licensed IP products. From material selection and cutting through sewing and final inspection, we maintain rigorous quality control at every stage — meeting the safety and quality requirements of European and American markets.</p>
-                <span class="cap-badge">Licensed IP</span>
-                <span class="cap-badge">Branded Merchandise</span>
-                <span class="cap-badge">Gift Products</span>
-            </div>
-            <div class="cap-card">
-                <div class="cap-icon">🎮</div>
-                <h3>Pull-Back Figures</h3>
-                <p>Pull-back figures combine character designs with reliable pull-back mechanisms. We provide structural optimisation and efficient mass production based on customer artwork, ensuring consistent durability, safety, and quality across every production run.</p>
-                <span class="cap-badge">Structural Optimisation</span>
-                <span class="cap-badge">Mass Production</span>
-                <span class="cap-badge">Customer Artwork</span>
-            </div>
-            <div class="cap-card">
-                <div class="cap-icon">🚗</div>
-                <h3>Remote Control Vehicles</h3>
-                <p>We offer comprehensive OEM and ODM manufacturing services for remote control toy cars, covering basic to advanced functional models. Our focus is on structural strength, precise control performance, and electronic safety — suitable for both US and EU market requirements.</p>
-                <span class="cap-badge">Basic to Advanced Models</span>
-                <span class="cap-badge">Electronic Safety</span>
-                <span class="cap-badge">OEM / ODM</span>
-            </div>
-            <div class="cap-card" style="grid-column: 1 / -1;">
-                <div class="cap-icon">💡</div>
-                <h3>Electronic Plastic Toys</h3>
-                <p>Electronic plastic toys integrate sound, light, and interactive electronic functions into durable plastic housings. With proven electronic solutions and in-house plastic manufacturing capabilities working in tandem, we ensure stable performance, reliable production consistency, and full compliance with US and EU regulations.</p>
-                <span class="cap-badge">Sound &amp; Light Features</span>
-                <span class="cap-badge">Interactive Electronics</span>
-                <span class="cap-badge">US &amp; EU Compliant</span>
-                <span class="cap-badge">In-House Electronics</span>
-            </div>
-        </div>
+<!-- INTRO STATEMENT -->
+<section class="intro-statement">
+  <div class="container">
+    <div class="statement-inner reveal-up">
+      <div class="statement-line"></div>
+      <p class="statement-text">We are not just a factory. We are a long-term manufacturing partner — building your vision from mold to finished product, with the quality assurance your markets demand.</p>
     </div>
+  </div>
 </section>
 
-<!-- PRODUCTS -->
-<section id="products">
-    <div class="section-inner">
-        <div class="section-header">
-            <span class="section-tag">Our Products</span>
-            <h2>What We Make</h2>
-            <p>Five core product lines, each backed by decades of manufacturing experience and full compliance with international safety standards.</p>
+<!-- CAPABILITIES PREVIEW -->
+<section class="caps-section">
+  <div class="container">
+    <div class="section-label reveal-up">Manufacturing Capabilities</div>
+    <h2 class="section-title reveal-up delay-1">Five categories.<br>One trusted partner.</h2>
+  </div>
+  <div class="caps-cards">
+    <a href="capabilities/plastic-figures.html" class="cap-card" data-num="01">
+      <div class="cap-card-inner">
+        <div class="cap-icon-wrap">
+          <svg viewBox="0 0 48 48" fill="none"><rect x="8" y="16" width="32" height="24" rx="3" stroke="currentColor" stroke-width="2"/><path d="M16 16V12a8 8 0 0116 0v4" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="28" r="4" fill="currentColor" opacity=".3"/></svg>
         </div>
-        <div class="products-grid">
-            <div class="product-card">
-                <div class="product-img">🏭</div>
-                <div class="product-info">
-                    <h3>Plastic Figures &amp; Functional Toys</h3>
-                    <p>Injection-molded plastic toys and character figures produced with in-house molds. Fully customisable from client designs, compliant with US and EU safety standards.</p>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-img" style="background: linear-gradient(135deg, #66BB6A, #2E7D32);">🧸</div>
-                <div class="product-info">
-                    <h3>Plush Figures &amp; Soft Toys</h3>
-                    <p>High-quality plush figures for gifts, licensed IP, and branded merchandise. Strict quality control from material selection through final inspection for US and EU markets.</p>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-img" style="background: linear-gradient(135deg, #AED581, #558B2F);">🎮</div>
-                <div class="product-info">
-                    <h3>Pull-Back Figures</h3>
-                    <p>Character-themed pull-back toys with reliable mechanisms. Structural optimisation and mass production based on customer artwork, with consistent durability and safety.</p>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-img" style="background: linear-gradient(135deg, #81C784, #388E3C);">🚗</div>
-                <div class="product-info">
-                    <h3>Remote Control Vehicles</h3>
-                    <p>OEM and ODM RC toy cars from basic to advanced models. Built for structural strength, control precision, and full compliance with electronic safety regulations.</p>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-img" style="background: linear-gradient(135deg, #9CCC65, #33691E);">💡</div>
-                <div class="product-info">
-                    <h3>Electronic Plastic Toys</h3>
-                    <p>Sound, light, and interactive electronic functions integrated into plastic toy housings. Stable performance and full compliance with US and EU regulations.</p>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-img" style="background: linear-gradient(135deg, #C5E1A5, #689F38);">🌏</div>
-                <div class="product-info">
-                    <h3>Custom &amp; Licensed Products</h3>
-                    <p>We support branded merchandise and licensed IP production across all product categories. From mold development to final packaging, we follow your specifications precisely.</p>
-                </div>
-            </div>
+        <h3>Plastic Figures &amp; Functional Toys</h3>
+        <p>In-house mold development and injection molding for character figures and functional toys, fully customisable to client artwork.</p>
+        <div class="cap-arrow">→</div>
+      </div>
+    </a>
+    <a href="capabilities/plush-toys.html" class="cap-card" data-num="02">
+      <div class="cap-card-inner">
+        <div class="cap-icon-wrap">
+          <svg viewBox="0 0 48 48" fill="none"><ellipse cx="24" cy="30" rx="14" ry="10" stroke="currentColor" stroke-width="2"/><ellipse cx="24" cy="20" rx="8" ry="8" stroke="currentColor" stroke-width="2"/><circle cx="21" cy="18" r="1.5" fill="currentColor"/><circle cx="27" cy="18" r="1.5" fill="currentColor"/></svg>
         </div>
-    </div>
+        <h3>Plush Figures &amp; Soft Toys</h3>
+        <p>Licensed IP, gift, and branded merchandise plush — from material selection through sewing and final inspection.</p>
+        <div class="cap-arrow">→</div>
+      </div>
+    </a>
+    <a href="capabilities/pull-back.html" class="cap-card" data-num="03">
+      <div class="cap-card-inner">
+        <div class="cap-icon-wrap">
+          <svg viewBox="0 0 48 48" fill="none"><rect x="8" y="20" width="32" height="14" rx="3" stroke="currentColor" stroke-width="2"/><circle cx="16" cy="36" r="4" stroke="currentColor" stroke-width="2"/><circle cx="32" cy="36" r="4" stroke="currentColor" stroke-width="2"/><path d="M24 20V14M24 14l-4 4M24 14l4 4" stroke="currentColor" stroke-width="2"/></svg>
+        </div>
+        <h3>Pull-Back Figures</h3>
+        <p>Character designs with precision pull-back mechanisms — structural optimisation and mass production from customer artwork.</p>
+        <div class="cap-arrow">→</div>
+      </div>
+    </a>
+    <a href="capabilities/rc-vehicles.html" class="cap-card" data-num="04">
+      <div class="cap-card-inner">
+        <div class="cap-icon-wrap">
+          <svg viewBox="0 0 48 48" fill="none"><rect x="6" y="18" width="36" height="16" rx="4" stroke="currentColor" stroke-width="2"/><circle cx="14" cy="34" r="5" stroke="currentColor" stroke-width="2"/><circle cx="34" cy="34" r="5" stroke="currentColor" stroke-width="2"/><rect x="28" y="10" width="10" height="8" rx="2" stroke="currentColor" stroke-width="2"/></svg>
+        </div>
+        <h3>Remote Control Vehicles</h3>
+        <p>OEM and ODM RC toy cars from basic to advanced models — structural strength, control precision, electronic safety.</p>
+        <div class="cap-arrow">→</div>
+      </div>
+    </a>
+    <a href="capabilities/electronic-toys.html" class="cap-card" data-num="05">
+      <div class="cap-card-inner">
+        <div class="cap-icon-wrap">
+          <svg viewBox="0 0 48 48" fill="none"><rect x="10" y="10" width="28" height="28" rx="4" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="24" r="6" stroke="currentColor" stroke-width="2"/><path d="M24 10v4M24 34v4M10 24h4M34 24h4" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+        <h3>Electronic Plastic Toys</h3>
+        <p>Sound, light, and interactive electronic functions integrated with in-house plastic manufacturing — fully US &amp; EU compliant.</p>
+        <div class="cap-arrow">→</div>
+      </div>
+    </a>
+  </div>
 </section>
 
-<!-- CONTACT -->
-<section id="contact">
-    <div class="section-inner">
-        <div class="section-header">
-            <span class="section-tag">Contact</span>
-            <h2>Get in Touch</h2>
-            <p>Looking to place an OEM order, discuss a licensing project, or learn more about our capabilities? We would love to hear from you.</p>
-        </div>
-        <div class="contact-grid">
-            <div class="contact-info">
-                <h3>Work With Us</h3>
-                <p>Whether you are a brand owner, retailer, or distributor, our team is ready to discuss how we can support your production needs — from sampling to full-scale manufacturing.</p>
-                <div class="contact-detail">
-                    <div class="contact-icon">📍</div>
-                    <div>
-                        <p>Headquarters</p>
-                        <small>Dongguan, Guangdong, China</small>
-                    </div>
-                </div>
-                <div class="contact-detail">
-                    <div class="contact-icon">🌏</div>
-                    <div>
-                        <p>Production Sites</p>
-                        <small>Dongguan · Heyuan · Hunan · Indonesia</small>
-                    </div>
-                </div>
-                <div class="contact-detail">
-                    <div class="contact-icon">📧</div>
-                    <div>
-                        <p>info@royalregent.com</p>
-                        <small>General &amp; trade inquiries</small>
-                    </div>
-                </div>
-            </div>
-            <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you! We will get back to you shortly.');">
-                <input type="text" placeholder="Your Name" required>
-                <input type="email" placeholder="Email Address" required>
-                <input type="text" placeholder="Company">
-                <select>
-                    <option value="" disabled selected>Subject</option>
-                    <option>OEM / ODM Inquiry</option>
-                    <option>Product &amp; Pricing</option>
-                    <option>Sampling Request</option>
-                    <option>Licensed / Branded Products</option>
-                    <option>Other</option>
-                </select>
-                <textarea placeholder="Tell us about your project or requirements" required></textarea>
-                <button type="submit" class="btn btn-primary">Send Message →</button>
-            </form>
-        </div>
+<!-- VISUAL FACTS -->
+<section class="visual-facts">
+  <div class="container">
+    <div class="section-label reveal-up">By The Numbers</div>
+    <h2 class="section-title reveal-up delay-1">38 years of scale,<br>precision, and trust.</h2>
+    <div class="facts-grid">
+      <div class="fact-block reveal-up delay-1">
+        <div class="fact-year">1987</div>
+        <div class="fact-desc">Founded in Sha Tau Kok — the first step in a 38-year manufacturing journey.</div>
+      </div>
+      <div class="fact-block reveal-up delay-2">
+        <div class="fact-year">2000</div>
+        <div class="fact-desc">First soft toy production line launched — entering plush and costume manufacturing.</div>
+      </div>
+      <div class="fact-block reveal-up delay-3">
+        <div class="fact-year">2010</div>
+        <div class="fact-desc">Doll production lines integrated sewing craftsmanship with plastic molding technology.</div>
+      </div>
+      <div class="fact-block reveal-up delay-1">
+        <div class="fact-year">2016</div>
+        <div class="fact-desc">Entered remote control vehicle manufacturing — our highest-complexity category.</div>
+      </div>
+      <div class="fact-block reveal-up delay-2">
+        <div class="fact-year">2023</div>
+        <div class="fact-desc">Officially entered Indonesia — a key milestone in global supply chain diversification.</div>
+      </div>
+      <div class="fact-block reveal-up delay-3">
+        <div class="fact-year">2025</div>
+        <div class="fact-desc">Indonesia Phase II commences — strengthening responsiveness to international markets.</div>
+      </div>
     </div>
+  </div>
+</section>
+
+<!-- COMPLIANCE BANNER -->
+<section class="compliance-banner">
+  <div class="container">
+    <div class="compliance-inner reveal-up">
+      <div class="compliance-left">
+        <h2>Built for US &amp; EU Markets.</h2>
+        <p>Every product we manufacture meets the stringent toy safety regulations required by American and European retailers and importers.</p>
+        <a href="contact.html" class="btn btn-primary">Request a Sample</a>
+      </div>
+      <div class="compliance-badges">
+        <div class="badge-item reveal-up delay-1">
+          <div class="badge-icon">✓</div>
+          <div class="badge-text">ASTM F963</div>
+          <div class="badge-sub">US Toy Safety Standard</div>
+        </div>
+        <div class="badge-item reveal-up delay-2">
+          <div class="badge-icon">✓</div>
+          <div class="badge-text">EN 71</div>
+          <div class="badge-sub">EU Toy Safety Standard</div>
+        </div>
+        <div class="badge-item reveal-up delay-3">
+          <div class="badge-icon">✓</div>
+          <div class="badge-text">OEM &amp; ODM</div>
+          <div class="badge-sub">Fully Customisable</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GLOBAL PRESENCE -->
+<section class="global-section">
+  <div class="container">
+    <div class="section-label reveal-up">Global Presence</div>
+    <h2 class="section-title reveal-up delay-1">Four sites.<br>One standard.</h2>
+    <div class="sites-grid">
+      <div class="site-card reveal-up delay-1">
+        <div class="site-num">01</div>
+        <h3>Dongguan</h3>
+        <p>Primary manufacturing hub. Plush toys, costumes, plastic figures, and RC vehicle production.</p>
+      </div>
+      <div class="site-card reveal-up delay-2">
+        <div class="site-num">02</div>
+        <h3>Heyuan</h3>
+        <p>Multi-product facility supporting product line diversification and capacity upgrades since 2005.</p>
+      </div>
+      <div class="site-card reveal-up delay-3">
+        <div class="site-num">03</div>
+        <h3>Hunan</h3>
+        <p>Expanded production site operational since 2018, significantly increasing total manufacturing capacity.</p>
+      </div>
+      <div class="site-card reveal-up delay-1">
+        <div class="site-num">04</div>
+        <h3>Indonesia</h3>
+        <p>Strategic Southeast Asia base since 2023. Phase II operational in 2025, strengthening supply chain resilience.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-    <div class="footer-inner">
-        <div class="footer-brand">
-            <a href="#" class="nav-logo" style="color: white;">
-                <img src="assets/logo.png" alt="Royal Regent" style="height:60px; filter: brightness(0) invert(1);" onerror="this.style.display='none'">
-            </a>
-            <p>OEM toy manufacturer since 1987. Plastic figures, plush toys, RC vehicles, and electronic toys — produced to US and EU safety standards across four manufacturing sites.</p>
+  <div class="footer-container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/logo.png" alt="Royal Regent" class="footer-logo">
+        <p>OEM toy manufacturer since 1987. Plastic figures, plush toys, RC vehicles, and electronic toys — produced to US and EU safety standards across four manufacturing sites.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="about.html">About Us</a>
+          <a href="about.html#history">Our History</a>
+          <a href="careers.html">Careers</a>
+          <a href="contact.html">Contact</a>
         </div>
         <div class="footer-col">
-            <h4>Company</h4>
-            <a href="#about">About Us</a>
-            <a href="#about">Our History</a>
-            <a href="#capabilities">Capabilities</a>
-            <a href="#contact">Contact</a>
+          <h4>Capabilities</h4>
+          <a href="capabilities/plastic-figures.html">Plastic Figures</a>
+          <a href="capabilities/plush-toys.html">Plush Toys</a>
+          <a href="capabilities/rc-vehicles.html">RC Vehicles</a>
+          <a href="capabilities/electronic-toys.html">Electronic Toys</a>
         </div>
         <div class="footer-col">
-            <h4>Products</h4>
-            <a href="#products">Plastic Figures</a>
-            <a href="#products">Plush Toys</a>
-            <a href="#products">RC Vehicles</a>
-            <a href="#products">Electronic Toys</a>
+          <h4>OEM Services</h4>
+          <a href="contact.html">Request a Sample</a>
+          <a href="contact.html">OEM Inquiry</a>
+          <a href="contact.html">ODM Services</a>
+          <a href="contact.html">Licensed Products</a>
         </div>
-        <div class="footer-col">
-            <h4>Manufacturing</h4>
-            <a href="#capabilities">OEM Services</a>
-            <a href="#capabilities">ODM Services</a>
-            <a href="#capabilities">US &amp; EU Compliance</a>
-            <a href="#contact">Request a Sample</a>
-        </div>
+      </div>
     </div>
     <div class="footer-bottom">
-        <p>&copy; 2025 Royal Regent. All rights reserved.</p>
+      <p>&copy; 2025 Royal Regent. All rights reserved.</p>
+      <div class="footer-tags">
+        <span>US &amp; EU Compliant</span>
+        <span>OEM / ODM</span>
+        <span>Est. 1987</span>
+      </div>
     </div>
+  </div>
 </footer>
 
-<script>
-    window.addEventListener('scroll', () => {
-        document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
-    });
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-        a.addEventListener('click', () => {
-            document.getElementById('navLinks').classList.remove('open');
-        });
-    });
-</script>
+<script src="assets/main.js"></script>
 </body>
 </html>
