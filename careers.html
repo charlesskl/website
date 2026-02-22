@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Careers - Royal Regent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .careers-values{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+    .values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--border);border-left:1px solid var(--border);}
+    .value-card{border-right:1px solid var(--border);border-bottom:1px solid var(--border);padding:48px 36px;background:#fff;transition:background 0.3s;}
+    .value-card:hover{background:var(--surface-2);}
+    .value-icon{font-size:2rem;margin-bottom:16px;}
+    .value-card h3{font-family:'Inter',sans-serif;font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:10px;}
+    .value-card p{font-size:0.87rem;color:var(--text-muted);line-height:1.7;}
+    .no-openings{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:60px 40px;text-align:center;}
+    .no-openings h3{font-family:'Inter',sans-serif;font-size:1.4rem;font-weight:700;color:var(--text);margin-bottom:12px;}
+    .no-openings p{font-size:0.95rem;color:var(--text-muted);line-height:1.7;max-width:480px;margin:0 auto 28px;}
+    .dept-filter{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px;}
+    .filter-btn{padding:8px 18px;border-radius:20px;font-size:0.82rem;font-weight:600;border:1px solid var(--border);background:#fff;color:var(--text-muted);cursor:pointer;transition:all 0.2s;letter-spacing:0.03em;}
+    .filter-btn.active,.filter-btn:hover{background:var(--gradient);color:#fff;border-color:transparent;}
+    @media(max-width:768px){.values-grid{grid-template-columns:1fr;}}
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo"><img src="assets/logo.png" alt="Royal Regent"></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="about.html">About</a></li>
+      <li class="has-dropdown">
+        <a href="capabilities.html">Capabilities <span class="arrow">&#8964;</span></a>
+        <ul class="dropdown">
+          <li><a href="capabilities/plastic-figures.html">Plastic Figures &amp; Functional Toys</a></li>
+          <li><a href="capabilities/plush-toys.html">Plush Figures &amp; Soft Toys</a></li>
+          <li><a href="capabilities/dolls.html">Dolls</a></li>
+          <li><a href="capabilities/rc-vehicles.html">Remote Control Vehicles</a></li>
+          <li><a href="capabilities/costumes.html">Costumes</a></li>
+        </ul>
+      </li>
+      <li><a href="careers.html">Careers</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact Us</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container">
+    <span class="page-hero-tag">Join Our Team</span>
+    <h1>Build something<br><span class="gradient-text">that lasts.</span></h1>
+    <p>For over 38 years, Royal Regent has grown by investing in people. We are looking for skilled professionals across manufacturing, engineering, quality, and operations to grow with us.</p>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="careers-values">
+  <div class="container">
+    <div class="section-label reveal-up">Why Royal Regent</div>
+    <h2 class="section-title reveal-up delay-1">A manufacturer built<br>on people first.</h2>
+  </div>
+  <div class="values-grid">
+    <div class="value-card reveal-up delay-1">
+      <div class="value-icon">&#127775;</div>
+      <h3>38 Years of Stability</h3>
+      <p>Founded in 1987, Royal Regent has grown across four decades — offering long-term career stability and steady growth across China and Indonesia.</p>
+    </div>
+    <div class="value-card reveal-up delay-2">
+      <div class="value-icon">&#127760;</div>
+      <h3>Global Scale</h3>
+      <p>Work across manufacturing sites in Dongguan, Heyuan, Hunan, and Indonesia — gaining exposure to a truly international supply chain.</p>
+    </div>
+    <div class="value-card reveal-up delay-3">
+      <div class="value-icon">&#128218;</div>
+      <h3>Skill Development</h3>
+      <p>From mold development to RC electronics and soft toy production — our breadth of categories creates unique opportunities to develop deep, cross-functional expertise.</p>
+    </div>
+    <div class="value-card reveal-up delay-1">
+      <div class="value-icon">&#9989;</div>
+      <h3>Quality Culture</h3>
+      <p>We produce to US and EU safety standards. Quality is not a department — it is embedded in how every team operates, from tooling through final inspection.</p>
+    </div>
+    <div class="value-card reveal-up delay-2">
+      <div class="value-icon">&#129309;</div>
+      <h3>Collaborative Teams</h3>
+      <p>Flat structure, direct communication, and a culture of ownership. Our teams work closely across functions — engineering, production, sourcing, and QA.</p>
+    </div>
+    <div class="value-card reveal-up delay-3">
+      <div class="value-icon">&#127941;</div>
+      <h3>Grow With Us</h3>
+      <p>We are entering a new phase of expansion in Indonesia and beyond. Join now and grow alongside a manufacturer at a pivotal moment in its history.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OPEN POSITIONS -->
+<section>
+  <div class="container">
+    <div class="section-label reveal-up">Open Positions</div>
+    <h2 class="section-title reveal-up delay-1">Current opportunities.</h2>
+
+    <div class="dept-filter">
+      <button class="filter-btn active">All Departments</button>
+      <button class="filter-btn">Engineering</button>
+      <button class="filter-btn">Quality Assurance</button>
+      <button class="filter-btn">Operations</button>
+      <button class="filter-btn">Sales &amp; BD</button>
+    </div>
+
+    <div class="job-grid" id="jobGrid">
+      <div class="job-card reveal-up delay-1" data-dept="Engineering">
+        <div class="job-dept">Engineering</div>
+        <h3>Mold Design Engineer</h3>
+        <div class="job-meta">
+          <span class="job-tag">Dongguan, China</span>
+          <span class="job-tag">Full-Time</span>
+          <span class="job-tag">On-site</span>
+        </div>
+        <p>Design and develop injection molds for plastic toy components. Work closely with product development and production teams to ensure tooling precision, cycle efficiency, and part quality.</p>
+        <a href="contact.html" class="job-apply">Apply Now →</a>
+      </div>
+
+      <div class="job-card reveal-up delay-2" data-dept="Quality Assurance">
+        <div class="job-dept">Quality Assurance</div>
+        <h3>QA Inspector — Plush &amp; Soft Toys</h3>
+        <div class="job-meta">
+          <span class="job-tag">Dongguan, China</span>
+          <span class="job-tag">Full-Time</span>
+          <span class="job-tag">On-site</span>
+        </div>
+        <p>Conduct in-process and final quality inspections for plush toy production lines. Ensure conformance to EN 71 and ASTM F963 standards, and maintain accurate inspection records.</p>
+        <a href="contact.html" class="job-apply">Apply Now →</a>
+      </div>
+
+      <div class="job-card reveal-up delay-1" data-dept="Operations">
+        <div class="job-dept">Operations</div>
+        <h3>Production Supervisor — Indonesia</h3>
+        <div class="job-meta">
+          <span class="job-tag">Indonesia</span>
+          <span class="job-tag">Full-Time</span>
+          <span class="job-tag">On-site</span>
+        </div>
+        <p>Oversee day-to-day production operations at our Indonesia facility. Manage line efficiency, coordinate with engineering and QA teams, and ensure on-time output to production schedules.</p>
+        <a href="contact.html" class="job-apply">Apply Now →</a>
+      </div>
+
+      <div class="job-card reveal-up delay-2" data-dept="Sales &amp; BD">
+        <div class="job-dept">Sales &amp; Business Development</div>
+        <h3>OEM Account Manager</h3>
+        <div class="job-meta">
+          <span class="job-tag">Hong Kong / Remote</span>
+          <span class="job-tag">Full-Time</span>
+        </div>
+        <p>Manage and grow key OEM client accounts across the US and EU markets. Work with clients from initial enquiry through sampling, production, and delivery — acting as the primary point of contact.</p>
+        <a href="contact.html" class="job-apply">Apply Now →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPECULATIVE / CTA -->
+<section class="cta-banner">
+  <div class="container">
+    <div class="section-label reveal-up" style="text-align:center;">Don't See Your Role?</div>
+    <h2 class="reveal-up delay-1">Send us a speculative<br>application.</h2>
+    <p class="reveal-up delay-2">We are always open to hearing from talented people in manufacturing engineering, quality, sourcing, and operations. Send your CV and a short introduction to our team.</p>
+    <div class="reveal-up delay-3" style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="mailto:info@royalregenthk.com" class="btn btn-primary">Send Your CV →</a>
+      <a href="contact.html" class="btn btn-ghost">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/logo.png" alt="Royal Regent" class="footer-logo">
+        <p>Manufacturing partner to the world's leading toy brands since 1987. Five product categories, four production sites, one consistent standard &mdash; US and EU compliant.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About Us</a>
+        <a href="capabilities.html">Capabilities</a>
+        <a href="careers.html">Careers</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+      <div class="footer-col">
+        <h4>Capabilities</h4>
+        <a href="capabilities/plastic-figures.html">Plastic Figures</a>
+        <a href="capabilities/plush-toys.html">Plush Toys</a>
+        <a href="capabilities/dolls.html">Dolls</a>
+        <a href="capabilities/rc-vehicles.html">RC Vehicles</a>
+        <a href="capabilities/costumes.html">Costumes</a>
+      </div>
+      <div class="footer-col">
+        <h4>Get In Touch</h4>
+        <p class="footer-address">Unit 07-08, 12/F, Greenfield Tower,<br>Concordia Plaza, No.1 Science Museum Road,<br>Tsim Sha Tsui, Kowloon, Hong Kong</p>
+        <a href="mailto:info@royalregenthk.com">info@royalregenthk.com</a>
+        <a href="tel:+85224250720">(852) 2425 0720</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Royal Regent. All rights reserved.</p>
+      <div class="footer-tags">
+        <span>US &amp; EU Compliant</span>
+        <span>OEM / ODM</span>
+        <span>Est. 1987</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+<script>
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.textContent.trim();
+      document.querySelectorAll('#jobGrid .job-card').forEach(card => {
+        const dept = card.dataset.dept;
+        const show = filter === 'All Departments' || dept === filter;
+        card.style.display = show ? '' : 'none';
+      });
+    });
+  });
+</script>
+</body>
+</html>

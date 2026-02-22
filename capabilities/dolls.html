@@ -3,49 +3,87 @@
   <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Pull-Back Figures - Royal Regent</title>
+      <title>Dolls - Royal Regent</title>
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
       <link rel="stylesheet" href="../assets/style.css">
       <style>.cap-hero{min-height:100vh;display:flex;align-items:flex-end;position:relative;overflow:hidden;background:linear-gradient(160deg,#f0f9f0 0%,#e8f5e9 50%,#f1f8f1 100%);padding-bottom:80px;}.cap-hero-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(76,175,80,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(76,175,80,0.06) 1px,transparent 1px);background-size:80px 80px;}.cap-hero-accent{position:absolute;top:15%;right:5%;width:500px;height:500px;background:radial-gradient(circle,rgba(76,175,80,0.12) 0%,transparent 70%);border-radius:50%;animation:pulse 6s ease-in-out infinite;}.cap-hero-content{position:relative;z-index:2;max-width:var(--max);margin:0 auto;padding:0 32px;padding-top:calc(var(--nav-h) + 60px);width:100%;}.cap-breadcrumb{display:flex;gap:8px;align-items:center;font-size:0.78rem;color:var(--text-muted);margin-bottom:32px;}.cap-breadcrumb a{color:var(--text-muted);text-decoration:none;transition:color 0.2s;}.cap-breadcrumb a:hover{color:var(--green-mid);}.cap-breadcrumb span{color:var(--border);}.cap-hero-eyebrow{font-size:0.75rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--green-mid);margin-bottom:20px;}.cap-hero-title{font-family:'Inter',sans-serif;font-size:clamp(3rem,7vw,6rem);font-weight:900;line-height:1.0;letter-spacing:-0.03em;color:var(--text);margin-bottom:28px;}.cap-hero-title .green{color:var(--green-mid);}.cap-hero-sub{font-size:1.1rem;color:var(--text-muted);max-width:560px;line-height:1.75;margin-bottom:40px;}.cap-marquee{position:absolute;bottom:0;left:0;right:0;background:rgba(255,255,255,0.85);border-top:1px solid var(--border);padding:14px 0;overflow:hidden;white-space:nowrap;}.cap-marquee-track{display:inline-block;animation:marquee 30s linear infinite;}.cap-marquee-track span{font-size:0.82rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin:0 16px;}.cap-marquee-track .dot{color:var(--green-light);margin:0 4px;}.photo-section{background:var(--surface);padding:100px 0;}.photo-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:280px 280px;gap:12px;}.photo-card{background:linear-gradient(135deg,#e8f5e9,#f0f9f0);border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:transform 0.3s;}.photo-card:hover{transform:scale(1.02);}.photo-card.large{grid-row:1/3;}.photo-card-inner{text-align:center;color:var(--text-muted);}.photo-icon{font-size:3rem;margin-bottom:12px;opacity:0.35;}.photo-label{font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;opacity:0.45;}.features-section{padding:100px 0;background:#fff;}.features-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}.features-left h2{font-family:'Inter',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;line-height:1.1;letter-spacing:-0.025em;color:var(--text);margin-bottom:20px;}.features-left h2 span{color:var(--green-mid);}.features-left>p{color:var(--text-muted);line-height:1.75;font-size:1rem;margin-bottom:40px;}.features-list{list-style:none;}.feature-item{display:flex;gap:16px;padding:20px 0;border-bottom:1px solid var(--border);}.feature-item:first-child{border-top:1px solid var(--border);}.feature-icon-wrap{width:44px;height:44px;flex-shrink:0;background:rgba(76,175,80,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-top:2px;}.feature-text h4{font-size:0.95rem;font-weight:700;color:var(--text);margin-bottom:5px;}.feature-text p{font-size:0.85rem;color:var(--text-muted);line-height:1.65;margin:0;}.specs-panel{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:40px;position:sticky;top:100px;}.specs-eyebrow{font-size:0.72rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--green-mid);margin-bottom:28px;}.spec-row{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:16px 0;border-bottom:1px solid var(--border);}.spec-row:last-child{border-bottom:none;}.spec-key{font-size:0.82rem;color:var(--text-muted);flex-shrink:0;}.spec-val{font-size:0.88rem;font-weight:700;color:var(--text);text-align:right;}.specs-examples{margin-top:28px;padding-top:28px;border-top:1px solid var(--border);}.specs-examples h5{font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--green-mid);margin-bottom:12px;}.specs-examples p{font-size:0.82rem;color:var(--text-muted);line-height:1.65;margin:0;}@media(max-width:768px){.photo-grid{grid-template-columns:1fr;grid-template-rows:auto;}.photo-card.large{grid-row:auto;}.features-layout{grid-template-columns:1fr;gap:40px;}.specs-panel{position:static;}.cap-hero-title{font-size:2.8rem;}}</style>
   </head>
   <body>
-    <nav id="navbar"><div class="nav-container"><a href="../index.html" class="nav-logo"><img src="../assets/logo.png" alt="Royal Regent"></a><ul class="nav-links" id="navLinks"><li><a href="../about.html">About</a></li><li class="has-dropdown"><a href="../capabilities.html">Capabilities <span class="arrow">&#8964;</span></a><ul class="dropdown"><li><a href="../capabilities/plastic-figures.html">Plastic Figures &amp; Functional Toys</a></li><li><a href="../capabilities/plush-toys.html">Plush Figures &amp; Soft Toys</a></li><li><a href="../capabilities/pull-back.html">Pull-Back Figures</a></li><li><a href="../capabilities/rc-vehicles.html">Remote Control Vehicles</a></li><li><a href="../capabilities/electronic-toys.html">Electronic Plastic Toys</a></li></ul></li><li><a href="../contact.html">Contact Us</a></li></ul><button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button></div></nav>
+    <nav id="navbar"><div class="nav-container"><a href="../index.html" class="nav-logo"><img src="../assets/logo.png" alt="Royal Regent"></a><ul class="nav-links" id="navLinks"><li><a href="../about.html">About</a></li><li class="has-dropdown"><a href="../capabilities.html">Capabilities <span class="arrow">&#8964;</span></a><ul class="dropdown"><li><a href="../capabilities/plastic-figures.html">Plastic Figures &amp; Functional Toys</a></li><li><a href="../capabilities/plush-toys.html">Plush Figures &amp; Soft Toys</a></li><li><a href="../capabilities/dolls.html">Dolls</a></li><li><a href="../capabilities/rc-vehicles.html">Remote Control Vehicles</a></li><li><a href="../capabilities/costumes.html">Costumes</a></li></ul></li><li><a href="../careers.html">Careers</a></li><li><a href="../contact.html">Contact Us</a></li></ul><button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button></div></nav>
     <section class="cap-hero">
       <div class="cap-hero-bg"></div><div class="cap-hero-accent"></div>
       <div class="cap-hero-content">
-        <div class="cap-breadcrumb"><a href="../index.html">Home</a><span>/</span><a href="../capabilities.html">Capabilities</a><span>/</span><span>Pull-Back Figures</span></div>
+        <div class="cap-breadcrumb"><a href="../index.html">Home</a><span>/</span><a href="../capabilities.html">Capabilities</a><span>/</span><span>Dolls</span></div>
         <div class="cap-hero-eyebrow">Capability 03 of 05</div>
-        <h1 class="cap-hero-title">Pull-Back<br><span class="green">Figures</span></h1>
-        <p class="cap-hero-sub">Character designs with precision pull-back mechanisms &mdash; structural optimisation and mass production from customer artwork, ensuring durability, safety, and consistent quality at scale.</p>
+        <h1 class="cap-hero-title">Fashion &amp; Baby<br><span class="green">Dolls</span></h1>
+        <p class="cap-hero-sub">Complete OEM and ODM doll manufacturing &mdash; face painting, hair rooting, and outfit assembly &mdash; produced to EN 71 and ASTM F963 safety standards for US and EU markets.</p>
       </div>
-      <div class="cap-marquee"><div class="cap-marquee-track"><span>Pull-Back Mechanism</span><span class="dot">&#9679;</span><span>Character Design</span><span class="dot">&#9679;</span><span>OEM</span><span class="dot">&#9679;</span><span>Mass Production</span><span class="dot">&#9679;</span><span>ASTM F963</span><span class="dot">&#9679;</span><span>EN 71</span><span class="dot">&#9679;</span><span>Pull-Back Mechanism</span><span class="dot">&#9679;</span><span>Character Design</span><span class="dot">&#9679;</span><span>OEM</span><span class="dot">&#9679;</span><span>Mass Production</span><span class="dot">&#9679;</span><span>ASTM F963</span><span class="dot">&#9679;</span><span>EN 71</span><span class="dot">&#9679;</span></div></div>
+      <div class="cap-marquee"><div class="cap-marquee-track"><span>Face Painting</span><span class="dot">&#9679;</span><span>Hair Rooting</span><span class="dot">&#9679;</span><span>Outfit Assembly</span><span class="dot">&#9679;</span><span>EN 71</span><span class="dot">&#9679;</span><span>ASTM F963</span><span class="dot">&#9679;</span><span>OEM / ODM</span><span class="dot">&#9679;</span><span>Face Painting</span><span class="dot">&#9679;</span><span>Hair Rooting</span><span class="dot">&#9679;</span><span>Outfit Assembly</span><span class="dot">&#9679;</span><span>EN 71</span><span class="dot">&#9679;</span><span>ASTM F963</span><span class="dot">&#9679;</span><span>OEM / ODM</span><span class="dot">&#9679;</span></div></div>
     </section>
     <section class="photo-section"><div class="container"><span class="section-label">Product Gallery</span><h2 class="section-title" style="margin-bottom:48px;">Photo Gallery<br><span>Coming Soon</span></h2><div class="photo-grid"><div class="photo-card large"><div class="photo-card-inner"><div class="photo-icon">&#128247;</div><div class="photo-label">Featured Product Photo</div></div></div><div class="photo-card"><div class="photo-card-inner"><div class="photo-icon">&#128247;</div><div class="photo-label">Product Detail</div></div></div><div class="photo-card"><div class="photo-card-inner"><div class="photo-icon">&#128247;</div><div class="photo-label">Manufacturing</div></div></div><div class="photo-card"><div class="photo-card-inner"><div class="photo-icon">&#128247;</div><div class="photo-label">Product Range</div></div></div><div class="photo-card"><div class="photo-card-inner"><div class="photo-icon">&#128247;</div><div class="photo-label">Quality Control</div></div></div></div></div></section>
     <section class="features-section"><div class="container"><div class="features-layout">
       <div class="features-left">
         <span class="section-label">Overview</span>
-        <h2>Precision mechanisms,<br><span>character-driven design.</span></h2>
-        <p>Pull-back toys require a tight integration of mechanical design and plastic manufacturing. Our team manages the full process &mdash; from translating client artwork into tooling through mechanism calibration and mass production. Each unit is tested for durability and consistent pull-back performance before shipment.</p>
+        <h2>OEM &amp; ODM doll manufacturing,<br><span>crafted with precision.</span></h2>
+        <p>Our doll manufacturing capability covers the full production process &mdash; from high-detail face painting and hair rooting through to garment production and accessory assembly. We support both fashion dolls and baby dolls, with flexible OEM and ODM programmes and full compliance certification for US and EU import requirements.</p>
         <ul class="features-list">
-          <li class="feature-item"><div class="feature-icon-wrap">&#9881;</div><div class="feature-text"><h4>Integrated Mechanism Design</h4><p>Pull-back mechanism designed and integrated directly with the plastic figure body for optimal performance and longevity.</p></div></li>
-          <li class="feature-item"><div class="feature-icon-wrap">&#127912;</div><div class="feature-text"><h4>Character Design Support</h4><p>Client artwork translated into production-ready tooling &mdash; supporting licensed and original character designs.</p></div></li>
-          <li class="feature-item"><div class="feature-icon-wrap">&#128295;</div><div class="feature-text"><h4>Durability Testing</h4><p>Each product batch tested for pull-back mechanism durability and consistent performance across mass production runs.</p></div></li>
-          <li class="feature-item"><div class="feature-icon-wrap">&#10003;</div><div class="feature-text"><h4>Safety Compliance</h4><p>Produced in compliance with ASTM F963 and EN 71 standards &mdash; suitable for US and EU retail markets.</p></div></li>
+          <li class="feature-item"><div class="feature-icon-wrap">&#127912;</div><div class="feature-text"><h4>Face Decoration &amp; Painting</h4><p>High-detail face painting with precision tooling &mdash; consistent application across high production volumes for both fashion and baby doll lines.</p></div></li>
+          <li class="feature-item"><div class="feature-icon-wrap">&#9986;</div><div class="feature-text"><h4>Hair Rooting</h4><p>Nylon and synthetic hair rooting with custom colours and styles &mdash; engineered for durability and play-safe performance throughout the product's life.</p></div></li>
+          <li class="feature-item"><div class="feature-icon-wrap">&#128084;</div><div class="feature-text"><h4>Outfit &amp; Accessory Assembly</h4><p>Full garment production and accessory assembly in-house &mdash; supporting licensed IP requirements, custom designs, and complete dress-up doll packages.</p></div></li>
+          <li class="feature-item"><div class="feature-icon-wrap">&#10003;</div><div class="feature-text"><h4>EN 71 / ASTM F963 Compliance</h4><p>Full compliance with EN 71 (EU) and ASTM F963 (US) toy safety standards &mdash; complete documentation available for import and retail requirements.</p></div></li>
         </ul>
       </div>
       <div class="features-right"><div class="specs-panel">
         <div class="specs-eyebrow">Specifications &amp; Capabilities</div>
-        <div class="spec-row"><span class="spec-key">Mechanism Type</span><span class="spec-val">Spring Pull-Back</span></div>
-        <div class="spec-row"><span class="spec-key">Manufacturing</span><span class="spec-val">Injection Molding</span></div>
-        <div class="spec-row"><span class="spec-key">Materials</span><span class="spec-val">ABS, PP, PVC</span></div>
-        <div class="spec-row"><span class="spec-key">Customisation</span><span class="spec-val">OEM</span></div>
-        <div class="spec-row"><span class="spec-key">Safety Standards</span><span class="spec-val">ASTM F963 / EN 71</span></div>
+        <div class="spec-row"><span class="spec-key">Doll Type</span><span class="spec-val">Fashion Dolls / Baby Dolls</span></div>
+        <div class="spec-row"><span class="spec-key">Body Material</span><span class="spec-val">PVC / ABS Plastic</span></div>
+        <div class="spec-row"><span class="spec-key">Hair Type</span><span class="spec-val">Nylon / Synthetic Rooted</span></div>
+        <div class="spec-row"><span class="spec-key">Customisation</span><span class="spec-val">OEM and ODM</span></div>
+        <div class="spec-row"><span class="spec-key">Certifications</span><span class="spec-val">CE, ASTM F963, EN 71</span></div>
         <div class="spec-row"><span class="spec-key">Markets Served</span><span class="spec-val">US, EU, Global</span></div>
-        <div class="specs-examples"><h5>Product Examples</h5><p>Character pull-back vehicles, animal figures with pull-back, licensed character pull-back toys, promotional pull-back figures</p></div>
+        <div class="specs-examples"><h5>Product Examples</h5><p>Fashion dolls, baby dolls, character dolls, licensed IP dolls, dress-up dolls</p></div>
       </div></div>
     </div></div></section>
-    <footer><div class="footer-container"><div class="footer-top"><div class="footer-brand"><img src="../assets/logo.png" alt="Royal Regent" class="footer-logo"><p>OEM toy manufacturer since 1987. Produced to US and EU safety standards.</p></div><div class="footer-links"><div class="footer-col"><h4>Capabilities</h4><a href="../capabilities/plastic-figures.html">Plastic Figures</a><a href="../capabilities/plush-toys.html">Plush Toys</a><a href="../capabilities/pull-back.html">Pull-Back Figures</a><a href="../capabilities/rc-vehicles.html">RC Vehicles</a><a href="../capabilities/electronic-toys.html">Electronic Toys</a></div><div class="footer-col"><h4>Contact Us</h4><p style="font-size:0.82rem;color:var(--text-muted);line-height:1.65;margin-bottom:10px;">Unit 07-08, 12/F, Greenfield Tower, Concordia Plaza,<br>No.1 Science Museum Road, Tsim Sha Tsui,<br>Kowloon, Hong Kong</p><a href="mailto:info@royalregenthk.com">info@royalregenthk.com</a><a href="tel:+85224250720">(852) 2425 0720</a></div></div></div><div class="footer-bottom"><p>&copy; 2025 Royal Regent. All rights reserved.</p><div class="footer-tags"><span>US &amp; EU Compliant</span><span>OEM / ODM</span><span>Est. 1987</span></div></div></div></footer>
+    <footer>
+  <div class="footer-container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="../assets/logo.png" alt="Royal Regent" class="footer-logo">
+        <p>Manufacturing partner to the world's leading toy brands since 1987. Five product categories, four production sites, one consistent standard &mdash; US and EU compliant.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="../about.html">About Us</a>
+        <a href="../capabilities.html">Capabilities</a>
+        <a href="../careers.html">Careers</a>
+        <a href="../contact.html">Contact Us</a>
+      </div>
+      <div class="footer-col">
+        <h4>Capabilities</h4>
+        <a href="../capabilities/plastic-figures.html">Plastic Figures</a>
+        <a href="../capabilities/plush-toys.html">Plush Toys</a>
+        <a href="../capabilities/dolls.html">Dolls</a>
+        <a href="../capabilities/rc-vehicles.html">RC Vehicles</a>
+        <a href="../capabilities/costumes.html">Costumes</a>
+      </div>
+      <div class="footer-col">
+        <h4>Get In Touch</h4>
+        <p class="footer-address">Unit 07-08, 12/F, Greenfield Tower,<br>Concordia Plaza, No.1 Science Museum Road,<br>Tsim Sha Tsui, Kowloon, Hong Kong</p>
+        <a href="mailto:info@royalregenthk.com">info@royalregenthk.com</a>
+        <a href="tel:+85224250720">(852) 2425 0720</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Royal Regent. All rights reserved.</p>
+      <div class="footer-tags">
+        <span>US &amp; EU Compliant</span>
+        <span>OEM / ODM</span>
+        <span>Est. 1987</span>
+      </div>
+    </div>
+  </div>
+</footer>
     <script src="../assets/main.js"></script>
   </body>
 </html>

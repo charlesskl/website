@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us - Royal Regent</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo"><img src="assets/logo.png" alt="Royal Regent"></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="about.html">About</a></li>
+      <li class="has-dropdown">
+        <a href="capabilities.html">Capabilities <span class="arrow">&#8964;</span></a>
+        <ul class="dropdown">
+          <li><a href="capabilities/plastic-figures.html">Plastic Figures &amp; Functional Toys</a></li>
+          <li><a href="capabilities/plush-toys.html">Plush Figures &amp; Soft Toys</a></li>
+          <li><a href="capabilities/dolls.html">Dolls</a></li>
+          <li><a href="capabilities/rc-vehicles.html">Remote Control Vehicles</a></li>
+          <li><a href="capabilities/costumes.html">Costumes</a></li>
+        </ul>
+      </li>
+      <li><a href="careers.html">Careers</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact Us</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container">
+    <span class="page-hero-tag">Our Story</span>
+    <h1>38 years of<br><span class="gradient-text">craftsmanship.</span></h1>
+    <p>From a single workshop in Sha Tau Kok, Hong Kong, Royal Regent has grown into a multi-site OEM and ODM toy manufacturer trusted by leading global brands — delivering safe, compliant, and precision-engineered toys from China and Indonesia to markets worldwide.</p>
+  </div>
+</section>
+
+<!-- INTRO STATEMENT -->
+<section class="intro-statement">
+  <div class="container">
+    <div class="statement-inner reveal-up">
+      <div class="statement-line"></div>
+      <p class="statement-text">We believe great manufacturing is built on trust, not just transactions. For 38 years, we have partnered with brands to turn creative visions into finished products — with the craftsmanship, compliance, and consistency their markets demand.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HISTORY TIMELINE -->
+<section id="history" style="background:var(--dark-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:120px 0;">
+  <div class="container">
+    <div class="section-label reveal-up">Our History</div>
+    <h2 class="section-title reveal-up delay-1">Nearly four decades<br>of <span>continuous growth.</span></h2>
+    <div class="tl-layout">
+
+      <!-- Left: Year Nav -->
+      <div class="tl-nav">
+        <div class="tl-track"></div>
+        <button class="tl-yr active" data-tl="0">1987</button>
+        <button class="tl-yr" data-tl="1">2000</button>
+        <button class="tl-yr" data-tl="2">2010</button>
+        <button class="tl-yr" data-tl="3">2016</button>
+        <button class="tl-yr" data-tl="4">2023</button>
+        <button class="tl-yr" data-tl="5">2025</button>
+      </div>
+
+      <!-- Right: Content -->
+      <div class="tl-panels">
+        <div class="tl-panel active" data-tl="0">
+          <div class="tl-big-year">1987</div>
+          <h3 class="tl-title">Founded in Sha Tau Kok</h3>
+          <p class="tl-desc">Royal Regent was established in Sha Tau Kok, Hong Kong — beginning as a focused plastic toy manufacturer. From the outset, the company built the quality systems, client relationships, and manufacturing discipline that continue to define it today.</p>
+        </div>
+        <div class="tl-panel" data-tl="1">
+          <div class="tl-big-year">2000</div>
+          <h3 class="tl-title">Entering Plush & Soft Toys</h3>
+          <p class="tl-desc">Royal Regent expanded beyond plastic manufacturing by launching dedicated plush and soft toy production lines. This milestone opened entirely new product categories and allowed the company to serve a broader range of global brand partners.</p>
+        </div>
+        <div class="tl-panel" data-tl="2">
+          <div class="tl-big-year">2010</div>
+          <h3 class="tl-title">Doll Lines Integrated</h3>
+          <p class="tl-desc">Doll manufacturing was fully integrated, combining precision plastic molding with in-house sewing craftsmanship. The result was a complete production capability for fashion dolls and baby dolls — face painting, hair rooting, outfit assembly — all under one roof.</p>
+        </div>
+        <div class="tl-panel" data-tl="3">
+          <div class="tl-big-year">2016</div>
+          <h3 class="tl-title">Remote Control Vehicles</h3>
+          <p class="tl-desc">Royal Regent entered RC vehicle manufacturing — the company's most technically demanding category. This expansion required advanced electronics integration, structural engineering expertise, and compliance with FCC, CE, and ASTM F963 safety standards.</p>
+        </div>
+        <div class="tl-panel" data-tl="4">
+          <div class="tl-big-year">2023</div>
+          <h3 class="tl-title">Indonesia Phase I</h3>
+          <p class="tl-desc">A landmark year: Royal Regent established its first Southeast Asian manufacturing facility in Indonesia. Phase I marked a strategic step in supply chain diversification — reducing concentration risk and positioning the company closer to key international markets.</p>
+        </div>
+        <div class="tl-panel" data-tl="5">
+          <div class="tl-big-year">2025</div>
+          <h3 class="tl-title">Indonesia Phase II</h3>
+          <p class="tl-desc">Indonesia Phase II commenced, scaling production capacity and deepening Royal Regent's Southeast Asian footprint. This expansion strengthens our ability to serve international customers with faster lead times, greater flexibility, and a more resilient global supply chain.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+.tl-layout{display:grid;grid-template-columns:180px 1fr;gap:80px;align-items:start;}
+.tl-nav{position:relative;padding-left:28px;}
+.tl-track{position:absolute;left:6px;top:12px;bottom:12px;width:2px;background:var(--border);}
+.tl-yr{display:block;width:100%;text-align:left;background:none;border:none;cursor:pointer;font-family:'Inter',sans-serif;font-size:1rem;font-weight:700;color:var(--text-muted);padding:14px 0;position:relative;transition:all 0.3s;letter-spacing:-0.01em;}
+.tl-yr::before{content:'';position:absolute;left:-25px;top:50%;transform:translateY(-50%);width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid var(--border);transition:all 0.3s;}
+.tl-yr.active{font-size:1.9rem;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2;}
+.tl-yr.active::before{background:var(--green-mid);border-color:var(--green-mid);width:14px;height:14px;left:-27px;box-shadow:0 0 0 4px rgba(76,175,80,0.15);}
+.tl-yr:hover:not(.active){color:var(--text);}
+.tl-panels{position:relative;min-height:320px;}
+.tl-panel{display:none;}
+.tl-panel.active{display:block;animation:tlFade 0.4s ease;}
+@keyframes tlFade{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.tl-big-year{font-family:'Inter',sans-serif;font-size:clamp(4rem,8vw,7rem);font-weight:900;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:20px;letter-spacing:-0.04em;}
+.tl-title{font-family:'Inter',sans-serif;font-size:1.6rem;font-weight:800;color:var(--text);margin-bottom:16px;letter-spacing:-0.02em;}
+.tl-desc{font-size:1rem;color:var(--text-muted);line-height:1.8;max-width:560px;}
+@media(max-width:768px){.tl-layout{grid-template-columns:1fr;gap:40px;}.tl-nav{display:flex;flex-wrap:wrap;gap:8px;padding-left:0;}.tl-track{display:none;}.tl-yr{width:auto;padding:6px 14px;font-size:0.85rem!important;background:rgba(76,175,80,0.06)!important;border:1px solid var(--border)!important;border-radius:20px!important;-webkit-text-fill-color:var(--text-muted)!important;color:var(--text-muted)!important;}.tl-yr::before{display:none;}.tl-yr.active{background:var(--gradient)!important;-webkit-text-fill-color:white!important;color:white!important;border-color:transparent!important;}.tl-big-year{font-size:3.5rem;}}
+</style>
+
+<!-- MANUFACTURING SITES -->
+<section style="background:#fff;">
+  <div class="container">
+    <div class="section-label reveal-up">Global Operations</div>
+    <h2 class="section-title reveal-up delay-1">Four sites.<br>One integrated <span>supply chain.</span></h2>
+    <div class="sites-grid">
+      <div class="site-card reveal-up delay-1">
+        <div class="site-num">01</div>
+        <h3>Dongguan, China</h3>
+        <p>Our flagship facility and operational headquarters. Home to in-house mold development, injection molding, and plastic figure production — the core of our manufacturing capability since our early years.</p>
+      </div>
+      <div class="site-card reveal-up delay-2">
+        <div class="site-num">02</div>
+        <h3>Heyuan, China</h3>
+        <p>Dedicated to plush and soft toy production. This facility handles material sourcing, pattern cutting, sewing, stuffing, and final quality inspection for all plush and character soft toy lines.</p>
+      </div>
+      <div class="site-card reveal-up delay-3">
+        <div class="site-num">03</div>
+        <h3>Hunan, China</h3>
+        <p>Specialising in doll and costume production. The Hunan site brings together skilled garment and assembly workers to produce fashion dolls, baby dolls, and dress-up costume ranges.</p>
+      </div>
+      <div class="site-card reveal-up delay-3">
+        <div class="site-num">04</div>
+        <h3>Indonesia</h3>
+        <p>Our newest and growing facility, established in 2023 with Phase I and expanded through Phase II in 2025. A strategic asset for supply chain diversification and proximity to key international markets.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section style="background:var(--surface);border-top:1px solid var(--border);">
+  <div class="container">
+    <div class="section-label reveal-up">What We Stand For</div>
+    <h2 class="section-title reveal-up delay-1">Principles that guide<br>everything we <span>manufacture.</span></h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px;">
+      <div class="site-card reveal-up delay-1">
+        <div style="width:48px;height:48px;background:rgba(76,175,80,0.12);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" stroke="#2E7D32" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="site-num">Quality</div>
+        <h3 style="font-size:1.3rem;font-weight:700;color:var(--text);margin-bottom:12px;">Built-in, not bolted-on</h3>
+        <p>Every product we manufacture is produced to ASTM F963 (US) and EN 71 (EU) safety standards. Quality is embedded at every stage — from material selection and mold design through assembly and final inspection — not added as an afterthought.</p>
+      </div>
+      <div class="site-card reveal-up delay-2">
+        <div style="width:48px;height:48px;background:rgba(76,175,80,0.12);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" stroke="#2E7D32" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="site-num">Partnership</div>
+        <h3 style="font-size:1.3rem;font-weight:700;color:var(--text);margin-bottom:12px;">Long-term, not transactional</h3>
+        <p>We work as an extension of our clients' teams — providing OEM and ODM services that go beyond manufacturing. From concept development and sampling to production planning and export logistics, we are a partner at every stage of the product journey.</p>
+      </div>
+      <div class="site-card reveal-up delay-3">
+        <div style="width:48px;height:48px;background:rgba(76,175,80,0.12);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" stroke="#2E7D32" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="site-num">Compliance</div>
+        <h3 style="font-size:1.3rem;font-weight:700;color:var(--text);margin-bottom:12px;">Every market, every standard</h3>
+        <p>Navigating safety regulations across the US, EU, and other markets is complex. Royal Regent maintains rigorous compliance processes across all manufacturing sites to ensure every product meets the regulatory requirements of its destination market.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <div class="container">
+    <div class="section-label reveal-up" style="text-align:center;">Start a Conversation</div>
+    <h2 class="reveal-up delay-1">Ready to start a project?</h2>
+    <p class="reveal-up delay-2">Tell us about your product. Whether you need OEM manufacturing, ODM development, or a sampling run — our team is ready to help bring your vision to life.</p>
+    <div class="reveal-up delay-3" style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="contact.html" class="btn btn-primary">Get In Touch &rarr;</a>
+      <a href="capabilities.html" class="btn btn-ghost">Explore Capabilities</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/logo.png" alt="Royal Regent" class="footer-logo">
+        <p>Manufacturing partner to the world's leading toy brands since 1987. Five product categories, four production sites, one consistent standard &mdash; US and EU compliant.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About Us</a>
+        <a href="capabilities.html">Capabilities</a>
+        <a href="careers.html">Careers</a>
+        <a href="contact.html">Contact Us</a>
+      </div>
+      <div class="footer-col">
+        <h4>Capabilities</h4>
+        <a href="capabilities/plastic-figures.html">Plastic Figures</a>
+        <a href="capabilities/plush-toys.html">Plush Toys</a>
+        <a href="capabilities/dolls.html">Dolls</a>
+        <a href="capabilities/rc-vehicles.html">RC Vehicles</a>
+        <a href="capabilities/costumes.html">Costumes</a>
+      </div>
+      <div class="footer-col">
+        <h4>Get In Touch</h4>
+        <p class="footer-address">Unit 07-08, 12/F, Greenfield Tower,<br>Concordia Plaza, No.1 Science Museum Road,<br>Tsim Sha Tsui, Kowloon, Hong Kong</p>
+        <a href="mailto:info@royalregenthk.com">info@royalregenthk.com</a>
+        <a href="tel:+85224250720">(852) 2425 0720</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Royal Regent. All rights reserved.</p>
+      <div class="footer-tags">
+        <span>US &amp; EU Compliant</span>
+        <span>OEM / ODM</span>
+        <span>Est. 1987</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/main.js"></script>
+<script>
+  document.querySelectorAll('.tl-yr').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = btn.dataset.tl;
+      document.querySelectorAll('.tl-yr').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tl-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelector(`.tl-panel[data-tl="${idx}"]`).classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
