@@ -8,7 +8,7 @@
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
       <link rel="stylesheet" href="../assets/style.css">
       <style>
-        .cap-hero{min-height:100vh;display:flex;align-items:flex-end;position:relative;overflow:hidden;background:linear-gradient(160deg,#f0f9f0 0%,#e8f5e9 50%,#f1f8f1 100%);padding-bottom:80px;}
+        .cap-hero{display:flex;flex-direction:column;position:relative;overflow:hidden;background:linear-gradient(160deg,#f0f9f0 0%,#e8f5e9 50%,#f1f8f1 100%);}
         .cap-hero-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(76,175,80,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(76,175,80,0.06) 1px,transparent 1px);background-size:80px 80px;}
         .cap-hero-accent{position:absolute;top:15%;right:5%;width:500px;height:500px;background:radial-gradient(circle,rgba(76,175,80,0.12) 0%,transparent 70%);border-radius:50%;animation:pulse 6s ease-in-out infinite;}
         .cap-hero-content{position:relative;z-index:2;max-width:var(--max);margin:0 auto;padding:0 32px;padding-top:calc(var(--nav-h) + 60px);width:100%;}
@@ -16,17 +16,9 @@
         .cap-breadcrumb a{color:var(--text-muted);text-decoration:none;transition:color 0.2s;}
         .cap-breadcrumb a:hover{color:var(--green-mid);}
         .cap-breadcrumb span{color:var(--border);}
-        .cap-hero-eyebrow{font-size:0.75rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--green-mid);margin-bottom:20px;}
         .cap-hero-title{font-family:'Inter',sans-serif;font-size:clamp(3rem,7vw,6rem);font-weight:900;line-height:1.0;letter-spacing:-0.03em;color:var(--text);margin-bottom:28px;}
         .cap-hero-title .green{color:var(--green-mid);}
         .cap-hero-sub{font-size:1.1rem;color:var(--text-muted);max-width:560px;line-height:1.75;margin-bottom:40px;}
-        .cap-milestones{position:absolute;bottom:0;left:0;right:0;background:rgba(255,255,255,0.92);backdrop-filter:blur(8px);border-top:1px solid var(--border);padding:20px 0;}
-        .cap-milestones-track{max-width:var(--max);margin:0 auto;padding:0 32px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
-        .cap-milestone{display:flex;gap:10px;align-items:flex-start;}
-        .cap-milestone-year{font-family:'Inter',sans-serif;font-size:0.82rem;font-weight:800;color:var(--green-mid);white-space:nowrap;padding-top:1px;}
-        .cap-milestone-text{font-size:0.75rem;color:var(--text-muted);line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
-        @media(max-width:900px){.cap-milestones-track{grid-template-columns:repeat(2,1fr);gap:16px;}}
-        @media(max-width:768px){.cap-milestones-track{grid-template-columns:1fr;gap:12px;}}
         .cap-detail{padding:100px 0;background:#fff;}
         .cap-detail-header{margin-bottom:56px;}
         .cap-detail-header h2{font-family:'Inter',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;line-height:1.1;letter-spacing:-0.025em;color:var(--text);}
@@ -78,17 +70,8 @@
           <a href="../capabilities/plastic-figures.html">Capabilities</a><span>/</span>
           <span>Plastic Figures</span>
         </div>
-        <div class="cap-hero-eyebrow">Capability 01 of 05</div>
         <h1 class="cap-hero-title">Plastic Figures &amp;<br><span class="green">Functional Toys</span></h1>
         <p class="cap-hero-sub">In-house mold development and precision injection molding for character figures and functional toys, fully customised to client designs and specifications.</p>
-      </div>
-      <div class="cap-milestones">
-        <div class="cap-milestones-track">
-          <div class="cap-milestone"><span class="cap-milestone-year">2010</span><span class="cap-milestone-text">Launched doll production lines, integrating sewing craftsmanship with plastic molding technology.</span></div>
-          <div class="cap-milestone"><span class="cap-milestone-year">2016</span><span class="cap-milestone-text">Entered remote control vehicle manufacturing, addressing higher technical requirements and enhancing capabilities in structural complexity and electronic integration.</span></div>
-          <div class="cap-milestone"><span class="cap-milestone-year">2023</span><span class="cap-milestone-text">Officially entered the Indonesian market, marking a key milestone in the company&rsquo;s global expansion strategy and promoting supply chain diversification.</span></div>
-          <div class="cap-milestone"><span class="cap-milestone-year">2025</span><span class="cap-milestone-text">Phase II of the Indonesia factory commenced operations, further expanding regional production capacity and strengthening responsiveness to international markets.</span></div>
-        </div>
       </div>
     </section>
     <section class="cap-detail">
