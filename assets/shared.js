@@ -18,9 +18,10 @@
  * 11. Image blur-up lazy loading
  * 12. Splitting.js hero headline animation
  * 13. Language selector
- * 14. Animated film grain noise overlay
- * 15. Horizontal scroll capability showcase
- * 16. Floating hover image on capability cards
+ * 14. Floating hover image on capability cards
+ * 15. WebGL hero distortion
+ * 16. Typewriter hero subtext
+ * 17. Scroll morph SVG
  * ═══════════════════════════════════════════════════════════════════
  */
 
@@ -68,7 +69,6 @@
   // ─── 2. ADVANCED TWO-PART CURSOR ────────────────────────────
   function initCursor() {
     if (isTouch || !hasHover) return;
-    if (typeof gsap === 'undefined') return;
 
     var dot = document.createElement('div');
     dot.className = 'cursor-dot';
@@ -93,24 +93,24 @@
     document.addEventListener('mousemove', function (e) {
       mouseX = e.clientX;
       mouseY = e.clientY;
-      // Dot follows instantly
-      gsap.set(dot, { x: mouseX, y: mouseY });
+      // Dot follows instantly via direct transform (no GSAP overhead)
+      dot.style.transform = 'translate3d(' + mouseX + 'px,' + mouseY + 'px,0)';
       if (firstMove) {
         firstMove = false;
         ringX = mouseX;
         ringY = mouseY;
-        gsap.set(ring, { x: ringX, y: ringY });
+        ring.style.transform = 'translate3d(' + ringX + 'px,' + ringY + 'px,0)';
         dot.style.opacity = '';
         ring.style.opacity = '';
       }
     });
 
-    // Ring follows with lerp lag
+    // Ring follows with lerp lag — direct transforms, no GSAP per frame
     function animateRing() {
-      ringX += (mouseX - ringX) * 0.12;
-      ringY += (mouseY - ringY) * 0.12;
-      gsap.set(ring, { x: ringX, y: ringY });
-      label.style.transform = 'translate(' + ringX + 'px,' + ringY + 'px) translate(-50%,-50%)';
+      ringX += (mouseX - ringX) * 0.15;
+      ringY += (mouseY - ringY) * 0.15;
+      ring.style.transform = 'translate3d(' + ringX + 'px,' + ringY + 'px,0)';
+      label.style.transform = 'translate3d(' + ringX + 'px,' + ringY + 'px,0) translate(-50%,-50%)';
       requestAnimationFrame(animateRing);
     }
     animateRing();
@@ -712,124 +712,6 @@
   }
 
 
-  // ─── ANIMATED FILM GRAIN NOISE ──────────────────────────
-  function initFilmGrain() {
-    if (isMobile) return;
-    if (prefersReducedMotion) return;
-
-    var canvas = document.createElement('canvas');
-    canvas.id = 'noise-overlay';
-    document.body.appendChild(canvas);
-
-    var ctx = canvas.getContext('2d');
-    canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9998;opacity:0.035;mix-blend-mode:overlay;';
-
-    var w = 0, h = 0;
-    var imageData = null;
-
-    function resize() {
-      // Use quarter resolution for performance
-      w = Math.ceil(window.innerWidth / 4);
-      h = Math.ceil(window.innerHeight / 4);
-      canvas.width = w;
-      canvas.height = h;
-      imageData = ctx.createImageData(w, h);
-    }
-    resize();
-    window.addEventListener('resize', resize);
-
-    var isVisible = true;
-    var observer = new IntersectionObserver(function(entries) {
-      isVisible = entries[0].isIntersecting;
-    }, { threshold: 0 });
-    observer.observe(canvas);
-
-    var frameCount = 0;
-    function generateNoise() {
-      requestAnimationFrame(generateNoise);
-      // Throttle to ~15fps for performance
-      frameCount++;
-      if (frameCount % 4 !== 0) return;
-      if (!isVisible) return;
-
-      var data = imageData.data;
-      var len = data.length;
-      for (var i = 0; i < len; i += 4) {
-        var value = (Math.random() * 255) | 0;
-        data[i] = value;
-        data[i + 1] = value;
-        data[i + 2] = value;
-        data[i + 3] = 255;
-      }
-      ctx.putImageData(imageData, 0, 0);
-    }
-    generateNoise();
-  }
-
-
-  // ─── HORIZONTAL SCROLL CAPABILITY SHOWCASE ─────────────
-  function initHorizontalScroll() {
-    if (isMobile) return;
-    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-
-    var section = document.getElementById('hScrollSection');
-    var track = document.getElementById('hScrollTrack');
-    if (!section || !track) return;
-
-    // Let GSAP calculate the scroll distance
-    function getScrollAmount() {
-      return -(track.scrollWidth - window.innerWidth);
-    }
-
-    gsap.to(track, {
-      x: getScrollAmount,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: section,
-        start: 'top top',
-        end: function() { return '+=' + Math.abs(getScrollAmount()); },
-        pin: true,
-        scrub: 1,
-        invalidateOnRefresh: true,
-        anticipatePin: 1
-      }
-    });
-
-    // Stagger-in panel content as panels enter viewport
-    var panels = track.querySelectorAll('.h-scroll-panel');
-    panels.forEach(function(panel) {
-      var inner = panel.querySelector('.h-panel-inner');
-      var img = panel.querySelector('.h-panel-img');
-      if (inner) {
-        gsap.from(inner, {
-          opacity: 0, y: 40,
-          duration: 0.8, ease: 'power3.out',
-          scrollTrigger: {
-            trigger: panel,
-            containerAnimation: gsap.getById ? undefined : undefined, // handled by horizontal movement
-            start: 'left 80%',
-            end: 'left 40%',
-            scrub: 1,
-            horizontal: true
-          }
-        });
-      }
-      if (img) {
-        gsap.from(img, {
-          scale: 0.85, opacity: 0,
-          duration: 0.8, ease: 'power2.out',
-          scrollTrigger: {
-            trigger: panel,
-            start: 'left 70%',
-            end: 'left 30%',
-            scrub: 1,
-            horizontal: true
-          }
-        });
-      }
-    });
-  }
-
 
   // ─── FLOATING HOVER IMAGE (cap cards) ─────────────────
   function initCapHoverImage() {
@@ -952,6 +834,268 @@
   }
 
 
+  // ─── WEBGL HERO DISTORTION ─────────────────────────────
+  function initHeroDistortion() {
+    if (isMobile) return;
+    if (prefersReducedMotion) return;
+
+    // Find hero section — works on index, about, and sub-pages
+    var hero = document.querySelector('.hero, .about-hero, .sub-hero');
+    if (!hero) return;
+
+    // Check WebGL support
+    var testCanvas = document.createElement('canvas');
+    var gl = testCanvas.getContext('webgl') || testCanvas.getContext('experimental-webgl');
+    if (!gl) return;
+
+    // Use Three.js if available, otherwise raw WebGL
+    if (typeof THREE === 'undefined') return;
+
+    try {
+      var container = document.createElement('div');
+      container.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:1;overflow:hidden;';
+      hero.style.position = hero.style.position || 'relative';
+      hero.insertBefore(container, hero.firstChild);
+
+      var scene = new THREE.Scene();
+      var camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+      var renderer = new THREE.WebGLRenderer({ alpha: true, antialias: false });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setClearColor(0x000000, 0);
+      container.appendChild(renderer.domElement);
+      renderer.domElement.style.cssText = 'width:100%;height:100%;display:block;';
+
+      var uniforms = {
+        uTime: { value: 0 },
+        uMouse: { value: new THREE.Vector2(0.5, 0.5) },
+        uDistortion: { value: 0.004 },
+        uResolution: { value: new THREE.Vector2(1, 1) }
+      };
+
+      var vertexShader = 'varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}';
+      var fragmentShader = [
+        'uniform float uTime;',
+        'uniform vec2 uMouse;',
+        'uniform float uDistortion;',
+        'uniform vec2 uResolution;',
+        'varying vec2 vUv;',
+        'void main(){',
+        '  vec2 uv=vUv;',
+        '  float aspect=uResolution.x/uResolution.y;',
+        '  vec2 scaled=vec2(uv.x*aspect,uv.y);',
+        '  vec2 mScaled=vec2(uMouse.x*aspect,uMouse.y);',
+        '  float dist=distance(scaled,mScaled);',
+        '  float ambient=sin(uv.x*8.0+uTime*0.5)*sin(uv.y*6.0+uTime*0.7)*0.003;',
+        '  float ripple=sin(dist*40.0-uTime*3.0)*uDistortion*(1.0-smoothstep(0.0,0.4,dist));',
+        '  vec2 offset=normalize(uv-uMouse+0.001)*ripple+ambient;',
+        '  float r=0.38+0.04*sin(uTime*0.3+uv.x*10.0);',
+        '  float g=0.55+0.04*sin(uTime*0.4+uv.y*10.0);',
+        '  float b=0.2+0.02*sin(uTime*0.5);',
+        '  float wave=sin(uv.x*20.0+offset.x*60.0+uTime)+sin(uv.y*20.0+offset.y*60.0+uTime*1.3);',
+        '  float alpha=smoothstep(0.3,1.0,abs(wave))*0.06+length(offset)*2.0;',
+        '  gl_FragColor=vec4(r,g,b,alpha*0.35);',
+        '}'
+      ].join('\n');
+
+      var material = new THREE.ShaderMaterial({
+        uniforms: uniforms,
+        vertexShader: vertexShader,
+        fragmentShader: fragmentShader,
+        transparent: true,
+        depthTest: false
+      });
+
+      var geometry = new THREE.PlaneGeometry(2, 2);
+      scene.add(new THREE.Mesh(geometry, material));
+
+      function resize() {
+        var w = container.clientWidth;
+        var h = container.clientHeight;
+        renderer.setSize(w, h);
+        uniforms.uResolution.value.set(w, h);
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      var targetDistortion = 0.004;
+      hero.addEventListener('mousemove', function(e) {
+        var rect = hero.getBoundingClientRect();
+        uniforms.uMouse.value.set(
+          (e.clientX - rect.left) / rect.width,
+          1.0 - (e.clientY - rect.top) / rect.height
+        );
+        targetDistortion = 0.012;
+      });
+      hero.addEventListener('mouseleave', function() {
+        targetDistortion = 0.004;
+      });
+
+      var isVisible = true;
+      var observer = new IntersectionObserver(function(entries) {
+        isVisible = entries[0].isIntersecting;
+      }, { threshold: 0 });
+      observer.observe(hero);
+
+      var startTime = performance.now();
+      function animate() {
+        requestAnimationFrame(animate);
+        if (!isVisible) return;
+        uniforms.uTime.value = (performance.now() - startTime) * 0.001;
+        uniforms.uDistortion.value += (targetDistortion - uniforms.uDistortion.value) * 0.05;
+        renderer.render(scene, camera);
+      }
+      animate();
+    } catch (e) {
+      console.warn('WebGL hero distortion failed:', e);
+    }
+  }
+
+
+  // ─── TYPEWRITER HERO SUBTEXT ──────────────────────────
+  function initTypewriter() {
+    if (isMobile) return;
+    if (prefersReducedMotion) return;
+
+    var el = document.getElementById('heroSub');
+    if (!el) return;
+    // Only on index page (check for hero section, not about-hero or sub-hero)
+    if (!document.querySelector('.hero#hero')) return;
+
+    var messages = [
+      el.textContent.trim(), // keep original as first message
+      "From a single workshop in Sha Tau Kok to manufacturing sites spanning China and Indonesia.",
+      "38 years of precision manufacturing for the world's leading toy brands.",
+      "From first sample to final carton — everything under one roof.",
+      "Your vision. Our craftsmanship. Built to last."
+    ];
+
+    // Create cursor element
+    var cursor = document.createElement('span');
+    cursor.className = 'typewriter-cursor';
+    cursor.textContent = '|';
+    el.parentNode.insertBefore(cursor, el.nextSibling);
+
+    var msgIndex = 0;
+    var charIndex = messages[0].length; // start fully typed
+    var isDeleting = false;
+    var pauseTimer = null;
+
+    // Show first message fully, then start cycling after a pause
+    el.textContent = messages[0];
+
+    function type() {
+      var current = messages[msgIndex];
+      var speed = isDeleting ? 20 : 40;
+
+      if (isDeleting) {
+        charIndex--;
+        el.textContent = current.substring(0, charIndex);
+      } else {
+        charIndex++;
+        el.textContent = current.substring(0, charIndex);
+      }
+
+      if (!isDeleting && charIndex === current.length) {
+        pauseTimer = setTimeout(function() {
+          isDeleting = true;
+          type();
+        }, 2500);
+        return;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        msgIndex = (msgIndex + 1) % messages.length;
+        pauseTimer = setTimeout(function() { type(); }, 400);
+        return;
+      }
+
+      setTimeout(type, speed);
+    }
+
+    // Start cycling after initial pause
+    setTimeout(function() {
+      isDeleting = true;
+      type();
+    }, 3500);
+  }
+
+
+  // ─── SCROLL MORPH SVG ────────────────────────────────
+  function initScrollMorph() {
+    if (isMobile) return;
+    if (prefersReducedMotion) return;
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+    // Create the fixed SVG container
+    var wrapper = document.createElement('div');
+    wrapper.className = 'scroll-morph';
+    wrapper.innerHTML = '<svg viewBox="0 0 100 100"><path class="morph-path" fill="none" stroke="currentColor" stroke-width="2"/></svg><span class="morph-pct"></span>';
+    document.body.appendChild(wrapper);
+
+    var path = wrapper.querySelector('.morph-path');
+    var pctLabel = wrapper.querySelector('.morph-pct');
+
+    // Shape definitions
+    var shapes = [
+      'M50,10 C71.5,10 90,28.5 90,50 C90,71.5 71.5,90 50,90 C28.5,90 10,71.5 10,50 C10,28.5 28.5,10 50,10 Z', // circle
+      'M20,15 Q50,5 80,15 Q95,50 80,85 Q50,95 20,85 Q5,50 20,15 Z',  // rounded square
+      'M50,10 Q55,10 85,80 Q85,92 50,92 Q15,92 15,80 Q45,10 50,10 Z', // triangle-ish
+      'M50,5 Q95,50 50,95 Q5,50 50,5 Z',  // diamond
+      'M50,5 L61,35 L95,35 L68,57 L79,91 L50,70 L21,91 L32,57 L5,35 L39,35 Z' // star
+    ];
+
+    // Interpolate between two SVG path strings (simple point interpolation)
+    function interpolatePaths(pathA, pathB, t) {
+      var numsA = pathA.match(/-?[\d.]+/g).map(Number);
+      var numsB = pathB.match(/-?[\d.]+/g).map(Number);
+      var len = Math.min(numsA.length, numsB.length);
+      var charsA = pathA.split(/-?[\d.]+/g);
+      var result = '';
+      for (var i = 0; i < len; i++) {
+        result += charsA[i] + (numsA[i] + (numsB[i] - numsA[i]) * t).toFixed(1);
+      }
+      if (charsA.length > len) result += charsA[len];
+      return result;
+    }
+
+    // Since paths have different point counts, use discrete shape transitions
+    function getShapeAtProgress(progress) {
+      var segments = shapes.length - 1;
+      var segment = Math.min(Math.floor(progress * segments), segments - 1);
+      var localT = (progress * segments) - segment;
+      localT = Math.max(0, Math.min(1, localT));
+
+      // For shapes with same point count we interpolate; otherwise blend via opacity
+      return shapes[Math.min(Math.round(progress * segments), segments)];
+    }
+
+    var currentRotation = 0;
+
+    ScrollTrigger.create({
+      trigger: document.body,
+      start: 'top top',
+      end: 'bottom bottom',
+      onUpdate: function(self) {
+        var p = self.progress;
+        path.setAttribute('d', getShapeAtProgress(p));
+        currentRotation = p * 360;
+        wrapper.querySelector('svg').style.transform = 'rotate(' + currentRotation.toFixed(1) + 'deg)';
+        pctLabel.textContent = Math.round(p * 100) + '%';
+      }
+    });
+
+    // Hover: show percentage and fill
+    wrapper.addEventListener('mouseenter', function() {
+      wrapper.classList.add('active');
+    });
+    wrapper.addEventListener('mouseleave', function() {
+      wrapper.classList.remove('active');
+    });
+
+    // Set initial state
+    path.setAttribute('d', shapes[0]);
+  }
+
+
   // ─── INIT ON DOM READY ────────────────────────────────────
   function init() {
     initLocomotiveScroll();
@@ -969,9 +1113,10 @@
     initSplitting();
     initParallax();
     initParticles();
-    initFilmGrain();
-    initHorizontalScroll();
     initCapHoverImage();
+    initHeroDistortion();
+    initTypewriter();
+    initScrollMorph();
     // Page transitions last — they intercept clicks
     initPageTransitions();
   }
