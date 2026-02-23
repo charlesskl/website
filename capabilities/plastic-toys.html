@@ -34,22 +34,20 @@
 
     .editorial-inner {
       position:relative; z-index:1;
-      display:grid; grid-template-columns:1fr 1fr; gap:var(--space-xl); align-items:start;
+      max-width:720px;
     }
 
     /* Left column — text content */
     .editorial-text { padding-top:var(--space-md); }
 
-    .editorial-intro {
-      display:flex; gap:24px; align-items:flex-start; margin-bottom:var(--space-xl);
-    }
-    .editorial-intro-line {
-      width:3px; min-height:60px; background:var(--gradient); border-radius:2px; flex-shrink:0; margin-top:6px;
-    }
+    .editorial-intro { display:flex; gap:24px; align-items:stretch; margin-bottom:var(--space-xl); }
+    .editorial-intro-line { width:3px; background:var(--brand); border-radius:2px; flex-shrink:0; transform-origin:top center; }
+    .editorial-intro .stmt-line { display:block; }
     .editorial-intro p {
-      font-family:var(--font-display); font-size:var(--text-xl); font-weight:400;
-      color:var(--text); line-height:1.65; letter-spacing:-0.01em;
+      font-family:var(--font-display); font-size:clamp(24px, 3vw, 36px); font-weight:300;
+      color:#1a1a1a; line-height:1.5; letter-spacing:0.02em;
     }
+    .editorial-intro .stmt-rule { width:48px; height:2px; background:var(--brand); margin-top:20px; }
 
     /* Feature list */
     .editorial-features { counter-reset:feat; }
@@ -70,22 +68,40 @@
       font-size:var(--text-sm); color:var(--text-muted); line-height:1.7; margin:0;
     }
 
-    /* Right column — photo grid */
-    .editorial-photos {
-      display:grid; grid-template-columns:1fr 1fr; gap:16px;
-      position:sticky; top:calc(var(--nav-h) + 32px);
+    /* Expanding photo panels */
+    .photo-panels { display:flex; width:100vw; margin-left:calc(-50vw + 50%); overflow:hidden; }
+    .photo-panel {
+      flex:1 1 33.333%; height:520px; overflow:hidden; position:relative;
+      transition:flex 600ms cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .editorial-photo {
-      border-radius:var(--radius-lg); overflow:hidden; background:var(--cream); border:1px solid var(--border);
-    }
-    .editorial-photo img {
+    .photo-panels:hover .photo-panel { flex:0 0 25%; }
+    .photo-panels:hover .photo-panel:hover { flex:0 0 50%; }
+    .photo-panel img {
       width:100%; height:100%; object-fit:cover; display:block;
-      transition:transform 1.2s var(--ease-out);
+      transition:transform 600ms ease;
     }
-    .editorial-photo:hover img { transform:scale(1.04); }
-    .editorial-photo:nth-child(1) { grid-column:1/2; aspect-ratio:3/4; }
-    .editorial-photo:nth-child(2) { grid-column:2/2; aspect-ratio:1/1; margin-top:48px; }
-    .editorial-photo:nth-child(3) { grid-column:1/-1; aspect-ratio:16/9; }
+    .photo-panel:hover img { transform:scale(1.04); }
+    .photo-panel-overlay {
+      position:absolute; bottom:0; left:0; right:0; height:50%;
+      background:linear-gradient(to top, rgba(0,0,0,0.45), rgba(0,0,0,0));
+      opacity:0; transition:opacity 500ms ease; pointer-events:none;
+    }
+    .photo-panel:hover .photo-panel-overlay { opacity:1; }
+    .photo-panel-label {
+      position:absolute; bottom:28px; left:28px; z-index:1;
+      opacity:0; transition:opacity 500ms ease; pointer-events:none;
+    }
+    .photo-panel:hover .photo-panel-label { opacity:1; }
+    .photo-panel-label .label-line {
+      display:block; width:40px; height:2px; background:var(--brand);
+      margin-bottom:10px; transform:scaleX(0); transform-origin:left;
+      transition:transform 500ms ease 100ms;
+    }
+    .photo-panel:hover .photo-panel-label .label-line { transform:scaleX(1); }
+    .photo-panel-label span {
+      font-family:var(--font-display); font-size:13px; font-weight:600;
+      letter-spacing:0.1em; text-transform:uppercase; color:#fff;
+    }
 
     /* ═══ CTA ═══ */
     .cta-section {
@@ -101,10 +117,14 @@
     /* ═══ RESPONSIVE ═══ */
     @media(max-width:768px) {
       .editorial-inner { grid-template-columns:1fr; }
-      .editorial-photos { position:static; grid-template-columns:1fr 1fr; }
-      .editorial-photo:nth-child(2) { margin-top:0; }
       .sub-hero { min-height:60vh; }
       .sub-hero-title { font-size:var(--text-3xl); }
+      .photo-panels { flex-direction:column; height:auto; }
+      .photo-panel { flex:none !important; width:100%; height:280px; }
+      .photo-panels:hover .photo-panel,
+      .photo-panels:hover .photo-panel:hover { flex:none !important; }
+      .photo-panel-overlay { opacity:0 !important; }
+      .photo-panel-label { opacity:0 !important; }
     }
   </style>
 </head>
@@ -169,7 +189,14 @@
 
         <div class="editorial-intro reveal-up">
           <div class="editorial-intro-line"></div>
-          <p>We specialise in plastic toy manufacturing with strong in-house capabilities across mold development and injection molding. Every mold developed is owned by the client and managed within our facility.</p>
+          <div>
+            <p>
+              <span class="stmt-line">Precision-tooled molds.</span>
+              <span class="stmt-line">Client-owned from day one.</span>
+              <span class="stmt-line">Built to production scale.</span>
+            </p>
+            <div class="stmt-rule"></div>
+          </div>
         </div>
 
         <div class="editorial-features">
@@ -204,19 +231,25 @@
         </div>
       </div>
 
-      <!-- Right: Photos -->
-      <div class="editorial-photos">
-        <div class="editorial-photo reveal-up">
-          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&q=80" alt="Plastic figures manufacturing" loading="lazy">
-        </div>
-        <div class="editorial-photo reveal-up">
-          <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&q=80" alt="Injection molding production" loading="lazy">
-        </div>
-        <div class="editorial-photo reveal-up">
-          <img src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=800&q=80" alt="Quality control inspection" loading="lazy">
-        </div>
-      </div>
+    </div>
+  </div>
 
+  <!-- Expanding photo panels -->
+  <div class="photo-panels">
+    <div class="photo-panel">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&q=80" alt="Plastic figures manufacturing" loading="lazy">
+      <div class="photo-panel-overlay"></div>
+      <div class="photo-panel-label"><div class="label-line"></div><span>Mold Development</span></div>
+    </div>
+    <div class="photo-panel">
+      <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&q=80" alt="Injection molding production" loading="lazy">
+      <div class="photo-panel-overlay"></div>
+      <div class="photo-panel-label"><div class="label-line"></div><span>Injection Molding</span></div>
+    </div>
+    <div class="photo-panel">
+      <img src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=800&q=80" alt="Quality control inspection" loading="lazy">
+      <div class="photo-panel-overlay"></div>
+      <div class="photo-panel-label"><div class="label-line"></div><span>Quality Control</span></div>
     </div>
   </div>
 </section>

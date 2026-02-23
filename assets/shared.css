@@ -177,6 +177,10 @@ body::before {
 
 
 /* ───── CUSTOM CURSOR ───── */
+@media (hover: hover) and (pointer: fine) and (min-width: 1025px) {
+  *, *::before, *::after { cursor: none !important; }
+}
+
 .cursor {
   position: fixed;
   top: 0;

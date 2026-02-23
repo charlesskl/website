@@ -72,10 +72,22 @@
 
     let cx = -100, cy = -100;
     let tx = -100, ty = -100;
+    let firstMove = true;
+
+    // Hide cursor until first mouse move to prevent jump on page load
+    cursor.style.opacity = '0';
+    label.style.opacity = '0';
 
     document.addEventListener('mousemove', function (e) {
       tx = e.clientX;
       ty = e.clientY;
+      if (firstMove) {
+        firstMove = false;
+        cx = tx;
+        cy = ty;
+        cursor.style.opacity = '';
+        label.style.opacity = '';
+      }
     });
 
     function tick() {
