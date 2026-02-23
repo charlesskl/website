@@ -975,13 +975,29 @@
     // Only on index page (check for hero section, not about-hero or sub-hero)
     if (!document.querySelector('.hero#hero')) return;
 
-    var messages = [
-      el.textContent.trim(), // keep original as first message
-      "From a single workshop in Sha Tau Kok to manufacturing sites spanning China and Indonesia.",
-      "38 years of precision manufacturing for the world's leading toy brands.",
-      "From first sample to final carton — everything under one roof.",
-      "Your vision. Our craftsmanship. Built to last."
-    ];
+    var lang = document.documentElement.lang || 'en';
+    var extraMessages = {
+      en: [
+        "From a single workshop in Sha Tau Kok to manufacturing sites spanning China and Indonesia.",
+        "38 years of precision manufacturing for the world's leading toy brands.",
+        "From first sample to final carton — everything under one roof.",
+        "Your vision. Our craftsmanship. Built to last."
+      ],
+      zh: [
+        "從沙頭角的一間小工廠，發展至遍佈中國與印尼的製造基地。",
+        "38年精密製造，服務全球頂尖玩具品牌。",
+        "從首件樣品到最終裝箱——所有環節均在廠內完成。",
+        "您的願景，我們的工藝，經久不衰。"
+      ],
+      id: [
+        "Dari satu bengkel di Sha Tau Kok hingga fasilitas manufaktur di Tiongkok dan Indonesia.",
+        "38 tahun manufaktur presisi untuk merek mainan terkemuka dunia.",
+        "Dari sampel pertama hingga karton terakhir — semuanya dalam satu atap.",
+        "Visi Anda. Keahlian kami. Dibuat untuk bertahan."
+      ]
+    };
+    var key = lang === 'zh-Hant' || lang === 'zh' ? 'zh' : lang;
+    var messages = [el.textContent.trim()].concat(extraMessages[key] || extraMessages.en);
 
     // Create cursor element
     var cursor = document.createElement('span');
