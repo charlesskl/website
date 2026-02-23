@@ -419,7 +419,6 @@ ul, ol { list-style: none; }
   align-items: center;
   justify-content: center;
   padding: 8px !important;
-  margin-right: 16px;
   color: #444 !important;
   background: none !important;
   transition: color 0.3s;
