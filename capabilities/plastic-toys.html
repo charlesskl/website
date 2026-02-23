@@ -34,22 +34,22 @@
 
     .editorial-inner {
       position:relative; z-index:1;
-      max-width:720px;
+      display:grid; grid-template-columns:1fr 1fr; gap:var(--space-2xl); align-items:start;
     }
 
-    /* Left column — text content */
-    .editorial-text { padding-top:var(--space-md); }
-
-    .editorial-intro { display:flex; gap:24px; align-items:stretch; margin-bottom:var(--space-xl); }
+    /* Left column — statement */
+    .editorial-left { padding-top:var(--space-md); position:sticky; top:calc(var(--nav-h) + 32px); }
+    .editorial-intro { display:flex; gap:24px; align-items:stretch; margin-top:var(--space-lg); }
     .editorial-intro-line { width:3px; background:var(--brand); border-radius:2px; flex-shrink:0; transform-origin:top center; }
     .editorial-intro .stmt-line { display:block; }
     .editorial-intro p {
-      font-family:var(--font-display); font-size:clamp(24px, 3vw, 36px); font-weight:300;
-      color:#1a1a1a; line-height:1.5; letter-spacing:0.02em;
+      font-family:var(--font-display); font-size:clamp(28px, 3.2vw, 44px); font-weight:300;
+      color:#1a1a1a; line-height:1.45; letter-spacing:0.01em;
     }
-    .editorial-intro .stmt-rule { width:48px; height:2px; background:var(--brand); margin-top:20px; }
+    .editorial-intro .stmt-rule { width:48px; height:2px; background:var(--brand); margin-top:24px; }
 
-    /* Feature list */
+    /* Right column — feature list */
+    .editorial-right { padding-top:var(--space-md); }
     .editorial-features { counter-reset:feat; }
     .editorial-feat {
       display:grid; grid-template-columns:48px 1fr; gap:20px; align-items:start;
@@ -116,7 +116,8 @@
 
     /* ═══ RESPONSIVE ═══ */
     @media(max-width:768px) {
-      .editorial-inner { grid-template-columns:1fr; }
+      .editorial-inner { grid-template-columns:1fr; gap:var(--space-lg); }
+      .editorial-left { position:static; }
       .sub-hero { min-height:60vh; }
       .sub-hero-title { font-size:var(--text-3xl); }
       .photo-panels { flex-direction:column; height:auto; }
@@ -183,10 +184,9 @@
   <div class="container">
     <div class="editorial-inner">
 
-      <!-- Left: Text -->
-      <div class="editorial-text">
+      <!-- Left: Statement -->
+      <div class="editorial-left">
         <span class="section-label reveal-up">Manufacturing Overview</span>
-
         <div class="editorial-intro reveal-up">
           <div class="editorial-intro-line"></div>
           <div>
@@ -198,7 +198,10 @@
             <div class="stmt-rule"></div>
           </div>
         </div>
+      </div>
 
+      <!-- Right: Features -->
+      <div class="editorial-right">
         <div class="editorial-features">
           <div class="editorial-feat reveal-up">
             <div class="editorial-feat-num">01</div>
