@@ -1,86 +1,329 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact Us - Royal Regent</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Royal Regent</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Shared Design System -->
+  <link rel="stylesheet" href="assets/shared.css">
+
+  <!-- Page-specific styles -->
+  <style>
+    /* ═══ CONTACT LAYOUT ═══ */
+    .contact-section { padding: var(--space-2xl) 0; background: var(--white); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: var(--space-xl);
+      align-items: start;
+    }
+
+    /* Left: Info — sticky so it follows scroll alongside the taller form */
+    .contact-info {
+      position: sticky;
+      top: calc(var(--nav-h) + 32px);
+    }
+    .contact-info h2 {
+      font-size: var(--text-2xl); margin-bottom: 16px;
+    }
+    .contact-info > p {
+      color: var(--text-muted); margin-bottom: 40px; line-height: 1.7;
+    }
+    .contact-detail {
+      display: flex; gap: 16px; align-items: flex-start; margin-bottom: 24px;
+    }
+    .contact-icon {
+      width: 44px; height: 44px;
+      background: var(--brand-8); border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.4s var(--ease-spring), border-color 0.3s;
+    }
+    .contact-icon svg {
+      width: 20px; height: 20px; stroke: var(--brand); fill: none;
+      stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .contact-detail:hover .contact-icon {
+      transform: translateY(-4px);
+      border-color: var(--brand-20);
+    }
+    .contact-detail h4 {
+      font-family: var(--font-body); font-size: var(--text-sm);
+      font-weight: 600; margin-bottom: 2px; letter-spacing: normal;
+    }
+    .contact-detail p {
+      font-size: var(--text-xs); color: var(--text-muted);
+    }
+
+
+    /* ═══ FORM CONTAINER ═══ */
+    .contact-form-card {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 80px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Progress indicator */
+    .form-progress {
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--gray-100);
+    }
+    .form-progress-fill {
+      height: 100%; width: 0%;
+      background: var(--gradient);
+      border-radius: 0 3px 3px 0;
+      transition: width 0.5s var(--ease-spring);
+    }
+
+
+    /* ═══ FLOATING LABELS ═══ */
+    .float-group {
+      position: relative;
+      margin-bottom: 16px;
+    }
+    .float-group input,
+    .float-group textarea,
+    .float-group select {
+      width: 100%;
+      padding: 20px 18px 8px;
+      background: var(--white);
+      border: 1.5px solid var(--border-solid);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.4s var(--ease-spring), transform 0.4s var(--ease-spring);
+    }
+    .float-group textarea {
+      height: 140px; resize: vertical; padding-top: 28px;
+    }
+    .float-group select {
+      padding-top: 20px;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A9178' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+    }
+    .float-group label {
+      position: absolute;
+      left: 18px; top: 50%;
+      transform: translateY(-50%);
+      font-size: var(--text-sm);
+      color: var(--text-light);
+      pointer-events: none;
+      transition: all 0.3s var(--ease-spring);
+      transform-origin: left;
+    }
+    .float-group textarea ~ label {
+      top: 20px; transform: translateY(0);
+    }
+
+    /* Float up when focused or has value */
+    .float-group input:focus,
+    .float-group textarea:focus,
+    .float-group select:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 4px var(--brand-8);
+      transform: scale(1.005);
+    }
+    .float-group input:focus ~ label,
+    .float-group input.has-value ~ label,
+    .float-group textarea:focus ~ label,
+    .float-group textarea.has-value ~ label,
+    .float-group select:focus ~ label,
+    .float-group select.has-value ~ label {
+      top: 8px;
+      transform: translateY(0) scale(0.75);
+      color: var(--brand);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .form-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    }
+
+
+    /* ═══ SUBMIT BUTTON ═══ */
+    .submit-btn {
+      width: 100%;
+      height: 56px;
+      padding: 0 36px;
+      border: none;
+      border-radius: var(--radius-sm);
+      background: var(--gradient);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: var(--text-base);
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s var(--ease-spring), box-shadow 0.4s;
+      box-shadow: 0 4px 24px rgba(124,179,66,0.25);
+    }
+    .submit-btn:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 40px rgba(124,179,66,0.35);
+    }
+    .submit-btn:active {
+      transform: translateY(0) scale(0.98);
+    }
+    .submit-btn .btn-text { transition: opacity 0.3s, transform 0.3s; }
+    .submit-btn .btn-success {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transform: scale(0.8);
+      transition: opacity 0.4s, transform 0.4s var(--ease-spring);
+      font-weight: 700;
+    }
+    .submit-btn.sent .btn-text { opacity: 0; transform: translateY(10px); }
+    .submit-btn.sent .btn-success { opacity: 1; transform: scale(1); }
+    .submit-btn.sent {
+      background: linear-gradient(135deg, #66BB6A, #43A047);
+      pointer-events: none;
+    }
+
+    /* Success check animation */
+    .check-circle {
+      width: 24px; height: 24px; margin-right: 10px;
+      border: 2px solid var(--white); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .check-circle svg { width: 14px; height: 14px; }
+    .check-circle svg path {
+      stroke-dasharray: 24;
+      stroke-dashoffset: 24;
+      animation: checkDraw 0.4s 0.2s ease forwards;
+    }
+    @keyframes checkDraw {
+      to { stroke-dashoffset: 0; }
+    }
+
+
+    /* ═══ RESPONSIVE ═══ */
+    @media (max-width: 768px) {
+      .contact-grid { grid-template-columns: 1fr; gap: var(--space-lg); }
+      .contact-form-card { padding: 48px 24px; }
+      .form-row { grid-template-columns: 1fr; }
+      .page-hero h1 { font-size: var(--text-3xl); }
+    }
+  </style>
 </head>
 <body>
+
+<!-- NAVBAR -->
 <nav id="navbar">
   <div class="nav-container">
     <a href="index.html" class="nav-logo"><img src="assets/logo.png" alt="Royal Regent"></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="about.html">About</a></li>
-      <li class="has-dropdown"><a href="#" onclick="return false" style="cursor:default">Capabilities <span class="arrow">&#8964;</span></a>
+      <li class="has-dropdown">
+        <a href="#" onclick="return false" style="cursor:default">Capabilities <span class="arrow">&#8964;</span></a>
         <ul class="dropdown">
-          <li><a href="capabilities/plastic-figures.html">Plastic</a></li>
-          <li><a href="capabilities/plush-toys.html">Plush</a></li>
-          <li><a href="capabilities/dolls.html">Dolls</a></li>
-          <li><a href="capabilities/rc-vehicles.html">RC</a></li>
-          <li><a href="capabilities/costumes.html">Costumes</a></li>
-        </ul></li>
+          <li><a href="capabilities/plastic-toys.html"><svg class="dd-icon" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>Plastic Toys<svg class="dd-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
+          <li><a href="capabilities/plush.html"><svg class="dd-icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>Plush<svg class="dd-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
+          <li><a href="capabilities/dolls.html"><svg class="dd-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Dolls<svg class="dd-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
+          <li><a href="capabilities/rc-vehicle.html"><svg class="dd-icon" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>RC Vehicles<svg class="dd-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
+          <li><a href="capabilities/costume.html"><svg class="dd-icon" viewBox="0 0 24 24"><path d="M12 3l1.5 3.2 3.5.5-2.5 2.5.6 3.5L12 11l-3.1 1.7.6-3.5L7 6.7l3.5-.5z"/><path d="M5 16l-1.5 3.2-3.5.5L2.5 22l-.6 2L5 22.3 8.1 24l-.6-2L10 19.5l-3.5-.5z"/><path d="M19 16l-1.5 3.2-3.5.5 2.5 2.5-.6 2L19 22.3l3.1 1.7-.6-2L24 19.5l-3.5-.5z"/></svg>Costumes<svg class="dd-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
+        </ul>
+      </li>
       <li><a href="careers.html">Careers</a></li>
-      <li><a href="contact.html" class="nav-cta">Contact Us</a></li>
+      <li><a href="contact.html" class="nav-cta" style="box-shadow:0 0 0 2px rgba(124,179,66,0.3);">Contact Us</a></li>
     </ul>
-    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
+
+<!-- PAGE HERO -->
 <section class="page-hero">
   <div class="container">
     <span class="page-hero-tag">Get In Touch</span>
-    <h1>Let's discuss<br><span class="gradient-text">your project.</span></h1>
-    <p>Whether you need OEM manufacturing, ODM design support, a sample run, or just want to learn more — our team is ready to respond.</p>
+    <h1>Let's discuss<br><span class="text-gradient">your project.</span></h1>
+    <p>Whether you need OEM manufacturing, a sample run, or just want to learn more — our team is ready to respond.</p>
   </div>
 </section>
 
-<section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CONTACT SECTION
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="contact-section">
   <div class="container">
     <div class="contact-grid">
+
+      <!-- Left: Contact Info -->
       <div class="contact-info">
         <div class="section-label reveal-up">Contact Information</div>
-        <h2 class="reveal-up delay-1">We respond to all manufacturing inquiries within 2 business days.</h2>
-        <p class="reveal-up delay-2">From initial inquiry through sampling and into full production — our team supports every stage of the process. Whether you are a brand owner, retailer, or distributor, tell us about your project and we will respond promptly.</p>
-        <div class="contact-detail reveal-up delay-2">
-          <div class="contact-icon">&#128205;</div>
-          <div><h4>Headquarters</h4><p>Dongguan, Guangdong, China</p></div>
+        <h2 class="reveal-up">Every inquiry matters. We'll get back to you as soon as we can.</h2>
+        <p class="reveal-up">From initial inquiry through sampling and into full production — our team supports every stage of the process. Whether you are a brand owner, retailer, or distributor, tell us about your project and we will respond promptly.</p>
+
+        <div class="contact-detail reveal-up">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          </div>
+          <div><h4>Production Sites</h4><p>China and Indonesia</p></div>
         </div>
-        <div class="contact-detail reveal-up delay-2">
-          <div class="contact-icon">&#127759;</div>
-          <div><h4>Production Sites</h4><p>Dongguan · Heyuan · Hunan · Indonesia</p></div>
-        </div>
-        <div class="contact-detail reveal-up delay-3">
-          <div class="contact-icon">&#128140;</div>
+        <div class="contact-detail reveal-up">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
+          </div>
           <div><h4>Email</h4><p>info@royalregent.com</p></div>
         </div>
-        <div style="margin-top:40px;" class="reveal-up delay-3">
-          <div class="section-label" style="margin-bottom:16px;">We Specialise In</div>
-          <div style="display:flex;flex-wrap:wrap;gap:10px;">
-            <span class="footer-tags" style="display:inline-block;"><span>OEM Manufacturing</span></span>
-            <span class="footer-tags" style="display:inline-block;"><span>ODM Services</span></span>
-            <span class="footer-tags" style="display:inline-block;"><span>Sample Development</span></span>
-            <span class="footer-tags" style="display:inline-block;"><span>Licensed IP Products</span></span>
-            <span class="footer-tags" style="display:inline-block;"><span>Mold Development</span></span>
-            <span class="footer-tags" style="display:inline-block;"><span>US &amp; EU Compliance</span></span>
-          </div>
-        </div>
+
       </div>
-      <div class="reveal-up delay-2">
-        <div class="contact-form">
-          <form onsubmit="event.preventDefault(); alert('Thank you for your message. We will respond within 2 business days.');">
+
+      <!-- Right: Form -->
+      <div class="reveal-up">
+        <div class="contact-form-card">
+          <!-- Progress bar -->
+          <div class="form-progress">
+            <div class="form-progress-fill" id="progressFill"></div>
+          </div>
+
+          <form id="contactForm" novalidate>
             <div class="form-row">
-              <div class="form-group"><label>First Name</label><input type="text" placeholder="Your first name" required></div>
-              <div class="form-group"><label>Last Name</label><input type="text" placeholder="Your last name" required></div>
+              <div class="float-group">
+                <input type="text" id="firstName" required data-field>
+                <label for="firstName">First Name</label>
+              </div>
+              <div class="float-group">
+                <input type="text" id="lastName" required data-field>
+                <label for="lastName">Last Name</label>
+              </div>
             </div>
-            <div class="form-group"><label>Email Address</label><input type="email" placeholder="your@company.com" required></div>
-            <div class="form-group"><label>Company</label><input type="text" placeholder="Your company name"></div>
-            <div class="form-group"><label>Subject</label>
-              <select>
-                <option value="" disabled selected>Select a subject</option>
+
+            <div class="float-group">
+              <input type="email" id="email" required data-field>
+              <label for="email">Email Address</label>
+            </div>
+
+            <div class="float-group">
+              <input type="text" id="company" data-field>
+              <label for="company">Company</label>
+            </div>
+
+            <div class="float-group">
+              <select id="subject" data-field>
+                <option value="" disabled selected></option>
                 <option>OEM Manufacturing Inquiry</option>
-                <option>ODM Design &amp; Development</option>
                 <option>Sample Request</option>
                 <option>Plastic</option>
                 <option>Plush</option>
@@ -91,16 +334,32 @@
                 <option>Careers</option>
                 <option>Other</option>
               </select>
+              <label for="subject">Subject</label>
             </div>
-            <div class="form-group"><label>Message</label><textarea placeholder="Tell us about your project — product type, quantity, target markets, and any relevant specifications." required></textarea></div>
-            <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;">Send Message &#8594;</button>
+
+            <div class="float-group">
+              <textarea id="message" required data-field></textarea>
+              <label for="message">Message</label>
+            </div>
+
+            <button type="submit" class="submit-btn magnetic" data-strength="0.15" id="submitBtn">
+              <span class="btn-text">Send Message &rarr;</span>
+              <span class="btn-success">
+                <span class="check-circle">
+                  <svg viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                Sent Successfully
+              </span>
+            </button>
           </form>
         </div>
       </div>
+
     </div>
   </div>
 </section>
 
+<!-- ═══ FOOTER ═══ -->
 <footer>
   <div class="footer-container">
     <div class="footer-top">
@@ -111,17 +370,16 @@
       <div class="footer-col">
         <h4>Company</h4>
         <a href="about.html">About Us</a>
-        <a href="capabilities/plastic-figures.html">Capabilities</a>
         <a href="careers.html">Careers</a>
         <a href="contact.html">Contact Us</a>
       </div>
       <div class="footer-col">
         <h4>Capabilities</h4>
-        <a href="capabilities/plastic-figures.html">Plastic Figures</a>
-        <a href="capabilities/plush-toys.html">Plush Toys</a>
+        <a href="capabilities/plastic-toys.html">Plastic Toys</a>
+        <a href="capabilities/plush.html">Plush</a>
         <a href="capabilities/dolls.html">Dolls</a>
-        <a href="capabilities/rc-vehicles.html">RC Vehicles</a>
-        <a href="capabilities/costumes.html">Costumes</a>
+        <a href="capabilities/rc-vehicle.html">RC Vehicles</a>
+        <a href="capabilities/costume.html">Costumes</a>
       </div>
       <div class="footer-col">
         <h4>Get In Touch</h4>
@@ -132,14 +390,150 @@
     </div>
     <div class="footer-bottom">
       <p>&copy; 2025 Royal Regent. All rights reserved.</p>
-      <div class="footer-tags">
-        <span>US &amp; EU Compliant</span>
-        <span>OEM / ODM</span>
-        <span>Est. 1987</span>
-      </div>
     </div>
   </div>
 </footer>
-<script src="assets/main.js"></script>
+
+
+<!-- ═══ SCRIPTS ═══ -->
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+<script src="assets/shared.js"></script>
+
+<script>
+(function() {
+  'use strict';
+
+  // ─── HERO ENTRANCE ─────────────────────────────────────────
+  function heroEntrance() {
+    // Uses standard page-hero; no custom entrance needed
+  }
+
+
+  // ─── FLOATING LABEL MANAGEMENT ─────────────────────────────
+  function initFloatingLabels() {
+    var fields = document.querySelectorAll('[data-field]');
+    fields.forEach(function(field) {
+      // Check initial value
+      if (field.value) field.classList.add('has-value');
+
+      field.addEventListener('input', function() {
+        field.classList.toggle('has-value', !!field.value);
+        updateProgress();
+      });
+      field.addEventListener('change', function() {
+        field.classList.toggle('has-value', !!field.value);
+        updateProgress();
+      });
+
+      // Spring animation on focus
+      field.addEventListener('focus', function() {
+        if (typeof gsap !== 'undefined') {
+          gsap.fromTo(field, { scale: 1 }, { scale: 1.005, duration: 0.3, ease: 'elastic.out(1, 0.5)' });
+        }
+      });
+      field.addEventListener('blur', function() {
+        if (typeof gsap !== 'undefined') {
+          gsap.to(field, { scale: 1, duration: 0.2, ease: 'power2.out' });
+        }
+      });
+    });
+  }
+
+
+  // ─── FORM PROGRESS INDICATOR ───────────────────────────────
+  function updateProgress() {
+    var fields = document.querySelectorAll('[data-field]');
+    var filled = 0;
+    fields.forEach(function(f) { if (f.value.trim()) filled++; });
+    var pct = (filled / fields.length) * 100;
+    var fill = document.getElementById('progressFill');
+    if (fill) fill.style.width = pct + '%';
+  }
+
+
+  // ─── FORM SUBMISSION ───────────────────────────────────────
+  function initFormSubmit() {
+    var form = document.getElementById('contactForm');
+    var btn = document.getElementById('submitBtn');
+    if (!form || !btn) return;
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Basic validation
+      var required = form.querySelectorAll('[required]');
+      var valid = true;
+      required.forEach(function(f) {
+        if (!f.value.trim()) {
+          valid = false;
+          f.style.borderColor = '#e57373';
+          setTimeout(function() { f.style.borderColor = ''; }, 2000);
+        }
+      });
+      if (!valid) {
+        // Shake button
+        if (typeof gsap !== 'undefined') {
+          gsap.to(btn, { x: -8, duration: 0.08, repeat: 5, yoyo: true, ease: 'power2.inOut',
+            onComplete: function() { gsap.set(btn, { x: 0 }); }
+          });
+        }
+        return;
+      }
+
+      // Success state
+      btn.classList.add('sent');
+
+      // Reset after delay
+      setTimeout(function() {
+        btn.classList.remove('sent');
+        form.reset();
+        document.querySelectorAll('[data-field]').forEach(function(f) {
+          f.classList.remove('has-value');
+        });
+        updateProgress();
+      }, 3000);
+    });
+  }
+
+
+  // ─── STAGGERED CONTACT DETAILS REVEAL ──────────────────────
+  function detailsReveal() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    var details = document.querySelectorAll('.contact-detail');
+    details.forEach(function(el, i) {
+      gsap.fromTo(el,
+        { opacity: 0, x: -20 },
+        {
+          opacity: 1, x: 0, duration: 0.6, ease: 'power3.out',
+          delay: i * 0.15,
+          scrollTrigger: { trigger: el, start: 'top 85%', once: true }
+        }
+      );
+    });
+
+  }
+
+
+
+
+  // ─── INIT ──────────────────────────────────────────────────
+  function init() {
+    heroEntrance();
+    initFloatingLabels();
+    updateProgress();
+    initFormSubmit();
+    detailsReveal();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    requestAnimationFrame(function() { requestAnimationFrame(init); });
+  }
+})();
+</script>
+
 </body>
 </html>

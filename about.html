@@ -1,29 +1,377 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About Us - Royal Regent</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Royal Regent</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Shared Design System -->
+  <link rel="stylesheet" href="assets/shared.css">
+
+  <!-- Page-specific styles -->
+  <style>
+    /* ═══ HERO ═══ */
+    .about-hero {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--gradient-hero);
+    }
+    .about-hero .hero-grid-pattern { position: absolute; inset: 0; }
+    .about-hero .aurora { z-index: 1; }
+    .about-hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: calc(var(--nav-h) + var(--space-xl)) var(--space-md) var(--space-xl);
+      width: 100%;
+    }
+    .about-hero-tag {
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--brand);
+      margin-bottom: 24px;
+      display: block;
+      opacity: 0; transform: translateY(20px);
+    }
+    .about-hero-title {
+      font-family: var(--font-display);
+      font-size: var(--text-5xl);
+      font-weight: 700;
+      line-height: 1.0;
+      color: var(--text);
+      letter-spacing: -0.04em;
+      margin-bottom: 28px;
+      opacity: 0; transform: translateY(40px);
+    }
+    .about-hero-sub {
+      font-size: var(--text-lg);
+      color: var(--text-muted);
+      max-width: 620px;
+      line-height: 1.75;
+      opacity: 0; transform: translateY(30px);
+    }
+    .about-hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-light);
+      opacity: 0;
+    }
+    .about-hero-scroll span {
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .scroll-line {
+      width: 1px; height: 48px;
+      background: linear-gradient(to bottom, var(--brand), transparent);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+
+
+    /* ═══ INTRO STATEMENT ═══ */
+    .intro-statement { padding: var(--space-xl) 0; background: var(--white); }
+    .statement-inner {
+      display: flex; gap: 32px; align-items: flex-start; max-width: 800px;
+    }
+    .statement-line {
+      width: 3px; min-height: 80px;
+      background: var(--gradient); border-radius: 2px; flex-shrink: 0; margin-top: 4px;
+    }
+    .statement-text {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 400; color: var(--text); line-height: 1.6; letter-spacing: -0.01em;
+    }
+
+
+    /* ═══ HISTORY SECTION — Interactive timeline (light variant) ═══ */
+    .section-title {
+      font-size: var(--text-3xl); font-weight: 700; margin-bottom: var(--space-lg);
+    }
+    .section-title span { color: var(--brand); }
+
+    .history-section {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: #fafafa;
+    }
+
+    /* Top bar */
+    .history-top {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 80px 56px 0;
+    }
+    .history-heading {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    /* Center area */
+    .history-center {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 56px;
+    }
+
+    /* Large watermark year */
+    .history-watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.85);
+      font-family: var(--font-display);
+      font-size: clamp(10rem, 28vw, 22rem);
+      font-weight: 900;
+      color: var(--brand);
+      opacity: 0.08;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      user-select: none;
+      pointer-events: none;
+      z-index: 0;
+      white-space: nowrap;
+    }
+
+    /* Milestone text */
+    .history-milestone {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 720px;
+    }
+    .history-milestone p {
+      font-size: clamp(1rem, 1.6vw, 1.25rem);
+      line-height: 1.7;
+      font-weight: 500;
+      color: #1a1a1a;
+    }
+
+    /* Scroll progress indicator — right edge */
+    .history-scroll-progress {
+      position: absolute;
+      top: 56px;
+      right: 24px;
+      bottom: 56px;
+      width: 3px;
+      background: rgba(124,179,66,0.12);
+      border-radius: 2px;
+      z-index: 10;
+      pointer-events: none;
+    }
+    .history-scroll-fill {
+      width: 100%;
+      height: 0%;
+      background: var(--brand);
+      border-radius: 2px;
+      transition: height 0.5s ease;
+    }
+
+    /* Scroll hint */
+    .history-scroll-hint {
+      position: absolute;
+      bottom: 140px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(0,0,0,0.35);
+      pointer-events: none;
+    }
+    .history-scroll-hint span {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .history-scroll-hint svg {
+      width: 18px;
+      height: 18px;
+      stroke: rgba(0,0,0,0.35);
+      stroke-width: 2;
+      fill: none;
+      animation: scrollHintBounce 1.5s ease-in-out infinite;
+    }
+    @keyframes scrollHintBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
+    /* Bottom timeline */
+    .history-timeline {
+      position: relative;
+      z-index: 2;
+      padding: 0 56px 48px;
+    }
+
+    /* Timeline track */
+    .timeline-track {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+    }
+    /* Base track at 20% opacity */
+    .timeline-track::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: rgba(124,179,66,0.2);
+      transform: translateY(-50%);
+    }
+    /* Segment fill between circles */
+    .timeline-segment {
+      position: absolute;
+      top: 50%;
+      height: 2px;
+      transform: translateY(-50%);
+      transform-origin: left center;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    /* Year circle nodes */
+    .timeline-node {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      z-index: 1;
+    }
+    .timeline-dot {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid var(--brand);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  background 0.5s ease,
+                  border-color 0.5s ease,
+                  width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  height 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .timeline-dot span {
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--brand);
+      transition: color 0.5s ease, font-size 0.4s ease;
+    }
+    .timeline-node:hover .timeline-dot {
+      transform: scale(1.12);
+    }
+
+    /* Active state */
+    .timeline-node.active .timeline-dot {
+      width: 64px;
+      height: 64px;
+      background: var(--brand);
+      border-color: var(--brand);
+      box-shadow: 0 4px 24px rgba(124,179,66,0.3);
+    }
+    .timeline-node.active .timeline-dot span {
+      color: #fff;
+      font-size: 0.85rem;
+    }
+
+
+    /* ═══ FOOTER REVEAL ═══ */
+    footer.footer-reveal { clip-path: inset(0 0 0 0); }
+
+
+    /* ═══ RESPONSIVE ═══ */
+    @media (max-width: 768px) {
+      .about-hero { min-height: 60vh; }
+      .about-hero-title { font-size: var(--text-3xl); }
+      .history-section { height: 100vh; }
+      .history-top { padding: 32px 24px 0; }
+      .history-center { padding: 0 24px; }
+      .history-scroll-progress { display: none; }
+      .history-scroll-hint { display: none; }
+      .history-timeline { padding: 0 24px 32px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .timeline-track { min-width: 700px; padding: 0 20px; }
+      .timeline-dot { width: 40px; height: 40px; }
+      .timeline-dot span { font-size: 0.6rem; }
+      .timeline-node.active .timeline-dot { width: 52px; height: 52px; }
+      .timeline-node.active .timeline-dot span { font-size: 0.72rem; }
+      .history-watermark { font-size: clamp(6rem, 22vw, 10rem); }
+    }
+  </style>
 </head>
 <body>
+
+<!-- PAGE TRANSITION OVERLAY -->
+<div class="page-transition"></div>
+
+<!-- SCROLL PROGRESS -->
+<div class="scroll-progress"></div>
 
 <!-- NAVBAR -->
 <nav id="navbar">
   <div class="nav-container">
     <a href="index.html" class="nav-logo"><img src="assets/logo.png" alt="Royal Regent"></a>
     <ul class="nav-links" id="navLinks">
-      <li><a href="about.html">About</a></li>
+      <li><a href="about.html" style="color:var(--brand-dark);background:var(--brand-5);">About</a></li>
       <li class="has-dropdown">
         <a href="#" onclick="return false" style="cursor:default">Capabilities <span class="arrow">&#8964;</span></a>
         <ul class="dropdown">
-          <li><a href="capabilities/plastic-figures.html">Plastic</a></li>
-          <li><a href="capabilities/plush-toys.html">Plush</a></li>
-          <li><a href="capabilities/dolls.html">Dolls</a></li>
-          <li><a href="capabilities/rc-vehicles.html">RC</a></li>
-          <li><a href="capabilities/costumes.html">Costumes</a></li>
+          <li><a href="capabilities/plastic-toys.html"><svg class="dd-icon" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>Plastic Toys<svg class="dd-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
+          <li><a href="capabilities/plush.html"><svg class="dd-icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>Plush<svg class="dd-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
+          <li><a href="capabilities/dolls.html"><svg class="dd-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Dolls<svg class="dd-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
+          <li><a href="capabilities/rc-vehicle.html"><svg class="dd-icon" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>RC Vehicles<svg class="dd-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
+          <li><a href="capabilities/costume.html"><svg class="dd-icon" viewBox="0 0 24 24"><path d="M12 3l1.5 3.2 3.5.5-2.5 2.5.6 3.5L12 11l-3.1 1.7.6-3.5L7 6.7l3.5-.5z"/><path d="M5 16l-1.5 3.2-3.5.5L2.5 22l-.6 2L5 22.3 8.1 24l-.6-2L10 19.5l-3.5-.5z"/><path d="M19 16l-1.5 3.2-3.5.5 2.5 2.5-.6 2L19 22.3l3.1 1.7-.6-2L24 19.5l-3.5-.5z"/></svg>Costumes<svg class="dd-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
         </ul>
       </li>
       <li><a href="careers.html">Careers</a></li>
@@ -35,16 +383,37 @@
   </div>
 </nav>
 
-<!-- PAGE HERO -->
-<section class="page-hero">
-  <div class="container">
-    <span class="page-hero-tag">Our Story</span>
-    <h1>38 years of<br><span class="gradient-text">craftsmanship.</span></h1>
-    <p>From a single workshop in Sha Tau Kok, Hong Kong, Royal Regent has grown into a multi-site OEM and ODM toy manufacturer trusted by leading global brands — delivering safe, compliant, and precision-engineered toys from China and Indonesia to markets worldwide.</p>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     HERO — Cinematic parallax with aurora depth
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="about-hero" id="aboutHero">
+  <div class="hero-grid-pattern"></div>
+  <div class="aurora">
+    <div class="aurora-blob"></div>
+    <div class="aurora-blob"></div>
+    <div class="aurora-blob"></div>
+  </div>
+
+  <div class="about-hero-content">
+    <span class="about-hero-tag" id="aboutTag">Our Story</span>
+    <h1 class="about-hero-title" id="aboutTitle">38 years of<br><span class="text-gradient">craftsmanship.</span></h1>
+    <p class="about-hero-sub" id="aboutSub">From a single workshop in Sha Tau Kok, Hong Kong, Royal Regent has grown into a multi-site OEM toy manufacturer trusted by leading global brands — delivering safe, compliant, and precision-engineered toys from China and Indonesia to markets worldwide.</p>
+  </div>
+
+  <div class="about-hero-scroll" id="aboutScroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
   </div>
 </section>
 
-<!-- INTRO STATEMENT -->
+
+<!-- ═══════════════════════════════════════════════════════════════
+     MAIN CONTENT (for footer reveal)
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="main-content">
+
+<!-- ═══ INTRO STATEMENT ═══ -->
 <section class="intro-statement">
   <div class="container">
     <div class="statement-inner reveal-up">
@@ -54,205 +423,63 @@
   </div>
 </section>
 
-<!-- HISTORY TIMELINE — Scroll-Driven -->
-<div id="history" class="tl-scroll-outer">
-  <div class="tl-scroll-sticky">
-    <div class="tl-grid-bg"></div>
-    <div class="tl-watermark" id="tlWatermark">1987</div>
 
-    <div class="container tl-container">
-      <div class="tl-header">
-        <span class="section-label">Development History</span>
-        <h2 class="section-title">Nearly four decades<br>of <span>continuous growth.</span></h2>
-      </div>
+<!-- ═══════════════════════════════════════════════════════════════
+     HISTORY — Interactive timeline (light variant)
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="history-section" id="historySection">
 
-      <div class="tl-body">
+  <!-- Top bar -->
+  <div class="history-top">
+    <h2 class="history-heading">Development History</h2>
+  </div>
 
-        <!-- Left: Year Nav -->
-        <div class="tl-nav-col">
-          <div class="tl-line-wrap">
-            <div class="tl-line-bg"></div>
-            <div class="tl-line-fill" id="tlLineFill"></div>
-          </div>
-          <button class="tl-yr active" data-tl="0" data-year="1987"><span class="tl-dot"></span><span class="tl-yr-text">1987</span></button>
-          <button class="tl-yr" data-tl="1" data-year="1990"><span class="tl-dot"></span><span class="tl-yr-text">1990</span></button>
-          <button class="tl-yr" data-tl="2" data-year="1997"><span class="tl-dot"></span><span class="tl-yr-text">1997</span></button>
-          <button class="tl-yr" data-tl="3" data-year="2000"><span class="tl-dot"></span><span class="tl-yr-text">2000</span></button>
-          <button class="tl-yr" data-tl="4" data-year="2003"><span class="tl-dot"></span><span class="tl-yr-text">2003</span></button>
-          <button class="tl-yr" data-tl="5" data-year="2005"><span class="tl-dot"></span><span class="tl-yr-text">2005</span></button>
-          <button class="tl-yr" data-tl="6" data-year="2010"><span class="tl-dot"></span><span class="tl-yr-text">2010</span></button>
-          <button class="tl-yr" data-tl="7" data-year="2016"><span class="tl-dot"></span><span class="tl-yr-text">2016</span></button>
-          <button class="tl-yr" data-tl="8" data-year="2018"><span class="tl-dot"></span><span class="tl-yr-text">2018</span></button>
-          <button class="tl-yr" data-tl="9" data-year="2023"><span class="tl-dot"></span><span class="tl-yr-text">2023</span></button>
-          <button class="tl-yr" data-tl="10" data-year="2025"><span class="tl-dot"></span><span class="tl-yr-text">2025</span></button>
-        </div>
+  <!-- Center: watermark year + milestone text -->
+  <div class="history-center">
+    <div class="history-watermark" id="historyWatermark">1987</div>
 
-        <!-- Right: Content -->
-        <div class="tl-content-area">
-
-          <div class="tl-panel active" data-tl="0">
-            <div class="tl-meta"><span class="tl-count-badge">01 &nbsp;/&nbsp; 11</span><span class="tl-loc-badge">&#127968; Hong Kong</span></div>
-            <div class="tl-big-yr">1987</div>
-            <h3 class="tl-title">Founded in Sha Tau Kok</h3>
-            <p class="tl-desc">The company was founded in Sha Tau Kok, marking the official beginning of its journey in manufacturing.</p>
-          </div>
-
-          <div class="tl-panel" data-tl="1">
-            <div class="tl-meta"><span class="tl-count-badge">02 &nbsp;/&nbsp; 11</span><span class="tl-loc-badge">&#127464;&#127475; China</span></div>
-            <div class="tl-big-yr">1990</div>
-            <h3 class="tl-title">Relocated to Longhua</h3>
-            <p class="tl-desc">Relocated to Longhua, significantly expanding production scale.</p>
-          </div>
-
-          <div class="tl-panel" data-tl="2">
-            <div class="tl-meta"><span class="tl-count-badge">03 &nbsp;/&nbsp; 11</span><span class="tl-loc-badge">&#127464;&#127475; China</span></div>
-            <div class="tl-big-yr">1997</div>
-            <h3 class="tl-title">Expanded to Dongguan</h3>
-            <p class="tl-desc">Expanded operations to Dongguan to meet rapidly growing market demand.</p>
-          </div>
-
-          <div class="tl-panel" data-tl="3">
-            <div class="tl-meta"><span class="tl-count-badge">04 &nbsp;/&nbsp; 11</span><span class="tl-loc-badge">&#127464;&#127475; China</span></div>
-            <div class="tl-big-yr">2000</div>
-            <h3 class="tl-title">Dongguan Factory Expansion</h3>
-            <p class="tl-desc">Completion and commissioning of the Dongguan factory expansion, introducing plush toys and costume production lines and marking the company&rsquo;s first entry into soft toy manufacturing.</p>
-          </div>
-
-          <div class="tl-panel" data-tl="4">
-            <div class="tl-meta"><span class="tl-count-badge">05 &nbsp;/&nbsp; 11</span><span class="tl-loc-badge">&#127464;&#127475; China</span></div>
-            <div class="tl-big-yr">2003</div>
-            <h3 class="tl-title">Extended to Heyuan</h3>
-            <p class="tl-desc">Extended manufacturing footprint to Heyuan, establishing a multi-location operation to enhance supply chain resilience.</p>
-          </div>
-
-          <div class="tl-panel" data-tl="5">
-            <div class="tl-meta"><span class="tl-count-badge">06 &nbsp;/&nbsp; 11</span><span class="tl-loc-badge">&#127464;&#127475; China</span></div>
-            <div class="tl-big-yr">2005</div>
-            <h3 class="tl-title">Heyuan Factory Expansion</h3>
-            <p class="tl-desc">Completion of the Heyuan factory expansion, effectively supporting product line diversification and capacity upgrades.</p>
-          </div>
-
-          <div class="tl-panel" data-tl="6">
-            <div class="tl-meta"><span class="tl-count-badge">07 &nbsp;/&nbsp; 11</span><span class="tl-loc-badge">&#127464;&#127475; China</span></div>
-            <div class="tl-big-yr">2010</div>
-            <h3 class="tl-title">Doll Production Lines</h3>
-            <p class="tl-desc">Launched doll production lines, integrating sewing craftsmanship with plastic molding technology.</p>
-          </div>
-
-          <div class="tl-panel" data-tl="7">
-            <div class="tl-meta"><span class="tl-count-badge">08 &nbsp;/&nbsp; 11</span><span class="tl-loc-badge">&#127464;&#127475; China</span></div>
-            <div class="tl-big-yr">2016</div>
-            <h3 class="tl-title">RC Vehicle Manufacturing</h3>
-            <p class="tl-desc">Entered remote control vehicle manufacturing, addressing higher technical requirements and enhancing capabilities in structural complexity and electronic integration.</p>
-          </div>
-
-          <div class="tl-panel" data-tl="8">
-            <div class="tl-meta"><span class="tl-count-badge">09 &nbsp;/&nbsp; 11</span><span class="tl-loc-badge">&#127464;&#127475; China</span></div>
-            <div class="tl-big-yr">2018</div>
-            <h3 class="tl-title">Expanded to Hunan</h3>
-            <p class="tl-desc">Expanded production to Hunan, significantly broadening manufacturing capacity and geographic coverage across China.</p>
-          </div>
-
-          <div class="tl-panel" data-tl="9">
-            <div class="tl-meta"><span class="tl-count-badge">10 &nbsp;/&nbsp; 11</span><span class="tl-loc-badge">&#127470;&#127465; Indonesia</span></div>
-            <div class="tl-big-yr">2023</div>
-            <h3 class="tl-title">Indonesia Phase I</h3>
-            <p class="tl-desc">Officially entered the Indonesian market, marking a key milestone in the company&rsquo;s global expansion strategy and promoting supply chain diversification.</p>
-          </div>
-
-          <div class="tl-panel" data-tl="10">
-            <div class="tl-meta"><span class="tl-count-badge">11 &nbsp;/&nbsp; 11</span><span class="tl-loc-badge">&#127470;&#127465; Indonesia</span></div>
-            <div class="tl-big-yr">2025</div>
-            <h3 class="tl-title">Indonesia Phase II</h3>
-            <p class="tl-desc">Phase II of the Indonesia factory commenced operations, further expanding regional production capacity and strengthening responsiveness to international markets.</p>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <!-- Scroll progress indicator -->
-    <div class="tl-scroll-progress">
-      <div class="tl-scroll-bar" id="tlScrollBar"></div>
+    <div class="history-milestone" id="historyMilestone">
+      <p>The company was founded in Sha Tau Kok, marking the official beginning of its journey in manufacturing.</p>
     </div>
   </div>
-</div>
 
-<style>
-/* ===== SCROLL-DRIVEN TIMELINE ===== */
-.tl-scroll-outer{position:relative;height:calc(100vh * 11);}
-.tl-scroll-sticky{position:sticky;top:0;height:100vh;overflow:hidden;background:linear-gradient(160deg,#f0f9f0 0%,#e8f5e9 60%,#f7fbf7 100%);}
-.tl-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(76,175,80,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(76,175,80,0.04) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;}
-.tl-watermark{position:absolute;right:-0.03em;top:50%;transform:translateY(-50%);font-family:'Inter',sans-serif;font-size:clamp(160px,20vw,280px);font-weight:900;color:rgba(76,175,80,0.06);letter-spacing:-0.05em;line-height:1;pointer-events:none;user-select:none;transition:opacity 0.4s;}
-.tl-container{position:relative;z-index:2;padding-top:100px;}
-.tl-header{margin-bottom:48px;}
-.tl-header .section-title{margin-bottom:0;}
-.tl-body{display:grid;grid-template-columns:180px 1fr;gap:60px;align-items:start;}
+  <!-- Scroll progress indicator — right edge -->
+  <div class="history-scroll-progress">
+    <div class="history-scroll-fill" id="historyScrollFill"></div>
+  </div>
 
-/* Left nav column */
-.tl-nav-col{position:relative;padding-left:28px;}
-.tl-line-wrap{position:absolute;left:5px;top:10px;bottom:10px;width:2px;}
-.tl-line-bg{position:absolute;inset:0;background:rgba(76,175,80,0.15);border-radius:2px;}
-.tl-line-fill{position:absolute;top:0;left:0;width:100%;height:0%;background:var(--gradient);border-radius:2px;transition:height 0.5s cubic-bezier(0.4,0,0.2,1);}
+  <!-- Scroll hint — shown on first load -->
+  <div class="history-scroll-hint" id="historyScrollHint">
+    <span>Scroll to explore</span>
+    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
 
-/* Year buttons */
-.tl-yr{display:flex;align-items:center;gap:14px;width:100%;background:none;border:none;cursor:pointer;padding:7px 0;position:relative;transition:all 0.3s;}
-.tl-dot{width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid rgba(76,175,80,0.25);flex-shrink:0;position:relative;z-index:2;transition:all 0.35s cubic-bezier(0.4,0,0.2,1);}
-.tl-yr-text{font-family:'Inter',sans-serif;font-size:0.82rem;font-weight:600;color:var(--text-muted);transition:all 0.35s;letter-spacing:-0.01em;line-height:1;}
-.tl-yr.active .tl-dot{width:14px;height:14px;background:var(--green-mid);border-color:var(--green-mid);box-shadow:0 0 0 4px rgba(76,175,80,0.18),0 0 0 9px rgba(76,175,80,0.07);}
-.tl-yr.active .tl-yr-text{font-size:1.15rem;font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-0.02em;}
-.tl-yr:hover:not(.active) .tl-dot{border-color:var(--green-mid);background:rgba(76,175,80,0.12);}
-.tl-yr:hover:not(.active) .tl-yr-text{color:var(--text);}
+  <!-- Bottom timeline -->
+  <div class="history-timeline">
+    <div class="timeline-track" id="timelineTrack">
+      <button class="timeline-node active" data-index="0"><div class="timeline-dot"><span>1987</span></div></button>
+      <button class="timeline-node" data-index="1"><div class="timeline-dot"><span>1990</span></div></button>
+      <button class="timeline-node" data-index="2"><div class="timeline-dot"><span>1997</span></div></button>
+      <button class="timeline-node" data-index="3"><div class="timeline-dot"><span>2000</span></div></button>
+      <button class="timeline-node" data-index="4"><div class="timeline-dot"><span>2003</span></div></button>
+      <button class="timeline-node" data-index="5"><div class="timeline-dot"><span>2005</span></div></button>
+      <button class="timeline-node" data-index="6"><div class="timeline-dot"><span>2010</span></div></button>
+      <button class="timeline-node" data-index="7"><div class="timeline-dot"><span>2016</span></div></button>
+      <button class="timeline-node" data-index="8"><div class="timeline-dot"><span>2018</span></div></button>
+      <button class="timeline-node" data-index="9"><div class="timeline-dot"><span>2023</span></div></button>
+      <button class="timeline-node" data-index="10"><div class="timeline-dot"><span>2025</span></div></button>
+    </div>
+  </div>
 
-/* Content panels */
-.tl-content-area{position:relative;min-height:380px;}
-.tl-panel{display:none;padding-bottom:40px;}
-.tl-panel.active{display:block;}
-.tl-panel.tl-enter{animation:tlEnter 0.5s cubic-bezier(0.4,0,0.2,1) forwards;}
-.tl-panel.tl-exit{animation:tlExit 0.25s ease forwards;}
-@keyframes tlEnter{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
-@keyframes tlExit{from{opacity:1;transform:translateY(0);}to{opacity:0;transform:translateY(-14px);}}
+</section>
 
-/* Meta row */
-.tl-meta{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
-.tl-count-badge{font-size:0.7rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--green-mid);background:rgba(76,175,80,0.08);border:1px solid rgba(76,175,80,0.2);border-radius:20px;padding:4px 12px;}
-.tl-loc-badge{font-size:0.82rem;font-weight:500;color:var(--text-muted);}
+</div><!-- /.main-content -->
 
-/* Big year */
-.tl-big-yr{font-family:'Inter',sans-serif;font-size:clamp(4.5rem,10vw,8.5rem);font-weight:900;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:0.9;margin-bottom:20px;letter-spacing:-0.05em;}
 
-/* Title & desc */
-.tl-title{font-family:'Inter',sans-serif;font-size:clamp(1.3rem,2.5vw,1.8rem);font-weight:800;color:var(--text);margin-bottom:14px;letter-spacing:-0.025em;line-height:1.2;}
-.tl-desc{font-size:0.95rem;color:var(--text-muted);line-height:1.8;max-width:520px;}
-
-/* Scroll progress bar */
-.tl-scroll-progress{position:absolute;right:32px;top:50%;transform:translateY(-50%);width:3px;height:200px;background:rgba(76,175,80,0.12);border-radius:3px;}
-.tl-scroll-bar{position:absolute;top:0;left:0;width:100%;height:0%;background:var(--gradient);border-radius:3px;transition:height 0.3s ease;}
-
-/* Responsive */
-@media(max-width:900px){
-  .tl-scroll-outer{height:calc(100vh * 8);}
-  .tl-body{grid-template-columns:140px 1fr;gap:32px;}
-}
-@media(max-width:768px){
-  .tl-scroll-outer{height:calc(100vh * 6);}
-  .tl-body{grid-template-columns:1fr;gap:24px;}
-  .tl-nav-col{display:flex;flex-wrap:wrap;gap:6px;padding-left:0;}
-  .tl-line-wrap{display:none;}
-  .tl-yr{width:auto;padding:4px 10px;background:rgba(76,175,80,0.06);border:1px solid var(--border);border-radius:20px;gap:0;}
-  .tl-dot{display:none;}
-  .tl-yr-text{font-size:0.78rem!important;color:var(--text-muted)!important;-webkit-text-fill-color:var(--text-muted)!important;}
-  .tl-yr.active{background:var(--gradient);border-color:transparent;}
-  .tl-yr.active .tl-yr-text{-webkit-text-fill-color:white!important;font-size:0.78rem!important;}
-  .tl-big-yr{font-size:3.5rem;}
-  .tl-watermark{display:none;}
-  .tl-scroll-progress{display:none;}
-  .tl-container{padding-top:80px;}
-}
-</style>
-
-<!-- FOOTER -->
-<footer>
+<!-- ═══════════════════════════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════════════════════════ -->
+<footer class="footer-reveal">
   <div class="footer-container">
     <div class="footer-top">
       <div class="footer-brand">
@@ -262,17 +489,16 @@
       <div class="footer-col">
         <h4>Company</h4>
         <a href="about.html">About Us</a>
-        <a href="capabilities/plastic-figures.html">Capabilities</a>
         <a href="careers.html">Careers</a>
         <a href="contact.html">Contact Us</a>
       </div>
       <div class="footer-col">
         <h4>Capabilities</h4>
-        <a href="capabilities/plastic-figures.html">Plastic Figures</a>
-        <a href="capabilities/plush-toys.html">Plush Toys</a>
+        <a href="capabilities/plastic-toys.html">Plastic Toys</a>
+        <a href="capabilities/plush.html">Plush</a>
         <a href="capabilities/dolls.html">Dolls</a>
-        <a href="capabilities/rc-vehicles.html">RC Vehicles</a>
-        <a href="capabilities/costumes.html">Costumes</a>
+        <a href="capabilities/rc-vehicle.html">RC Vehicles</a>
+        <a href="capabilities/costume.html">Costumes</a>
       </div>
       <div class="footer-col">
         <h4>Get In Touch</h4>
@@ -283,114 +509,284 @@
     </div>
     <div class="footer-bottom">
       <p>&copy; 2025 Royal Regent. All rights reserved.</p>
-      <div class="footer-tags">
-        <span>US &amp; EU Compliant</span>
-        <span>OEM / ODM</span>
-        <span>Est. 1987</span>
-      </div>
     </div>
   </div>
 </footer>
 
-<script src="assets/main.js"></script>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SCRIPTS
+     ═══════════════════════════════════════════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+<script src="assets/shared.js"></script>
+
 <script>
 (function() {
-  const TOTAL = 11;
-  let current = 0;
-  let animating = false;
+  'use strict';
 
-  const outer     = document.querySelector('.tl-scroll-outer');
-  const watermark = document.getElementById('tlWatermark');
-  const lineFill  = document.getElementById('tlLineFill');
-  const scrollBar = document.getElementById('tlScrollBar');
-  const yrBtns    = document.querySelectorAll('.tl-yr');
-  const panels    = document.querySelectorAll('.tl-panel');
-
-  function goTo(idx, smooth) {
-    if (idx === current || idx < 0 || idx >= TOTAL) return;
-    if (smooth && animating) return;
-    animating = true;
-
-    const oldPanel = panels[current];
-    const newPanel = panels[idx];
-
-    oldPanel.classList.add('tl-exit');
-    setTimeout(() => {
-      oldPanel.classList.remove('active', 'tl-exit');
-      newPanel.classList.add('active', 'tl-enter');
-      setTimeout(() => {
-        newPanel.classList.remove('tl-enter');
-        animating = false;
-      }, 500);
-    }, 250);
-
-    yrBtns.forEach(b => b.classList.remove('active'));
-    yrBtns[idx].classList.add('active');
-
-    lineFill.style.height = (idx / (TOTAL - 1) * 100) + '%';
-
-    watermark.style.opacity = '0';
-    setTimeout(() => {
-      watermark.textContent = yrBtns[idx].dataset.year;
-      watermark.style.opacity = '1';
-    }, 180);
-
-    current = idx;
+  // ─── HERO ENTRANCE ─────────────────────────────────────────
+  function heroEntrance() {
+    if (typeof gsap === 'undefined') return;
+    var tl = gsap.timeline({ delay: 0.3 });
+    tl.to('#aboutTag', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' });
+    tl.to('#aboutTitle', { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }, '-=0.3');
+    tl.to('#aboutSub', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.4');
+    tl.to('#aboutScroll', { opacity: 1, duration: 0.8, ease: 'power2.out' }, '-=0.2');
   }
 
-  // Scroll-driven: detect scroll position within the outer container
-  let ticking = false;
-  function onScroll() {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      const rect = outer.getBoundingClientRect();
-      const outerH = outer.offsetHeight;
-      const scrolled = -rect.top;
-      const progress = Math.max(0, Math.min(1, scrolled / (outerH - window.innerHeight)));
+  // ─── HISTORY TIMELINE — SCROLL-DRIVEN PINNED ────────
+  function historyTimeline() {
+    var isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+    var milestones = [
+      { year: '1987', text: 'The company was founded in Sha Tau Kok, marking the official beginning of its journey in manufacturing.' },
+      { year: '1990', text: 'Relocated to Longhua, significantly expanding production scale.' },
+      { year: '1997', text: 'Expanded operations to Dongguan to meet rapidly growing market demand.' },
+      { year: '2000', text: 'Completion and commissioning of the Dongguan factory expansion, introducing plush toys and costume production lines and marking the company\u2019s first entry into soft toy manufacturing.' },
+      { year: '2003', text: 'Extended manufacturing footprint to Heyuan, establishing a multi-location operation to enhance supply chain resilience.' },
+      { year: '2005', text: 'Completion of the Heyuan factory expansion, effectively supporting product line diversification and capacity upgrades.' },
+      { year: '2010', text: 'Launched doll production lines, integrating sewing craftsmanship with plastic molding technology.' },
+      { year: '2016', text: 'Entered remote control vehicle manufacturing, addressing higher technical requirements and enhancing capabilities in structural complexity and electronic integration.' },
+      { year: '2018', text: 'Expanded production to Hunan, significantly increasing overall manufacturing capacity.' },
+      { year: '2023', text: 'Officially entered the Indonesian market, marking a key milestone in the company\u2019s global expansion strategy and promoting supply chain diversification.' },
+      { year: '2025', text: 'Phase II of the Indonesia factory commenced operations, further expanding regional production capacity and strengthening responsiveness to international markets.' }
+    ];
 
-      // Update scroll bar
-      if (scrollBar) scrollBar.style.height = (progress * 100) + '%';
+    var section = document.getElementById('historySection');
+    var nodes = document.querySelectorAll('.timeline-node');
+    var watermark = document.getElementById('historyWatermark');
+    var milestone = document.getElementById('historyMilestone');
+    var scrollFill = document.getElementById('historyScrollFill');
+    var scrollHint = document.getElementById('historyScrollHint');
+    if (!section || !nodes.length || !watermark || !milestone) return;
 
-      // Determine which milestone to show
-      const idx = Math.min(TOTAL - 1, Math.max(0, Math.floor(progress * TOTAL)));
-      if (idx !== current) goTo(idx, false);
-      ticking = false;
+    var current = 0;
+    var total = milestones.length;
+    var animating = false;
+    var debounceTimer = null;
+    var DEBOUNCE_MS = 600;
+
+    function goTo(idx, skipAnim) {
+      if (idx < 0 || idx >= total) return;
+      if (idx === current && !skipAnim) return;
+
+      var prev = current;
+      current = idx;
+
+      nodes.forEach(function(n) { n.classList.remove('active'); });
+      nodes[idx].classList.add('active');
+
+      if (scrollFill) {
+        scrollFill.style.height = ((idx / (total - 1)) * 100) + '%';
+      }
+
+      if (skipAnim) {
+        watermark.textContent = milestones[idx].year;
+        milestone.querySelector('p').textContent = milestones[idx].text;
+        gsap.set(watermark, { opacity: 0.08, scale: 1 });
+        gsap.set(milestone, { opacity: 1, y: 0 });
+        return;
+      }
+
+      if (animating) return;
+      animating = true;
+
+      if (scrollHint && scrollHint.style.opacity !== '0') {
+        gsap.to(scrollHint, { opacity: 0, duration: 0.3, ease: 'power2.out',
+          onComplete: function() { scrollHint.style.display = 'none'; }
+        });
+      }
+
+      var dir = idx > prev ? 1 : -1;
+
+      var tlOut = gsap.timeline();
+      tlOut.to(watermark, { opacity: 0, scale: 0.85, duration: 0.25, ease: 'power2.in' }, 0);
+      tlOut.to(milestone, { opacity: 0, y: dir * 20, duration: 0.25, ease: 'power2.in' }, 0);
+
+      tlOut.call(function() {
+        watermark.textContent = milestones[idx].year;
+        milestone.querySelector('p').textContent = milestones[idx].text;
+
+        var tlIn = gsap.timeline({
+          onComplete: function() {
+            debounceTimer = setTimeout(function() {
+              animating = false;
+            }, DEBOUNCE_MS);
+          }
+        });
+        tlIn.fromTo(watermark,
+          { opacity: 0, scale: 0.85 },
+          { opacity: 0.08, scale: 1, duration: 0.5, ease: 'power2.out' }, 0);
+        tlIn.fromTo(milestone,
+          { opacity: 0, y: -dir * 20 },
+          { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0);
+      });
+    }
+
+    // Desktop: ScrollTrigger pinned
+    if (!isMobile && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      var pinDuration = (total - 1) * window.innerHeight * 1.2;
+
+      var snapPoints = [];
+      for (var s = 0; s < total; s++) {
+        snapPoints.push(s / (total - 1));
+      }
+
+      // Create segment fill divs between each pair of nodes
+      var segments = [];
+      var track = document.getElementById('timelineTrack');
+      function buildSegments() {
+        segments.forEach(function(seg) { seg.remove(); });
+        segments = [];
+        for (var i = 0; i < total - 1; i++) {
+          var seg = document.createElement('div');
+          seg.className = 'timeline-segment';
+          var n1 = nodes[i].getBoundingClientRect();
+          var n2 = nodes[i + 1].getBoundingClientRect();
+          var trackRect = track.getBoundingClientRect();
+          var left = n1.left + n1.width / 2 - trackRect.left;
+          var right = n2.left + n2.width / 2 - trackRect.left;
+          seg.style.left = left + 'px';
+          seg.style.width = (right - left) + 'px';
+          track.appendChild(seg);
+          segments.push(seg);
+        }
+      }
+      requestAnimationFrame(function() { requestAnimationFrame(buildSegments); });
+      window.addEventListener('resize', function() { requestAnimationFrame(buildSegments); });
+
+      function updateSegmentFills(progress) {
+        var rawIdx = progress * (total - 1);
+        for (var i = 0; i < segments.length; i++) {
+          var segProgress;
+          if (rawIdx >= i + 1) {
+            segProgress = 1;
+          } else if (rawIdx <= i) {
+            segProgress = 0;
+          } else {
+            segProgress = rawIdx - i;
+          }
+          segments[i].style.background = 'linear-gradient(to right, var(--brand) ' + (segProgress * 100) + '%, transparent ' + (segProgress * 100) + '%)';
+        }
+      }
+
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top top',
+        end: '+=' + pinDuration,
+        pin: true,
+        scrub: false,
+        snap: {
+          snapTo: snapPoints,
+          duration: { min: 0.3, max: 0.6 },
+          ease: 'power2.inOut'
+        },
+        onUpdate: function(self) {
+          var rawIdx = self.progress * (total - 1);
+          var idx = Math.round(rawIdx);
+          idx = Math.max(0, Math.min(total - 1, idx));
+          if (idx !== current && !animating) {
+            goTo(idx);
+          }
+          if (scrollFill) {
+            scrollFill.style.height = (self.progress * 100) + '%';
+          }
+          updateSegmentFills(self.progress);
+        }
+      });
+
+      nodes.forEach(function(node) {
+        node.addEventListener('click', function() {
+          var idx = parseInt(node.dataset.index);
+          var sectionTop = section.offsetTop;
+          var targetScroll = sectionTop + (idx / (total - 1)) * pinDuration;
+          if (window.__lenis) {
+            window.__lenis.scrollTo(targetScroll, { duration: 1.2 });
+          } else {
+            window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+          }
+        });
+      });
+
+      nodes.forEach(function(node, i) {
+        gsap.fromTo(node,
+          { scale: 0, opacity: 0 },
+          {
+            scale: 1, opacity: 1, duration: 0.6,
+            ease: 'back.out(1.7)',
+            delay: 0.15 + i * 0.08,
+            scrollTrigger: { trigger: section, start: 'top 70%', once: true }
+          }
+        );
+      });
+    }
+
+    // Mobile: swipe left/right navigation
+    if (isMobile) {
+      var touchStartX = 0;
+      section.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+      section.addEventListener('touchend', function(e) {
+        var diff = touchStartX - e.changedTouches[0].screenX;
+        if (Math.abs(diff) > 50) {
+          goTo(current + (diff > 0 ? 1 : -1));
+        }
+      }, { passive: true });
+
+      nodes.forEach(function(node) {
+        node.addEventListener('click', function() {
+          goTo(parseInt(node.dataset.index));
+        });
+      });
+    }
+
+    goTo(0, true);
+  }
+
+  // ─── FOOTER REVEAL ─────────────────────────────────────────
+  function footerReveal() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    var footer = document.querySelector('footer.footer-reveal');
+    var mainContent = document.querySelector('.main-content');
+    if (!footer || !mainContent) return;
+    ScrollTrigger.create({
+      trigger: footer,
+      start: 'top bottom',
+      end: 'top top',
+      scrub: true,
+      onUpdate: function(self) {
+        mainContent.style.boxShadow = '0 -20px 60px rgba(0,0,0,' + (self.progress * 0.15) + ')';
+      }
     });
   }
-  window.addEventListener('scroll', onScroll, { passive: true });
 
-  // Click navigation still works
-  yrBtns.forEach((btn, i) => btn.addEventListener('click', () => {
-    // Scroll to the right position for this milestone
-    const outerTop = outer.offsetTop;
-    const outerH = outer.offsetHeight;
-    const targetScroll = outerTop + (i / TOTAL) * (outerH - window.innerHeight);
-    window.scrollTo({ top: targetScroll, behavior: 'smooth' });
-  }));
+  // ─── PARALLAX ON STATEMENT ─────────────────────────────────
+  function scrollParallax() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    if (/Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) return;
+    gsap.to('.statement-line', {
+      scaleY: 1.5, ease: 'none',
+      scrollTrigger: { trigger: '.intro-statement', start: 'top bottom', end: 'bottom top', scrub: true }
+    });
+  }
 
-  // Keyboard navigation
-  document.addEventListener('keydown', e => {
-    const rect = outer.getBoundingClientRect();
-    if (rect.top > window.innerHeight || rect.bottom < 0) return;
-    if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
-      e.preventDefault();
-      const nextIdx = Math.min(current + 1, TOTAL - 1);
-      const outerTop = outer.offsetTop;
-      const outerH = outer.offsetHeight;
-      const targetScroll = outerTop + (nextIdx / TOTAL) * (outerH - window.innerHeight);
-      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
-    }
-    if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
-      e.preventDefault();
-      const prevIdx = Math.max(current - 1, 0);
-      const outerTop = outer.offsetTop;
-      const outerH = outer.offsetHeight;
-      const targetScroll = outerTop + (prevIdx / TOTAL) * (outerH - window.innerHeight);
-      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
-    }
-  });
+  // ─── INIT ──────────────────────────────────────────────────
+  function init() {
+    heroEntrance();
+    historyTimeline();
+    footerReveal();
+    scrollParallax();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    requestAnimationFrame(function() { requestAnimationFrame(init); });
+  }
 })();
 </script>
+
 </body>
 </html>

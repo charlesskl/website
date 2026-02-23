@@ -1,271 +1,994 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Royal Regent — OEM Toy Manufacturer Since 1987</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/style.css">
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Royal Regent — OEM Toy Manufacturer Since 1987</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Shared Design System -->
+  <link rel="stylesheet" href="assets/shared.css">
+
+  <!-- Index-specific Styles -->
+  <style>
+    /* ═══ HERO ═══ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--gradient-hero);
+    }
+    .hero-bg { position: absolute; inset: 0; pointer-events: none; }
+
+    /* 4-layer parallax containers */
+    .parallax-layer { position: absolute; inset: 0; will-change: transform; }
+    .parallax-bg { z-index: 0; }
+    .parallax-mid { z-index: 1; }
+    .parallax-headline { z-index: 2; }
+    .parallax-fg { z-index: 3; }
+
+    .hero-grid-pattern { z-index: 0; }
+
+    /* WebGL canvas */
+    #heroParticles {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--space-md);
+      padding-top: var(--nav-h);
+      width: 100%;
+    }
+    .hero-tag {
+      font-family: var(--font-body);
+      font-size: var(--text-xs);
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--brand);
+      margin-bottom: 24px;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: var(--text-5xl);
+      font-weight: 700;
+      line-height: 1.0;
+      margin-bottom: 28px;
+      color: var(--text);
+      letter-spacing: -0.04em;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    .hero-sub {
+      font-size: var(--text-lg);
+      color: var(--text-muted);
+      max-width: 540px;
+      margin-bottom: 40px;
+      line-height: 1.75;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-light);
+      opacity: 0;
+    }
+    .hero-scroll-hint span {
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--brand), transparent);
+      animation: scrollLine 2s ease-in-out infinite;
+    }
+
+    /* Aurora blobs in hero */
+    .hero .aurora { z-index: 1; }
+
+
+    /* ═══ MARQUEE ═══ */
+    .marquee { position: relative; z-index: 10; }
+    .marquee-track {
+      animation: marqueeScroll 40s linear infinite;
+    }
+    .marquee:hover .marquee-track {
+      animation-play-state: paused;
+    }
+    @keyframes marqueeScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+
+    /* ═══ INTRO STATEMENT ═══ */
+    .intro-statement {
+      padding: 100px 0 60px;
+      background: rgba(124,179,66,0.02);
+    }
+    .statement-grid {
+      display: grid;
+      grid-template-columns: 55% 45%;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 var(--space-md);
+      position: relative;
+    }
+    .statement-left {
+      display: flex;
+      align-items: stretch;
+      gap: 32px;
+    }
+    .statement-line {
+      width: 3px;
+      background: var(--brand);
+      border-radius: 2px;
+      flex-shrink: 0;
+      transform-origin: top center;
+    }
+    .statement-content {
+      display: flex;
+      flex-direction: column;
+    }
+    .statement-text {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 4vw, 56px);
+      font-weight: 300;
+      color: #1a1a1a;
+      line-height: 1.5;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+    .statement-text .stmt-line {
+      display: block;
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    .statement-rule {
+      width: 60px;
+      height: 2px;
+      background: var(--brand);
+      margin-top: 28px;
+      transform-origin: left center;
+    }
+    .statement-accent {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      font-family: var(--font-display);
+      font-size: clamp(120px, 18vw, 220px);
+      font-weight: 700;
+      color: var(--brand);
+      opacity: 0.06;
+      line-height: 1;
+      user-select: none;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @media (max-width: 1024px) {
+      .intro-statement { padding: 100px 0; }
+      .statement-text { white-space: normal; }
+    }
+    @media (max-width: 768px) {
+      .intro-statement { padding: 80px 0; }
+      .statement-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .statement-left {
+        flex-direction: column;
+        gap: 20px;
+      }
+      .statement-line {
+        width: 48px;
+        height: 3px;
+        transform-origin: left center;
+      }
+      .statement-text {
+        font-size: clamp(28px, 6vw, 36px);
+        white-space: normal;
+      }
+      .statement-accent {
+        justify-content: flex-start;
+        font-size: clamp(60px, 18vw, 110px);
+      }
+    }
+
+
+    /* ═══ CAPABILITIES SECTION ═══ */
+    .caps-section {
+      padding: var(--space-lg) 0 var(--space-2xl);
+      background: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .caps-section .container { position: relative; z-index: 2; }
+    .section-title {
+      font-size: var(--text-3xl);
+      font-weight: 700;
+      margin-bottom: var(--space-lg);
+    }
+    .section-title span { color: var(--brand); }
+
+    .caps-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+    }
+
+    /* Mana-style tall portrait card */
+    .cap-card {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      border-radius: 0;
+      overflow: hidden;
+      background: #fff;
+      aspect-ratio: 3 / 4.5;
+      will-change: transform, opacity;
+      cursor: pointer;
+    }
+
+    /* Background scene — hidden by default */
+    .cap-card-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      opacity: 0;
+      will-change: opacity, transform;
+      overflow: hidden;
+      border-radius: 0;
+    }
+    .cap-card-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.08);
+      will-change: transform;
+    }
+    /* Gradient overlay on top of bg image */
+    .cap-card-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+    /* Unique gradients per card */
+    .cap-card[data-cap="plastic"] .cap-card-bg::after {
+      background: linear-gradient(135deg, rgba(245,166,35,0.85), rgba(211,84,0,0.7));
+    }
+    .cap-card[data-cap="plush"] .cap-card-bg::after {
+      background: linear-gradient(135deg, rgba(236,167,207,0.85), rgba(179,136,255,0.7));
+    }
+    .cap-card[data-cap="dolls"] .cap-card-bg::after {
+      background: linear-gradient(135deg, rgba(240,180,170,0.85), rgba(255,235,220,0.7));
+    }
+    .cap-card[data-cap="rc"] .cap-card-bg::after {
+      background: linear-gradient(135deg, rgba(30,100,220,0.85), rgba(0,180,255,0.7));
+    }
+    .cap-card[data-cap="costumes"] .cap-card-bg::after {
+      background: linear-gradient(135deg, rgba(56,120,50,0.88), rgba(30,70,30,0.75));
+    }
+
+    /* Product image — foreground, fills the card */
+    .cap-card-img {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      will-change: transform;
+      overflow: hidden;
+    }
+    .cap-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      font-size: 0;
+      color: transparent;
+    }
+
+    /* Fallback gradients per card when images are slow/broken */
+    .cap-card[data-cap="plastic"]  .cap-card-img { background: linear-gradient(135deg, #f5a623, #d35400); }
+    .cap-card[data-cap="plush"]    .cap-card-img { background: linear-gradient(135deg, #eca7cf, #b388ff); }
+    .cap-card[data-cap="dolls"]    .cap-card-img { background: linear-gradient(135deg, #f0b4aa, #ffebdc); }
+    .cap-card[data-cap="rc"]       .cap-card-img { background: linear-gradient(135deg, #1e64dc, #00b4ff); }
+    .cap-card[data-cap="costumes"] .cap-card-img { background: linear-gradient(135deg, #387832, #1e461e); }
+
+    /* Card info — anchored to bottom of card */
+    .cap-card-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 80px 20px 16px;
+      background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.25) 50%, transparent 100%);
+    }
+
+    /* Category name */
+    .cap-card-name {
+      font-family: var(--font-display);
+      font-size: var(--text-base);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.01em;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    }
+
+    /* Explore link — hidden by default */
+    .cap-card-link {
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #fff;
+      opacity: 0;
+      transform: translateY(8px);
+      will-change: opacity, transform;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Hover shadow — GSAP controlled but declaring base */
+    .cap-card-shadow {
+      box-shadow: none;
+      transition: box-shadow 0.4s ease;
+    }
+
+
+    /* ═══ HISTORY / DEVELOPMENT HISTORY SECTION ═══ */
+    .history-section {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Full-bleed background image */
+    .history-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .history-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.05);
+      will-change: transform;
+    }
+    /* Subtle dark overlay for white text readability */
+    .history-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.3);
+      z-index: 1;
+      pointer-events: none;
+    }
+    /* Darker gradient at bottom for timeline contrast */
+    .history-bg::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      background: linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Top bar — heading left */
+    .history-top {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 80px 56px 0;
+    }
+    .history-heading {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    /* Center area — big year watermark + milestone text */
+    .history-center {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 56px;
+    }
+
+    /* Massive semi-transparent year watermark */
+    .history-watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.85);
+      font-family: var(--font-display);
+      font-size: clamp(10rem, 28vw, 22rem);
+      font-weight: 900;
+      color: rgba(255, 255, 255, 0.35);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      user-select: none;
+      pointer-events: none;
+      z-index: 0;
+      white-space: nowrap;
+    }
+
+    /* Milestone text overlay */
+    .history-milestone {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 720px;
+      color: #fff;
+    }
+    .history-milestone p {
+      font-size: clamp(1rem, 1.6vw, 1.25rem);
+      line-height: 1.7;
+      font-weight: 500;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    /* Scroll progress indicator — right edge */
+    .history-scroll-progress {
+      position: absolute;
+      top: 56px;
+      right: 24px;
+      bottom: 56px;
+      width: 3px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 2px;
+      z-index: 10;
+      pointer-events: none;
+    }
+    .history-scroll-fill {
+      width: 100%;
+      height: 0%;
+      background: var(--brand);
+      border-radius: 2px;
+      transition: height 0.5s ease;
+    }
+
+    /* Scroll hint */
+    .history-scroll-hint {
+      position: absolute;
+      bottom: 140px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.7);
+      pointer-events: none;
+    }
+    .history-scroll-hint span {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .history-scroll-hint svg {
+      width: 18px;
+      height: 18px;
+      stroke: rgba(255,255,255,0.7);
+      stroke-width: 2;
+      fill: none;
+      animation: scrollHintBounce 1.5s ease-in-out infinite;
+    }
+    @keyframes scrollHintBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
+    /* Bottom timeline */
+    .history-timeline {
+      position: relative;
+      z-index: 2;
+      padding: 0 56px 48px;
+    }
+
+    /* Timeline track */
+    .timeline-track {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+    }
+    /* Base dashed line at 20% opacity */
+    .timeline-track::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: rgba(124,179,66,0.2);
+      transform: translateY(-50%);
+    }
+    /* Segment fill between circles */
+    .timeline-segment {
+      position: absolute;
+      top: 50%;
+      height: 2px;
+      transform: translateY(-50%);
+      transform-origin: left center;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .timeline-segment::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--brand);
+      transform-origin: left center;
+      transform: scaleX(0);
+    }
+
+    /* Year circle nodes */
+    .timeline-node {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      z-index: 1;
+    }
+    .timeline-dot {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  background 0.5s ease,
+                  width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  height 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+    }
+    .timeline-dot span {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--brand);
+      transition: color 0.5s ease, font-size 0.4s ease;
+    }
+    .timeline-node:hover .timeline-dot {
+      transform: scale(1.12);
+    }
+
+    /* Active state — larger circle, brand green fill */
+    .timeline-node.active .timeline-dot {
+      width: 96px;
+      height: 96px;
+      background: var(--brand);
+      box-shadow: 0 4px 24px rgba(124,179,66,0.35);
+    }
+    .timeline-node.active .timeline-dot span {
+      color: #fff;
+      font-size: 1.1rem;
+    }
+
+
+    /* ═══ CLIP-PATH SECTION WIPES ═══ */
+    .clip-section {
+      clip-path: inset(0 0 0 0);
+    }
+
+
+    /* ═══ FOOTER REVEAL ═══ */
+    footer.footer-reveal {
+      clip-path: inset(0 0 0 0);
+    }
+
+
+    /* ═══ RESPONSIVE ═══ */
+    @media (max-width: 1024px) {
+      .caps-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+      .cap-card { aspect-ratio: 3 / 4; }
+    }
+    @media (max-width: 768px) {
+      .caps-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+      .cap-card { aspect-ratio: 3 / 4; }
+      /* Mobile: always show background + white text */
+      .cap-card-bg { opacity: 1 !important; }
+      .cap-card-name { color: #fff; }
+      .cap-card-link { opacity: 1; transform: none; color: #fff; }
+      .history-section { height: 100vh; }
+      .history-top { padding: 32px 24px 0; }
+      .history-center { padding: 0 24px; }
+      .history-scroll-progress { display: none; }
+      .history-scroll-hint { display: none; }
+      .history-timeline { padding: 0 24px 32px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .timeline-track { min-width: 500px; padding: 0 20px; }
+      .timeline-dot { width: 52px; height: 52px; }
+      .timeline-dot span { font-size: 0.78rem; }
+      .timeline-node.active .timeline-dot { width: 72px; height: 72px; }
+      .timeline-node.active .timeline-dot span { font-size: 0.9rem; }
+      .history-watermark { font-size: clamp(6rem, 22vw, 10rem); }
+      .hero-title { font-size: var(--text-3xl); }
+      .parallax-layer { position: static; }
+      .hero { align-items: flex-start; padding-top: calc(var(--nav-h) + 40px); }
+      .hero-content { padding-top: 20px; }
+    }
+    @media (max-width: 480px) {
+      .caps-grid { gap: 12px; }
+      .cap-card-name { font-size: var(--text-sm); }
+    }
+  </style>
+</head>
 <body>
 
-  <!-- NAVBAR -->
-  <nav id="navbar">
-      <div class="nav-container">
-            <a href="index.html" class="nav-logo">
-                    <img src="assets/logo.png" alt="Royal Regent">
-            </a>
-            <ul class="nav-links" id="navLinks">
-                    <li><a href="about.html">About</a></li>
-                  <li class="has-dropdown">
-                            <a href="#" onclick="return false" style="cursor:default">Capabilities <span class="arrow">&#8964;</span></a>
-                            <ul class="dropdown">
-                                        <li><a href="capabilities/plastic-figures.html">Plastic</a></li>
-                            <li><a href="capabilities/plush-toys.html">Plush</a></li>
-                            <li><a href="capabilities/dolls.html">Dolls</a></li>
-                            <li><a href="capabilities/rc-vehicles.html">RC</a></li>
-                            <li><a href="capabilities/costumes.html">Costumes</a></li>
-                            </ul>
-                  </li>
-                  
-                  <li><a href="careers.html">Careers</a></li>
-                  <li><a href="contact.html" class="nav-cta">Contact Us</a></li>
-            </ul>
-          <button class="hamburger" id="hamburger" aria-label="Menu">
-                <span></span><span></span><span></span>
-          </button>
-      </div>
-  </nav>
+<!-- PAGE TRANSITION OVERLAY -->
+<div class="page-transition"></div>
 
-<!-- HERO -->
+<!-- SCROLL PROGRESS -->
+<div class="scroll-progress"></div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/logo.png" alt="Royal Regent">
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="about.html">About</a></li>
+      <li class="has-dropdown">
+        <a href="#" onclick="return false" style="cursor:default">Capabilities <span class="arrow">&#8964;</span></a>
+        <ul class="dropdown">
+          <li><a href="capabilities/plastic-toys.html"><svg class="dd-icon" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>Plastic Toys<svg class="dd-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
+          <li><a href="capabilities/plush.html"><svg class="dd-icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>Plush<svg class="dd-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
+          <li><a href="capabilities/dolls.html"><svg class="dd-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Dolls<svg class="dd-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
+          <li><a href="capabilities/rc-vehicle.html"><svg class="dd-icon" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>RC Vehicles<svg class="dd-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
+          <li><a href="capabilities/costume.html"><svg class="dd-icon" viewBox="0 0 24 24"><path d="M12 3l1.5 3.2 3.5.5-2.5 2.5.6 3.5L12 11l-3.1 1.7.6-3.5L7 6.7l3.5-.5z"/><path d="M5 16l-1.5 3.2-3.5.5L2.5 22l-.6 2L5 22.3 8.1 24l-.6-2L10 19.5l-3.5-.5z"/><path d="M19 16l-1.5 3.2-3.5.5 2.5 2.5-.6 2L19 22.3l3.1 1.7-.6-2L24 19.5l-3.5-.5z"/></svg>Costumes<svg class="dd-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
+        </ul>
+      </li>
+      <li><a href="careers.html">Careers</a></li>
+      <li><a href="contact.html" class="nav-cta">Contact Us</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     HERO — Cinematic full-screen with 4-layer parallax
+     ═══════════════════════════════════════════════════════════════ -->
 <section class="hero" id="hero">
+
+  <!-- Background parallax layer -->
   <div class="hero-bg">
-      <div class="hero-particle" id="heroParticle"></div>
-      <div class="hero-grid"></div>
-  </div>
-  <div class="hero-content">
-      <div class="hero-tag reveal-up">OEM Toy Manufacturer · Est. 1987</div>
-      <h1 class="hero-title reveal-up delay-1">
-            Precision.<br>
-            <span class="gradient-text">Craftsmanship.</span><br>
-            Global Scale.
-      </h1>
-      <p class="hero-sub reveal-up delay-2">From a single workshop in Sha Tau Kok to manufacturing sites spanning across China and Indonesia — Royal Regent delivers safe, compliant, and expertly engineered toys for the world's leading brands.</p>
-      <div class="hero-actions reveal-up delay-3">
-            <a href="capabilities/plastic-figures.html" class="btn btn-primary">Explore Capabilities</a>
-            <a href="about.html" class="btn btn-ghost">Our Story →</a>
+    <div class="parallax-layer parallax-bg">
+      <div class="hero-grid-pattern"></div>
+    </div>
+
+    <!-- Aurora blobs (mid layer) -->
+    <div class="parallax-layer parallax-mid">
+      <div class="aurora">
+        <div class="aurora-blob"></div>
+        <div class="aurora-blob"></div>
+        <div class="aurora-blob"></div>
       </div>
+    </div>
+
+    <!-- Three.js particles (foreground layer) -->
+    <div class="parallax-layer parallax-fg">
+      <canvas id="heroParticles"></canvas>
+    </div>
   </div>
-  <div class="hero-scroll-hint">
-      <span>Scroll</span>
-      <div class="scroll-line"></div>
+
+  <!-- Content (headline layer) -->
+  <div class="hero-content parallax-layer parallax-headline">
+    <div class="hero-tag" id="heroTag">OEM Toy Manufacturer · Est. 1987</div>
+    <h1 class="hero-title" id="heroTitle">
+      Precision.<br>
+      <span class="text-gradient">Craftsmanship.</span><br>
+      Global Scale.
+    </h1>
+    <p class="hero-sub" id="heroSub">From a single workshop in Sha Tau Kok to manufacturing sites spanning across China and Indonesia — Royal Regent delivers safe, compliant, and expertly engineered toys for the world's leading brands.</p>
+    <div class="hero-actions" id="heroActions">
+      <a href="capabilities/plastic-toys.html" class="btn btn-primary magnetic" data-strength="0.2">Explore Capabilities</a>
+      <a href="about.html" class="btn btn-outline magnetic" data-strength="0.2">Our Story →</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll-hint" id="heroScroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
   </div>
 </section>
 
-<!-- MARQUEE STRIP -->
-<div class="marquee-strip">
-  <div class="marquee-track">
-          <span>RC Car</span><span class="dot">·</span>
-          <span>Action Figures</span><span class="dot">·</span>
-          <span>Fashion Dolls</span><span class="dot">·</span>
-          <span>Baby Dolls</span><span class="dot">·</span>
-          <span>Vehicles</span><span class="dot">·</span>
-          <span>Play Sets</span><span class="dot">·</span>
-          <span>Figurines / Collectibles</span><span class="dot">·</span>
-          <span>Outdoor Toys</span><span class="dot">·</span>
-          <span>Bath Toys</span><span class="dot">·</span>
-          <span>Spinning Tops</span><span class="dot">·</span>
-          <span>Water Guns</span><span class="dot">·</span>
-          <span>Blaster</span><span class="dot">·</span>
-          <span>Stuffed Plush</span><span class="dot">·</span>
-          <span>Character Plush</span><span class="dot">·</span>
-          <span>Weighted Plush</span><span class="dot">·</span>
-          <span>Musical / Sound Plush</span><span class="dot">·</span>
-          <span>Interactive Plush</span><span class="dot">·</span>
-          <span>Costumes</span><span class="dot">·</span>
-          <span>RC Car</span><span class="dot">·</span>
-          <span>Action Figures</span><span class="dot">·</span>
-          <span>Fashion Dolls</span><span class="dot">·</span>
-          <span>Baby Dolls</span><span class="dot">·</span>
-          <span>Vehicles</span><span class="dot">·</span>
-          <span>Play Sets</span><span class="dot">·</span>
-          <span>Figurines / Collectibles</span><span class="dot">·</span>
-          <span>Outdoor Toys</span><span class="dot">·</span>
-          <span>Bath Toys</span><span class="dot">·</span>
-          <span>Spinning Tops</span><span class="dot">·</span>
-          <span>Water Guns</span><span class="dot">·</span>
-          <span>Blaster</span><span class="dot">·</span>
-          <span>Stuffed Plush</span><span class="dot">·</span>
-          <span>Character Plush</span><span class="dot">·</span>
-          <span>Weighted Plush</span><span class="dot">·</span>
-          <span>Musical / Sound Plush</span><span class="dot">·</span>
-          <span>Interactive Plush</span><span class="dot">·</span>
-          <span>Costumes</span><span class="dot">·</span>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     MARQUEE — Premium smooth ticker
+     ═══════════════════════════════════════════════════════════════ -->
+<div class="marquee" data-cursor="Drag">
+  <div class="marquee-track" id="marqueeTrack">
+    <span class="marquee-item">RC Car <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Action Figures <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Fashion Dolls <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Baby Dolls <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Vehicles <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Play Sets <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Figurines / Collectibles <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Outdoor Toys <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Bath Toys <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Spinning Tops <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Water Guns <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Blaster <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Stuffed Plush <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Character Plush <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Weighted Plush <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Musical / Sound Plush <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Interactive Plush <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Costumes <span class="marquee-dot"></span></span>
+    <!-- Duplicate for seamless loop -->
+    <span class="marquee-item">RC Car <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Action Figures <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Fashion Dolls <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Baby Dolls <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Vehicles <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Play Sets <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Figurines / Collectibles <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Outdoor Toys <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Bath Toys <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Spinning Tops <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Water Guns <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Blaster <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Stuffed Plush <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Character Plush <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Weighted Plush <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Musical / Sound Plush <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Interactive Plush <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Costumes <span class="marquee-dot"></span></span>
   </div>
 </div>
 
-<!-- INTRO STATEMENT -->
-<section class="intro-statement">
+
+<!-- Main content wrapper (for footer reveal) -->
+<div class="main-content">
+
+<!-- ═══════════════════════════════════════════════════════════════
+     INTRO STATEMENT
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="intro-statement clip-section" id="introStatement">
+  <div class="statement-grid">
+    <div class="statement-left">
+      <div class="statement-line" id="stmtLine"></div>
+      <div class="statement-content">
+        <p class="statement-text">
+          <span class="stmt-line">Built on trust.</span>
+          <span class="stmt-line">Refined over decades.</span>
+          <span class="stmt-line">Ready for what you need next.</span>
+        </p>
+        <div class="statement-rule" id="stmtRule"></div>
+      </div>
+    </div>
+    <div class="statement-accent" id="stmtAccent">1987</div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CAPABILITIES — Mana-style hover-reveal portrait cards
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="caps-section clip-section" id="capsSection">
   <div class="container">
-      <div class="statement-inner reveal-up">
-            <div class="statement-line"></div>
-            <p class="statement-text">We are not just a factory. We are a long-term manufacturing partner — building your vision from mold to finished product, with the quality assurance your markets demand.</p>
-      </div>
+    <div class="section-label reveal-up">Manufacturing Capabilities</div>
+    <h2 class="section-title reveal-up">Five categories.<br><span>One trusted partner.</span></h2>
   </div>
-</section>
 
-<!-- CAPABILITIES PREVIEW -->
-<section class="caps-section">
   <div class="container">
-      <div class="section-label reveal-up">Manufacturing Capabilities</div>
-      <h2 class="section-title reveal-up delay-1">Five categories.<br>One trusted partner.</h2>
-  </div>
-  <div class="caps-cards">
-      <a href="capabilities/plastic-figures.html" class="cap-card" data-num="01">
-            <div class="cap-card-inner">
-                    <div class="cap-icon-wrap">
-                              <svg viewBox="0 0 48 48" fill="none"><rect x="8" y="16" width="32" height="24" rx="3" stroke="currentColor" stroke-width="2"/><path d="M16 16V12a8 8 0 0116 0v4" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="28" r="4" fill="currentColor" opacity=".3"/></svg>
-                    </div>
-                    <h3>Plastic</h3>
-                    <p>In-house mold development and injection molding for character figures and functional toys, fully customisable to client artwork.</p>
-                    <div class="cap-arrow">→</div>
-            </div>
-      </a>
-      <a href="capabilities/plush-toys.html" class="cap-card" data-num="02">
-            <div class="cap-card-inner">
-                    <div class="cap-icon-wrap">
-                              <svg viewBox="0 0 48 48" fill="none"><ellipse cx="24" cy="30" rx="14" ry="10" stroke="currentColor" stroke-width="2"/><ellipse cx="24" cy="20" rx="8" ry="8" stroke="currentColor" stroke-width="2"/><circle cx="21" cy="18" r="1.5" fill="currentColor"/><circle cx="27" cy="18" r="1.5" fill="currentColor"/></svg>
-                    </div>
-                    <h3>Plush</h3>
-                    <p>Licensed IP, gift, and branded merchandise plush — from material selection through sewing and final inspection.</p>
-                    <div class="cap-arrow">→</div>
-            </div>
-      </a>
-      <a href="capabilities/dolls.html" class="cap-card" data-num="03">
-            <div class="cap-card-inner">
-                    <div class="cap-icon-wrap">
-                              <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="14" r="8" stroke="currentColor" stroke-width="2"/><path d="M12 40c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke="currentColor" stroke-width="2"/><path d="M18 28l-3 8M30 28l3 8" stroke="currentColor" stroke-width="2"/></svg>
-                    </div>
-                    <h3>Dolls</h3>
-                    <p>Fashion dolls and baby dolls with high-quality finishing — from face painting and hair rooting to outfit assembly and packaging.</p>
-                    <div class="cap-arrow">→</div>
-            </div>
-      </a>
-      <a href="capabilities/rc-vehicles.html" class="cap-card" data-num="04">
-            <div class="cap-card-inner">
-                    <div class="cap-icon-wrap">
-                              <svg viewBox="0 0 48 48" fill="none"><rect x="6" y="18" width="36" height="16" rx="4" stroke="currentColor" stroke-width="2"/><circle cx="14" cy="34" r="5" stroke="currentColor" stroke-width="2"/><circle cx="34" cy="34" r="5" stroke="currentColor" stroke-width="2"/><rect x="28" y="10" width="10" height="8" rx="2" stroke="currentColor" stroke-width="2"/></svg>
-                    </div>
-                    <h3>RC</h3>
-                    <p>OEM and ODM RC toy cars from basic to advanced models — structural strength, control precision, electronic safety.</p>
-                    <div class="cap-arrow">→</div>
-            </div>
-      </a>
-      <a href="capabilities/costumes.html" class="cap-card" data-num="05">
-            <div class="cap-card-inner">
-                    <div class="cap-icon-wrap">
-                              <svg viewBox="0 0 48 48" fill="none"><path d="M16 8h16l4 10H12L16 8z" stroke="currentColor" stroke-width="2"/><rect x="10" y="18" width="28" height="22" rx="3" stroke="currentColor" stroke-width="2"/><path d="M22 18v22M26 18v22" stroke="currentColor" stroke-width="1.5"/></svg>
-                    </div>
-                    <h3>Costumes</h3>
-                    <p>Character and dress-up costumes for children — soft, safe fabrics with detailed finishing for licensed and custom designs.</p>
-                    <div class="cap-arrow">→</div>
-            </div>
-      </a>
-  </div>
-</section>
+    <div class="caps-grid" id="capsGrid">
 
-<!-- RIPPLE STATS SECTION -->
-<section class="rp-section" id="rpSection">
-  <canvas class="rp-canvas" id="rpCanvas"></canvas>
-  <div class="rp-overlay"></div>
+      <!-- Plastic Toys -->
+      <a href="capabilities/plastic-toys.html" class="cap-card" data-cap="plastic">
+        <div class="cap-card-bg">
+          <img src="https://images.unsplash.com/photo-1558060370-d644479cb6f7?w=800&q=80&auto=format" alt="" loading="lazy">
+        </div>
+        <div class="cap-card-img">
+          <img src="https://images.pexels.com/photos/3806754/pexels-photo-3806754.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Colorful plastic toy figures" loading="lazy">
+        </div>
+        <div class="cap-card-info">
+          <div class="cap-card-name">Plastic Toys</div>
+          <div class="cap-card-link">Explore this capability <span>→</span></div>
+        </div>
+      </a>
 
-  <div class="container rp-content">
+      <!-- Plush -->
+      <a href="capabilities/plush.html" class="cap-card" data-cap="plush">
+        <div class="cap-card-bg">
+          <img src="https://images.pexels.com/photos/860882/pexels-photo-860882.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
+        </div>
+        <div class="cap-card-img">
+          <img src="https://images.pexels.com/photos/754178/pexels-photo-754178.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Plush teddy bear" loading="lazy">
+        </div>
+        <div class="cap-card-info">
+          <div class="cap-card-name">Plush</div>
+          <div class="cap-card-link">Explore this capability <span>→</span></div>
+        </div>
+      </a>
 
-    <div class="rp-top">
-      <span class="rp-label">By The Numbers</span>
-      <h2 class="rp-heading">38 years of scale,<br>precision, and trust.</h2>
+      <!-- Dolls -->
+      <a href="capabilities/dolls.html" class="cap-card" data-cap="dolls">
+        <div class="cap-card-bg">
+          <img src="https://images.pexels.com/photos/4887099/pexels-photo-4887099.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
+        </div>
+        <div class="cap-card-img">
+          <img src="https://images.pexels.com/photos/1376771/pexels-photo-1376771.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Fashion dolls" loading="lazy">
+        </div>
+        <div class="cap-card-info">
+          <div class="cap-card-name">Dolls</div>
+          <div class="cap-card-link">Explore this capability <span>→</span></div>
+        </div>
+      </a>
+
+      <!-- RC Vehicles -->
+      <a href="capabilities/rc-vehicle.html" class="cap-card" data-cap="rc">
+        <div class="cap-card-bg">
+          <img src="https://images.pexels.com/photos/2767817/pexels-photo-2767817.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
+        </div>
+        <div class="cap-card-img">
+          <img src="https://images.pexels.com/photos/97353/pexels-photo-97353.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Toy RC car" loading="lazy">
+        </div>
+        <div class="cap-card-info">
+          <div class="cap-card-name">RC Vehicles</div>
+          <div class="cap-card-link">Explore this capability <span>→</span></div>
+        </div>
+      </a>
+
+      <!-- Costumes -->
+      <a href="capabilities/costume.html" class="cap-card" data-cap="costumes">
+        <div class="cap-card-bg">
+          <img src="https://images.pexels.com/photos/5859332/pexels-photo-5859332.jpeg?auto=compress&cs=tinysrgb&w=800" alt="" loading="lazy">
+        </div>
+        <div class="cap-card-img">
+          <img src="https://images.pexels.com/photos/8421978/pexels-photo-8421978.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Child in superhero costume" loading="lazy">
+        </div>
+        <div class="cap-card-info">
+          <div class="cap-card-name">Costumes</div>
+          <div class="cap-card-link">Explore this capability <span>→</span></div>
+        </div>
+      </a>
+
     </div>
-
-    <div class="rp-stats">
-      <div class="rp-stat">
-        <div class="rp-num"><span class="rp-counter" data-target="38">0</span><span class="rp-sup">+</span></div>
-        <div class="rp-stat-label">Years of Manufacturing</div>
-      </div>
-      <div class="rp-div"></div>
-      <div class="rp-stat">
-        <div class="rp-num"><span class="rp-counter" data-target="5">0</span></div>
-        <div class="rp-stat-label">Product Categories</div>
-      </div>
-      <div class="rp-div"></div>
-      <div class="rp-stat">
-        <div class="rp-num"><span class="rp-counter" data-target="4">0</span></div>
-        <div class="rp-stat-label">Production Sites</div>
-      </div>
-      <div class="rp-div"></div>
-      <div class="rp-stat">
-        <div class="rp-num"><span class="rp-counter" data-target="2">0</span></div>
-        <div class="rp-stat-label">Continents</div>
-      </div>
-    </div>
-
-    <div class="rp-timeline">
-      <div class="rp-tl-track">
-        <div class="rp-tl-fill" id="rpTlFill"></div>
-      </div>
-      <div class="rp-milestones">
-        <div class="rp-ms active" data-idx="0"><div class="rp-ms-dot"></div><div class="rp-ms-year">1987</div><div class="rp-ms-text">Founded in<br>Sha Tau Kok</div></div>
-        <div class="rp-ms" data-idx="1"><div class="rp-ms-dot"></div><div class="rp-ms-year">2000</div><div class="rp-ms-text">Entered Plush<br>&amp; Soft Toys</div></div>
-        <div class="rp-ms" data-idx="2"><div class="rp-ms-dot"></div><div class="rp-ms-year">2010</div><div class="rp-ms-text">Doll Lines<br>Integrated</div></div>
-        <div class="rp-ms" data-idx="3"><div class="rp-ms-dot"></div><div class="rp-ms-year">2016</div><div class="rp-ms-text">RC Vehicle<br>Manufacturing</div></div>
-        <div class="rp-ms" data-idx="4"><div class="rp-ms-dot"></div><div class="rp-ms-year">2023</div><div class="rp-ms-text">Indonesia<br>Phase I</div></div>
-        <div class="rp-ms" data-idx="5"><div class="rp-ms-dot"></div><div class="rp-ms-year">2025</div><div class="rp-ms-text">Indonesia<br>Phase II</div></div>
-      </div>
-    </div>
-
   </div>
 </section>
 
-<style>
-.rp-section{position:relative;overflow:hidden;background:var(--dark-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:120px 0 100px;}
-.rp-canvas{position:absolute;inset:0;width:100%;height:100%;opacity:1;}
-.rp-overlay{position:absolute;inset:0;background:linear-gradient(160deg,rgba(240,249,240,0.25) 0%,rgba(232,245,233,0.1) 50%,rgba(240,249,240,0.25) 100%);pointer-events:none;}
-.rp-content{position:relative;z-index:2;}
 
-/* Top */
-.rp-top{margin-bottom:64px;}
-.rp-label{font-size:0.75rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--green-mid);display:block;margin-bottom:16px;}
-.rp-heading{font-family:'Inter',sans-serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;color:var(--text);line-height:1.1;letter-spacing:-0.025em;}
+<!-- ═══════════════════════════════════════════════════════════════
+     HISTORY — Full-bleed development history (GCteq-style)
+     ═══════════════════════════════════════════════════════════════ -->
+<section class="history-section clip-section" id="historySection">
 
-/* Stats row */
-.rp-stats{display:flex;align-items:center;gap:0;margin-bottom:80px;border:1px solid var(--border);border-radius:16px;overflow:hidden;background:rgba(255,255,255,0.75);backdrop-filter:blur(12px);}
-.rp-stat{flex:1;padding:36px 32px;text-align:center;}
-.rp-num{font-family:'Inter',sans-serif;font-size:clamp(2.8rem,5vw,4.5rem);font-weight:900;color:var(--text);line-height:1;letter-spacing:-0.04em;display:flex;align-items:flex-start;justify-content:center;gap:2px;}
-.rp-sup{font-size:0.5em;margin-top:6px;color:var(--green-mid);}
-.rp-stat-label{font-size:0.82rem;font-weight:500;color:var(--text-muted);margin-top:10px;letter-spacing:0.04em;}
-.rp-div{width:1px;background:var(--border);align-self:stretch;}
+  <!-- Full-bleed background image -->
+  <div class="history-bg" id="historyBg">
+    <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=1920&q=80" alt="" loading="lazy">
+  </div>
 
-/* Timeline */
-.rp-timeline{position:relative;}
-.rp-tl-track{position:absolute;top:9px;left:0;right:0;height:2px;background:var(--border);border-radius:2px;}
-.rp-tl-fill{position:absolute;left:0;top:0;height:100%;width:0%;background:var(--gradient);border-radius:2px;transition:width 1.2s cubic-bezier(0.4,0,0.2,1);}
-.rp-milestones{display:grid;grid-template-columns:repeat(6,1fr);gap:0;padding-top:0;}
-.rp-ms{text-align:center;cursor:pointer;padding-top:0;}
-.rp-ms-dot{width:20px;height:20px;border-radius:50%;background:var(--dark-2);border:2px solid var(--border);margin:0 auto 16px;position:relative;z-index:2;transition:all 0.35s;}
-.rp-ms.active .rp-ms-dot,.rp-ms:hover .rp-ms-dot{border-color:var(--green-mid);background:var(--green-mid);box-shadow:0 0 0 5px rgba(76,175,80,0.15),0 0 0 10px rgba(76,175,80,0.06);}
-.rp-ms-year{font-family:'Inter',sans-serif;font-size:1.1rem;font-weight:800;color:var(--text);margin-bottom:8px;letter-spacing:-0.02em;transition:color 0.3s;}
-.rp-ms.active .rp-ms-year,.rp-ms:hover .rp-ms-year{color:var(--green-mid);}
-.rp-ms-text{font-size:0.75rem;color:var(--text-muted);line-height:1.5;transition:color 0.3s;}
-.rp-ms.active .rp-ms-text,.rp-ms:hover .rp-ms-text{color:var(--text);}
+  <!-- Top bar -->
+  <div class="history-top">
+    <h2 class="history-heading">Development History</h2>
+  </div>
 
-@media(max-width:768px){
-  .rp-stats{flex-direction:column;}.rp-div{width:100%;height:1px;align-self:auto;}
-  .rp-milestones{grid-template-columns:repeat(3,1fr);row-gap:32px;}.rp-tl-track{display:none;}
-}
-</style>
+  <!-- Center: watermark year + milestone text -->
+  <div class="history-center">
+    <div class="history-watermark" id="historyWatermark">1987</div>
 
-<!-- FOOTER -->
-<footer>
+    <div class="history-milestone" id="historyMilestone">
+      <p>Founded in Sha Tau Kok — the first step in a 38-year manufacturing journey.</p>
+    </div>
+  </div>
+
+  <!-- Scroll progress indicator — right edge -->
+  <div class="history-scroll-progress">
+    <div class="history-scroll-fill" id="historyScrollFill"></div>
+  </div>
+
+  <!-- Scroll hint — shown on first load -->
+  <div class="history-scroll-hint" id="historyScrollHint">
+    <span>Scroll to explore</span>
+    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+
+  <!-- Bottom timeline -->
+  <div class="history-timeline">
+    <div class="timeline-track" id="timelineTrack">
+      <button class="timeline-node active" data-index="0">
+        <div class="timeline-dot"><span>1987</span></div>
+      </button>
+      <button class="timeline-node" data-index="1">
+        <div class="timeline-dot"><span>2000</span></div>
+      </button>
+      <button class="timeline-node" data-index="2">
+        <div class="timeline-dot"><span>2010</span></div>
+      </button>
+      <button class="timeline-node" data-index="3">
+        <div class="timeline-dot"><span>2016</span></div>
+      </button>
+      <button class="timeline-node" data-index="4">
+        <div class="timeline-dot"><span>2023</span></div>
+      </button>
+      <button class="timeline-node" data-index="5">
+        <div class="timeline-dot"><span>2025</span></div>
+      </button>
+    </div>
+  </div>
+
+</section>
+
+</div><!-- /.main-content -->
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FOOTER — Reveals from behind content
+     ═══════════════════════════════════════════════════════════════ -->
+<footer class="footer-reveal">
   <div class="footer-container">
     <div class="footer-top">
       <div class="footer-brand">
@@ -275,17 +998,16 @@
       <div class="footer-col">
         <h4>Company</h4>
         <a href="about.html">About Us</a>
-        <a href="capabilities/plastic-figures.html">Capabilities</a>
         <a href="careers.html">Careers</a>
         <a href="contact.html">Contact Us</a>
       </div>
       <div class="footer-col">
         <h4>Capabilities</h4>
-        <a href="capabilities/plastic-figures.html">Plastic Figures</a>
-        <a href="capabilities/plush-toys.html">Plush Toys</a>
+        <a href="capabilities/plastic-toys.html">Plastic Toys</a>
+        <a href="capabilities/plush.html">Plush</a>
+        <a href="capabilities/rc-vehicle.html">RC Vehicles</a>
         <a href="capabilities/dolls.html">Dolls</a>
-        <a href="capabilities/rc-vehicles.html">RC Vehicles</a>
-        <a href="capabilities/costumes.html">Costumes</a>
+        <a href="capabilities/costume.html">Costumes</a>
       </div>
       <div class="footer-col">
         <h4>Get In Touch</h4>
@@ -296,127 +1018,604 @@
     </div>
     <div class="footer-bottom">
       <p>&copy; 2025 Royal Regent. All rights reserved.</p>
-      <div class="footer-tags">
-        <span>US &amp; EU Compliant</span>
-        <span>OEM / ODM</span>
-        <span>Est. 1987</span>
-      </div>
     </div>
   </div>
 </footer>
 
-  <script src="assets/main.js"></script>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SCRIPTS — CDN dependencies + shared + page-specific
+     ═══════════════════════════════════════════════════════════════ -->
+<!-- Lenis Smooth Scroll -->
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+
+<!-- GSAP + ScrollTrigger -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+
+<!-- Three.js (lightweight) -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.min.js"></script>
+
+<!-- Shared Interaction Engine -->
+<script src="assets/shared.js"></script>
+
+<!-- ═══ PAGE-SPECIFIC: Hero choreography, parallax, timeline ═══ -->
 <script>
-// ── WATER RIPPLE ENGINE ──────────────────────────────────────────
-(function(){
-  const canvas = document.getElementById('rpCanvas');
-  if (!canvas) return;
-  const section = document.getElementById('rpSection');
-  let W, H, buf1, buf2, texData, ctx;
-  const DAMP = 0.982;
+(function() {
+  'use strict';
 
-  function init() {
-    W = section.offsetWidth;
-    H = section.offsetHeight;
-    canvas.width = W; canvas.height = H;
-    ctx  = canvas.getContext('2d');
-    buf1 = new Float32Array(W * H);
-    buf2 = new Float32Array(W * H);
-    buildTexture();
+  var isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+
+  // ─── HERO CHOREOGRAPHED LOAD SEQUENCE ───────────────────────
+  function heroEntrance() {
+    if (typeof gsap === 'undefined') return;
+
+    var tl = gsap.timeline({ delay: 0.3 });
+
+    // 1. Tag line
+    tl.to('#heroTag', {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: 'power3.out'
+    }, '-=0.3');
+
+    // 3. Headline (staggered per line)
+    tl.to('#heroTitle', {
+      opacity: 1,
+      y: 0,
+      duration: 0.9,
+      ease: 'power3.out'
+    }, '-=0.3');
+
+    // 4. Subtext
+    tl.to('#heroSub', {
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      ease: 'power3.out'
+    }, '-=0.4');
+
+    // 5. CTA buttons
+    tl.to('#heroActions', {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: 'power3.out'
+    }, '-=0.3');
+
+    // 6. Scroll hint
+    tl.to('#heroScroll', {
+      opacity: 1,
+      duration: 0.8,
+      ease: 'power2.out'
+    }, '-=0.2');
   }
 
-  function buildTexture() {
-    const off = document.createElement('canvas');
-    off.width = W; off.height = H;
-    const c = off.getContext('2d');
-    const g = c.createLinearGradient(0, 0, W, H);
-    g.addColorStop(0, '#f0f9f0'); g.addColorStop(0.4, '#e8f5e9'); g.addColorStop(1, '#f1f8f1');
-    c.fillStyle = g; c.fillRect(0, 0, W, H);
-    for (let i = 0; i < 300; i++) {
-      c.fillStyle = `rgba(76,175,80,${Math.random()*0.08})`;
-      c.beginPath(); c.arc(Math.random()*W, Math.random()*H, Math.random()*4, 0, Math.PI*2); c.fill();
+
+  // ─── 4-LAYER MOUSE PARALLAX ────────────────────────────────
+  function heroParallax() {
+    if (isMobile) return;
+
+    var bg = document.querySelector('.parallax-bg');
+    var mid = document.querySelector('.parallax-mid');
+    var headline = document.querySelector('.parallax-headline');
+    var fg = document.querySelector('.parallax-fg');
+
+    if (!bg) return;
+
+    var cx = 0, cy = 0;
+    var tx = 0, ty = 0;
+
+    document.addEventListener('mousemove', function(e) {
+      tx = (e.clientX / window.innerWidth - 0.5) * 2;
+      ty = (e.clientY / window.innerHeight - 0.5) * 2;
+    });
+
+    function tick() {
+      cx += (tx - cx) * 0.06;
+      cy += (ty - cy) * 0.06;
+
+      // Each layer moves at different speed = depth illusion
+      if (bg) bg.style.transform = 'translate(' + (cx * -8) + 'px,' + (cy * -8) + 'px)';
+      if (mid) mid.style.transform = 'translate(' + (cx * -16) + 'px,' + (cy * -16) + 'px)';
+      if (headline) headline.style.transform = 'translate(' + (cx * 4) + 'px,' + (cy * 4) + 'px)';
+      if (fg) fg.style.transform = 'translate(' + (cx * -24) + 'px,' + (cy * -24) + 'px)';
+
+      requestAnimationFrame(tick);
     }
-    texData = c.getImageData(0, 0, W, H).data;
+    requestAnimationFrame(tick);
   }
 
-  function drop(x, y, r, str) {
-    x=x|0; y=y|0;
-    for (let dy=-r; dy<=r; dy++) for (let dx=-r; dx<=r; dx++)
-      if (dx*dx+dy*dy<=r*r) { const i=(y+dy)*W+(x+dx); if(i>0&&i<buf1.length) buf1[i]+=str; }
-  }
 
-  function step() {
-    for (let i=W; i<W*(H-1); i++)
-      buf2[i]=((buf1[i-1]+buf1[i+1]+buf1[i-W]+buf1[i+W])*0.5-buf2[i])*DAMP;
-    const t=buf1; buf1=buf2; buf2=t;
-  }
+  // ─── CAPABILITY CARDS — Mana-style hover reveal ──────────
+  function capsReveal() {
+    var cards = document.querySelectorAll('.cap-card');
+    if (!cards.length) return;
 
-  function render() {
-    const img=ctx.createImageData(W,H), px=img.data;
-    for (let i=0; i<W*H; i++) {
-      const dx=buf1[i+1]-buf1[i-1], dy=buf1[i+W]-buf1[i-W];
-      let sx=((i%W)+dx*0.08)|0, sy=(((i/W)|0)+dy*0.08)|0;
-      sx=Math.max(0,Math.min(W-1,sx)); sy=Math.max(0,Math.min(H-1,sy));
-      const ti=(sy*W+sx)*4, oi=i*4, spec=Math.max(0,dx*0.4+dy*0.4);
-      px[oi]  =Math.min(255,texData[ti]  +spec*8);
-      px[oi+1]=Math.min(255,texData[ti+1]+spec*12);
-      px[oi+2]=Math.min(255,texData[ti+2]+spec*5);
-      px[oi+3]=255;
+    // Scroll-entry: staggered fade-in from below
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      cards.forEach(function(card, i) {
+        gsap.fromTo(card,
+          { opacity: 0, y: 60 },
+          {
+            opacity: 1, y: 0,
+            duration: 0.8, ease: 'power3.out',
+            delay: i * 0.1,
+            scrollTrigger: { trigger: card, start: 'top 88%', once: true }
+          }
+        );
+      });
     }
-    ctx.putImageData(img, 0, 0);
   }
 
-  function loop(){ step(); render(); requestAnimationFrame(loop); }
+  function capsHover() {
+    if (isMobile) return;
+    var cards = document.querySelectorAll('.cap-card');
+    if (!cards.length || typeof gsap === 'undefined') return;
+    var grid = document.getElementById('capsGrid');
 
-  section.addEventListener('mousemove', e => {
-    const r=canvas.getBoundingClientRect();
-    drop(e.clientX-r.left, e.clientY-r.top, 3, 55);
-  });
-  section.addEventListener('touchmove', e => {
-    const r=canvas.getBoundingClientRect(), t=e.touches[0];
-    drop(t.clientX-r.left, t.clientY-r.top, 3, 65);
-  }, {passive:true});
-  setInterval(() => drop(Math.random()*W|0, Math.random()*H|0, 2, 30), 2500);
+    cards.forEach(function(card) {
+      var bg = card.querySelector('.cap-card-bg');
+      var bgImg = bg ? bg.querySelector('img') : null;
+      var productImg = card.querySelector('.cap-card-img');
+      var info = card.querySelector('.cap-card-info');
+      var link = card.querySelector('.cap-card-link');
+      var name = card.querySelector('.cap-card-name');
+      var kenBurnsTween = null;
 
-  init(); loop();
-  window.addEventListener('resize', init);
-})();
+      card.addEventListener('mouseenter', function() {
+        // Background fades in 400ms
+        if (bg) gsap.to(bg, { opacity: 1, duration: 0.4, ease: 'power2.out' });
 
-// ── COUNT-UP ─────────────────────────────────────────────────────
-(function(){
-  const counters = document.querySelectorAll('.rp-counter');
-  let done = false;
-  function run() {
-    counters.forEach(el => {
-      const target=+el.dataset.target, start=performance.now(), dur=1800;
-      (function tick(now){
-        const p=Math.min((now-start)/dur,1), ease=1-Math.pow(1-p,3);
-        el.textContent=Math.round(ease*target);
-        if(p<1) requestAnimationFrame(tick);
-      })(performance.now());
+        // Ken Burns slow drift on background image
+        if (bgImg) {
+          kenBurnsTween = gsap.to(bgImg, {
+            scale: 1.15, x: 8, y: -5,
+            duration: 8, ease: 'none', repeat: -1, yoyo: true
+          });
+        }
+
+        // Product image subtle scale zoom
+        if (productImg) gsap.to(productImg, {
+          scale: 1.05, duration: 0.5, ease: 'power2.out'
+        });
+
+        // Card gets soft shadow
+        gsap.to(card, {
+          boxShadow: '0 24px 64px rgba(0,0,0,0.18)',
+          duration: 0.4, ease: 'power2.out'
+        });
+
+        // No name shift needed — flex column handles stacking
+
+        // "Explore" fades in
+        if (link) gsap.to(link, {
+          opacity: 1, y: 0, duration: 0.35, ease: 'power2.out', delay: 0.1
+        });
+
+        // Dim non-hovered cards with stagger feel
+        cards.forEach(function(other) {
+          if (other !== card) {
+            gsap.to(other, { opacity: 0.6, duration: 0.3, ease: 'power2.out' });
+          }
+        });
+      });
+
+      card.addEventListener('mouseleave', function() {
+        // Kill Ken Burns
+        if (kenBurnsTween) { kenBurnsTween.kill(); kenBurnsTween = null; }
+
+        // Background fades out 300ms
+        if (bg) gsap.to(bg, { opacity: 0, duration: 0.3, ease: 'power2.in' });
+        if (bgImg) gsap.to(bgImg, { scale: 1.08, x: 0, y: 0, duration: 0.3 });
+
+        // Product image scale reset
+        if (productImg) gsap.to(productImg, {
+          scale: 1, duration: 0.3, ease: 'power2.inOut'
+        });
+
+        // Shadow gone
+        gsap.to(card, {
+          boxShadow: '0 0px 0px rgba(0,0,0,0)',
+          duration: 0.3, ease: 'power2.in'
+        });
+
+        // No name reset needed
+
+        // "Explore" hides
+        if (link) gsap.to(link, {
+          opacity: 0, y: 8, duration: 0.25, ease: 'power2.in'
+        });
+
+        // Restore all cards
+        cards.forEach(function(other) {
+          if (other !== card) {
+            gsap.to(other, { opacity: 1, duration: 0.3, ease: 'power2.out' });
+          }
+        });
+      });
     });
   }
-  new IntersectionObserver(([e])=>{ if(e.isIntersecting&&!done){done=true;run();} },{threshold:0.3})
-    .observe(document.getElementById('rpSection'));
-})();
 
-// ── TIMELINE ─────────────────────────────────────────────────────
-(function(){
-  const fill = document.getElementById('rpTlFill');
-  const milestones = document.querySelectorAll('.rp-ms');
-  let done = false;
-  new IntersectionObserver(([e])=>{
-    if(e.isIntersecting&&!done){
-      done=true;
-      setTimeout(()=>{ if(fill) fill.style.width='100%'; },300);
-      milestones.forEach((ms,i)=>setTimeout(()=>ms.classList.add('active'),300+i*180));
+
+
+
+  // ─── HISTORY TIMELINE — SCROLL-DRIVEN PINNED ──────────
+  function historyTimeline() {
+    var milestones = [
+      { year: '1987', text: 'Founded in Sha Tau Kok — the first step in a 38-year manufacturing journey.' },
+      { year: '2000', text: 'First soft toy production line launched — entering plush and costume manufacturing.' },
+      { year: '2010', text: 'Doll production lines integrated sewing craftsmanship with plastic molding technology.' },
+      { year: '2016', text: 'Entered remote control vehicle manufacturing — our highest-complexity category.' },
+      { year: '2023', text: 'Officially entered Indonesia — a key milestone in global supply chain diversification.' },
+      { year: '2025', text: 'Indonesia Phase II commences — strengthening responsiveness to international markets.' }
+    ];
+
+    var section = document.getElementById('historySection');
+    var nodes = document.querySelectorAll('.timeline-node');
+    var watermark = document.getElementById('historyWatermark');
+    var milestone = document.getElementById('historyMilestone');
+    var scrollFill = document.getElementById('historyScrollFill');
+    var scrollHint = document.getElementById('historyScrollHint');
+    if (!section || !nodes.length || !watermark || !milestone) return;
+
+    var current = 0;
+    var total = milestones.length;
+    var animating = false;
+    var debounceTimer = null;
+    var DEBOUNCE_MS = 600;
+
+    function goTo(idx, skipAnim) {
+      if (idx < 0 || idx >= total) return;
+      if (idx === current && !skipAnim) return;
+
+      var prev = current;
+      current = idx;
+
+      // Update node states
+      nodes.forEach(function(n) { n.classList.remove('active'); });
+      nodes[idx].classList.add('active');
+
+      // Update scroll progress fill
+      if (scrollFill) {
+        scrollFill.style.height = ((idx / (total - 1)) * 100) + '%';
+      }
+
+      if (skipAnim) {
+        // Instant set (for init)
+        watermark.textContent = milestones[idx].year;
+        milestone.querySelector('p').textContent = milestones[idx].text;
+        gsap.set(watermark, { opacity: 1, scale: 1 });
+        gsap.set(milestone, { opacity: 1, y: 0 });
+        return;
+      }
+
+      if (animating) return;
+      animating = true;
+
+      // Hide scroll hint on first interaction
+      if (scrollHint && scrollHint.style.opacity !== '0') {
+        gsap.to(scrollHint, { opacity: 0, duration: 0.3, ease: 'power2.out',
+          onComplete: function() { scrollHint.style.display = 'none'; }
+        });
+      }
+
+      // Determine direction
+      var dir = idx > prev ? 1 : -1;
+
+      // Fade out watermark (scale down slightly) + text (slide down)
+      var tlOut = gsap.timeline();
+      tlOut.to(watermark, { opacity: 0, scale: 0.85, duration: 0.25, ease: 'power2.in' }, 0);
+      tlOut.to(milestone, { opacity: 0, y: dir * 20, duration: 0.25, ease: 'power2.in' }, 0);
+
+      tlOut.call(function() {
+        watermark.textContent = milestones[idx].year;
+        milestone.querySelector('p').textContent = milestones[idx].text;
+
+        // Fade in watermark (scale up to 1) + text (slide up from below)
+        var tlIn = gsap.timeline({
+          onComplete: function() {
+            // Debounce: block further transitions for DEBOUNCE_MS
+            debounceTimer = setTimeout(function() {
+              animating = false;
+            }, DEBOUNCE_MS);
+          }
+        });
+        tlIn.fromTo(watermark,
+          { opacity: 0, scale: 0.85 },
+          { opacity: 1, scale: 1, duration: 0.5, ease: 'power2.out' }, 0);
+        tlIn.fromTo(milestone,
+          { opacity: 0, y: -dir * 20 },
+          { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0);
+      });
     }
-  },{threshold:0.4}).observe(document.getElementById('rpSection'));
-  milestones.forEach(ms=>ms.addEventListener('click',()=>{
-    milestones.forEach(m=>m.classList.remove('active'));
-    ms.classList.add('active');
-  }));
+
+    // ─── Desktop: ScrollTrigger pinned ─────────────────
+    if (!isMobile && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      // Pin the section for N milestones × 120vh
+      var pinDuration = (total - 1) * window.innerHeight * 1.2;
+
+      // Build snap points for each milestone
+      var snapPoints = [];
+      for (var s = 0; s < total; s++) {
+        snapPoints.push(s / (total - 1));
+      }
+
+      // Create segment fill divs between each pair of nodes
+      var segments = [];
+      var track = document.getElementById('timelineTrack');
+      function buildSegments() {
+        segments.forEach(function(seg) { seg.remove(); });
+        segments = [];
+        for (var i = 0; i < total - 1; i++) {
+          var seg = document.createElement('div');
+          seg.className = 'timeline-segment';
+          var n1 = nodes[i].getBoundingClientRect();
+          var n2 = nodes[i + 1].getBoundingClientRect();
+          var trackRect = track.getBoundingClientRect();
+          var left = n1.left + n1.width / 2 - trackRect.left;
+          var right = n2.left + n2.width / 2 - trackRect.left;
+          seg.style.left = left + 'px';
+          seg.style.width = (right - left) + 'px';
+          track.appendChild(seg);
+          segments.push(seg);
+        }
+      }
+      // Build after a tick so layout is settled
+      requestAnimationFrame(function() { requestAnimationFrame(buildSegments); });
+      window.addEventListener('resize', function() { requestAnimationFrame(buildSegments); });
+
+      function updateSegmentFills(progress) {
+        var rawIdx = progress * (total - 1);
+        for (var i = 0; i < segments.length; i++) {
+          var fill = segments[i].querySelector('::after') || segments[i];
+          var segProgress;
+          if (rawIdx >= i + 1) {
+            segProgress = 1; // fully passed
+          } else if (rawIdx <= i) {
+            segProgress = 0; // not reached
+          } else {
+            segProgress = rawIdx - i; // partial
+          }
+          segments[i].style.setProperty('--seg-fill', segProgress);
+          // Use inline style on ::after via the segment's own style
+          segments[i].style.background = 'linear-gradient(to right, var(--brand) ' + (segProgress * 100) + '%, transparent ' + (segProgress * 100) + '%)';
+        }
+      }
+
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top top',
+        end: '+=' + pinDuration,
+        pin: true,
+        scrub: false,
+        snap: {
+          snapTo: snapPoints,
+          duration: { min: 0.3, max: 0.6 },
+          ease: 'power2.inOut'
+        },
+        onUpdate: function(self) {
+          // Map scroll progress to milestone index
+          var rawIdx = self.progress * (total - 1);
+          var idx = Math.round(rawIdx);
+          idx = Math.max(0, Math.min(total - 1, idx));
+          if (idx !== current && !animating) {
+            goTo(idx);
+          }
+          // Update vertical progress fill
+          if (scrollFill) {
+            scrollFill.style.height = (self.progress * 100) + '%';
+          }
+          // Update horizontal segment fills
+          updateSegmentFills(self.progress);
+        }
+      });
+
+      // Node clicks — scroll to that milestone's position
+      nodes.forEach(function(node) {
+        node.addEventListener('click', function() {
+          var idx = parseInt(node.dataset.index);
+          // Calculate the scroll position for this milestone
+          var sectionTop = section.offsetTop;
+          var targetScroll = sectionTop + (idx / (total - 1)) * pinDuration;
+          // Use Lenis if available, otherwise native
+          if (window.__lenis) {
+            window.__lenis.scrollTo(targetScroll, { duration: 1.2 });
+          } else {
+            window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+          }
+        });
+      });
+
+      // Ken Burns continuous drift on bg
+      gsap.to('#historyBg img', {
+        scale: 1.12, x: 15, y: -10,
+        duration: 20, ease: 'none', repeat: -1, yoyo: true
+      });
+
+      // Staggered pop-in for nodes on first scroll entry
+      nodes.forEach(function(node, i) {
+        gsap.fromTo(node,
+          { scale: 0, opacity: 0 },
+          {
+            scale: 1, opacity: 1, duration: 0.6,
+            ease: 'back.out(1.7)',
+            delay: 0.15 + i * 0.1,
+            scrollTrigger: { trigger: section, start: 'top 70%', once: true }
+          }
+        );
+      });
+    }
+
+    // ─── Mobile: swipe left/right navigation ────────────
+    if (isMobile) {
+      var touchStartX = 0;
+      var touchEndX = 0;
+
+      section.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      section.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        var diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) {
+            // Swipe left = next
+            goTo(current + 1);
+          } else {
+            // Swipe right = prev
+            goTo(current - 1);
+          }
+        }
+      }, { passive: true });
+
+      // Node clicks still work on mobile
+      nodes.forEach(function(node) {
+        node.addEventListener('click', function() {
+          goTo(parseInt(node.dataset.index));
+        });
+      });
+    }
+
+    // Init first milestone
+    goTo(0, true);
+  }
+
+
+  // ─── INTRO STATEMENT ENTRANCE ────────────────────────────
+  function statementEntrance() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+    var line = document.getElementById('stmtLine');
+    var rule = document.getElementById('stmtRule');
+    var accent = document.getElementById('stmtAccent');
+    var sentences = document.querySelectorAll('.stmt-line');
+    if (!line || !sentences.length) return;
+
+    var isMobileLayout = window.matchMedia('(max-width: 768px)').matches;
+
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#introStatement',
+        start: 'top 75%',
+        once: true
+      }
+    });
+
+    // 1. Green border draws in
+    if (isMobileLayout) {
+      gsap.set(line, { scaleX: 0 });
+      tl.to(line, { scaleX: 1, duration: 0.5, ease: 'power3.out' });
+    } else {
+      gsap.set(line, { scaleY: 0 });
+      tl.to(line, { scaleY: 1, duration: 0.5, ease: 'power3.out' });
+    }
+
+    // 2. Each sentence slides up and fades in, 150ms stagger
+    tl.to(sentences, {
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      ease: 'power3.out',
+      stagger: 0.15
+    }, '-=0.2');
+
+    // 3. Short green rule draws in from left
+    if (rule) {
+      gsap.set(rule, { scaleX: 0 });
+      tl.to(rule, { scaleX: 1, duration: 0.4, ease: 'power3.out' }, '-=0.1');
+    }
+
+    // 4. "1987" accent fades in slowly
+    if (accent) {
+      gsap.set(accent, { opacity: 0 });
+      tl.to(accent, { opacity: 0.06, duration: 0.8, ease: 'power2.out' }, '-=0.4');
+    }
+  }
+
+
+  // ─── CLIP-PATH SECTION WIPES ──────────────────────────────
+  function clipPathWipes() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    if (isMobile) return;
+
+    document.querySelectorAll('.clip-section').forEach(function(section) {
+      gsap.fromTo(section,
+        { clipPath: 'inset(8% 4% 8% 4% round 24px)' },
+        {
+          clipPath: 'inset(0% 0% 0% 0% round 0px)',
+          ease: 'none',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 80%',
+            end: 'top 20%',
+            scrub: 0.5
+          }
+        }
+      );
+    });
+  }
+
+
+  // ─── FOOTER REVEAL (slides from behind) ──────────────────
+  function footerReveal() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+    var footer = document.querySelector('footer.footer-reveal');
+    var mainContent = document.querySelector('.main-content');
+    if (!footer || !mainContent) return;
+
+    // Push main content up as footer is revealed
+    ScrollTrigger.create({
+      trigger: footer,
+      start: 'top bottom',
+      end: 'top top',
+      scrub: true,
+      onUpdate: function(self) {
+        var shadowOpacity = self.progress * 0.15;
+        mainContent.style.boxShadow = '0 -20px 60px rgba(0,0,0,' + shadowOpacity + ')';
+      }
+    });
+  }
+
+
+  // ─── MULTI-LAYER SCROLL PARALLAX ──────────────────────────
+  function scrollParallax() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    if (isMobile) return;
+
+    // History heading parallax (disabled — section is now pinned)
+
+
+    // Intro statement — removed old parallax (replaced by statementEntrance)
+  }
+
+
+  // ─── INIT ALL ─────────────────────────────────────────────
+  function init() {
+    heroEntrance();
+    heroParallax();
+    capsReveal();
+    capsHover();
+    statementEntrance();
+    historyTimeline();
+    clipPathWipes();
+    footerReveal();
+    scrollParallax();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    // Slight delay to ensure GSAP/ScrollTrigger are registered
+    requestAnimationFrame(function() {
+      requestAnimationFrame(init);
+    });
+  }
 })();
 </script>
+
 </body>
 </html>
