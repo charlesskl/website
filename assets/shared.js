@@ -985,7 +985,7 @@
 
     function type() {
       var current = messages[msgIndex];
-      var speed = isDeleting ? 20 : 40;
+      var speed = isDeleting ? 10 : 25;
 
       if (isDeleting) {
         charIndex--;
@@ -1011,11 +1011,11 @@
       setTimeout(type, speed);
     }
 
-    // Start cycling after initial pause
+    // Start cycling after initial pause — original message stays longer
     setTimeout(function() {
       isDeleting = true;
       type();
-    }, 3500);
+    }, 6000);
   }
 
 
