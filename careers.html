@@ -4,9 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Careers - Royal Regent</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/shared.css">
   <style>
     /* ═══ VALUES GRID ═══ */
@@ -22,8 +19,61 @@
     .positions-section { padding:var(--space-2xl) 0; }
     .section-title { font-size:var(--text-3xl); font-weight:700; margin-bottom:var(--space-lg); }
 
+    /* ═══ ADMIN PANEL ═══ */
+    .admin-trigger { color:var(--text-muted); font-size:11px; opacity:0.3; text-decoration:none; cursor:pointer; margin-left:12px; }
+    .admin-trigger:hover { opacity:0.6; }
+
+    .admin-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center; }
+    .admin-overlay.active { display:flex; }
+
+    .admin-modal { background:var(--white); border-radius:16px; width:90vw; max-width:800px; max-height:85vh; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 24px 80px rgba(0,0,0,0.2); }
+    .admin-header { padding:24px 28px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+    .admin-header h3 { font-family:var(--font-display); font-size:20px; font-weight:600; margin:0; }
+    .admin-header-actions { display:flex; gap:8px; align-items:center; }
+    .admin-close { background:none; border:none; font-size:24px; cursor:pointer; color:var(--text-muted); padding:4px 8px; }
+    .admin-close:hover { color:var(--text); }
+
+    .admin-body { padding:24px 28px; overflow-y:auto; flex:1; }
+    .admin-footer { padding:16px 28px; border-top:1px solid var(--border); display:flex; gap:8px; justify-content:flex-end; }
+
+    /* Password gate */
+    .admin-password { text-align:center; padding:40px 28px; }
+    .admin-password input { padding:10px 16px; border:1px solid var(--border); border-radius:8px; font-size:15px; width:240px; margin-right:8px; }
+    .admin-password .error { color:#c0392b; font-size:13px; margin-top:8px; display:none; }
+
+    /* Job list in admin */
+    .admin-job-list { list-style:none; padding:0; margin:0; }
+    .admin-job-item { display:flex; align-items:center; justify-content:space-between; padding:14px 0; border-bottom:1px solid var(--border); }
+    .admin-job-item:last-child { border-bottom:none; }
+    .admin-job-info h4 { font-size:15px; font-weight:600; margin:0 0 2px; }
+    .admin-job-info span { font-size:13px; color:var(--text-muted); }
+    .admin-job-actions { display:flex; gap:6px; }
+    .admin-job-actions button { padding:6px 12px; border:1px solid var(--border); border-radius:6px; background:var(--white); font-size:13px; cursor:pointer; transition:all 0.2s; }
+    .admin-job-actions .edit-btn:hover { border-color:var(--brand); color:var(--brand); }
+    .admin-job-actions .delete-btn:hover { border-color:#c0392b; color:#c0392b; }
+
+    /* Job form */
+    .admin-form { display:none; }
+    .admin-form.active { display:block; }
+    .admin-form label { display:block; font-size:13px; font-weight:500; color:var(--text-muted); margin-bottom:4px; margin-top:16px; }
+    .admin-form label:first-child { margin-top:0; }
+    .admin-form input, .admin-form textarea, .admin-form select { width:100%; padding:10px 14px; border:1px solid var(--border); border-radius:8px; font-size:14px; font-family:var(--font-body); box-sizing:border-box; }
+    .admin-form textarea { min-height:80px; resize:vertical; }
+    .admin-form .form-row { display:flex; gap:12px; }
+    .admin-form .form-row > div { flex:1; }
+
+    .btn-sm { padding:8px 18px; font-size:13px; border-radius:8px; border:none; cursor:pointer; font-weight:500; transition:all 0.2s; }
+    .btn-sm.primary { background:var(--brand); color:var(--white); }
+    .btn-sm.primary:hover { background:var(--brand-dark); }
+    .btn-sm.ghost { background:transparent; border:1px solid var(--border); color:var(--text); }
+    .btn-sm.ghost:hover { border-color:var(--text-muted); }
+    .btn-sm.export { background:#2c3e50; color:var(--white); }
+    .btn-sm.export:hover { background:#1a252f; }
+
     @media(max-width:768px) {
       .values-grid { grid-template-columns:1fr; }
+      .admin-modal { width:95vw; max-height:90vh; }
+      .admin-form .form-row { flex-direction:column; gap:0; }
     }
   </style>
 </head>
@@ -46,6 +96,7 @@
         </ul>
       </li>
       <li><a href="careers.html">Careers</a></li>
+      <li class="nav-linkedin"><a href="https://www.linkedin.com/company/royalregentgroup" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg><span class="nav-linkedin-text">LinkedIn</span></a></li>
       <li><a href="contact.html" class="nav-cta">Contact Us</a></li>
     </ul>
     <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -70,32 +121,32 @@
   <div class="values-grid">
     <div class="value-card reveal-up">
       <div class="value-icon">&#127775;</div>
-      <h3>38 Years of Stability</h3>
+      <h3>38 years of stability</h3>
       <p>Founded in 1987, Royal Regent has grown across four decades — offering long-term career stability and steady growth across China and Indonesia.</p>
     </div>
     <div class="value-card reveal-up">
       <div class="value-icon">&#127760;</div>
-      <h3>Global Scale</h3>
+      <h3>Global scale</h3>
       <p>Work across manufacturing sites in Dongguan, Heyuan, Hunan, and Indonesia — gaining exposure to a truly international supply chain.</p>
     </div>
     <div class="value-card reveal-up">
       <div class="value-icon">&#128218;</div>
-      <h3>Skill Development</h3>
+      <h3>Skill development</h3>
       <p>From mold development to RC electronics and soft toy production — our breadth of categories creates unique opportunities to develop deep, cross-functional expertise.</p>
     </div>
     <div class="value-card reveal-up">
       <div class="value-icon">&#9989;</div>
-      <h3>Quality Culture</h3>
+      <h3>Quality culture</h3>
       <p>We produce to US and EU safety standards. Quality is not a department — it is embedded in how every team operates, from tooling through final inspection.</p>
     </div>
     <div class="value-card reveal-up">
       <div class="value-icon">&#129309;</div>
-      <h3>Collaborative Teams</h3>
+      <h3>Collaborative teams</h3>
       <p>Flat structure, direct communication, and a culture of ownership. Our teams work closely across functions — engineering, production, sourcing, and QA.</p>
     </div>
     <div class="value-card reveal-up">
       <div class="value-icon">&#127941;</div>
-      <h3>Grow With Us</h3>
+      <h3>Grow with us</h3>
       <p>We are entering a new phase of expansion in Indonesia and beyond. Join now and grow alongside a manufacturer at a pivotal moment in its history.</p>
     </div>
   </div>
@@ -104,67 +155,89 @@
 <!-- OPEN POSITIONS -->
 <section class="positions-section">
   <div class="container">
-    <div class="section-label reveal-up">Open Positions</div>
+    <div class="section-label reveal-up">Open Positions<a href="#" class="admin-trigger" id="adminTrigger">&#9881;</a></div>
     <h2 class="section-title reveal-up">Current opportunities.</h2>
 
-    <div class="filter-bar">
-      <button class="filter-btn active">All Departments</button>
-      <button class="filter-btn">Engineering</button>
-      <button class="filter-btn">Quality Assurance</button>
-      <button class="filter-btn">Operations</button>
-      <button class="filter-btn">Sales &amp; BD</button>
-    </div>
+    <div class="filter-bar" id="filterBar"></div>
 
-    <div class="job-grid" id="jobGrid">
-      <div class="job-card reveal-up" data-dept="Engineering">
-        <div class="job-dept">Engineering</div>
-        <h3>Mold Design Engineer</h3>
-        <div class="job-meta">
-          <span class="job-tag">Dongguan, China</span>
-          <span class="job-tag">Full-Time</span>
-          <span class="job-tag">On-site</span>
-        </div>
-        <p>Design and develop injection molds for plastic toy components. Work closely with product development and production teams to ensure tooling precision, cycle efficiency, and part quality.</p>
-        <a href="contact.html" class="job-apply">Apply Now &rarr;</a>
-      </div>
-
-      <div class="job-card reveal-up" data-dept="Quality Assurance">
-        <div class="job-dept">Quality Assurance</div>
-        <h3>QA Inspector — Plush &amp; Soft Toys</h3>
-        <div class="job-meta">
-          <span class="job-tag">Dongguan, China</span>
-          <span class="job-tag">Full-Time</span>
-          <span class="job-tag">On-site</span>
-        </div>
-        <p>Conduct in-process and final quality inspections for plush toy production lines. Ensure conformance to EN 71 and ASTM F963 standards, and maintain accurate inspection records.</p>
-        <a href="contact.html" class="job-apply">Apply Now &rarr;</a>
-      </div>
-
-      <div class="job-card reveal-up" data-dept="Operations">
-        <div class="job-dept">Operations</div>
-        <h3>Production Supervisor — Indonesia</h3>
-        <div class="job-meta">
-          <span class="job-tag">Indonesia</span>
-          <span class="job-tag">Full-Time</span>
-          <span class="job-tag">On-site</span>
-        </div>
-        <p>Oversee day-to-day production operations at our Indonesia facility. Manage line efficiency, coordinate with engineering and QA teams, and ensure on-time output to production schedules.</p>
-        <a href="contact.html" class="job-apply">Apply Now &rarr;</a>
-      </div>
-
-      <div class="job-card reveal-up" data-dept="Sales &amp; BD">
-        <div class="job-dept">Sales &amp; Business Development</div>
-        <h3>OEM Account Manager</h3>
-        <div class="job-meta">
-          <span class="job-tag">Hong Kong / Remote</span>
-          <span class="job-tag">Full-Time</span>
-        </div>
-        <p>Manage and grow key OEM client accounts across the US and EU markets. Work with clients from initial enquiry through sampling, production, and delivery — acting as the primary point of contact.</p>
-        <a href="contact.html" class="job-apply">Apply Now &rarr;</a>
-      </div>
-    </div>
+    <div class="job-grid" id="jobGrid"></div>
   </div>
 </section>
+
+<!-- ADMIN PANEL -->
+<div class="admin-overlay" id="adminOverlay">
+  <div class="admin-modal">
+    <div class="admin-header">
+      <h3 id="adminTitle">Manage Jobs</h3>
+      <div class="admin-header-actions">
+        <button class="btn-sm export" id="adminExport">Export JSON</button>
+        <button class="admin-close" id="adminClose">&times;</button>
+      </div>
+    </div>
+    <div class="admin-body">
+      <!-- Password gate -->
+      <div id="adminPassword" class="admin-password">
+        <p style="margin-bottom:16px;color:var(--text-muted);">Enter admin password to continue</p>
+        <input type="password" id="adminPwdInput" placeholder="Password">
+        <button class="btn-sm primary" id="adminPwdBtn">Unlock</button>
+        <div class="error" id="adminPwdError">Incorrect password. Try again.</div>
+      </div>
+      <!-- Job list view -->
+      <div id="adminList" style="display:none;">
+        <div style="margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:13px;color:var(--text-muted);" id="adminCount"></span>
+          <button class="btn-sm primary" id="adminAddBtn">+ Add Job</button>
+        </div>
+        <ul class="admin-job-list" id="adminJobList"></ul>
+      </div>
+      <!-- Job form view -->
+      <div id="adminForm" class="admin-form">
+        <label>Job Title</label>
+        <input type="text" id="formTitle" placeholder="e.g. Mold Design Engineer">
+        <div class="form-row">
+          <div>
+            <label>Department</label>
+            <select id="formDept">
+              <option value="Engineering">Engineering</option>
+              <option value="Quality Assurance">Quality Assurance</option>
+              <option value="Operations">Operations</option>
+              <option value="Sales &amp; BD">Sales &amp; BD</option>
+            </select>
+          </div>
+          <div>
+            <label>Location</label>
+            <input type="text" id="formLocation" placeholder="e.g. Dongguan, China">
+          </div>
+        </div>
+        <div class="form-row">
+          <div>
+            <label>Type</label>
+            <select id="formType">
+              <option value="Full-Time">Full-Time</option>
+              <option value="Part-Time">Part-Time</option>
+              <option value="Contract">Contract</option>
+            </select>
+          </div>
+          <div>
+            <label>Arrangement</label>
+            <select id="formArrangement">
+              <option value="On-site">On-site</option>
+              <option value="Remote">Remote</option>
+              <option value="Hybrid">Hybrid</option>
+              <option value="">Not specified</option>
+            </select>
+          </div>
+        </div>
+        <label>Description</label>
+        <textarea id="formDesc" placeholder="Job description..."></textarea>
+      </div>
+    </div>
+    <div class="admin-footer" id="adminFooter" style="display:none;">
+      <button class="btn-sm ghost" id="formCancel">Cancel</button>
+      <button class="btn-sm primary" id="formSave">Save Job</button>
+    </div>
+  </div>
+</div>
 
 <!-- SPECULATIVE / CTA -->
 <section class="cta-banner">
@@ -221,19 +294,236 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
 <script src="assets/shared.js"></script>
 <script>
-  document.querySelectorAll('.filter-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
-      btn.classList.add('active');
+(function() {
+  var ADMIN_PASS = 'royalregent2025';
+  var jobs = [];
+  var editingIndex = -1;
+  var authenticated = false;
 
-      var filter = btn.textContent.trim();
-      document.querySelectorAll('#jobGrid .job-card').forEach(function(card) {
-        var dept = card.dataset.dept;
-        var show = filter === 'All Departments' || dept === filter;
-        card.style.display = show ? '' : 'none';
+  // ── Load jobs from JSON ──
+  function loadJobs() {
+    fetch('jobs.json')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        jobs = data;
+        renderFilters();
+        renderJobGrid();
+      })
+      .catch(function() {
+        document.getElementById('jobGrid').innerHTML = '<p style="color:var(--text-muted);">Unable to load job listings.</p>';
       });
+  }
+
+  // ── Render filter buttons ──
+  function renderFilters() {
+    var depts = ['All Departments'];
+    jobs.forEach(function(j) {
+      if (depts.indexOf(j.department) === -1) depts.push(j.department);
     });
+    var bar = document.getElementById('filterBar');
+    bar.innerHTML = '';
+    depts.forEach(function(d) {
+      var btn = document.createElement('button');
+      btn.className = 'filter-btn' + (d === 'All Departments' ? ' active' : '');
+      btn.textContent = d;
+      btn.addEventListener('click', function() {
+        bar.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        filterJobs(d);
+      });
+      bar.appendChild(btn);
+    });
+  }
+
+  function filterJobs(dept) {
+    document.querySelectorAll('#jobGrid .job-card').forEach(function(card) {
+      var show = dept === 'All Departments' || card.dataset.dept === dept;
+      card.style.display = show ? '' : 'none';
+    });
+  }
+
+  // ── Render public job grid ──
+  function renderJobGrid() {
+    var grid = document.getElementById('jobGrid');
+    grid.innerHTML = '';
+    jobs.forEach(function(job) {
+      var card = document.createElement('div');
+      card.className = 'job-card reveal-up';
+      card.dataset.dept = job.department;
+      var tags = '<span class="job-tag">' + escHtml(job.location) + '</span><span class="job-tag">' + escHtml(job.type) + '</span>';
+      if (job.arrangement) tags += '<span class="job-tag">' + escHtml(job.arrangement) + '</span>';
+      card.innerHTML = '<div class="job-dept">' + escHtml(job.department) + '</div>' +
+        '<h3>' + escHtml(job.title) + '</h3>' +
+        '<div class="job-meta">' + tags + '</div>' +
+        '<p>' + escHtml(job.description) + '</p>' +
+        '<a href="' + escHtml(job.applyUrl || 'contact.html') + '" class="job-apply">Apply Now &rarr;</a>';
+      grid.appendChild(card);
+    });
+  }
+
+  function escHtml(s) {
+    var d = document.createElement('div');
+    d.textContent = s || '';
+    return d.innerHTML;
+  }
+
+  // ── Admin panel ──
+  var overlay = document.getElementById('adminOverlay');
+  var adminList = document.getElementById('adminList');
+  var adminPwd = document.getElementById('adminPassword');
+  var adminForm = document.getElementById('adminForm');
+  var adminFooter = document.getElementById('adminFooter');
+
+  document.getElementById('adminTrigger').addEventListener('click', function(e) {
+    e.preventDefault();
+    overlay.classList.add('active');
+    if (authenticated) showList();
   });
+
+  document.getElementById('adminClose').addEventListener('click', function() {
+    overlay.classList.remove('active');
+    showPasswordGate();
+  });
+
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) {
+      overlay.classList.remove('active');
+      showPasswordGate();
+    }
+  });
+
+  // Password
+  document.getElementById('adminPwdBtn').addEventListener('click', tryPassword);
+  document.getElementById('adminPwdInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') tryPassword();
+  });
+
+  function tryPassword() {
+    var val = document.getElementById('adminPwdInput').value;
+    if (val === ADMIN_PASS) {
+      authenticated = true;
+      document.getElementById('adminPwdError').style.display = 'none';
+      showList();
+    } else {
+      document.getElementById('adminPwdError').style.display = 'block';
+    }
+  }
+
+  function showPasswordGate() {
+    if (!authenticated) {
+      adminPwd.style.display = '';
+      adminList.style.display = 'none';
+      adminForm.classList.remove('active');
+      adminFooter.style.display = 'none';
+    }
+  }
+
+  function showList() {
+    adminPwd.style.display = 'none';
+    adminList.style.display = '';
+    adminForm.classList.remove('active');
+    adminFooter.style.display = 'none';
+    document.getElementById('adminTitle').textContent = 'Manage Jobs';
+    renderAdminList();
+  }
+
+  function renderAdminList() {
+    var list = document.getElementById('adminJobList');
+    list.innerHTML = '';
+    document.getElementById('adminCount').textContent = jobs.length + ' job' + (jobs.length !== 1 ? 's' : '');
+    jobs.forEach(function(job, i) {
+      var li = document.createElement('li');
+      li.className = 'admin-job-item';
+      li.innerHTML = '<div class="admin-job-info"><h4>' + escHtml(job.title) + '</h4><span>' + escHtml(job.department) + ' &middot; ' + escHtml(job.location) + '</span></div>' +
+        '<div class="admin-job-actions"><button class="edit-btn" data-i="' + i + '">Edit</button><button class="delete-btn" data-i="' + i + '">Delete</button></div>';
+      list.appendChild(li);
+    });
+    list.querySelectorAll('.edit-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() { openForm(parseInt(btn.dataset.i)); });
+    });
+    list.querySelectorAll('.delete-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() { deleteJob(parseInt(btn.dataset.i)); });
+    });
+  }
+
+  // Add / Edit form
+  document.getElementById('adminAddBtn').addEventListener('click', function() { openForm(-1); });
+
+  function openForm(index) {
+    editingIndex = index;
+    adminList.style.display = 'none';
+    adminForm.classList.add('active');
+    adminFooter.style.display = 'flex';
+    document.getElementById('adminTitle').textContent = index === -1 ? 'Add New Job' : 'Edit Job';
+
+    if (index >= 0) {
+      var j = jobs[index];
+      document.getElementById('formTitle').value = j.title;
+      document.getElementById('formDept').value = j.department;
+      document.getElementById('formLocation').value = j.location;
+      document.getElementById('formType').value = j.type;
+      document.getElementById('formArrangement').value = j.arrangement || '';
+      document.getElementById('formDesc').value = j.description;
+    } else {
+      document.getElementById('formTitle').value = '';
+      document.getElementById('formDept').value = 'Engineering';
+      document.getElementById('formLocation').value = '';
+      document.getElementById('formType').value = 'Full-Time';
+      document.getElementById('formArrangement').value = 'On-site';
+      document.getElementById('formDesc').value = '';
+    }
+  }
+
+  document.getElementById('formCancel').addEventListener('click', showList);
+
+  document.getElementById('formSave').addEventListener('click', function() {
+    var title = document.getElementById('formTitle').value.trim();
+    if (!title) { alert('Title is required.'); return; }
+
+    var job = {
+      id: title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, ''),
+      title: title,
+      department: document.getElementById('formDept').value,
+      location: document.getElementById('formLocation').value.trim(),
+      type: document.getElementById('formType').value,
+      arrangement: document.getElementById('formArrangement').value,
+      description: document.getElementById('formDesc').value.trim(),
+      applyUrl: 'contact.html'
+    };
+
+    if (editingIndex >= 0) {
+      job.id = jobs[editingIndex].id;
+      jobs[editingIndex] = job;
+    } else {
+      jobs.push(job);
+    }
+
+    renderFilters();
+    renderJobGrid();
+    showList();
+  });
+
+  function deleteJob(index) {
+    if (!confirm('Delete "' + jobs[index].title + '"?')) return;
+    jobs.splice(index, 1);
+    renderFilters();
+    renderJobGrid();
+    renderAdminList();
+  }
+
+  // Export JSON
+  document.getElementById('adminExport').addEventListener('click', function() {
+    var blob = new Blob([JSON.stringify(jobs, null, 2)], { type: 'application/json' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'jobs.json';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+
+  // ── Init ──
+  loadJobs();
+})();
 </script>
 </body>
 </html>

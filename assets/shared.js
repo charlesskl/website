@@ -520,6 +520,95 @@
   }
 
 
+  // ─── MOBILE ANIMATIONS ──────────────────────────────────
+  function initMobileAnimations() {
+    var mq = window.matchMedia('(max-width: 768px)');
+    if (!mq.matches) return;
+    if (prefersReducedMotion) return;
+
+    // Cards staggered fade-up
+    var cardGroups = document.querySelectorAll('.values-grid, .editorial-features, .job-grid, .positions-grid');
+    cardGroups.forEach(function(group) {
+      var cards = group.querySelectorAll('.value-card, .editorial-feat, .job-card, .position-card');
+      cards.forEach(function(card) {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(24px)';
+        card.style.transition = 'opacity 400ms ease-out, transform 400ms ease-out';
+      });
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var items = entry.target.querySelectorAll('.value-card, .editorial-feat, .job-card, .position-card');
+            items.forEach(function(item, i) {
+              setTimeout(function() {
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0)';
+              }, i * 80);
+            });
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      obs.observe(group);
+    });
+
+    // Green left border scaleY draw
+    var introLines = document.querySelectorAll('.editorial-intro-line');
+    introLines.forEach(function(line) {
+      line.style.transform = 'scaleY(0)';
+      line.style.transformOrigin = 'top center';
+      line.style.transition = 'transform 500ms ease-out';
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.style.transform = 'scaleY(1)';
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+      obs.observe(line);
+    });
+
+    // Photo panel tap reveal
+    var panels = document.querySelectorAll('.photo-panel');
+    panels.forEach(function(panel) {
+      panel.addEventListener('click', function() {
+        panels.forEach(function(p) { p.classList.remove('tap-active'); });
+        panel.classList.add('tap-active');
+        setTimeout(function() {
+          panel.classList.remove('tap-active');
+        }, 2000);
+      });
+    });
+
+    // Photo panels staggered scroll entry
+    var panelContainers = document.querySelectorAll('.photo-panels');
+    panelContainers.forEach(function(container) {
+      var items = container.querySelectorAll('.photo-panel');
+      items.forEach(function(item) {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(20px)';
+        item.style.transition = 'opacity 400ms ease-out, transform 400ms ease-out';
+      });
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var pnls = entry.target.querySelectorAll('.photo-panel');
+            pnls.forEach(function(p, i) {
+              setTimeout(function() {
+                p.style.opacity = '1';
+                p.style.transform = 'translateY(0)';
+              }, i * 100);
+            });
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.05 });
+      obs.observe(container);
+    });
+  }
+
+
   // ─── INIT ON DOM READY ────────────────────────────────────
   function init() {
     initLenis();
@@ -532,6 +621,7 @@
     initDropdowns();
     initLazyImages();
     initReveal();
+    initMobileAnimations();
     initParallax();
     initParticles();
     // Page transitions last — they intercept clicks

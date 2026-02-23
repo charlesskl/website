@@ -4,9 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Plastic Toys - Royal Regent</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/shared.css">
   <style>
     /* ═══ HERO ═══ */
@@ -15,7 +12,7 @@
     .sub-hero .aurora { z-index:1; }
     .sub-hero-content { position:relative; z-index:10; max-width:var(--max-w); margin:0 auto; padding:calc(var(--nav-h) + var(--space-xl)) var(--space-md) var(--space-xl); width:100%; }
     .sub-hero-tag { font-family:var(--font-body); font-size:var(--text-xs); font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--brand); margin-bottom:24px; display:block; opacity:0; transform:translateY(20px); }
-    .sub-hero-title { font-family:var(--font-display); font-size:var(--text-5xl); font-weight:700; line-height:1.0; color:var(--text); letter-spacing:-0.04em; margin-bottom:28px; opacity:0; transform:translateY(40px); }
+    .sub-hero-title { font-family:var(--font-display); font-size:var(--text-5xl); font-weight:700; line-height:1.0; color:var(--text); letter-spacing:-0.02em; margin-bottom:28px; opacity:0; transform:translateY(40px); }
     .sub-hero-sub { font-size:var(--text-lg); color:var(--text-muted); max-width:620px; line-height:1.75; opacity:0; transform:translateY(30px); }
     .sub-hero-scroll { position:absolute; bottom:40px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:10px; color:var(--text-light); opacity:0; }
     .sub-hero-scroll span { font-size:var(--text-xs); font-weight:500; letter-spacing:0.12em; text-transform:uppercase; }
@@ -34,22 +31,22 @@
 
     .editorial-inner {
       position:relative; z-index:1;
-      display:grid; grid-template-columns:45% 50%; gap:5%; align-items:start;
+      display:flex; gap:5%; align-items:stretch;
     }
 
     /* Left column — statement */
-    .editorial-left { position:sticky; top:calc(var(--nav-h) + 32px); }
+    .editorial-left { width:45%; display:flex; flex-direction:column; justify-content:space-between; }
     .editorial-intro { display:flex; gap:24px; align-items:stretch; margin-top:var(--space-lg); }
     .editorial-intro-line { width:3px; background:var(--brand); border-radius:2px; flex-shrink:0; transform-origin:top center; }
     .editorial-intro .stmt-line { display:block; }
     .editorial-intro p {
       font-family:var(--font-display); font-size:clamp(28px, 3.2vw, 44px); font-weight:300;
-      color:#1a1a1a; line-height:1.45; letter-spacing:0.01em;
+      color:#1a1a1a; line-height:1.45; letter-spacing:0.01em; max-width:480px;
     }
     .editorial-intro .stmt-rule { width:48px; height:2px; background:var(--brand); margin-top:24px; }
 
     /* Right column — feature list */
-    .editorial-right {}
+    .editorial-right { width:50%; }
     .editorial-features { counter-reset:feat; }
     .editorial-feat {
       display:grid; grid-template-columns:48px 1fr; gap:20px; align-items:start;
@@ -151,6 +148,7 @@
         </ul>
       </li>
       <li><a href="../careers.html">Careers</a></li>
+      <li class="nav-linkedin"><a href="https://www.linkedin.com/company/royalregentgroup" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg><span class="nav-linkedin-text">LinkedIn</span></a></li>
       <li><a href="../contact.html" class="nav-cta">Contact Us</a></li>
     </ul>
     <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -171,7 +169,7 @@
       <span>Plastic Toys</span>
     </div>
     <span class="sub-hero-tag" id="heroTag">Plastic Toys</span>
-    <h1 class="sub-hero-title" id="heroTitle">Plastic Figures &amp;<br><span class="text-gradient">Functional Toys</span></h1>
+    <h1 class="sub-hero-title" id="heroTitle">Plastic figures &amp;<br><span class="text-gradient">functional toys</span></h1>
     <p class="sub-hero-sub" id="heroSub">In-house mold development and precision injection molding for character figures and functional toys, fully customised to client designs and specifications.</p>
   </div>
   <div class="sub-hero-scroll" id="heroScroll"><span>Scroll</span><div class="scroll-line"></div></div>
@@ -187,15 +185,11 @@
 
       <!-- Left: Statement -->
       <div class="editorial-left">
-        <span class="section-label reveal-up">Manufacturing Overview</span>
+        <span class="section-label reveal-up">Manufacturing overview</span>
         <div class="editorial-intro reveal-up">
           <div class="editorial-intro-line"></div>
           <div>
-            <p>
-              <span class="stmt-line">Precision-tooled molds.</span>
-              <span class="stmt-line">Client-owned from day one.</span>
-              <span class="stmt-line">Built to production scale.</span>
-            </p>
+            <p>Precision-tooled molds.<br>Client-owned from day one.<br>Built to production scale.</p>
             <div class="stmt-rule"></div>
           </div>
         </div>
@@ -207,22 +201,22 @@
           <div class="editorial-feat reveal-up">
             <div class="editorial-feat-num">01</div>
             <div>
-              <h3>In-House Mold Development</h3>
-              <p>Full mold design, tooling, and steel mold fabrication with no outsourcing — faster turnaround and tighter quality control.</p>
+              <h3>From first sample to final carton</h3>
+              <p>Every stage of production happens under one roof — from initial 3D printed prototypes through injection molding, painting, assembly, and outbound carton packing. No handoffs, no third-party delays, full visibility throughout.</p>
             </div>
           </div>
           <div class="editorial-feat reveal-up">
             <div class="editorial-feat-num">02</div>
             <div>
-              <h3>Precision Injection Molding</h3>
-              <p>Multi-shot and single-shot injection molding with tight dimensional tolerances for consistent, high-quality output at scale.</p>
+              <h3>Built for volume, ready for complexity</h3>
+              <p>Whether your product is a simple figure or a multi-component functional toy, our integrated manufacturing setup is designed to scale efficiently — keeping lead times tight and costs predictable as order volumes grow.</p>
             </div>
           </div>
           <div class="editorial-feat reveal-up">
             <div class="editorial-feat-num">03</div>
             <div>
-              <h3>Custom Artwork &amp; Finishing</h3>
-              <p>Full painting, pad printing, tampo printing, and assembly finishing based on client colour and artwork specifications.</p>
+              <h3>In-house automation</h3>
+              <p>We operate a dedicated automation department that designs and deploys custom automated processes for high-volume production runs. This keeps our output consistent, reduces labour variance, and makes our unit costs genuinely competitive at scale.</p>
             </div>
           </div>
         </div>
@@ -234,7 +228,7 @@
   <!-- Expanding photo panels -->
   <div class="photo-panels">
     <div class="photo-panel">
-      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800&q=80" alt="Plastic figures manufacturing" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&q=80" alt="Plastic figures manufacturing" loading="lazy">
       <div class="photo-panel-overlay"></div>
       <div class="photo-panel-label"><div class="label-line"></div><span>Mold Development</span></div>
     </div>
