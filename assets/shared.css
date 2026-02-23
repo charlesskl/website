@@ -499,6 +499,13 @@ h4, h5 {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+.text-gradient .char,
+.text-gradient .word {
+  background: inherit;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
 .section-label {
   font-family: var(--font-body);
