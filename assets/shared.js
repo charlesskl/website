@@ -801,8 +801,22 @@
         // Set initial state
         gsap.set(items, { opacity: 0, y: 30, rotation: splitBy === 'chars' ? 6 : 0 });
 
-        // Animate in when scrolled into view
-        if (typeof ScrollTrigger !== 'undefined') {
+        // Check if element is already in viewport (hero at top of page)
+        var rect = result.el.getBoundingClientRect();
+        var inView = rect.top < window.innerHeight * 0.9;
+
+        if (inView) {
+          // Already visible — animate immediately with a short delay
+          gsap.to(items, {
+            opacity: 1,
+            y: 0,
+            rotation: 0,
+            duration: 0.5,
+            ease: 'power3.out',
+            stagger: splitBy === 'chars' ? 0.02 : 0.05,
+            delay: 0.3
+          });
+        } else if (typeof ScrollTrigger !== 'undefined') {
           gsap.to(items, {
             opacity: 1,
             y: 0,
@@ -812,7 +826,7 @@
             stagger: splitBy === 'chars' ? 0.02 : 0.05,
             scrollTrigger: {
               trigger: result.el,
-              start: 'top 80%',
+              start: 'top 85%',
               once: true
             }
           });
