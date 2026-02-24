@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Join Royal Regent's team. Explore careers in toy manufacturing engineering, quality assurance, operations, and more.">
   <title>Careers - Royal Regent</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
   <link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting.css">
@@ -109,7 +110,7 @@
       <li class="nav-linkedin"><a href="https://www.linkedin.com/company/royalregentgroup" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg><span class="nav-linkedin-text">LinkedIn</span></a></li>
       <li><a href="contact.html" class="nav-cta">Contact Us</a></li>
     </ul>
-    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
@@ -118,7 +119,7 @@
   <div class="container">
     <span class="page-hero-tag">Join Our Team</span>
     <h1>Build something<br><span class="text-gradient">that lasts.</span></h1>
-    <p>For over 38 years, Royal Regent has grown by investing in people. We are looking for skilled professionals across manufacturing, engineering, quality, and operations to grow with us.</p>
+    <p>For over 39 years, Royal Regent has grown by investing in people. We are looking for skilled professionals across manufacturing, engineering, quality, and operations to grow with us.</p>
   </div>
 </section>
 
@@ -131,7 +132,7 @@
   <div class="values-grid">
     <div class="value-card reveal-up">
       <div class="value-icon">&#127775;</div>
-      <h3>38 years of stability</h3>
+      <h3>39 years of stability</h3>
       <p>Founded in 1987, Royal Regent has grown across four decades — offering long-term career stability and steady growth across China and Indonesia.</p>
     </div>
     <div class="value-card reveal-up">
@@ -180,6 +181,7 @@
     <div class="admin-header">
       <h3 id="adminTitle">Manage Jobs</h3>
       <div class="admin-header-actions">
+        <button class="btn-sm ghost" id="adminReset" style="display:none;font-size:11px;" title="Discard all local changes and reload from jobs.json">Reset</button>
         <button class="btn-sm primary" id="adminSaveGH" style="display:none;">Save</button>
         <button class="btn-sm export" id="adminExport">Export JSON</button>
         <button class="admin-close" id="adminClose">&times;</button>
@@ -284,7 +286,6 @@
       <div class="footer-col">
         <h4>Company</h4>
         <a href="about.html">About Us</a>
-        <a href="capabilities/plastic-toys.html">Capabilities</a>
         <a href="careers.html">Careers</a>
         <a href="contact.html">Contact Us</a>
       </div>
@@ -304,7 +305,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2025 Royal Regent. All rights reserved.</p>
+      <p>&copy; 2026 Royal Regent. All rights reserved.</p>
     </div>
   </div>
 </footer>
@@ -328,26 +329,26 @@
   var ghConnected = !!ghToken;
   var dirty = false;
 
-  // ── Load jobs from JSON ──
+  // ── Load jobs ──
+  // localStorage is the source of truth once any edit has been made.
+  // jobs.json is only used as the initial seed on first visit.
   function loadJobs() {
-    // Only use localStorage if admin has unsaved edits
-    var hasEdits = localStorage.getItem('jobs_dirty');
-    if (hasEdits) {
-      var cached = localStorage.getItem('jobs_data');
-      if (cached) {
-        try {
-          jobs = JSON.parse(cached);
-          dirty = true;
-          renderFilters();
-          renderJobGrid();
-          return;
-        } catch(e) { /* fall through to fetch */ }
-      }
+    var cached = localStorage.getItem('jobs_data');
+    if (cached) {
+      try {
+        jobs = JSON.parse(cached);
+        dirty = !!localStorage.getItem('jobs_dirty');
+        renderFilters();
+        renderJobGrid();
+        return;
+      } catch(e) { /* fall through to fetch */ }
     }
+    // First visit or corrupted cache — seed from static file
     fetch('jobs.json')
       .then(function(r) { return r.json(); })
       .then(function(data) {
         jobs = data;
+        localStorage.setItem('jobs_data', JSON.stringify(jobs));
         renderFilters();
         renderJobGrid();
       })
@@ -361,9 +362,15 @@
     localStorage.setItem('jobs_dirty', '1');
   }
 
-  function clearJobsLocal() {
+  function clearDirtyFlag() {
+    localStorage.removeItem('jobs_dirty');
+  }
+
+  function resetToServer() {
     localStorage.removeItem('jobs_data');
     localStorage.removeItem('jobs_dirty');
+    dirty = false;
+    loadJobs();
   }
 
   // ── Render filter buttons ──
@@ -507,6 +514,7 @@
   function updateSaveBtn() {
     var btn = document.getElementById('adminSaveGH');
     btn.style.display = (ghConnected && dirty) ? '' : 'none';
+    document.getElementById('adminReset').style.display = dirty ? '' : 'none';
   }
 
   function showStatus(msg, isError) {
@@ -650,7 +658,7 @@
     })
     .then(function() {
       dirty = false;
-      clearJobsLocal();
+      clearDirtyFlag();
       btn.disabled = false;
       btn.textContent = 'Save';
       updateSaveBtn();
@@ -661,6 +669,14 @@
       btn.textContent = 'Save';
       showStatus(err.message || 'Failed to save', true);
     });
+  });
+
+  // Reset to server data
+  document.getElementById('adminReset').addEventListener('click', function() {
+    if (!confirm('Discard all local changes and reload jobs from the server?')) return;
+    resetToServer();
+    showStatus('Reset to server data');
+    showList();
   });
 
   // Export JSON

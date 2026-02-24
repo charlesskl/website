@@ -29,7 +29,8 @@
   'use strict';
 
   // ─── FEATURE DETECTION ───────────────────────────────────────
-  const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+  const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)
+    || (navigator.maxTouchPoints > 1 && /Mac/.test(navigator.userAgent));
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
   const hasHover = window.matchMedia('(hover: hover)').matches;
@@ -431,9 +432,40 @@
     var btn = document.getElementById('hamburger');
     var links = document.getElementById('navLinks');
     if (!btn || !links) return;
+
+    function openMenu() {
+      links.classList.add('open');
+      btn.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      links.classList.remove('open');
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
     btn.addEventListener('click', function () {
-      links.classList.toggle('open');
-      btn.classList.toggle('open');
+      if (links.classList.contains('open')) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    // Close on outside tap
+    document.addEventListener('click', function (e) {
+      if (links.classList.contains('open') && !links.contains(e.target) && !btn.contains(e.target)) {
+        closeMenu();
+      }
+    });
+
+    // Close on ESC key
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && links.classList.contains('open')) {
+        closeMenu();
+      }
     });
   }
 
@@ -693,34 +725,69 @@
 
   function navigateToLang(targetLang, currentLang) {
     var path = window.location.pathname;
-    var basePath = path;
 
-    if (currentLang === 'en') {
-      // Going from /page.html → /cn/page.html
-      var lastSlash = basePath.lastIndexOf('/');
-      var dir = basePath.substring(0, lastSlash + 1);
-      var file = basePath.substring(lastSlash + 1);
-      window.location.href = dir + targetLang + '/' + file;
+    // Detect base path for GitHub Pages (e.g. /website/)
+    // by finding the first segment that isn't a lang code
+    var segments = path.split('/').filter(Boolean);
+    var langCodes = ['cn', 'id'];
+    var basePath = '';
+
+    // Strip current lang from path to get the "english" version
+    var cleanPath = path;
+    if (currentLang !== 'en') {
+      // Replace first occurrence of /cn/ or /id/ with /
+      cleanPath = cleanPath.replace('/' + currentLang + '/', '/');
+    }
+
+    if (targetLang === 'en') {
+      window.location.href = cleanPath;
     } else {
-      // Going from /cn/page.html → strip /cn/ then optionally add /id/
-      basePath = basePath.replace('/' + currentLang + '/', '/');
-      if (targetLang !== 'en') {
-        var lastSlash2 = basePath.lastIndexOf('/');
-        var dir2 = basePath.substring(0, lastSlash2 + 1);
-        var file2 = basePath.substring(lastSlash2 + 1);
-        basePath = dir2 + targetLang + '/' + file2;
+      // Insert target lang after the base path but before the rest
+      // Find the position after the base directory (GitHub Pages or root)
+      // For paths like /website/capabilities/plastic-toys.html
+      // we need /website/cn/capabilities/plastic-toys.html
+      // For paths like /capabilities/plastic-toys.html
+      // we need /cn/capabilities/plastic-toys.html
+      // For paths like /index.html → /cn/index.html
+
+      // Find the root: everything before the first known directory or file
+      var knownDirs = ['capabilities', 'index.html', 'about.html', 'contact.html', 'careers.html'];
+      var insertPos = -1;
+      for (var i = 0; i < knownDirs.length; i++) {
+        var idx = cleanPath.indexOf(knownDirs[i]);
+        if (idx !== -1) {
+          insertPos = idx;
+          break;
+        }
       }
-      window.location.href = basePath;
+
+      if (insertPos !== -1) {
+        var before = cleanPath.substring(0, insertPos);
+        var after = cleanPath.substring(insertPos);
+        window.location.href = before + targetLang + '/' + after;
+      } else {
+        // Fallback: just prepend lang to filename
+        var lastSlash = cleanPath.lastIndexOf('/');
+        var dir = cleanPath.substring(0, lastSlash + 1);
+        var file = cleanPath.substring(lastSlash + 1);
+        window.location.href = dir + targetLang + '/' + file;
+      }
     }
   }
 
   function showLangBanner(preferred, current) {
     var names = { en: 'English', cn: '繁體中文', id: 'Bahasa Indonesia' };
+    var bannerTexts = {
+      en: { msg: 'This page is available in ', btn: 'Switch' },
+      cn: { msg: '此頁面提供以下語言版本：', btn: '切換' },
+      id: { msg: 'Halaman ini tersedia dalam ', btn: 'Ganti' }
+    };
+    var t = bannerTexts[current] || bannerTexts.en;
     var banner = document.createElement('div');
     banner.className = 'lang-banner';
     banner.innerHTML =
-      '<span>This page is available in ' + names[preferred] + '</span>' +
-      '<a href="#" id="langBannerSwitch">Switch</a>' +
+      '<span>' + t.msg + names[preferred] + '</span>' +
+      '<a href="#" id="langBannerSwitch">' + t.btn + '</a>' +
       '<button id="langBannerDismiss">\u2715</button>';
     document.body.appendChild(banner);
     requestAnimationFrame(function() {
@@ -1005,19 +1072,19 @@
     var extraMessages = {
       en: [
         "From a single workshop in Sha Tau Kok to manufacturing sites spanning China and Indonesia.",
-        "38 years of precision manufacturing for the world's leading toy brands.",
+        "39 years of precision manufacturing for the world's leading toy brands.",
         "From first sample to final carton — everything under one roof.",
         "Your vision. Our craftsmanship. Built to last."
       ],
       zh: [
         "從沙頭角的一間小工廠，發展至遍佈中國與印尼的製造基地。",
-        "38年精密製造，服務全球頂尖玩具品牌。",
+        "39年精密製造，服務全球頂尖玩具品牌。",
         "從首件樣品到最終裝箱——所有環節均在廠內完成。",
         "您的願景，我們的工藝，經久不衰。"
       ],
       id: [
         "Dari satu bengkel di Sha Tau Kok hingga fasilitas manufaktur di Tiongkok dan Indonesia.",
-        "38 tahun manufaktur presisi untuk merek mainan terkemuka dunia.",
+        "39 tahun manufaktur presisi untuk merek mainan terkemuka dunia.",
         "Dari sampel pertama hingga karton terakhir — semuanya dalam satu atap.",
         "Visi Anda. Keahlian kami. Dibuat untuk bertahan."
       ]
