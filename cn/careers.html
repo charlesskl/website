@@ -229,7 +229,11 @@
           </div>
           <div>
             <label>地點</label>
-            <input type="text" id="formLocation" placeholder="例如：東莞，中國">
+            <select id="formLocation">
+              <option value="Indonesia, Kendal">印尼，肯達爾</option>
+              <option value="Indonesia, Ngawi">印尼，昂阿維</option>
+              <option value="Dongguan, China">東莞，中國</option>
+            </select>
           </div>
         </div>
         <div class="form-row">
@@ -580,7 +584,7 @@
     } else {
       document.getElementById('formTitle').value = '';
       document.getElementById('formDept').value = 'Engineering';
-      document.getElementById('formLocation').value = '';
+      document.getElementById('formLocation').value = 'Indonesia, Kendal';
       document.getElementById('formType').value = 'Full-Time';
       document.getElementById('formArrangement').value = 'On-site';
       document.getElementById('formDesc').value = '';
