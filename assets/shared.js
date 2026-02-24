@@ -40,6 +40,8 @@
   function initLocomotiveScroll() {
     if (typeof LocomotiveScroll === 'undefined') return;
     if (prefersReducedMotion) return;
+    // Skip LocomotiveScroll on mobile — use native scroll for best compatibility
+    if (isMobile) return;
 
     var scrollContainer = document.querySelector('[data-scroll-container]');
     if (!scrollContainer) return;
@@ -526,6 +528,17 @@
           }
         );
       });
+
+      // Safety: force-reveal any elements still hidden after 4s
+      // (covers edge cases where ScrollTrigger fails on mobile)
+      setTimeout(function() {
+        els.forEach(function(el) {
+          var style = window.getComputedStyle(el);
+          if (parseFloat(style.opacity) < 0.1) {
+            gsap.to(el, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
+          }
+        });
+      }, 4000);
     } else {
       // Fallback IntersectionObserver
       var observer = new IntersectionObserver(function (entries) {
@@ -1149,6 +1162,11 @@
     initScrollMorph();
     // Page transitions last — they intercept clicks
     initPageTransitions();
+
+    // Ensure ScrollTrigger recalculates after all inits
+    if (typeof ScrollTrigger !== 'undefined') {
+      requestAnimationFrame(function() { ScrollTrigger.refresh(); });
+    }
   }
 
   if (document.readyState === 'loading') {
