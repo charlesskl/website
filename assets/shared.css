@@ -193,13 +193,13 @@ ul, ol { list-style: none; }
   pointer-events: none;
   z-index: var(--z-cursor);
   will-change: transform;
-  transition: width 0.35s var(--ease-spring),
-              height 0.35s var(--ease-spring),
-              margin 0.35s var(--ease-spring),
-              border-radius 0.35s var(--ease-spring),
-              background 0.25s,
-              border-color 0.25s,
-              opacity 0.25s;
+  transition: width 0.3s var(--ease-spring),
+              height 0.3s var(--ease-spring),
+              margin 0.3s var(--ease-spring),
+              border-radius 0.3s var(--ease-spring),
+              background 0.2s,
+              border-color 0.2s,
+              opacity 0.2s;
 }
 
 /* State: hovering a link/button */
@@ -1210,7 +1210,6 @@ h1 .char, h1 .word {
   height: 48px;
   z-index: 100;
   pointer-events: auto;
-  cursor: default;
   color: var(--brand-light);
   opacity: 0.7;
   transition: opacity 0.3s;

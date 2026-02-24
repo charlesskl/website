@@ -109,8 +109,8 @@
 
     // Ring follows with lerp lag — direct transforms, no GSAP per frame
     function animateRing() {
-      ringX += (mouseX - ringX) * 0.15;
-      ringY += (mouseY - ringY) * 0.15;
+      ringX += (mouseX - ringX) * 0.25;
+      ringY += (mouseY - ringY) * 0.25;
       ring.style.transform = 'translate3d(' + ringX + 'px,' + ringY + 'px,0)';
       label.style.transform = 'translate3d(' + ringX + 'px,' + ringY + 'px,0) translate(-50%,-50%)';
       requestAnimationFrame(animateRing);
