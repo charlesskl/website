@@ -109,8 +109,8 @@
 
     // Ring follows with lerp lag — direct transforms, no GSAP per frame
     function animateRing() {
-      ringX += (mouseX - ringX) * 0.25;
-      ringY += (mouseY - ringY) * 0.25;
+      ringX += (mouseX - ringX) * 0.5;
+      ringY += (mouseY - ringY) * 0.5;
       ring.style.transform = 'translate3d(' + ringX + 'px,' + ringY + 'px,0)';
       label.style.transform = 'translate3d(' + ringX + 'px,' + ringY + 'px,0) translate(-50%,-50%)';
       requestAnimationFrame(animateRing);
@@ -470,11 +470,24 @@
         }, 300);
       }
 
+      // Desktop: hover
       dd.addEventListener('mouseenter', openDropdown);
       dd.addEventListener('mouseleave', startClose);
       if (menu) {
         menu.addEventListener('mouseenter', function() { clearTimeout(closeTimer); });
         menu.addEventListener('mouseleave', startClose);
+      }
+
+      // Mobile: tap to toggle (skip lang-selector — always visible)
+      if (!dd.classList.contains('lang-selector')) {
+        var toggle = dd.querySelector(':scope > a');
+        if (toggle) {
+          toggle.addEventListener('click', function(e) {
+            if (!mq.matches) return;
+            e.preventDefault();
+            dd.classList.toggle('dd-open');
+          });
+        }
       }
     });
   }

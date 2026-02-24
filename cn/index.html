@@ -669,8 +669,12 @@
       .history-watermark { font-size: clamp(6rem, 22vw, 10rem); }
       .hero-title { font-size: var(--text-3xl); }
       .parallax-layer { position: static; }
-      .hero { align-items: flex-start; padding-top: calc(var(--nav-h) + 40px); }
-      .hero-content { padding-top: 20px; }
+      .hero { align-items: flex-start; padding-top: calc(var(--nav-h) + 40px); min-height: auto; }
+      .hero-content { padding-top: 20px; padding-bottom: 40px; }
+      .hero-scroll-hint { display: none; }
+      .hero-sub { font-size: var(--text-base); }
+      .hero-actions { flex-direction: column; }
+      .hero-actions .btn { text-align: center; }
     }
     @media (max-width: 480px) {
       .caps-grid { gap: 12px; }
