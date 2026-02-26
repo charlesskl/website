@@ -706,7 +706,7 @@
         }
       }
 
-      ScrollTrigger.create({
+      var pinST = ScrollTrigger.create({
         trigger: section,
         start: 'top top',
         end: '+=' + pinDuration,
@@ -734,8 +734,7 @@
       nodes.forEach(function(node) {
         node.addEventListener('click', function() {
           var idx = parseInt(node.dataset.index);
-          var sectionTop = section.offsetTop;
-          var targetScroll = sectionTop + (idx / (total - 1)) * pinDuration;
+          var targetScroll = pinST.start + (idx / (total - 1)) * (pinST.end - pinST.start);
           window.scrollTo({ top: targetScroll, behavior: 'smooth' });
         });
       });
