@@ -1,5 +1,7 @@
 # Website
 
+**This project contains 18,793 lines of code.**
+
 **Live Site:** [https://charlesskl.github.io/website/](https://charlesskl.github.io/website/)
 
 **Local Dev:** [http://localhost:8000](http://localhost:8000)

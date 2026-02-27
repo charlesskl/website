@@ -5,23 +5,20 @@
  * ═══════════════════════════════════════════════════════════════════
  *
  * Modules:
- *  1. Locomotive Scroll (smooth scroll)
- *  2. Advanced two-part cursor (dot + ring)
- *  3. Magnetic buttons (GSAP elastic)
- *  4. Scroll progress bar
- *  5. Aurora background
- *  6. Cinematic page transitions (clip-path wipe)
- *  7. Parallax engine
- *  8. Three.js / WebGL particle system
- *  9. Navbar scroll behaviour
- * 10. Hamburger menu
- * 11. Image blur-up lazy loading
- * 12. Splitting.js hero headline animation
- * 13. Language selector
- * 14. Floating hover image on capability cards
- * 15. WebGL hero distortion
- * 16. Typewriter hero subtext
- * 17. Scroll morph SVG
+ *  1. Advanced two-part cursor (dot + ring)
+ *  2. Magnetic buttons (GSAP elastic)
+ *  3. Scroll progress bar
+ *  4. Aurora background
+ *  5. Cinematic page transitions (clip-path wipe)
+ *  6. Parallax engine
+ *  7. Three.js / WebGL particle system
+ *  8. Navbar scroll behaviour
+ *  9. Hamburger menu
+ * 10. Image blur-up lazy loading
+ * 11. Splitting.js hero headline animation
+ * 12. Language selector
+ * 13. Floating hover image on capability cards
+ * 14. Typewriter hero subtext
  * ═══════════════════════════════════════════════════════════════════
  */
 
@@ -36,40 +33,7 @@
   const hasHover = window.matchMedia('(hover: hover)').matches;
 
 
-  // ─── 1. LOCOMOTIVE SCROLL (replaces Lenis) ──────────────────
-  let locoScroll = null;
-  function initLocomotiveScroll() {
-    if (typeof LocomotiveScroll === 'undefined') return;
-    if (prefersReducedMotion) return;
-    // Skip LocomotiveScroll on mobile — use native scroll for best compatibility
-    if (isMobile) return;
-
-    var scrollContainer = document.querySelector('[data-scroll-container]');
-    if (!scrollContainer) return;
-
-    try {
-      locoScroll = window.__locoScroll = new LocomotiveScroll({
-        el: scrollContainer,
-        smooth: false,
-        smartphone: { smooth: false },
-        tablet: { smooth: false }
-      });
-
-      // With smooth:false, LocomotiveScroll uses native scroll so
-      // ScrollTrigger works normally without a scroller proxy.
-      // The data-scroll attributes still trigger class-based reveals.
-      if (typeof ScrollTrigger !== 'undefined') {
-        locoScroll.on('scroll', ScrollTrigger.update);
-        ScrollTrigger.addEventListener('refresh', function() { locoScroll.update(); });
-        ScrollTrigger.refresh();
-      }
-    } catch (e) {
-      console.warn('Locomotive Scroll init failed, using native scroll:', e);
-    }
-  }
-
-
-  // ─── 2. ADVANCED TWO-PART CURSOR ────────────────────────────
+  // ─── 1. ADVANCED TWO-PART CURSOR ────────────────────────────
   function initCursor() {
     if (isTouch || !hasHover) return;
 
@@ -941,123 +905,6 @@
   }
 
 
-  // ─── WEBGL HERO DISTORTION ─────────────────────────────
-  function initHeroDistortion() {
-    if (isMobile) return;
-    if (prefersReducedMotion) return;
-
-    // Find hero section — works on index, about, and sub-pages
-    var hero = document.querySelector('.hero, .about-hero, .sub-hero');
-    if (!hero) return;
-
-    // Check WebGL support
-    var testCanvas = document.createElement('canvas');
-    var gl = testCanvas.getContext('webgl') || testCanvas.getContext('experimental-webgl');
-    if (!gl) return;
-
-    // Use Three.js if available, otherwise raw WebGL
-    if (typeof THREE === 'undefined') return;
-
-    try {
-      var container = document.createElement('div');
-      container.style.cssText = 'position:absolute;inset:0;pointer-events:none;z-index:1;overflow:hidden;';
-      hero.style.position = hero.style.position || 'relative';
-      hero.insertBefore(container, hero.firstChild);
-
-      var scene = new THREE.Scene();
-      var camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-      var renderer = new THREE.WebGLRenderer({ alpha: true, antialias: false });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.setClearColor(0x000000, 0);
-      container.appendChild(renderer.domElement);
-      renderer.domElement.style.cssText = 'width:100%;height:100%;display:block;';
-
-      var uniforms = {
-        uTime: { value: 0 },
-        uMouse: { value: new THREE.Vector2(0.5, 0.5) },
-        uDistortion: { value: 0.004 },
-        uResolution: { value: new THREE.Vector2(1, 1) }
-      };
-
-      var vertexShader = 'varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}';
-      var fragmentShader = [
-        'uniform float uTime;',
-        'uniform vec2 uMouse;',
-        'uniform float uDistortion;',
-        'uniform vec2 uResolution;',
-        'varying vec2 vUv;',
-        'void main(){',
-        '  vec2 uv=vUv;',
-        '  float aspect=uResolution.x/uResolution.y;',
-        '  vec2 scaled=vec2(uv.x*aspect,uv.y);',
-        '  vec2 mScaled=vec2(uMouse.x*aspect,uMouse.y);',
-        '  float dist=distance(scaled,mScaled);',
-        '  float ambient=sin(uv.x*8.0+uTime*0.5)*sin(uv.y*6.0+uTime*0.7)*0.003;',
-        '  float ripple=sin(dist*40.0-uTime*3.0)*uDistortion*(1.0-smoothstep(0.0,0.4,dist));',
-        '  vec2 offset=normalize(uv-uMouse+0.001)*ripple+ambient;',
-        '  float r=0.38+0.04*sin(uTime*0.3+uv.x*10.0);',
-        '  float g=0.55+0.04*sin(uTime*0.4+uv.y*10.0);',
-        '  float b=0.2+0.02*sin(uTime*0.5);',
-        '  float wave=sin(uv.x*20.0+offset.x*60.0+uTime)+sin(uv.y*20.0+offset.y*60.0+uTime*1.3);',
-        '  float alpha=smoothstep(0.3,1.0,abs(wave))*0.06+length(offset)*2.0;',
-        '  gl_FragColor=vec4(r,g,b,alpha*0.35);',
-        '}'
-      ].join('\n');
-
-      var material = new THREE.ShaderMaterial({
-        uniforms: uniforms,
-        vertexShader: vertexShader,
-        fragmentShader: fragmentShader,
-        transparent: true,
-        depthTest: false
-      });
-
-      var geometry = new THREE.PlaneGeometry(2, 2);
-      scene.add(new THREE.Mesh(geometry, material));
-
-      function resize() {
-        var w = container.clientWidth;
-        var h = container.clientHeight;
-        renderer.setSize(w, h);
-        uniforms.uResolution.value.set(w, h);
-      }
-      resize();
-      window.addEventListener('resize', resize);
-
-      var targetDistortion = 0.004;
-      hero.addEventListener('mousemove', function(e) {
-        var rect = hero.getBoundingClientRect();
-        uniforms.uMouse.value.set(
-          (e.clientX - rect.left) / rect.width,
-          1.0 - (e.clientY - rect.top) / rect.height
-        );
-        targetDistortion = 0.012;
-      });
-      hero.addEventListener('mouseleave', function() {
-        targetDistortion = 0.004;
-      });
-
-      var isVisible = true;
-      var observer = new IntersectionObserver(function(entries) {
-        isVisible = entries[0].isIntersecting;
-      }, { threshold: 0 });
-      observer.observe(hero);
-
-      var startTime = performance.now();
-      function animate() {
-        requestAnimationFrame(animate);
-        if (!isVisible) return;
-        uniforms.uTime.value = (performance.now() - startTime) * 0.001;
-        uniforms.uDistortion.value += (targetDistortion - uniforms.uDistortion.value) * 0.05;
-        renderer.render(scene, camera);
-      }
-      animate();
-    } catch (e) {
-      console.warn('WebGL hero distortion failed:', e);
-    }
-  }
-
-
   // ─── TYPEWRITER HERO SUBTEXT ──────────────────────────
   function initTypewriter() {
     if (isMobile) return;
@@ -1142,86 +989,8 @@
   }
 
 
-  // ─── SCROLL MORPH SVG ────────────────────────────────
-  function initScrollMorph() {
-    if (isMobile) return;
-    if (prefersReducedMotion) return;
-    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-
-    // Create the fixed SVG container
-    var wrapper = document.createElement('div');
-    wrapper.className = 'scroll-morph';
-    wrapper.innerHTML = '<svg viewBox="0 0 100 100"><path class="morph-path" fill="none" stroke="currentColor" stroke-width="2"/></svg><span class="morph-pct"></span>';
-    document.body.appendChild(wrapper);
-
-    var path = wrapper.querySelector('.morph-path');
-    var pctLabel = wrapper.querySelector('.morph-pct');
-
-    // Shape definitions
-    var shapes = [
-      'M50,10 C71.5,10 90,28.5 90,50 C90,71.5 71.5,90 50,90 C28.5,90 10,71.5 10,50 C10,28.5 28.5,10 50,10 Z', // circle
-      'M20,15 Q50,5 80,15 Q95,50 80,85 Q50,95 20,85 Q5,50 20,15 Z',  // rounded square
-      'M50,10 Q55,10 85,80 Q85,92 50,92 Q15,92 15,80 Q45,10 50,10 Z', // triangle-ish
-      'M50,5 Q95,50 50,95 Q5,50 50,5 Z',  // diamond
-      'M50,5 L61,35 L95,35 L68,57 L79,91 L50,70 L21,91 L32,57 L5,35 L39,35 Z' // star
-    ];
-
-    // Interpolate between two SVG path strings (simple point interpolation)
-    function interpolatePaths(pathA, pathB, t) {
-      var numsA = pathA.match(/-?[\d.]+/g).map(Number);
-      var numsB = pathB.match(/-?[\d.]+/g).map(Number);
-      var len = Math.min(numsA.length, numsB.length);
-      var charsA = pathA.split(/-?[\d.]+/g);
-      var result = '';
-      for (var i = 0; i < len; i++) {
-        result += charsA[i] + (numsA[i] + (numsB[i] - numsA[i]) * t).toFixed(1);
-      }
-      if (charsA.length > len) result += charsA[len];
-      return result;
-    }
-
-    // Since paths have different point counts, use discrete shape transitions
-    function getShapeAtProgress(progress) {
-      var segments = shapes.length - 1;
-      var segment = Math.min(Math.floor(progress * segments), segments - 1);
-      var localT = (progress * segments) - segment;
-      localT = Math.max(0, Math.min(1, localT));
-
-      // For shapes with same point count we interpolate; otherwise blend via opacity
-      return shapes[Math.min(Math.round(progress * segments), segments)];
-    }
-
-    var currentRotation = 0;
-
-    ScrollTrigger.create({
-      trigger: document.body,
-      start: 'top top',
-      end: 'bottom bottom',
-      onUpdate: function(self) {
-        var p = self.progress;
-        path.setAttribute('d', getShapeAtProgress(p));
-        currentRotation = p * 360;
-        wrapper.querySelector('svg').style.transform = 'rotate(' + currentRotation.toFixed(1) + 'deg)';
-        pctLabel.textContent = Math.round(p * 100) + '%';
-      }
-    });
-
-    // Hover: show percentage and fill
-    wrapper.addEventListener('mouseenter', function() {
-      wrapper.classList.add('active');
-    });
-    wrapper.addEventListener('mouseleave', function() {
-      wrapper.classList.remove('active');
-    });
-
-    // Set initial state
-    path.setAttribute('d', shapes[0]);
-  }
-
-
   // ─── INIT ON DOM READY ────────────────────────────────────
   function init() {
-    initLocomotiveScroll();
     initCursor();
     initMagnetic();
     initScrollProgress();
@@ -1235,11 +1004,15 @@
     initLanguageSelector();
     initSplitting();
     initParallax();
-    initParticles();
+    // Three.js effects — init now if already loaded, otherwise defer
+    if (typeof THREE !== 'undefined') {
+      initParticles();
+    }
+    window.__initThreeEffects = function() {
+      initParticles();
+    };
     initCapHoverImage();
-    initHeroDistortion();
     initTypewriter();
-    initScrollMorph();
     // Page transitions last — they intercept clicks
     initPageTransitions();
 

@@ -7,7 +7,6 @@
   <title>Royal Regent — OEM Toy Manufacturer Since 1987</title>
 
   <!-- Locomotive Scroll + Splitting -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
   <link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting.css">
 
   <!-- Shared Design System -->
@@ -698,7 +697,7 @@
     }
   </style>
 </head>
-<body data-scroll-container>
+<body>
 
 <!-- PAGE TRANSITION OVERLAY -->
 <div class="page-transition"></div>
@@ -1052,18 +1051,26 @@
      SCRIPTS — CDN dependencies + shared + page-specific
      ═══════════════════════════════════════════════════════════════ -->
 <!-- Lenis Smooth Scroll -->
-<script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
 <script src="https://unpkg.com/splitting"></script>
 
 <!-- GSAP + ScrollTrigger -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
 
-<!-- Three.js (lightweight) -->
-<script src="https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.min.js"></script>
-
 <!-- Shared Interaction Engine -->
 <script src="assets/shared.js"></script>
+
+<!-- Three.js — loaded async so it doesn't block page interactivity -->
+<script>
+(function() {
+  var s = document.createElement('script');
+  s.src = 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.min.js';
+  s.onload = function() {
+    if (typeof window.__initThreeEffects === 'function') window.__initThreeEffects();
+  };
+  document.head.appendChild(s);
+})();
+</script>
 
 <!-- ═══ PAGE-SPECIFIC: Hero choreography, parallax, timeline ═══ -->
 <script>
@@ -1286,222 +1293,66 @@
     var scrollHint = document.getElementById('historyScrollHint');
     if (!section || !nodes.length || !watermark || !milestone) return;
 
-    var current = 0;
+    var current = -1;
     var total = milestones.length;
-    var animating = false;
-    var debounceTimer = null;
-    var DEBOUNCE_MS = 600;
 
-    function goTo(idx, skipAnim) {
-      if (idx < 0 || idx >= total) return;
-      if (idx === current && !skipAnim) return;
+    function goTo(idx) {
+      if (idx < 0 || idx >= total || idx === current) return;
 
-      var prev = current;
+      gsap.killTweensOf(watermark);
+      gsap.killTweensOf(milestone);
+
       current = idx;
 
-      // Update node states
       nodes.forEach(function(n) { n.classList.remove('active'); });
       nodes[idx].classList.add('active');
 
-      // Update scroll progress fill
       if (scrollFill) {
         scrollFill.style.height = ((idx / (total - 1)) * 100) + '%';
       }
 
-      if (skipAnim) {
-        // Instant set (for init)
-        watermark.textContent = milestones[idx].year;
-        milestone.querySelector('p').textContent = milestones[idx].text;
-        gsap.set(watermark, { opacity: 1, scale: 1 });
-        gsap.set(milestone, { opacity: 1, y: 0 });
-        return;
-      }
-
-      if (animating) return;
-      animating = true;
-
-      // Hide scroll hint on first interaction
       if (scrollHint && scrollHint.style.opacity !== '0') {
-        gsap.to(scrollHint, { opacity: 0, duration: 0.3, ease: 'power2.out',
-          onComplete: function() { scrollHint.style.display = 'none'; }
-        });
+        scrollHint.style.opacity = '0';
+        scrollHint.style.display = 'none';
       }
 
-      // Determine direction
-      var dir = idx > prev ? 1 : -1;
-
-      // Fade out watermark (scale down slightly) + text (slide down)
-      var tlOut = gsap.timeline();
-      tlOut.to(watermark, { opacity: 0, scale: 0.85, duration: 0.25, ease: 'power2.in' }, 0);
-      tlOut.to(milestone, { opacity: 0, y: dir * 20, duration: 0.25, ease: 'power2.in' }, 0);
-
-      tlOut.call(function() {
-        watermark.textContent = milestones[idx].year;
-        milestone.querySelector('p').textContent = milestones[idx].text;
-
-        // Fade in watermark (scale up to 1) + text (slide up from below)
-        var tlIn = gsap.timeline({
-          onComplete: function() {
-            // Debounce: block further transitions for DEBOUNCE_MS
-            debounceTimer = setTimeout(function() {
-              animating = false;
-            }, DEBOUNCE_MS);
-          }
-        });
-        tlIn.fromTo(watermark,
-          { opacity: 0, scale: 0.85 },
-          { opacity: 1, scale: 1, duration: 0.5, ease: 'power2.out' }, 0);
-        tlIn.fromTo(milestone,
-          { opacity: 0, y: -dir * 20 },
-          { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0);
-      });
+      watermark.textContent = milestones[idx].year;
+      milestone.querySelector('p').textContent = milestones[idx].text;
+      gsap.set(watermark, { opacity: 1, scale: 1 });
+      gsap.set(milestone, { opacity: 1, y: 0 });
     }
 
-    // ─── Desktop: ScrollTrigger pinned ─────────────────
-    if (!isMobile && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-      // Pin the section for N milestones × 120vh
-      var pinDuration = (total - 1) * window.innerHeight * 1.2;
-
-      // Build snap points for each milestone
-      var snapPoints = [];
-      for (var s = 0; s < total; s++) {
-        snapPoints.push(s / (total - 1));
-      }
-
-      // Create segment fill divs between each pair of nodes
-      var segments = [];
-      var track = document.getElementById('timelineTrack');
-      function buildSegments() {
-        segments.forEach(function(seg) { seg.remove(); });
-        segments = [];
-        for (var i = 0; i < total - 1; i++) {
-          var seg = document.createElement('div');
-          seg.className = 'timeline-segment';
-          var n1 = nodes[i].getBoundingClientRect();
-          var n2 = nodes[i + 1].getBoundingClientRect();
-          var trackRect = track.getBoundingClientRect();
-          var left = n1.left + n1.width / 2 - trackRect.left;
-          var right = n2.left + n2.width / 2 - trackRect.left;
-          seg.style.left = left + 'px';
-          seg.style.width = (right - left) + 'px';
-          track.appendChild(seg);
-          segments.push(seg);
-        }
-      }
-      // Build after a tick so layout is settled
-      requestAnimationFrame(function() { requestAnimationFrame(buildSegments); });
-      window.addEventListener('resize', function() { requestAnimationFrame(buildSegments); });
-
-      function updateSegmentFills(progress) {
-        var rawIdx = progress * (total - 1);
-        for (var i = 0; i < segments.length; i++) {
-          var fill = segments[i].querySelector('::after') || segments[i];
-          var segProgress;
-          if (rawIdx >= i + 1) {
-            segProgress = 1; // fully passed
-          } else if (rawIdx <= i) {
-            segProgress = 0; // not reached
-          } else {
-            segProgress = rawIdx - i; // partial
-          }
-          segments[i].style.setProperty('--seg-fill', segProgress);
-          // Use inline style on ::after via the segment's own style
-          segments[i].style.background = 'linear-gradient(to right, var(--brand) ' + (segProgress * 100) + '%, transparent ' + (segProgress * 100) + '%)';
-        }
-      }
-
-      ScrollTrigger.create({
-        trigger: section,
-        start: 'top top',
-        end: '+=' + pinDuration,
-        pin: true,
-        scrub: false,
-        snap: {
-          snapTo: snapPoints,
-          duration: { min: 0.3, max: 0.6 },
-          ease: 'power2.inOut'
-        },
-        onUpdate: function(self) {
-          // Map scroll progress to milestone index
-          var rawIdx = self.progress * (total - 1);
-          var idx = Math.round(rawIdx);
-          idx = Math.max(0, Math.min(total - 1, idx));
-          if (idx !== current && !animating) {
-            goTo(idx);
-          }
-          // Update vertical progress fill
-          if (scrollFill) {
-            scrollFill.style.height = (self.progress * 100) + '%';
-          }
-          // Update horizontal segment fills
-          updateSegmentFills(self.progress);
-        }
+    // ─── Click navigation (desktop + mobile) ─────────────
+    nodes.forEach(function(node) {
+      node.addEventListener('click', function() {
+        goTo(parseInt(node.dataset.index));
       });
+    });
 
-      // Node clicks — scroll to that milestone's position
-      nodes.forEach(function(node) {
-        node.addEventListener('click', function() {
-          var idx = parseInt(node.dataset.index);
-          // Calculate the scroll position for this milestone
-          var sectionTop = section.offsetTop;
-          var targetScroll = sectionTop + (idx / (total - 1)) * pinDuration;
-          window.scrollTo({ top: targetScroll, behavior: 'smooth' });
-        });
-      });
+    // Mobile: swipe left/right
+    if (isMobile) {
+      var touchStartX = 0;
+      section.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+      section.addEventListener('touchend', function(e) {
+        var diff = touchStartX - e.changedTouches[0].screenX;
+        if (Math.abs(diff) > 50) {
+          goTo(current + (diff > 0 ? 1 : -1));
+        }
+      }, { passive: true });
+    }
 
-      // Ken Burns continuous drift on bg
+    // Ken Burns continuous drift on bg (desktop only)
+    if (!isMobile && typeof gsap !== 'undefined') {
       gsap.to('#historyBg img', {
         scale: 1.12, x: 15, y: -10,
         duration: 20, ease: 'none', repeat: -1, yoyo: true
       });
-
-      // Staggered pop-in for nodes on first scroll entry
-      nodes.forEach(function(node, i) {
-        gsap.fromTo(node,
-          { scale: 0, opacity: 0 },
-          {
-            scale: 1, opacity: 1, duration: 0.6,
-            ease: 'back.out(1.7)',
-            delay: 0.15 + i * 0.1,
-            scrollTrigger: { trigger: section, start: 'top 70%', once: true }
-          }
-        );
-      });
-    }
-
-    // ─── Mobile: swipe left/right navigation ────────────
-    if (isMobile) {
-      var touchStartX = 0;
-      var touchEndX = 0;
-
-      section.addEventListener('touchstart', function(e) {
-        touchStartX = e.changedTouches[0].screenX;
-      }, { passive: true });
-
-      section.addEventListener('touchend', function(e) {
-        touchEndX = e.changedTouches[0].screenX;
-        var diff = touchStartX - touchEndX;
-        if (Math.abs(diff) > 50) {
-          if (diff > 0) {
-            // Swipe left = next
-            goTo(current + 1);
-          } else {
-            // Swipe right = prev
-            goTo(current - 1);
-          }
-        }
-      }, { passive: true });
-
-      // Node clicks still work on mobile
-      nodes.forEach(function(node) {
-        node.addEventListener('click', function() {
-          goTo(parseInt(node.dataset.index));
-        });
-      });
     }
 
     // Init first milestone
-    goTo(0, true);
+    goTo(0);
   }
 
 
