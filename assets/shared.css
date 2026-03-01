@@ -129,8 +129,8 @@ body {
 @media (hover: hover) and (pointer: fine) {
   body { cursor: none; }
   a, button { cursor: none; }
-  .admin-overlay { cursor: auto; }
-  .admin-overlay a, .admin-overlay button { cursor: pointer; }
+  .admin-overlay, .apply-overlay { cursor: auto; }
+  .admin-overlay a, .admin-overlay button, .apply-overlay a, .apply-overlay button { cursor: pointer; }
 }
 
 a { color: inherit; text-decoration: none; }
@@ -162,9 +162,10 @@ ul, ol { list-style: none; }
 @media (hover: hover) and (pointer: fine) and (min-width: 1025px) {
   *, *::before, *::after { cursor: none !important; }
   .admin-overlay, .admin-overlay *, .admin-overlay *::before, .admin-overlay *::after { cursor: auto !important; }
-  .admin-overlay a { cursor: pointer !important; }
-  .admin-overlay button { cursor: pointer !important; }
-  .admin-overlay input, .admin-overlay textarea, .admin-overlay select { cursor: text !important; }
+  .apply-overlay, .apply-overlay *, .apply-overlay *::before, .apply-overlay *::after { cursor: auto !important; }
+  .admin-overlay a, .apply-overlay a { cursor: pointer !important; }
+  .admin-overlay button, .apply-overlay button { cursor: pointer !important; }
+  .admin-overlay input, .admin-overlay textarea, .admin-overlay select, .apply-overlay input, .apply-overlay textarea, .apply-overlay select { cursor: text !important; }
 }
 
 /* Dot — instant follow, 4px solid */
@@ -1015,7 +1016,7 @@ footer.footer-reveal {
 .job-meta, .job-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
 .job-tag { background: var(--brand-8); border: 1px solid var(--brand-20); border-radius: 20px; padding: 4px 12px; font-size: var(--text-xs); color: var(--text-muted); }
 .job-card p { font-size: var(--text-sm); color: var(--text-muted); line-height: 1.65; }
-.job-apply { display: inline-flex; align-items: center; gap: 6px; margin-top: 20px; font-size: var(--text-sm); font-weight: 600; color: var(--brand); transition: gap 0.3s var(--ease-spring); text-decoration: none; }
+.job-apply { display: inline-flex; align-items: center; gap: 6px; margin-top: 20px; font-size: var(--text-sm); font-weight: 600; color: var(--brand); transition: gap 0.3s var(--ease-spring); text-decoration: none; cursor: pointer; }
 .job-apply:hover { gap: 12px; }
 
 .filter-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 40px; }

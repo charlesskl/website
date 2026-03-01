@@ -76,10 +76,36 @@
     .btn-sm.export { background:#2c3e50; color:var(--white); }
     .btn-sm.export:hover { background:#1a252f; }
 
+    /* ═══ APPLY MODAL ═══ */
+    .apply-overlay, .apply-overlay *, .apply-overlay *::before, .apply-overlay *::after { cursor:auto !important; }
+    .apply-overlay a, .apply-overlay button { cursor:pointer !important; }
+    .apply-overlay input, .apply-overlay textarea, .apply-overlay select { cursor:text !important; }
+    .apply-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center; }
+    .apply-overlay.active { display:flex; }
+    .apply-modal { background:var(--white); border-radius:16px; width:90vw; max-width:540px; overflow:hidden; box-shadow:0 24px 80px rgba(0,0,0,0.2); }
+    .apply-modal-header { padding:24px 28px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+    .apply-modal-header h3 { font-family:var(--font-display); font-size:18px; font-weight:600; margin:0; }
+    .apply-modal-close { background:none; border:none; font-size:24px; cursor:pointer; color:var(--text-muted); padding:4px 8px; }
+    .apply-modal-close:hover { color:var(--text); }
+    .apply-modal-body { padding:24px 28px; }
+    .apply-modal-body label { display:block; font-size:13px; font-weight:500; color:var(--text-muted); margin-bottom:4px; margin-top:16px; }
+    .apply-modal-body label:first-child { margin-top:0; }
+    .apply-modal-body input[type="text"] { width:100%; padding:10px 14px; border:1px solid var(--border); border-radius:8px; font-size:14px; font-family:var(--font-body); box-sizing:border-box; }
+    .apply-modal-body .apply-job-title { font-size:15px; font-weight:600; color:var(--text); padding:10px 14px; background:var(--surface-alt); border-radius:8px; }
+    .apply-entity-group { display:flex; gap:12px; margin-top:6px; }
+    .apply-entity-group label { display:flex; align-items:center; gap:8px; padding:12px 16px; border:1px solid var(--border); border-radius:8px; cursor:pointer; flex:1; margin:0; font-size:14px; font-weight:500; color:var(--text); transition:all 0.2s; }
+    .apply-entity-group label:hover { border-color:var(--brand); }
+    .apply-entity-group input[type="radio"] { accent-color:var(--brand); }
+    .apply-entity-group input[type="radio"]:checked + span { color:var(--brand); }
+    .apply-modal-footer { padding:16px 28px; border-top:1px solid var(--border); }
+    .apply-modal-footer button { width:100%; padding:12px; font-size:15px; font-weight:600; border:none; border-radius:8px; background:var(--brand); color:var(--white); cursor:pointer; transition:background 0.2s; }
+    .apply-modal-footer button:hover { background:var(--brand-dark); }
+
     @media(max-width:768px) {
       .values-grid { grid-template-columns:1fr; }
       .admin-modal { width:95vw; max-height:90vh; }
       .admin-form .form-row { flex-direction:column; gap:0; }
+      .apply-modal { width:95vw; }
     }
   </style>
 </head>
@@ -185,7 +211,6 @@
       <h3 id="adminTitle">管理職位</h3>
       <div class="admin-header-actions">
         <button class="btn-sm ghost" id="adminReset" style="display:none;font-size:11px;" title="放棄所有本地更改並從伺服器重新載入">重置</button>
-        <button class="btn-sm primary" id="adminSaveGH" style="display:none;">儲存</button>
         <button class="btn-sm export" id="adminExport">匯出 JSON</button>
         <button class="admin-close" id="adminClose">&times;</button>
       </div>
@@ -198,14 +223,7 @@
         <button class="btn-sm primary" id="adminPwdBtn">解鎖</button>
         <div class="error" id="adminPwdError">密碼錯誤，請重試。</div>
       </div>
-      <!-- GitHub token gate -->
-      <div id="adminToken" class="admin-password" style="display:none;">
-        <p style="margin-bottom:8px;color:var(--text);">連接 GitHub 以直接儲存</p>
-        <p style="margin-bottom:16px;color:var(--text-muted);font-size:13px;">輸入具有 repo 權限的<a href="https://github.com/settings/tokens" target="_blank" style="color:var(--brand);text-decoration:underline;">個人存取權杖</a></p>
-        <input type="password" id="adminTokenInput" placeholder="ghp_...">
-        <button class="btn-sm primary" id="adminTokenBtn">連接</button>
-        <div style="margin-top:12px;"><a href="#" id="adminSkipToken" style="font-size:13px;color:var(--text-muted);text-decoration:underline;">跳過——改用匯出</a></div>
-      </div>
+      <!-- (Token gate removed — export-only workflow) -->
       <!-- Save status -->
       <div id="adminSaveStatus" style="display:none;text-align:center;padding:12px;font-size:13px;border-radius:8px;margin-bottom:16px;"></div>
       <!-- Job list view -->
@@ -224,10 +242,8 @@
           <div>
             <label>部門</label>
             <select id="formDept">
-              <option value="Engineering">工程</option>
-              <option value="Quality Assurance">品質保證</option>
-              <option value="Operations">營運</option>
-              <option value="Sales &amp; BD">銷售及業務發展</option>
+              <option value="Office">辦公室</option>
+              <option value="Production">生產</option>
             </select>
           </div>
           <div>
@@ -265,6 +281,30 @@
     <div class="admin-footer" id="adminFooter" style="display:none;">
       <button class="btn-sm ghost" id="formCancel">取消</button>
       <button class="btn-sm primary" id="formSave">儲存職位</button>
+    </div>
+  </div>
+</div>
+
+<!-- APPLY MODAL -->
+<div class="apply-overlay" id="applyOverlay">
+  <div class="apply-modal">
+    <div class="apply-modal-header">
+      <h3>申請此職位</h3>
+      <button class="apply-modal-close" id="applyClose">&times;</button>
+    </div>
+    <div class="apply-modal-body">
+      <label>職位</label>
+      <div class="apply-job-title" id="applyJobTitle"></div>
+      <label>您的姓名</label>
+      <input type="text" id="applyName" placeholder="全名">
+      <label>發送申請至</label>
+      <div class="apply-entity-group">
+        <label><input type="radio" name="applyEntity" value="recruitment.rri@royalregentgroup.com" checked><span><strong>PT Royal Regent Indonesia</strong><br><small style="font-weight:400;color:var(--text-muted)">肯德爾，中爪哇</small></span></label>
+        <label><input type="radio" name="applyEntity" value="recruitment.rrm@royalregentid.com"><span><strong>PT Royal Regent Manufacturing</strong><br><small style="font-weight:400;color:var(--text-muted)">恩加維，東爪哇</small></span></label>
+      </div>
+    </div>
+    <div class="apply-modal-footer">
+      <button id="applySubmit">提交申請 &rarr;</button>
     </div>
   </div>
 </div>
@@ -325,37 +365,42 @@
 <script>
 (function() {
   var ADMIN_PASS = 'rr';
-  var GH_OWNER = 'charlesskl';
-  var GH_REPO = 'website';
-  var GH_FILE = 'jobs.json';
   var jobs = [];
   var editingIndex = -1;
   var authenticated = false;
-  var ghToken = localStorage.getItem('gh_token') || '';
-  var ghConnected = !!ghToken;
   var dirty = false;
 
   // ── Load jobs ──
+  var JOBS_VERSION = '2';
   function loadJobs() {
-    var cached = localStorage.getItem('jobs_data');
-    if (cached) {
-      try {
-        jobs = JSON.parse(cached);
-        dirty = !!localStorage.getItem('jobs_dirty');
-        renderFilters();
-        renderJobGrid();
-        return;
-      } catch(e) { /* fall through to fetch */ }
+    var dirty = !!localStorage.getItem('jobs_dirty');
+    var cachedVersion = localStorage.getItem('jobs_version');
+    if (dirty && cachedVersion === JOBS_VERSION) {
+      var cached = localStorage.getItem('jobs_data');
+      if (cached) {
+        try {
+          jobs = JSON.parse(cached);
+          renderFilters();
+          renderJobGrid();
+          return;
+        } catch(e) { /* fall through to fetch */ }
+      }
     }
     fetch('../jobs.json')
       .then(function(r) { return r.json(); })
       .then(function(data) {
         jobs = data;
         localStorage.setItem('jobs_data', JSON.stringify(jobs));
+        localStorage.setItem('jobs_version', JOBS_VERSION);
+        localStorage.removeItem('jobs_dirty');
         renderFilters();
         renderJobGrid();
       })
       .catch(function() {
+        var cached = localStorage.getItem('jobs_data');
+        if (cached) {
+          try { jobs = JSON.parse(cached); renderFilters(); renderJobGrid(); return; } catch(e) {}
+        }
         document.getElementById('jobGrid').innerHTML = '<p style="color:var(--text-muted);">無法載入職位列表。</p>';
       });
   }
@@ -377,17 +422,14 @@
   }
 
   // ── Translation maps for job data ──
-  var deptMap = { 'Engineering': '工程', 'Quality Assurance': '品質保證', 'Operations': '營運', 'Sales & BD': '銷售及業務拓展' };
+  var deptMap = { 'Office': '辦公室', 'Production': '生產' };
   var typeMap = { 'Full-Time': '全職', 'Part-Time': '兼職', 'Contract': '合約' };
   var arrMap = { 'On-site': '現場辦公', 'Remote': '遠程', 'Hybrid': '混合', 'Unspecified': '未指定' };
   function t(map, val) { return map[val] || val; }
 
   // ── Render filter buttons ──
   function renderFilters() {
-    var depts = ['All Departments'];
-    jobs.forEach(function(j) {
-      if (depts.indexOf(j.department) === -1) depts.push(j.department);
-    });
+    var depts = ['All Departments', 'Office', 'Production'];
     var bar = document.getElementById('filterBar');
     bar.innerHTML = '';
     depts.forEach(function(d) {
@@ -424,7 +466,11 @@
         '<h3>' + escHtml(job.title) + '</h3>' +
         '<div class="job-meta">' + tags + '</div>' +
         '<p>' + escHtml(job.description) + '</p>' +
-        '<a href="' + escHtml(job.applyUrl || 'https://www.linkedin.com/company/royalregentgroup') + '" class="job-apply" target="_blank" rel="noopener noreferrer">立即申請 &rarr;</a>';
+        '<a href="#" class="job-apply" data-title="' + escHtml(job.title) + '">立即申請 &rarr;</a>';
+      card.querySelector('.job-apply').addEventListener('click', function(e) {
+        e.preventDefault();
+        openApplyModal(this.dataset.title);
+      });
       grid.appendChild(card);
     });
   }
@@ -471,58 +517,22 @@
     if (val === ADMIN_PASS) {
       authenticated = true;
       document.getElementById('adminPwdError').style.display = 'none';
-      if (ghConnected) {
-        showList();
-      } else {
-        showTokenGate();
-      }
+      showList();
     } else {
       document.getElementById('adminPwdError').style.display = 'block';
     }
   }
 
-  function showTokenGate() {
-    adminPwd.style.display = 'none';
-    adminList.style.display = 'none';
-    adminForm.classList.remove('active');
-    adminFooter.style.display = 'none';
-    document.getElementById('adminToken').style.display = '';
-  }
-
-  document.getElementById('adminTokenBtn').addEventListener('click', function() {
-    var token = document.getElementById('adminTokenInput').value.trim();
-    if (token) {
-      ghToken = token;
-      ghConnected = true;
-      localStorage.setItem('gh_token', token);
-      document.getElementById('adminToken').style.display = 'none';
-      showList();
-    }
-  });
-
-  document.getElementById('adminTokenInput').addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') document.getElementById('adminTokenBtn').click();
-  });
-
-  document.getElementById('adminSkipToken').addEventListener('click', function(e) {
-    e.preventDefault();
-    document.getElementById('adminToken').style.display = 'none';
-    showList();
-  });
-
   function showPasswordGate() {
     if (!authenticated) {
       adminPwd.style.display = '';
       adminList.style.display = 'none';
-      document.getElementById('adminToken').style.display = 'none';
       adminForm.classList.remove('active');
       adminFooter.style.display = 'none';
     }
   }
 
   function updateSaveBtn() {
-    var btn = document.getElementById('adminSaveGH');
-    btn.style.display = (ghConnected && dirty) ? '' : 'none';
     document.getElementById('adminReset').style.display = dirty ? '' : 'none';
   }
 
@@ -537,7 +547,6 @@
 
   function showList() {
     adminPwd.style.display = 'none';
-    document.getElementById('adminToken').style.display = 'none';
     adminList.style.display = '';
     adminForm.classList.remove('active');
     adminFooter.style.display = 'none';
@@ -585,7 +594,7 @@
       document.getElementById('formDesc').value = j.description;
     } else {
       document.getElementById('formTitle').value = '';
-      document.getElementById('formDept').value = 'Engineering';
+      document.getElementById('formDept').value = 'Office';
       document.getElementById('formLocation').value = 'Indonesia, Kendal';
       document.getElementById('formType').value = 'Full-Time';
       document.getElementById('formArrangement').value = 'On-site';
@@ -635,51 +644,6 @@
     renderAdminList();
   }
 
-  // Save to GitHub
-  document.getElementById('adminSaveGH').addEventListener('click', function() {
-    var btn = document.getElementById('adminSaveGH');
-    btn.disabled = true;
-    btn.textContent = '儲存中...';
-
-    // Get current file SHA first
-    fetch('https://api.github.com/repos/' + GH_OWNER + '/' + GH_REPO + '/contents/' + GH_FILE, {
-      headers: { 'Authorization': 'token ' + ghToken }
-    })
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
-      var content = btoa(unescape(encodeURIComponent(JSON.stringify(jobs, null, 2) + '\n')));
-      return fetch('https://api.github.com/repos/' + GH_OWNER + '/' + GH_REPO + '/contents/' + GH_FILE, {
-        method: 'PUT',
-        headers: {
-          'Authorization': 'token ' + ghToken,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          message: 'Update job listings via admin panel',
-          content: content,
-          sha: data.sha
-        })
-      });
-    })
-    .then(function(r) {
-      if (!r.ok) throw new Error('GitHub API error: ' + r.status);
-      return r.json();
-    })
-    .then(function() {
-      dirty = false;
-      clearDirtyFlag();
-      btn.disabled = false;
-      btn.textContent = '儲存';
-      updateSaveBtn();
-      showStatus('已成功儲存至 GitHub');
-    })
-    .catch(function(err) {
-      btn.disabled = false;
-      btn.textContent = '儲存';
-      showStatus(err.message || '儲存失敗', true);
-    });
-  });
-
   // Reset to server data
   document.getElementById('adminReset').addEventListener('click', function() {
     if (!confirm('放棄所有本地更改並從伺服器重新載入職位？')) return;
@@ -696,6 +660,33 @@
     a.download = 'jobs.json';
     a.click();
     URL.revokeObjectURL(a.href);
+  });
+
+  // ── Apply modal ──
+  var applyOverlay = document.getElementById('applyOverlay');
+
+  function openApplyModal(title) {
+    document.getElementById('applyJobTitle').textContent = title;
+    document.getElementById('applyName').value = '';
+    applyOverlay.classList.add('active');
+  }
+
+  document.getElementById('applyClose').addEventListener('click', function() {
+    applyOverlay.classList.remove('active');
+  });
+
+  applyOverlay.addEventListener('click', function(e) {
+    if (e.target === applyOverlay) applyOverlay.classList.remove('active');
+  });
+
+  document.getElementById('applySubmit').addEventListener('click', function() {
+    var name = document.getElementById('applyName').value.trim();
+    var title = document.getElementById('applyJobTitle').textContent;
+    var email = document.querySelector('input[name="applyEntity"]:checked').value;
+    var subject = encodeURIComponent('Application — ' + title);
+    var body = encodeURIComponent('Name: ' + (name || '(not provided)') + '\nPosition: ' + title + '\n\nPlease find my CV attached.');
+    window.location.href = 'mailto:' + email + '?subject=' + subject + '&body=' + body;
+    applyOverlay.classList.remove('active');
   });
 
   // ── Init ──
