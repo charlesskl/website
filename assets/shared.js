@@ -780,11 +780,11 @@
 
     // Image map per capability
     var capImages = {
-      plastic: 'https://images.pexels.com/photos/3806754/pexels-photo-3806754.jpeg?auto=compress&cs=tinysrgb&w=400',
-      plush: 'https://images.pexels.com/photos/754178/pexels-photo-754178.jpeg?auto=compress&cs=tinysrgb&w=400',
-      dolls: 'https://images.pexels.com/photos/1376771/pexels-photo-1376771.jpeg?auto=compress&cs=tinysrgb&w=400',
-      rc: 'https://images.pexels.com/photos/97353/pexels-photo-97353.jpeg?auto=compress&cs=tinysrgb&w=400',
-      costumes: 'https://images.pexels.com/photos/8421978/pexels-photo-8421978.jpeg?auto=compress&cs=tinysrgb&w=400'
+      plastic: '/assets/images/stock/cap-plastic-fg.webp',
+      plush: '/assets/images/stock/cap-plush-fg.webp',
+      dolls: '/assets/images/stock/cap-dolls-fg.webp',
+      rc: '/assets/images/stock/cap-rc-fg.webp',
+      costumes: '/assets/images/stock/cap-costumes-fg.webp'
     };
 
     // Create container
