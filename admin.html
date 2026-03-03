@@ -73,7 +73,16 @@
 
 <a href="careers.html" class="back-link">&larr; Back to Careers</a>
 
-<div class="admin-container">
+<!-- Password gate -->
+<div class="admin-container" id="authGate" style="padding:60px 28px;text-align:center;">
+  <h2 style="font-family:var(--font-display);font-size:22px;font-weight:600;margin-bottom:20px;">Admin Access</h2>
+  <p style="color:var(--text-muted);margin-bottom:16px;">Enter password to continue</p>
+  <input type="password" id="pwdInput" placeholder="Password" style="padding:10px 16px;border:1px solid var(--border);border-radius:8px;font-size:15px;width:240px;margin-right:8px;">
+  <button class="btn-sm primary" id="pwdBtn">Unlock</button>
+  <p id="pwdError" style="color:#c0392b;font-size:13px;margin-top:8px;display:none;">Incorrect password.</p>
+</div>
+
+<div class="admin-container" id="adminPanel" style="display:none;">
   <div class="admin-header">
     <h2 id="adminTitle">Manage Jobs</h2>
     <div class="admin-header-actions">
@@ -143,6 +152,33 @@
 
 <script>
 (function() {
+  // Password gate (SHA-256 hash so password isn't in plaintext)
+  var PASS_HASH = '597c28c381ef1feee61f3e9677a628b4cbd41cfb2539c8938062e1df2a882d39';
+  var authGate = document.getElementById('authGate');
+  var adminPanel = document.getElementById('adminPanel');
+
+  async function checkHash(input) {
+    var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(input));
+    return Array.from(new Uint8Array(buf)).map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
+  }
+
+  document.getElementById('pwdBtn').addEventListener('click', tryUnlock);
+  document.getElementById('pwdInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') tryUnlock();
+  });
+
+  function tryUnlock() {
+    checkHash(document.getElementById('pwdInput').value).then(function(hash) {
+      if (hash === PASS_HASH) {
+        authGate.style.display = 'none';
+        adminPanel.style.display = '';
+        loadJobs();
+      } else {
+        document.getElementById('pwdError').style.display = '';
+      }
+    });
+  }
+
   var jobs = [];
   var editingIndex = -1;
   var dirty = false;
@@ -321,7 +357,6 @@
     URL.revokeObjectURL(a.href);
   });
 
-  loadJobs();
 })();
 </script>
 </body>
