@@ -11,7 +11,9 @@
   <title>聯繫 Royal Regent Toys — 香港玩具製造商</title>
 
   <!-- Shared Design System -->
-  <link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting.css">
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@300,400,500,700&display=swap">
+  <link rel="stylesheet" href="https://unpkg.com/splitting@1.0.6/dist/splitting.css" integrity="sha384-6z/M4zCNHzM59q8BnJ1btvx5I7ArdKNNBgb/V4m7ZTUPI4e2SVF0o5IQAGCO414a" crossorigin="anonymous">
   <link rel="stylesheet" href="../assets/shared.css">
 
   <!-- Page-specific styles -->
@@ -309,29 +311,30 @@
           </div>
 
           <form id="contactForm" novalidate>
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
             <div class="form-row">
               <div class="float-group">
-                <input type="text" id="firstName" required data-field>
+                <input type="text" id="firstName" name="firstName" required data-field>
                 <label for="firstName">名字</label>
               </div>
               <div class="float-group">
-                <input type="text" id="lastName" required data-field>
+                <input type="text" id="lastName" name="lastName" required data-field>
                 <label for="lastName">姓氏</label>
               </div>
             </div>
 
             <div class="float-group">
-              <input type="email" id="email" required data-field>
+              <input type="email" id="email" name="email" required data-field>
               <label for="email">電子郵件地址</label>
             </div>
 
             <div class="float-group">
-              <input type="text" id="company" data-field>
+              <input type="text" id="company" name="company" data-field>
               <label for="company">公司</label>
             </div>
 
             <div class="float-group">
-              <select id="subject" data-field>
+              <select id="subject" name="subject" data-field>
                 <option value="" disabled selected></option>
                 <option>OEM製造諮詢</option>
                 <option>樣品要求</option>
@@ -348,7 +351,7 @@
             </div>
 
             <div class="float-group">
-              <textarea id="message" required data-field></textarea>
+              <textarea id="message" name="message" required data-field></textarea>
               <label for="message">留言</label>
             </div>
 
@@ -406,9 +409,9 @@
 
 
 <!-- ═══ SCRIPTS ═══ -->
-<script src="https://unpkg.com/splitting"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/splitting@1.0.6/dist/splitting.min.js" integrity="sha384-taxnKSnzdVS5gZB4jZcieFZlmBPQMFqhdEmCScZsrIFCxX8Zizq4fKJJH5kBwMXT" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js" integrity="sha384-pEQB1h4Zmn9xhS6jotzltHSIQq6N0Oh3BXkCNOH5LKI81R2NRbb9efarAJYw9gTY" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js" integrity="sha384-TgZ1GoXcDnrw/czNfaiSZSFV1zgIRv8aQOevBA8ppS4SkNONmzYfjARpXsDfdnUE" crossorigin="anonymous"></script>
 <script src="../assets/shared.js"></script>
 
 <script>
@@ -483,7 +486,6 @@
         }
       });
       if (!valid) {
-        // Shake button
         if (typeof gsap !== 'undefined') {
           gsap.to(btn, { x: -8, duration: 0.08, repeat: 5, yoyo: true, ease: 'power2.inOut',
             onComplete: function() { gsap.set(btn, { x: 0 }); }
@@ -492,10 +494,18 @@
         return;
       }
 
-      // Success state
-      btn.classList.add('sent');
+      var name = (form.firstName.value + ' ' + form.lastName.value).trim();
+      var subject = encodeURIComponent('[Website] ' + (form.subject.value || '諮詢') + ' — ' + name);
+      var body = encodeURIComponent(
+        '姓名: ' + name +
+        '\n電郵: ' + form.email.value +
+        (form.company.value ? '\n公司: ' + form.company.value : '') +
+        '\n主題: ' + (form.subject.value || 'N/A') +
+        '\n\n' + form.message.value
+      );
+      window.location.href = 'mailto:info@royalregentgroup.com?subject=' + subject + '&body=' + body;
 
-      // Reset after delay
+      btn.classList.add('sent');
       setTimeout(function() {
         btn.classList.remove('sent');
         form.reset();

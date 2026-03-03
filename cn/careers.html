@@ -9,7 +9,9 @@
   <meta name="description" content="加入Royal Regent Toys團隊。玩具製造工程、品質保證、營運等職位。香港、中國東莞及印尼（PT RRI、PT RRM）招聘中。">
   <meta name="keywords" content="Royal Regent Toys招聘, 玩具製造職位, PT RRI招聘, PT RRM招聘, RRI, RRM, 香港玩具製造商招聘, 印尼玩具工廠職位">
   <title>招聘 — Royal Regent Toys | 加入我們的團隊</title>
-  <link rel="stylesheet" href="https://unpkg.com/splitting/dist/splitting.css">
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@300,400,500,700&display=swap">
+  <link rel="stylesheet" href="https://unpkg.com/splitting@1.0.6/dist/splitting.css" integrity="sha384-6z/M4zCNHzM59q8BnJ1btvx5I7ArdKNNBgb/V4m7ZTUPI4e2SVF0o5IQAGCO414a" crossorigin="anonymous">
   <link rel="stylesheet" href="../assets/shared.css">
   <style>
     /* ═══ VALUES GRID ═══ */
@@ -25,56 +27,9 @@
     .positions-section { padding:var(--space-2xl) 0; }
     .section-title { font-size:var(--text-3xl); font-weight:700; margin-bottom:var(--space-lg); }
 
-    /* ═══ ADMIN PANEL ═══ */
+    /* ═══ ADMIN TRIGGER ═══ */
     .admin-trigger { color:var(--text-muted); font-size:11px; opacity:0.3; text-decoration:none; cursor:pointer; margin-left:12px; }
     .admin-trigger:hover { opacity:0.6; }
-
-    .admin-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center; }
-    .admin-overlay.active { display:flex; }
-
-    .admin-modal { background:var(--white); border-radius:16px; width:90vw; max-width:800px; max-height:85vh; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 24px 80px rgba(0,0,0,0.2); }
-    .admin-header { padding:24px 28px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
-    .admin-header h3 { font-family:var(--font-display); font-size:20px; font-weight:600; margin:0; }
-    .admin-header-actions { display:flex; gap:8px; align-items:center; }
-    .admin-close { background:none; border:none; font-size:24px; cursor:pointer; color:var(--text-muted); padding:4px 8px; }
-    .admin-close:hover { color:var(--text); }
-
-    .admin-body { padding:24px 28px; overflow-y:auto; flex:1; }
-    .admin-footer { padding:16px 28px; border-top:1px solid var(--border); display:flex; gap:8px; justify-content:flex-end; }
-
-    /* Password gate */
-    .admin-password { text-align:center; padding:40px 28px; }
-    .admin-password input { padding:10px 16px; border:1px solid var(--border); border-radius:8px; font-size:15px; width:240px; margin-right:8px; }
-    .admin-password .error { color:#c0392b; font-size:13px; margin-top:8px; display:none; }
-
-    /* Job list in admin */
-    .admin-job-list { list-style:none; padding:0; margin:0; }
-    .admin-job-item { display:flex; align-items:center; justify-content:space-between; padding:14px 0; border-bottom:1px solid var(--border); }
-    .admin-job-item:last-child { border-bottom:none; }
-    .admin-job-info h4 { font-size:15px; font-weight:600; margin:0 0 2px; }
-    .admin-job-info span { font-size:13px; color:var(--text-muted); }
-    .admin-job-actions { display:flex; gap:6px; }
-    .admin-job-actions button { padding:6px 12px; border:1px solid var(--border); border-radius:6px; background:var(--white); font-size:13px; cursor:pointer; transition:all 0.2s; }
-    .admin-job-actions .edit-btn:hover { border-color:var(--brand); color:var(--brand); }
-    .admin-job-actions .delete-btn:hover { border-color:#c0392b; color:#c0392b; }
-
-    /* Job form */
-    .admin-form { display:none; }
-    .admin-form.active { display:block; }
-    .admin-form label { display:block; font-size:13px; font-weight:500; color:var(--text-muted); margin-bottom:4px; margin-top:16px; }
-    .admin-form label:first-child { margin-top:0; }
-    .admin-form input, .admin-form textarea, .admin-form select { width:100%; padding:10px 14px; border:1px solid var(--border); border-radius:8px; font-size:14px; font-family:var(--font-body); box-sizing:border-box; }
-    .admin-form textarea { min-height:80px; resize:vertical; }
-    .admin-form .form-row { display:flex; gap:12px; }
-    .admin-form .form-row > div { flex:1; }
-
-    .btn-sm { padding:8px 18px; font-size:13px; border-radius:8px; border:none; cursor:pointer; font-weight:500; transition:all 0.2s; }
-    .btn-sm.primary { background:var(--brand); color:var(--white); }
-    .btn-sm.primary:hover { background:var(--brand-dark); }
-    .btn-sm.ghost { background:transparent; border:1px solid var(--border); color:var(--text); }
-    .btn-sm.ghost:hover { border-color:var(--text-muted); }
-    .btn-sm.export { background:#2c3e50; color:var(--white); }
-    .btn-sm.export:hover { background:#1a252f; }
 
     /* ═══ APPLY MODAL ═══ */
     .apply-overlay, .apply-overlay *, .apply-overlay *::before, .apply-overlay *::after { cursor:auto !important; }
@@ -103,8 +58,6 @@
 
     @media(max-width:768px) {
       .values-grid { grid-template-columns:1fr; }
-      .admin-modal { width:95vw; max-height:90vh; }
-      .admin-form .form-row { flex-direction:column; gap:0; }
       .apply-modal { width:95vw; }
     }
   </style>
@@ -195,7 +148,7 @@
 <!-- OPEN POSITIONS -->
 <section class="positions-section">
   <div class="container">
-    <div class="section-label reveal-up">招聘職位<a href="#" class="admin-trigger" id="adminTrigger">&#9881;</a></div>
+    <div class="section-label reveal-up">招聘職位<a href="../admin.html" class="admin-trigger">&#9881;</a></div>
     <h2 class="section-title reveal-up">目前的機會。</h2>
 
     <div class="filter-bar" id="filterBar"></div>
@@ -203,87 +156,6 @@
     <div class="job-grid" id="jobGrid"></div>
   </div>
 </section>
-
-<!-- ADMIN PANEL -->
-<div class="admin-overlay" id="adminOverlay">
-  <div class="admin-modal">
-    <div class="admin-header">
-      <h3 id="adminTitle">管理職位</h3>
-      <div class="admin-header-actions">
-        <button class="btn-sm ghost" id="adminReset" style="display:none;font-size:11px;" title="放棄所有本地更改並從伺服器重新載入">重置</button>
-        <button class="btn-sm export" id="adminExport">匯出 JSON</button>
-        <button class="admin-close" id="adminClose">&times;</button>
-      </div>
-    </div>
-    <div class="admin-body">
-      <!-- Password gate -->
-      <div id="adminPassword" class="admin-password">
-        <p style="margin-bottom:16px;color:var(--text-muted);">請輸入管理員密碼以繼續</p>
-        <input type="password" id="adminPwdInput" placeholder="密碼">
-        <button class="btn-sm primary" id="adminPwdBtn">解鎖</button>
-        <div class="error" id="adminPwdError">密碼錯誤，請重試。</div>
-      </div>
-      <!-- (Token gate removed — export-only workflow) -->
-      <!-- Save status -->
-      <div id="adminSaveStatus" style="display:none;text-align:center;padding:12px;font-size:13px;border-radius:8px;margin-bottom:16px;"></div>
-      <!-- Job list view -->
-      <div id="adminList" style="display:none;">
-        <div style="margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;">
-          <span style="font-size:13px;color:var(--text-muted);" id="adminCount"></span>
-          <button class="btn-sm primary" id="adminAddBtn">+ 新增職位</button>
-        </div>
-        <ul class="admin-job-list" id="adminJobList"></ul>
-      </div>
-      <!-- Job form view -->
-      <div id="adminForm" class="admin-form">
-        <label>職位名稱</label>
-        <input type="text" id="formTitle" placeholder="例如：模具設計工程師">
-        <div class="form-row">
-          <div>
-            <label>部門</label>
-            <select id="formDept">
-              <option value="Office">辦公室</option>
-              <option value="Production">生產</option>
-            </select>
-          </div>
-          <div>
-            <label>地點</label>
-            <select id="formLocation">
-              <option value="Indonesia, Kendal">印尼，肯達爾</option>
-              <option value="Indonesia, Ngawi">印尼，昂阿維</option>
-              <option value="Dongguan, China">東莞，中國</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-row">
-          <div>
-            <label>類型</label>
-            <select id="formType">
-              <option value="Full-Time">全職</option>
-              <option value="Part-Time">兼職</option>
-              <option value="Contract">合約</option>
-            </select>
-          </div>
-          <div>
-            <label>工作安排</label>
-            <select id="formArrangement">
-              <option value="On-site">現場辦公</option>
-              <option value="Remote">遠端</option>
-              <option value="Hybrid">混合</option>
-              <option value="">未指定</option>
-            </select>
-          </div>
-        </div>
-        <label>職位描述</label>
-        <textarea id="formDesc" placeholder="職位描述..."></textarea>
-      </div>
-    </div>
-    <div class="admin-footer" id="adminFooter" style="display:none;">
-      <button class="btn-sm ghost" id="formCancel">取消</button>
-      <button class="btn-sm primary" id="formSave">儲存職位</button>
-    </div>
-  </div>
-</div>
 
 <!-- APPLY MODAL -->
 <div class="apply-overlay" id="applyOverlay">
@@ -358,67 +230,26 @@
 </footer>
 
 <!-- SCRIPTS -->
-<script src="https://unpkg.com/splitting"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/splitting@1.0.6/dist/splitting.min.js" integrity="sha384-taxnKSnzdVS5gZB4jZcieFZlmBPQMFqhdEmCScZsrIFCxX8Zizq4fKJJH5kBwMXT" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js" integrity="sha384-pEQB1h4Zmn9xhS6jotzltHSIQq6N0Oh3BXkCNOH5LKI81R2NRbb9efarAJYw9gTY" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js" integrity="sha384-TgZ1GoXcDnrw/czNfaiSZSFV1zgIRv8aQOevBA8ppS4SkNONmzYfjARpXsDfdnUE" crossorigin="anonymous"></script>
 <script src="../assets/shared.js"></script>
 <script>
 (function() {
-  var ADMIN_PASS = 'rr';
   var jobs = [];
-  var editingIndex = -1;
-  var authenticated = false;
-  var dirty = false;
 
   // ── Load jobs ──
-  var JOBS_VERSION = '2';
   function loadJobs() {
-    var dirty = !!localStorage.getItem('jobs_dirty');
-    var cachedVersion = localStorage.getItem('jobs_version');
-    if (dirty && cachedVersion === JOBS_VERSION) {
-      var cached = localStorage.getItem('jobs_data');
-      if (cached) {
-        try {
-          jobs = JSON.parse(cached);
-          renderFilters();
-          renderJobGrid();
-          return;
-        } catch(e) { /* fall through to fetch */ }
-      }
-    }
     fetch('../jobs.json')
       .then(function(r) { return r.json(); })
       .then(function(data) {
         jobs = data;
-        localStorage.setItem('jobs_data', JSON.stringify(jobs));
-        localStorage.setItem('jobs_version', JOBS_VERSION);
-        localStorage.removeItem('jobs_dirty');
         renderFilters();
         renderJobGrid();
       })
       .catch(function() {
-        var cached = localStorage.getItem('jobs_data');
-        if (cached) {
-          try { jobs = JSON.parse(cached); renderFilters(); renderJobGrid(); return; } catch(e) {}
-        }
         document.getElementById('jobGrid').innerHTML = '<p style="color:var(--text-muted);">無法載入職位列表。</p>';
       });
-  }
-
-  function saveJobsLocal() {
-    localStorage.setItem('jobs_data', JSON.stringify(jobs));
-    localStorage.setItem('jobs_dirty', '1');
-  }
-
-  function clearDirtyFlag() {
-    localStorage.removeItem('jobs_dirty');
-  }
-
-  function resetToServer() {
-    localStorage.removeItem('jobs_data');
-    localStorage.removeItem('jobs_dirty');
-    dirty = false;
-    loadJobs();
   }
 
   // ── Translation maps for job data ──
@@ -429,17 +260,18 @@
 
   // ── Render filter buttons ──
   function renderFilters() {
-    var depts = ['All Departments', 'Office', 'Production'];
+    var depts = ['所有部門', '辦公室', '生產'];
+    var deptKeys = ['All Departments', 'Office', 'Production'];
     var bar = document.getElementById('filterBar');
     bar.innerHTML = '';
-    depts.forEach(function(d) {
+    depts.forEach(function(label, i) {
       var btn = document.createElement('button');
-      btn.className = 'filter-btn' + (d === 'All Departments' ? ' active' : '');
-      btn.textContent = d === 'All Departments' ? '所有部門' : t(deptMap, d);
+      btn.className = 'filter-btn' + (i === 0 ? ' active' : '');
+      btn.textContent = label;
       btn.addEventListener('click', function() {
         bar.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
         btn.classList.add('active');
-        filterJobs(d);
+        filterJobs(deptKeys[i]);
       });
       bar.appendChild(btn);
     });
@@ -480,187 +312,6 @@
     d.textContent = s || '';
     return d.innerHTML;
   }
-
-  // ── Admin panel ──
-  var overlay = document.getElementById('adminOverlay');
-  var adminList = document.getElementById('adminList');
-  var adminPwd = document.getElementById('adminPassword');
-  var adminForm = document.getElementById('adminForm');
-  var adminFooter = document.getElementById('adminFooter');
-
-  document.getElementById('adminTrigger').addEventListener('click', function(e) {
-    e.preventDefault();
-    overlay.classList.add('active');
-    if (authenticated) showList();
-  });
-
-  document.getElementById('adminClose').addEventListener('click', function() {
-    overlay.classList.remove('active');
-    showPasswordGate();
-  });
-
-  overlay.addEventListener('click', function(e) {
-    if (e.target === overlay) {
-      overlay.classList.remove('active');
-      showPasswordGate();
-    }
-  });
-
-  // Password
-  document.getElementById('adminPwdBtn').addEventListener('click', tryPassword);
-  document.getElementById('adminPwdInput').addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') tryPassword();
-  });
-
-  function tryPassword() {
-    var val = document.getElementById('adminPwdInput').value;
-    if (val === ADMIN_PASS) {
-      authenticated = true;
-      document.getElementById('adminPwdError').style.display = 'none';
-      showList();
-    } else {
-      document.getElementById('adminPwdError').style.display = 'block';
-    }
-  }
-
-  function showPasswordGate() {
-    if (!authenticated) {
-      adminPwd.style.display = '';
-      adminList.style.display = 'none';
-      adminForm.classList.remove('active');
-      adminFooter.style.display = 'none';
-    }
-  }
-
-  function updateSaveBtn() {
-    document.getElementById('adminReset').style.display = dirty ? '' : 'none';
-  }
-
-  function showStatus(msg, isError) {
-    var el = document.getElementById('adminSaveStatus');
-    el.textContent = msg;
-    el.style.display = '';
-    el.style.background = isError ? '#fdecea' : '#e8f5e9';
-    el.style.color = isError ? '#c0392b' : '#2e7d32';
-    setTimeout(function() { el.style.display = 'none'; }, 3000);
-  }
-
-  function showList() {
-    adminPwd.style.display = 'none';
-    adminList.style.display = '';
-    adminForm.classList.remove('active');
-    adminFooter.style.display = 'none';
-    document.getElementById('adminTitle').textContent = '管理職位';
-    updateSaveBtn();
-    renderAdminList();
-  }
-
-  function renderAdminList() {
-    var list = document.getElementById('adminJobList');
-    list.innerHTML = '';
-    document.getElementById('adminCount').textContent = jobs.length + ' 個職位';
-    jobs.forEach(function(job, i) {
-      var li = document.createElement('li');
-      li.className = 'admin-job-item';
-      li.innerHTML = '<div class="admin-job-info"><h4>' + escHtml(job.title) + '</h4><span>' + escHtml(job.department) + ' &middot; ' + escHtml(job.location) + '</span></div>' +
-        '<div class="admin-job-actions"><button class="edit-btn" data-i="' + i + '">編輯</button><button class="delete-btn" data-i="' + i + '">刪除</button></div>';
-      list.appendChild(li);
-    });
-    list.querySelectorAll('.edit-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() { openForm(parseInt(btn.dataset.i)); });
-    });
-    list.querySelectorAll('.delete-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() { deleteJob(parseInt(btn.dataset.i)); });
-    });
-  }
-
-  // Add / Edit form
-  document.getElementById('adminAddBtn').addEventListener('click', function() { openForm(-1); });
-
-  function openForm(index) {
-    editingIndex = index;
-    adminList.style.display = 'none';
-    adminForm.classList.add('active');
-    adminFooter.style.display = 'flex';
-    document.getElementById('adminTitle').textContent = index === -1 ? '新增職位' : '編輯職位';
-
-    if (index >= 0) {
-      var j = jobs[index];
-      document.getElementById('formTitle').value = j.title;
-      document.getElementById('formDept').value = j.department;
-      document.getElementById('formLocation').value = j.location;
-      document.getElementById('formType').value = j.type;
-      document.getElementById('formArrangement').value = j.arrangement || '';
-      document.getElementById('formDesc').value = j.description;
-    } else {
-      document.getElementById('formTitle').value = '';
-      document.getElementById('formDept').value = 'Office';
-      document.getElementById('formLocation').value = 'Indonesia, Kendal';
-      document.getElementById('formType').value = 'Full-Time';
-      document.getElementById('formArrangement').value = 'On-site';
-      document.getElementById('formDesc').value = '';
-    }
-  }
-
-  document.getElementById('formCancel').addEventListener('click', showList);
-
-  document.getElementById('formSave').addEventListener('click', function() {
-    var title = document.getElementById('formTitle').value.trim();
-    if (!title) { alert('職位名稱為必填項。'); return; }
-
-    var job = {
-      id: title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, ''),
-      title: title,
-      department: document.getElementById('formDept').value,
-      location: document.getElementById('formLocation').value.trim(),
-      type: document.getElementById('formType').value,
-      arrangement: document.getElementById('formArrangement').value,
-      description: document.getElementById('formDesc').value.trim(),
-      applyUrl: 'contact.html'
-    };
-
-    if (editingIndex >= 0) {
-      job.id = jobs[editingIndex].id;
-      jobs[editingIndex] = job;
-    } else {
-      jobs.push(job);
-    }
-
-    dirty = true;
-    saveJobsLocal();
-    renderFilters();
-    renderJobGrid();
-    showList();
-  });
-
-  function deleteJob(index) {
-    if (!confirm('刪除「' + jobs[index].title + '」？')) return;
-    jobs.splice(index, 1);
-    dirty = true;
-    saveJobsLocal();
-    renderFilters();
-    renderJobGrid();
-    updateSaveBtn();
-    renderAdminList();
-  }
-
-  // Reset to server data
-  document.getElementById('adminReset').addEventListener('click', function() {
-    if (!confirm('放棄所有本地更改並從伺服器重新載入職位？')) return;
-    resetToServer();
-    showStatus('已重置為伺服器資料');
-    showList();
-  });
-
-  // Export JSON
-  document.getElementById('adminExport').addEventListener('click', function() {
-    var blob = new Blob([JSON.stringify(jobs, null, 2)], { type: 'application/json' });
-    var a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'jobs.json';
-    a.click();
-    URL.revokeObjectURL(a.href);
-  });
 
   // ── Apply modal ──
   var applyOverlay = document.getElementById('applyOverlay');
