@@ -18,7 +18,10 @@
       --border: #e5e5ea;
       --surface-alt: #f5f5f7;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; cursor: auto !important; }
+    a, button { cursor: pointer !important; }
+    input, textarea, select { cursor: text !important; }
+    .cursor-dot, .cursor-ring, .cursor-label { display: none !important; }
     body { font-family: var(--font-body); background: var(--surface-alt); color: var(--text); min-height: 100vh; padding: 40px 20px; }
 
     .admin-container { max-width: 800px; margin: 0 auto; background: var(--white); border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); overflow: hidden; }
