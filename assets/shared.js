@@ -444,14 +444,16 @@
     dropdowns.forEach(function(dd) {
       var closeTimer = null;
       var menu = dd.querySelector('.dropdown');
+      var toggle = dd.querySelector(':scope > a');
       var items = menu ? menu.querySelectorAll('li') : [];
+      var menuLinks = menu ? menu.querySelectorAll('a') : [];
 
       function openDropdown() {
-        if (mq.matches) return;
         clearTimeout(closeTimer);
         dd.classList.add('dd-open');
-        // Stagger items
-        if (typeof gsap !== 'undefined' && items.length) {
+        if (toggle) toggle.setAttribute('aria-expanded', 'true');
+        // Stagger items (desktop only)
+        if (!mq.matches && typeof gsap !== 'undefined' && items.length) {
           gsap.fromTo(items,
             { opacity: 0, y: 8 },
             { opacity: 1, y: 0, duration: 0.25, ease: 'power2.out', stagger: 0.06 }
@@ -459,29 +461,96 @@
         }
       }
 
-      function startClose() {
-        if (mq.matches) return;
-        closeTimer = setTimeout(function() {
-          dd.classList.remove('dd-open');
-        }, 300);
+      function closeDropdown() {
+        dd.classList.remove('dd-open');
+        if (toggle) toggle.setAttribute('aria-expanded', 'false');
       }
 
+      function startClose() {
+        if (mq.matches) return;
+        closeTimer = setTimeout(closeDropdown, 300);
+      }
+
+      // Set ARIA attributes on toggle
+      if (toggle) {
+        toggle.setAttribute('role', 'button');
+        toggle.setAttribute('aria-haspopup', 'true');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+      if (menu) {
+        menu.setAttribute('role', 'menu');
+      }
+      menuLinks.forEach(function(link) {
+        link.setAttribute('role', 'menuitem');
+      });
+
       // Desktop: hover
-      dd.addEventListener('mouseenter', openDropdown);
+      dd.addEventListener('mouseenter', function() {
+        if (mq.matches) return;
+        openDropdown();
+      });
       dd.addEventListener('mouseleave', startClose);
       if (menu) {
         menu.addEventListener('mouseenter', function() { clearTimeout(closeTimer); });
         menu.addEventListener('mouseleave', startClose);
       }
 
+      // Keyboard: open on Enter/Space, navigate with arrows
+      if (toggle) {
+        toggle.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
+            e.preventDefault();
+            openDropdown();
+            if (menuLinks.length) menuLinks[0].focus();
+          }
+        });
+      }
+
+      // Arrow key navigation within menu
+      menuLinks.forEach(function(link, idx) {
+        link.addEventListener('keydown', function(e) {
+          if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            if (idx < menuLinks.length - 1) menuLinks[idx + 1].focus();
+          } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            if (idx > 0) menuLinks[idx - 1].focus();
+            else if (toggle) toggle.focus();
+          } else if (e.key === 'Escape') {
+            e.preventDefault();
+            closeDropdown();
+            if (toggle) toggle.focus();
+          } else if (e.key === 'Tab') {
+            // Close dropdown when tabbing out of last item
+            if (!e.shiftKey && idx === menuLinks.length - 1) {
+              closeDropdown();
+            } else if (e.shiftKey && idx === 0) {
+              closeDropdown();
+            }
+          }
+        });
+      });
+
+      // Close on focus leaving the dropdown entirely
+      dd.addEventListener('focusout', function(e) {
+        requestAnimationFrame(function() {
+          if (!dd.contains(document.activeElement)) {
+            closeDropdown();
+          }
+        });
+      });
+
       // Mobile: tap to toggle (skip lang-selector — always visible)
       if (!dd.classList.contains('lang-selector')) {
-        var toggle = dd.querySelector(':scope > a');
         if (toggle) {
           toggle.addEventListener('click', function(e) {
             if (!mq.matches) return;
             e.preventDefault();
-            dd.classList.toggle('dd-open');
+            if (dd.classList.contains('dd-open')) {
+              closeDropdown();
+            } else {
+              openDropdown();
+            }
           });
         }
       }
@@ -714,27 +783,26 @@
       // we need /cn/capabilities/plastic-toys.html
       // For paths like /index.html → /cn/index.html
 
-      // Find the root: everything before the first known directory or file
-      var knownDirs = ['capabilities', 'index.html', 'about.html', 'contact.html', 'careers.html'];
-      var insertPos = -1;
-      for (var i = 0; i < knownDirs.length; i++) {
-        var idx = cleanPath.indexOf(knownDirs[i]);
-        if (idx !== -1) {
-          insertPos = idx;
+      // Dynamic detection: find the lang insertion point by looking for
+      // the first path segment that is a known page file or subdirectory.
+      // This avoids hardcoding page names and works with any new pages.
+      var parts = cleanPath.split('/');
+      var insertIdx = -1;
+      for (var i = 0; i < parts.length; i++) {
+        // A segment ending in .html or a known subdirectory containing pages
+        if (parts[i].indexOf('.html') !== -1 || parts[i] === 'capabilities') {
+          insertIdx = i;
           break;
         }
       }
 
-      if (insertPos !== -1) {
-        var before = cleanPath.substring(0, insertPos);
-        var after = cleanPath.substring(insertPos);
-        window.location.href = before + targetLang + '/' + after;
+      if (insertIdx !== -1) {
+        parts.splice(insertIdx, 0, targetLang);
+        window.location.href = parts.join('/');
       } else {
-        // Fallback: just prepend lang to filename
-        var lastSlash = cleanPath.lastIndexOf('/');
-        var dir = cleanPath.substring(0, lastSlash + 1);
-        var file = cleanPath.substring(lastSlash + 1);
-        window.location.href = dir + targetLang + '/' + file;
+        // Fallback: append lang + index
+        var base = cleanPath.endsWith('/') ? cleanPath : cleanPath + '/';
+        window.location.href = base + targetLang + '/';
       }
     }
   }
