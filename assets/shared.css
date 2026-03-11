@@ -607,6 +607,45 @@ h4, h5 {
 }
 
 
+/* ─── Button Shimmer Hover (MICRO-01) ─── */
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+  pointer-events: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover::after {
+    animation: shimmer 0.6s ease-in-out;
+  }
+}
+
+/* Also apply shimmer to nav CTA */
+.nav-cta {
+  position: relative;
+  overflow: hidden;
+}
+.nav-cta::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+  pointer-events: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .nav-cta:hover::after {
+    animation: shimmer 0.6s ease-in-out;
+  }
+}
+
+
 /* ───── MAGNETIC BUTTON WRAPPER ───── */
 .magnetic {
   display: inline-block;
@@ -1181,8 +1220,8 @@ footer.footer-reveal {
 }
 
 @keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  from { left: -100%; }
+  to   { left: 150%; }
 }
 
 @keyframes float {
