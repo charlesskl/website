@@ -1057,14 +1057,290 @@
   }
 
 
+  // ─── LENIS SMOOTH SCROLL (P1) ────────────────────────────
+  function initLenis() {
+    if (prefersReducedMotion) return;
+    if (typeof Lenis === 'undefined') return;
+
+    var lenis = new Lenis({
+      duration: 1.2,
+      easing: function(t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 2
+    });
+
+    // Sync with GSAP ScrollTrigger
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add(function(time) {
+        lenis.raf(time * 1000);
+      });
+      gsap.ticker.lagSmoothing(0);
+    } else {
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+    }
+
+    window.__lenis = lenis;
+  }
+
+
+  // ─── MOUSE FOLLOW ENHANCEMENT (P2) ─────────────────────
+  function initMouseFollow() {
+    if (isMobile || isTouch || !hasHover) return;
+    if (prefersReducedMotion) return;
+    if (typeof gsap === 'undefined') return;
+
+    // Hero parallax tilt
+    var hero = document.querySelector('.hero, .about-hero, .sub-hero, .page-hero');
+    if (hero) {
+      var heroEls = hero.querySelectorAll('.hero-tag, .hero-title, .hero-sub, .hero-actions, .about-hero-tag, .about-hero-title, .about-hero-sub, .sub-hero-tag, .sub-hero-title, .sub-hero-sub, .page-hero-tag, h1, p');
+      if (heroEls.length) {
+        var qx = gsap.quickTo(heroEls, 'x', { duration: 0.6, ease: 'power3' });
+        var qy = gsap.quickTo(heroEls, 'y', { duration: 0.6, ease: 'power3' });
+        hero.addEventListener('mousemove', function(e) {
+          var rect = hero.getBoundingClientRect();
+          var nx = (e.clientX - rect.left) / rect.width - 0.5;
+          var ny = (e.clientY - rect.top) / rect.height - 0.5;
+          qx(nx * 12);
+          qy(ny * 8);
+        });
+        hero.addEventListener('mouseleave', function() {
+          qx(0);
+          qy(0);
+        });
+      }
+    }
+
+    // Capability cards 3D tilt
+    var capCards = document.querySelectorAll('.cap-card, .glass-card, .value-card, .job-card');
+    capCards.forEach(function(card) {
+      card.style.transformStyle = 'preserve-3d';
+      card.addEventListener('mousemove', function(e) {
+        var rect = card.getBoundingClientRect();
+        var nx = (e.clientX - rect.left) / rect.width - 0.5;
+        var ny = (e.clientY - rect.top) / rect.height - 0.5;
+        gsap.to(card, {
+          rotateY: nx * 8,
+          rotateX: ny * -8,
+          duration: 0.4,
+          ease: 'power2.out',
+          transformPerspective: 800
+        });
+      });
+      card.addEventListener('mouseleave', function() {
+        gsap.to(card, {
+          rotateY: 0,
+          rotateX: 0,
+          duration: 0.6,
+          ease: 'elastic.out(1, 0.5)'
+        });
+      });
+    });
+  }
+
+
+  // ─── MOBILE NAV STAGGER (P2) ───────────────────────────
+  function initMobileNavStagger() {
+    var btn = document.getElementById('hamburger');
+    var links = document.getElementById('navLinks');
+    if (!btn || !links) return;
+
+    var mq = window.matchMedia('(max-width: 768px)');
+    if (!mq.matches) return;
+
+    // Observe class changes on navLinks for stagger timing
+    var observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(m) {
+        if (m.attributeName !== 'class') return;
+        if (links.classList.contains('open')) {
+          var items = links.querySelectorAll(':scope > li');
+          items.forEach(function(item, i) {
+            item.style.transitionDelay = (i * 50) + 'ms';
+          });
+        } else {
+          var items = links.querySelectorAll(':scope > li');
+          items.forEach(function(item) {
+            item.style.transitionDelay = '0ms';
+          });
+        }
+      });
+    });
+    observer.observe(links, { attributes: true });
+  }
+
+
+  // ─── BRAND LOADER (P0) — Lusion-inspired ────────────────
+  function initLoader() {
+    var loader = document.getElementById('brandLoader');
+    if (!loader) return;
+    document.body.style.overflow = 'hidden';
+
+    var logoEl = loader.querySelector('.loader-logo');
+    var percentEl = loader.querySelector('.loader-percent');
+    var ringEl = loader.querySelector('.loader-ring');
+    var ringFill = loader.querySelector('.loader-ring-fill');
+    var taglineSpans = loader.querySelectorAll('.loader-tagline span');
+    var startTime = Date.now();
+    var DURATION = 2200;
+    var dismissed = false;
+    var current = 0;
+    var target = 0;
+    var raf;
+    var taglineRevealed = false;
+
+    // Compute SVG ring circumference
+    var ringCircumference = ringFill ? parseFloat(ringFill.getAttribute('r')) * 2 * Math.PI : 0;
+
+    // Entrance — fade in logo, counter, ring
+    requestAnimationFrame(function() {
+      if (logoEl) logoEl.classList.add('visible');
+      if (percentEl) percentEl.classList.add('visible');
+      if (ringEl) ringEl.classList.add('visible');
+    });
+
+    // Loading steps — fast start, slow finish (feels organic)
+    var steps = [
+      { at: 150,  val: 20 },
+      { at: 350,  val: 38 },
+      { at: 600,  val: 55 },
+      { at: 900,  val: 68 },
+      { at: 1200, val: 78 },
+      { at: 1500, val: 86 },
+      { at: 1800, val: 92 },
+      { at: 2000, val: 96 },
+    ];
+
+    steps.forEach(function(s) {
+      setTimeout(function() { target = s.val; }, s.at);
+    });
+
+    function updateDisplay(val) {
+      var rounded = Math.round(val);
+      if (percentEl) percentEl.textContent = rounded + '%';
+      // Update SVG ring
+      if (ringFill && ringCircumference) {
+        var filled = (val / 100) * ringCircumference;
+        ringFill.setAttribute('stroke-dasharray', filled + ',' + ringCircumference);
+      }
+      // Reveal tagline at 40%
+      if (!taglineRevealed && rounded >= 40 && taglineSpans.length) {
+        taglineRevealed = true;
+        taglineSpans.forEach(function(span, i) {
+          setTimeout(function() {
+            span.classList.add('visible');
+          }, i * 30);
+        });
+      }
+    }
+
+    // Smooth lerp tick
+    function tick() {
+      var diff = target - current;
+      current += diff * 0.08;
+
+      if (Math.abs(diff) < 0.5 && target === 100) {
+        current = 100;
+      }
+
+      updateDisplay(current);
+
+      if (current < 100) {
+        raf = requestAnimationFrame(tick);
+      } else {
+        // Hold at 100% briefly, then exit
+        setTimeout(exitLoader, 350);
+      }
+    }
+
+    raf = requestAnimationFrame(tick);
+
+    function exitLoader() {
+      if (dismissed) return;
+      dismissed = true;
+
+      // Step 1: fade out counter + progress line
+      loader.classList.add('exit-counter');
+
+      // Step 2: fade out logo (after counter gone)
+      setTimeout(function() {
+        loader.classList.add('exit-logo');
+      }, 300);
+
+      // Step 3: fade out loader background → reveal page
+      setTimeout(function() {
+        loader.classList.add('exit-bg');
+        document.body.style.overflow = '';
+
+        // Step 4: stagger reveal page content
+        var reveals = document.querySelectorAll('.page-reveal');
+        reveals.forEach(function(el, i) {
+          setTimeout(function() {
+            el.classList.add('revealed');
+          }, i * 120);
+        });
+      }, 700);
+
+      // Clean up
+      setTimeout(function() {
+        loader.classList.add('dismissed');
+        if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+      }, 1600);
+    }
+
+    // Push to 100% after DURATION or when fonts ready (whichever is later)
+    var fontsLoaded = false;
+    var timerDone = false;
+
+    function checkComplete() {
+      if (fontsLoaded && timerDone) {
+        target = 100;
+      }
+    }
+
+    setTimeout(function() {
+      timerDone = true;
+      checkComplete();
+    }, DURATION);
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function() {
+        fontsLoaded = true;
+        checkComplete();
+      }).catch(function() {
+        fontsLoaded = true;
+        checkComplete();
+      });
+    } else {
+      fontsLoaded = true;
+    }
+
+    // Absolute fallback — never stay stuck longer than 4s
+    setTimeout(function() {
+      if (!dismissed) {
+        console.warn('Loader fallback: force dismiss after 4s');
+        target = 100;
+      }
+    }, 4000);
+  }
+
+
   // ─── INIT ON DOM READY ────────────────────────────────────
   function init() {
+    initLoader();
     initCursor();
     initMagnetic();
     initScrollProgress();
     initAurora();
     initNavbar();
     initHamburger();
+    initMobileNavStagger();
     initDropdowns();
     initLazyImages();
     initReveal();
@@ -1072,6 +1348,8 @@
     initLanguageSelector();
     initSplitting();
     initParallax();
+    initLenis();
+    initMouseFollow();
     // Three.js effects — init now if already loaded, otherwise defer
     if (typeof THREE !== 'undefined') {
       initParticles();

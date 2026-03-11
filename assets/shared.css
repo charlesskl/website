@@ -1146,7 +1146,6 @@ footer.footer-reveal {
 @media (max-width: 768px) {
   .hamburger { display: flex; }
   .nav-links {
-    display: none;
     position: absolute;
     top: var(--nav-h);
     left: 0; right: 0;
@@ -1158,7 +1157,6 @@ footer.footer-reveal {
     border-bottom: 1px solid var(--border);
     box-shadow: 0 20px 40px rgba(0,0,0,0.06);
   }
-  .nav-links.open { display: flex; }
   .nav-links > li { width: 100%; text-align: center; }
   .nav-links > li > a { display: block; padding: 14px 16px; min-height: 44px; }
   /* Dropdowns: collapsed by default, toggle on tap */
@@ -1327,6 +1325,253 @@ textarea:focus-visible, select:focus-visible, [tabindex]:focus-visible {
   }
   .page-transition { display: none !important; }
   .scroll-progress { display: none !important; }
+  .hero-3d-container { display: none !important; }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BRAND LOADER (P0)
+   ═══════════════════════════════════════════════════════════════════════════ */
+/* NOTE: Critical loader CSS is also inlined in each page's <head> <style>
+   so it renders before shared.css loads. This section provides overrides
+   and the dismiss animation classes. */
+
+/* ── Loader container ── */
+.brand-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: #FAFDF7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  pointer-events: all;
+}
+
+/* ── Logo with circular progress ring ── */
+.loader-ring-wrap {
+  position: relative;
+  width: clamp(110px, 18vw, 180px);
+  height: clamp(110px, 18vw, 180px);
+}
+.loader-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(100% + 32px);
+  height: calc(100% + 32px);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.8s ease 0.3s;
+}
+.loader-ring.visible { opacity: 1; }
+.loader-ring circle {
+  fill: none;
+  stroke-linecap: round;
+}
+.loader-ring-bg {
+  stroke: rgba(124, 179, 66, 0.15);
+  stroke-width: 1;
+}
+.loader-ring-fill {
+  stroke: rgba(124, 179, 66, 0.4);
+  stroke-width: 1.5;
+  stroke-dasharray: 0, 999;
+  transition: stroke-dasharray 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: rotate(-90deg);
+  transform-origin: center;
+}
+
+.loader-logo {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.loader-logo.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+.loader-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ── Percentage counter — Monumental style ── */
+.loader-percent {
+  font-family: 'Clash Display', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  color: rgba(124, 179, 66, 0.7);
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  margin-top: 16px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s,
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+}
+.loader-percent.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Tagline reveal ── */
+.loader-tagline {
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 400;
+  font-size: clamp(0.55rem, 0.9vw, 0.65rem);
+  letter-spacing: 0.3em;
+  color: rgba(124, 179, 66, 0.4);
+  margin-top: 20px;
+  display: flex;
+  gap: 0;
+  overflow: hidden;
+}
+.loader-tagline span {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  display: inline-block;
+}
+.loader-tagline span.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* non-breaking space characters need width */
+.loader-tagline span.space {
+  width: 0.35em;
+}
+
+/* ── Exit sequence ── */
+.brand-loader.exit-counter .loader-percent,
+.brand-loader.exit-counter .loader-tagline {
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.brand-loader.exit-counter .loader-ring {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.brand-loader.exit-logo .loader-logo {
+  opacity: 0;
+  transform: scale(1.08);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.brand-loader.exit-bg {
+  opacity: 0;
+  transition: opacity 0.9s cubic-bezier(0.65, 0, 0.35, 1);
+  pointer-events: none;
+}
+
+/* ── Page content fade-in after loader ── */
+.page-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.page-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Loader dismissed ── */
+.brand-loader.dismissed {
+  pointer-events: none;
+  display: none;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HERO 3D MODEL CONTAINER (P0)
+   ═══════════════════════════════════════════════════════════════════════════ */
+.hero-3d-container {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 45%;
+  height: 70%;
+  z-index: 5;
+  pointer-events: none;
+}
+.hero-3d-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+@media (max-width: 1024px) {
+  .hero-3d-container {
+    position: relative;
+    top: auto;
+    right: auto;
+    transform: none;
+    width: 100%;
+    height: 300px;
+    margin-top: 32px;
+  }
+}
+@media (max-width: 768px) {
+  .hero-3d-container {
+    height: 240px;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOBILE NAV ANIMATION (P2)
+   ═══════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .nav-links {
+    display: flex !important;
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
+    visibility: hidden;
+    transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: rgba(255,255,255,0.92) !important;
+  }
+  .nav-links.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    visibility: visible;
+  }
+  .nav-links > li {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .nav-links.open > li {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Hamburger → X morph */
+  .hamburger span {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+  }
+  .hamburger.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .hamburger.open span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  .hamburger.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════

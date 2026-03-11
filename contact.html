@@ -431,6 +431,7 @@
 
 
 <!-- ═══ SCRIPTS ═══ -->
+<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
 <script src="https://unpkg.com/splitting@1.0.6/dist/splitting.min.js" integrity="sha384-taxnKSnzdVS5gZB4jZcieFZlmBPQMFqhdEmCScZsrIFCxX8Zizq4fKJJH5kBwMXT" crossorigin="anonymous"></script>
 <script src="assets/shared.js"></script>
 
@@ -514,27 +515,48 @@
         return;
       }
 
-      // Build mailto link
-      var name = (form.firstName.value + ' ' + form.lastName.value).trim();
-      var subject = encodeURIComponent('[Website] ' + (form.subject.value || 'Inquiry') + ' — ' + name);
-      var body = encodeURIComponent(
-        'Name: ' + name +
-        '\nEmail: ' + form.email.value +
-        (form.company.value ? '\nCompany: ' + form.company.value : '') +
-        '\nSubject: ' + (form.subject.value || 'N/A') +
-        '\n\n' + form.message.value
-      );
-      window.location.href = 'mailto:info@royalregenthk.com?subject=' + subject + '&body=' + body;
+      // Submit via Formspree (REPLACE YOUR_FORM_ID with your actual Formspree form ID)
+      var FORMSPREE_URL = 'https://formspree.io/f/YOUR_FORM_ID'; // TODO: Replace with real Formspree ID
 
-      btn.classList.add('sent');
-      setTimeout(function() {
-        btn.classList.remove('sent');
-        form.reset();
-        document.querySelectorAll('[data-field]').forEach(function(f) {
-          f.classList.remove('has-value');
-        });
-        updateProgress();
-      }, 3000);
+      var formData = new FormData(form);
+
+      btn.disabled = true;
+      btn.querySelector('.btn-text').textContent = 'Sending...';
+
+      fetch(FORMSPREE_URL, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(function(response) {
+        if (response.ok) {
+          btn.classList.add('sent');
+          setTimeout(function() {
+            btn.classList.remove('sent');
+            btn.disabled = false;
+            btn.querySelector('.btn-text').innerHTML = 'Send Message &rarr;';
+            form.reset();
+            document.querySelectorAll('[data-field]').forEach(function(f) {
+              f.classList.remove('has-value');
+            });
+            updateProgress();
+          }, 3000);
+        } else {
+          throw new Error('Form submission failed');
+        }
+      })
+      .catch(function(err) {
+        console.error('Form error:', err);
+        btn.disabled = false;
+        btn.querySelector('.btn-text').innerHTML = 'Send Message &rarr;';
+        // Show error state
+        btn.style.background = 'linear-gradient(135deg, #e57373, #c62828)';
+        btn.querySelector('.btn-text').textContent = 'Failed — Try Again';
+        setTimeout(function() {
+          btn.style.background = '';
+          btn.querySelector('.btn-text').innerHTML = 'Send Message &rarr;';
+        }, 3000);
+      });
     });
   }
 
