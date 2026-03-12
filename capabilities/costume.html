@@ -219,14 +219,7 @@
 (function(){
   'use strict';
   var isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
-  function heroEntrance() {
-    if (typeof gsap === 'undefined') return;
-    var tl = gsap.timeline({ delay: 0.3 });
-    tl.to('#heroTag', { opacity:1, y:0, duration:0.6, ease:'power3.out' });
-    tl.to('#heroTitle', { opacity:1, y:0, duration:0.9, ease:'power3.out' }, '-=0.3');
-    tl.to('#heroSub', { opacity:1, y:0, duration:0.7, ease:'power3.out' }, '-=0.4');
-    tl.to('#heroScroll', { opacity:1, duration:0.8, ease:'power2.out' }, '-=0.2');
-  }
+  // heroEntrance() removed — now handled centrally by assets/animation/hero.js
   function editorialReveal() {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
     var wm = document.querySelector('.editorial-watermark');
@@ -239,7 +232,7 @@
     if (!f || !m) return;
     ScrollTrigger.create({ trigger:f, start:'top bottom', end:'top top', scrub:true, onUpdate: function(self) { m.style.boxShadow = '0 -20px 60px rgba(0,0,0,' + (self.progress*0.15) + ')'; } });
   }
-  function init() { heroEntrance(); editorialReveal(); footerReveal(); }
+  function init() { editorialReveal(); footerReveal(); }
   if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); }
   else { requestAnimationFrame(function() { requestAnimationFrame(init); }); }
 })();
@@ -247,9 +240,14 @@
 <!-- GSAP Core — Phase 1 Foundation -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/SplitText.min.js"></script>
 <script src="../assets/animations.js"></script>
 <script src="../assets/animation/controller.js"></script>
 <script src="../assets/animation/scroll-engine.js"></script>
 <script src="../assets/animation/responsive.js"></script>
+<script src="../assets/animation/text-system.js"></script>
+<script src="../assets/animation/hero.js"></script>
+<script src="../assets/animation/text-scramble.js"></script>
+<script src="../assets/animation/scroll-text.js"></script>
 </body>
 </html>

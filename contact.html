@@ -439,10 +439,7 @@
 (function() {
   'use strict';
 
-  // ─── HERO ENTRANCE ─────────────────────────────────────────
-  function heroEntrance() {
-    // Uses standard page-hero; no custom entrance needed
-  }
+  // heroEntrance() removed — now handled centrally by assets/animation/hero.js
 
 
   // ─── FLOATING LABEL MANAGEMENT ─────────────────────────────
@@ -583,7 +580,6 @@
 
   // ─── INIT ──────────────────────────────────────────────────
   function init() {
-    heroEntrance();
     initFloatingLabels();
     updateProgress();
     initFormSubmit();
@@ -601,10 +597,15 @@
 <!-- GSAP Core — Phase 1 Foundation -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/SplitText.min.js"></script>
 <script src="assets/animations.js"></script>
 
 <script src="assets/animation/controller.js"></script>
 <script src="assets/animation/scroll-engine.js"></script>
 <script src="assets/animation/responsive.js"></script>
+<script src="assets/animation/text-system.js"></script>
+<script src="assets/animation/hero.js"></script>
+<script src="assets/animation/text-scramble.js"></script>
+<script src="assets/animation/scroll-text.js"></script>
 </body>
 </html>

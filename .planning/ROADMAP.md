@@ -11,7 +11,7 @@ Transform the Royal Regent website from functional-but-generic animations into a
 - Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
 
 - [x] **Phase 1: Foundation** - Scroll infrastructure, module registry, and animation architecture baseline (completed 2026-03-12)
-- [ ] **Phase 2: Hero & Text** - Opening sequence master timeline and SplitText kinetic typography system
+- [x] **Phase 2: Hero & Text** - Opening sequence master timeline and SplitText kinetic typography system (completed 2026-03-12)
 - [ ] **Phase 3: Scroll Experiences** - Clip-path reveals, parallax, velocity skew, and staggered choreography
 - [ ] **Phase 4: Cursor & Nav** - Custom cursor states, magnetic buttons, nav transitions, and micro-interactions
 - [ ] **Phase 5: WebGL** - Three.js shader backgrounds, card showcase, and GPU memory safety
@@ -32,7 +32,7 @@ Transform the Royal Regent website from functional-but-generic animations into a
 **Plans**: 1 plan
 
 Plans:
-- [ ] 01-01-PLAN.md — Module registry, scroll engine, responsive contexts, and CDN graceful degradation
+- [x] 01-01-PLAN.md — Module registry, scroll engine, responsive contexts, and CDN graceful degradation
 
 ### Phase 2: Hero & Text
 **Goal**: The first 2.5 seconds of every page visit deliver a coordinated, cinema-quality opening — preloader exits cleanly into hero, headline text reveals character-by-character, and every section heading animates on scroll with masked word reveals
@@ -44,11 +44,11 @@ Plans:
   3. All section headings across every page animate on scroll with masked word or line reveals
   4. Statistics and data numbers display a Matrix-style scramble before resolving to their final value
   5. With reduced motion enabled, all text and hero content appears instantly without animation
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 02-01: Preloader exit, hero master timeline, and SplitText system
-- [ ] 02-02: Scroll-triggered headline reveals and text scramble on stats
+- [x] 02-01-PLAN.md — Preloader exit, hero master timeline, SplitText system, and CDN wiring
+- [x] 02-02-PLAN.md — Scroll-triggered heading reveals and Matrix-style text scramble on stats
 
 ### Phase 3: Scroll Experiences
 **Goal**: Scrolling through any section feels premium — images reveal with geometric wipes, backgrounds create depth through parallax, scroll speed creates subtle skew, and sections enter with coordinated choreography rather than independent fades
@@ -125,7 +125,7 @@ Plans:
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 1/1 | Complete   | 2026-03-12 |
-| 2. Hero & Text | 0/2 | Not started | - |
+| 2. Hero & Text | 2/2 | Complete | 2026-03-12 |
 | 3. Scroll Experiences | 0/2 | Not started | - |
 | 4. Cursor & Nav | 0/2 | Not started | - |
 | 5. WebGL | 0/2 | Not started | - |

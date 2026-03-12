@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: planning
-stopped_at: Completed 01-01-PLAN.md
-last_updated: "2026-03-12T00:54:10.361Z"
-last_activity: 2026-03-11 — Roadmap created, 6 phases defined, 40 v1 requirements mapped
+status: executing
+stopped_at: Completed Phase 2 (02-01 + 02-02)
+last_updated: "2026-03-12"
+last_activity: 2026-03-12 — Phase 2 complete, hero timeline + SplitText system + scroll text reveals + text scramble
 progress:
   total_phases: 6
-  completed_phases: 1
-  total_plans: 1
-  completed_plans: 1
-  percent: 100
+  completed_phases: 2
+  total_plans: 3
+  completed_plans: 3
+  percent: 33
 ---
 
 # Project State
@@ -21,36 +21,39 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-11)
 
 **Core value:** Immediate WOW factor on first visit with silky-smooth interactions throughout — no compromise between spectacle and usability
-**Current focus:** Phase 1 — Foundation
+**Current focus:** Phase 3 — Scroll Experiences (next)
 
 ## Current Position
 
-Phase: 1 of 6 (Foundation)
-Plan: 0 of 1 in current phase
-Status: Ready to plan
-Last activity: 2026-03-11 — Roadmap created, 6 phases defined, 40 v1 requirements mapped
+Phase: 2 of 6 (Hero & Text) — COMPLETE
+Plan: 2 of 2 in current phase
+Status: Phase 2 complete, ready for Phase 3
+Last activity: 2026-03-12 — Phase 2 complete, hero timeline + SplitText + scroll reveals + text scramble
 
-Progress: [██████████] 100%
+Progress: [███░░░░░░░] 33%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 0
-- Average duration: — min
-- Total execution time: 0 hours
+- Total plans completed: 3
+- Average duration: 4 min
+- Total execution time: ~12 min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| - | - | - | - |
+| 01-foundation | 1 | 3 min | 3 min |
+| 02-hero-text | 2 | 9 min | 4.5 min |
 
 **Recent Trend:**
-- Last 5 plans: —
-- Trend: —
+- Last 3 plans: 01-01 (3 min), 02-01 (5 min), 02-02 (4 min)
+- Trend: Stable
 
 *Updated after each plan completion*
 | Phase 01-foundation P01 | 3 | 3 tasks | 30 files |
+| Phase 02-hero-text P01 | 5 | 2 tasks | 29 files |
+| Phase 02-hero-text P02 | 4 | 2 tasks | 29 files |
 
 ## Accumulated Context
 
@@ -66,6 +69,9 @@ Recent decisions affecting current work:
 - [Phase 01-foundation]: Use jsdelivr CDN for Lenis 1.3.18 instead of unpkg
 - [Phase 01-foundation]: IIFE pattern with use strict for all animation modules (no bundler)
 - [Phase 01-foundation]: Insert animation scripts before body close tag for correct load order
+- [Phase 02-hero-text]: SplitText CDN at 3.14.2 while base GSAP stays at page-specific version
+- [Phase 02-hero-text]: MutationObserver on #brandLoader for preloader handoff (avoids modifying shared.js)
+- [Phase 02-hero-text]: text-scramble.js owns #stmtAccent entirely (removed from inline statementEntrance)
 
 ### Pending Todos
 
@@ -78,6 +84,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-12T00:54:10.360Z
-Stopped at: Completed 01-01-PLAN.md
+Last session: 2026-03-12
+Stopped at: Completed Phase 2 (02-01 + 02-02)
 Resume file: None

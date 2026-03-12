@@ -586,15 +586,7 @@
 (function() {
   'use strict';
 
-  // ─── HERO ENTRANCE ─────────────────────────────────────────
-  function heroEntrance() {
-    if (typeof gsap === 'undefined') return;
-    var tl = gsap.timeline({ delay: 0.3 });
-    tl.to('#aboutTag', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' });
-    tl.to('#aboutTitle', { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }, '-=0.3');
-    tl.to('#aboutSub', { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' }, '-=0.4');
-    tl.to('#aboutScroll', { opacity: 1, duration: 0.8, ease: 'power2.out' }, '-=0.2');
-  }
+  // heroEntrance() removed — now handled centrally by assets/animation/hero.js
 
   // ─── HISTORY TIMELINE — SCROLL-DRIVEN PINNED ────────
   function historyTimeline() {
@@ -706,7 +698,6 @@
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
     var line = document.getElementById('stmtLine');
     var rule = document.getElementById('stmtRule');
-    var accent = document.getElementById('stmtAccent');
     var sentences = document.querySelectorAll('.stmt-line');
     if (!line || !sentences.length) return;
 
@@ -723,12 +714,11 @@
     }
     tl.to(sentences, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', stagger: 0.15 }, '-=0.2');
     if (rule) { gsap.set(rule, { scaleX: 0 }); tl.to(rule, { scaleX: 1, duration: 0.4, ease: 'power3.out' }, '-=0.1'); }
-    if (accent) { gsap.set(accent, { opacity: 0 }); tl.to(accent, { opacity: 0.06, duration: 0.8, ease: 'power2.out' }, '-=0.4'); }
+    // "1987" accent now handled by text-scramble.js
   }
 
   // ─── INIT ──────────────────────────────────────────────────
   function init() {
-    heroEntrance();
     statementEntrance();
     historyTimeline();
     footerReveal();
@@ -746,10 +736,15 @@
 <!-- GSAP Core — Phase 1 Foundation -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/SplitText.min.js"></script>
 <script src="assets/animations.js"></script>
 
 <script src="assets/animation/controller.js"></script>
 <script src="assets/animation/scroll-engine.js"></script>
 <script src="assets/animation/responsive.js"></script>
+<script src="assets/animation/text-system.js"></script>
+<script src="assets/animation/hero.js"></script>
+<script src="assets/animation/text-scramble.js"></script>
+<script src="assets/animation/scroll-text.js"></script>
 </body>
 </html>

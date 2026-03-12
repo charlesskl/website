@@ -1279,50 +1279,7 @@
   var isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
 
   // ─── HERO CHOREOGRAPHED LOAD SEQUENCE ───────────────────────
-  function heroEntrance() {
-    if (typeof gsap === 'undefined') return;
-
-    var tl = gsap.timeline({ delay: 0.3 });
-
-    // 1. Tag line
-    tl.to('#heroTag', {
-      opacity: 1,
-      y: 0,
-      duration: 0.6,
-      ease: 'power3.out'
-    }, '-=0.3');
-
-    // 3. Headline (staggered per line)
-    tl.to('#heroTitle', {
-      opacity: 1,
-      y: 0,
-      duration: 0.9,
-      ease: 'power3.out'
-    }, '-=0.3');
-
-    // 4. Subtext
-    tl.to('#heroSub', {
-      opacity: 1,
-      y: 0,
-      duration: 0.7,
-      ease: 'power3.out'
-    }, '-=0.4');
-
-    // 5. CTA buttons
-    tl.to('#heroActions', {
-      opacity: 1,
-      y: 0,
-      duration: 0.6,
-      ease: 'power3.out'
-    }, '-=0.3');
-
-    // 6. Scroll hint
-    tl.to('#heroScroll', {
-      opacity: 1,
-      duration: 0.8,
-      ease: 'power2.out'
-    }, '-=0.2');
-  }
+  // heroEntrance() removed — now handled centrally by assets/animation/hero.js
 
 
   // ─── 4-LAYER MOUSE PARALLAX ────────────────────────────────
@@ -1561,7 +1518,6 @@
 
     var line = document.getElementById('stmtLine');
     var rule = document.getElementById('stmtRule');
-    var accent = document.getElementById('stmtAccent');
     var sentences = document.querySelectorAll('.stmt-line');
     if (!line || !sentences.length) return;
 
@@ -1599,11 +1555,7 @@
       tl.to(rule, { scaleX: 1, duration: 0.4, ease: 'power3.out' }, '-=0.1');
     }
 
-    // 4. "1987" accent fades in slowly
-    if (accent) {
-      gsap.set(accent, { opacity: 0 });
-      tl.to(accent, { opacity: 0.06, duration: 0.8, ease: 'power2.out' }, '-=0.4');
-    }
+    // 4. "1987" accent now handled by text-scramble.js
   }
 
 
@@ -1666,7 +1618,6 @@
 
   // ─── INIT ALL ─────────────────────────────────────────────
   function init() {
-    heroEntrance();
     heroParallax();
     capsReveal();
     capsHover();
@@ -1691,10 +1642,15 @@
 <!-- GSAP Core — Phase 1 Foundation -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/SplitText.min.js"></script>
 <script src="assets/animations.js"></script>
 
 <script src="assets/animation/controller.js"></script>
 <script src="assets/animation/scroll-engine.js"></script>
 <script src="assets/animation/responsive.js"></script>
+<script src="assets/animation/text-system.js"></script>
+<script src="assets/animation/hero.js"></script>
+<script src="assets/animation/text-scramble.js"></script>
+<script src="assets/animation/scroll-text.js"></script>
 </body>
 </html>

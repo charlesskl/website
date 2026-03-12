@@ -282,20 +282,14 @@
 <script src="https://unpkg.com/splitting@1.0.6/dist/splitting.min.js" integrity="sha384-taxnKSnzdVS5gZB4jZcieFZlmBPQMFqhdEmCScZsrIFCxX8Zizq4fKJJH5kBwMXT" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js" integrity="sha384-pEQB1h4Zmn9xhS6jotzltHSIQq6N0Oh3BXkCNOH5LKI81R2NRbb9efarAJYw9gTY" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js" integrity="sha384-TgZ1GoXcDnrw/czNfaiSZSFV1zgIRv8aQOevBA8ppS4SkNONmzYfjARpXsDfdnUE" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/SplitText.min.js"></script>
 <script src="../../assets/shared.js"></script>
 <script>
 (function(){
   'use strict';
   var isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
 
-  function heroEntrance() {
-    if (typeof gsap === 'undefined') return;
-    var tl = gsap.timeline({ delay: 0.3 });
-    tl.to('#heroTag', { opacity:1, y:0, duration:0.6, ease:'power3.out' });
-    tl.to('#heroTitle', { opacity:1, y:0, duration:0.9, ease:'power3.out' }, '-=0.3');
-    tl.to('#heroSub', { opacity:1, y:0, duration:0.7, ease:'power3.out' }, '-=0.4');
-    tl.to('#heroScroll', { opacity:1, duration:0.8, ease:'power2.out' }, '-=0.2');
-  }
+  // heroEntrance() removed — now handled centrally by assets/animation/hero.js
 
   function editorialReveal() {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
@@ -320,7 +314,7 @@
     });
   }
 
-  function init() { heroEntrance(); editorialReveal(); footerReveal(); }
+  function init() { editorialReveal(); footerReveal(); }
   if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init); }
   else { requestAnimationFrame(function() { requestAnimationFrame(init); }); }
 })();
@@ -328,5 +322,9 @@
 <script src="../../assets/animation/controller.js"></script>
 <script src="../../assets/animation/scroll-engine.js"></script>
 <script src="../../assets/animation/responsive.js"></script>
+<script src="../../assets/animation/text-system.js"></script>
+<script src="../../assets/animation/hero.js"></script>
+<script src="../../assets/animation/text-scramble.js"></script>
+<script src="../../assets/animation/scroll-text.js"></script>
 </body>
 </html>
