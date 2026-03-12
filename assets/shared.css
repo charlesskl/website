@@ -1564,6 +1564,13 @@ html.js-loaded [data-reveal="fade"]  { transform: none; opacity: 0; }
   transform: none !important;
 }
 
+/* When GSAP choreography takes over, disable CSS transitions on reveal
+   elements to prevent double-animation. GSAP sets inline styles directly. */
+html.js-loaded [data-reveal].rr-choreographed,
+html.js-loaded .reveal-up.rr-choreographed {
+  transition: none !important;
+}
+
 /* ─── Accessibility: prefers-reduced-motion (FOUND-03) ──────────────────── */
 /* CSS layer: immediately reveal all data-reveal elements, no animation */
 @media (prefers-reduced-motion: reduce) {

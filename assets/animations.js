@@ -11,16 +11,10 @@
   /* ── Accessibility guard (mirrors shared.js pattern) ─────────────────── */
   var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ── GSAP initialization stub (Phase 2 timelines will be added here) ─── */
-  function initGSAP() {
-    if (typeof gsap === 'undefined') return; // guard: CDN failed to load
-    if (prefersReducedMotion) return;        // guard: accessibility (FOUND-03)
-    gsap.registerPlugin(ScrollTrigger);
-    // Phase 2 animations will be registered here
-  }
-
-  /* ── data-reveal scroll system (IntersectionObserver, not GSAP) ───────── */
+/* ── data-reveal scroll system (IntersectionObserver, not GSAP) ───────── */
   /* Uses native IO so reveals work even if GSAP CDN fails to load          */
+  /* Phase 3: When GSAP choreography is available, this system defers to    */
+  /* section-choreography.js. Preserved as CDN-failure fallback (FOUND-05). */
   function initScrollReveal() {
     var targets = document.querySelectorAll('[data-reveal]');
     if (!targets.length) return;
@@ -30,6 +24,21 @@
       targets.forEach(function (el) {
         el.classList.add('is-revealed');
       });
+      return;
+    }
+
+    /* If GSAP choreography is available (Phase 3), let it handle reveals.
+       This IO system becomes fallback-only for CDN failure scenarios. */
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      /* GSAP available — section-choreography.js handles all reveals.
+         Safety net: after 3s, force-reveal any uncovered element. */
+      setTimeout(function () {
+        targets.forEach(function (el) {
+          if (!el.classList.contains('is-revealed')) {
+            el.classList.add('is-revealed');
+          }
+        });
+      }, 3000);
       return;
     }
 
@@ -67,7 +76,6 @@
   /* ── Init on DOM ready ───────────────────────────────────────────────── */
   document.addEventListener('DOMContentLoaded', function () {
     initScrollReveal();
-    initGSAP();
   });
 
 }());
