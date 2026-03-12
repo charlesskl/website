@@ -150,7 +150,6 @@ ul, ol { list-style: none; }
   height: 2px;
   background: var(--gradient);
   z-index: calc(var(--z-modal) + 10);
-  will-change: width;
 }
 
 
@@ -174,7 +173,6 @@ ul, ol { list-style: none; }
   background: var(--brand-light);
   pointer-events: none;
   z-index: calc(var(--z-cursor) + 2);
-  will-change: transform;
   transition: opacity 0.2s;
 }
 .cursor-dot.hide { opacity: 0; }
@@ -189,7 +187,6 @@ ul, ol { list-style: none; }
   border: 1.5px solid var(--brand-light);
   pointer-events: none;
   z-index: var(--z-cursor);
-  will-change: transform;
   transition: width 0.3s var(--ease-spring),
               height 0.3s var(--ease-spring),
               margin 0.3s var(--ease-spring),
@@ -238,7 +235,6 @@ ul, ol { list-style: none; }
   color: var(--brand-dark);
   opacity: 0;
   transition: opacity 0.2s;
-  will-change: transform;
 }
 .cursor-label.visible { opacity: 1; }
 
@@ -270,7 +266,6 @@ body.rr-cursor-active select { cursor: none; }
   background: var(--brand-light);
   pointer-events: none;
   z-index: calc(var(--z-cursor) + 2);
-  will-change: transform;
   transition: width 0.2s, height 0.2s, margin 0.2s, opacity 0.2s;
 }
 .rr-cursor-dot.is-small {
@@ -294,7 +289,6 @@ body.rr-cursor-active select { cursor: none; }
   border: 1.5px solid var(--brand-light);
   pointer-events: none;
   z-index: var(--z-cursor);
-  will-change: transform;
   transition: width 0.35s var(--ease-spring),
               height 0.35s var(--ease-spring),
               margin 0.35s var(--ease-spring),
@@ -334,7 +328,6 @@ body.rr-cursor-active select { cursor: none; }
   color: var(--brand-dark);
   opacity: 0;
   transition: opacity 0.2s;
-  will-change: transform;
   transform: translate(-50%, -50%);
 }
 .rr-cursor-label.is-visible { opacity: 1; }
@@ -342,6 +335,14 @@ body.rr-cursor-active select { cursor: none; }
 @media (hover: none), (pointer: coarse) {
   .rr-cursor-dot, .rr-cursor-ring, .rr-cursor-label { display: none !important; }
   body.rr-cursor-active { cursor: auto; }
+}
+
+/* GPU promotion for cursor elements — only on devices with a fine pointer */
+@media (pointer: fine) and (hover: hover) {
+  .cursor-dot, .cursor-ring, .cursor-label,
+  .rr-cursor-dot, .rr-cursor-ring, .rr-cursor-label {
+    will-change: transform;
+  }
 }
 
 
@@ -402,7 +403,6 @@ body.rr-cursor-active select { cursor: none; }
   z-index: calc(var(--z-modal) + 100);
   background: var(--brand);
   clip-path: inset(0 100% 0 0);
-  will-change: clip-path;
   pointer-events: none;
 }
 
@@ -413,7 +413,6 @@ body.rr-cursor-active select { cursor: none; }
   z-index: calc(var(--z-modal) + 200);
   background: var(--brand);
   clip-path: inset(0 100% 0 0);
-  will-change: clip-path;
   pointer-events: none;
 }
 
@@ -748,7 +747,6 @@ h4, h5 {
               background 0.3s;
   position: relative;
   overflow: hidden;
-  will-change: transform;
   text-decoration: none;
 }
 
@@ -821,7 +819,6 @@ h4, h5 {
 /* ───── MAGNETIC BUTTON WRAPPER ───── */
 .magnetic {
   display: inline-block;
-  will-change: transform;
 }
 
 
@@ -840,7 +837,6 @@ h4, h5 {
   transform: scale(1.15);
   opacity: 0;
   transition: transform 1.2s var(--ease-out), opacity 0.8s;
-  will-change: transform, opacity;
 }
 
 .img-reveal.revealed img {
@@ -927,7 +923,6 @@ h4, h5 {
   border-radius: 50%;
   filter: blur(100px);
   opacity: 0.3;
-  will-change: transform;
 }
 
 .aurora-blob:nth-child(1) {
@@ -1380,7 +1375,6 @@ footer.footer-reveal {
 /* ───── SPLITTING.JS CHAR ANIMATION ───── */
 h1 .char, h1 .word {
   display: inline-block;
-  will-change: transform, opacity;
 }
 
 /* ───── LANGUAGE SELECTOR ───── */
@@ -1415,7 +1409,6 @@ h1 .char, h1 .word {
   pointer-events: none;
   z-index: var(--z-overlay);
   opacity: 0;
-  will-change: transform;
   box-shadow: 0 12px 40px rgba(0,0,0,0.25);
 }
 .cap-hover-img img {
