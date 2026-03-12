@@ -247,6 +247,154 @@ ul, ol { list-style: none; }
 }
 
 
+/* ───── NEW CURSOR SYSTEM (Phase 4) ───── */
+/* Hides old cursor elements when new system is active */
+body.rr-cursor-active .cursor-dot,
+body.rr-cursor-active .cursor-ring,
+body.rr-cursor-active .cursor-label { display: none !important; }
+
+body.rr-cursor-active { cursor: none; }
+body.rr-cursor-active a,
+body.rr-cursor-active button,
+body.rr-cursor-active [role="button"],
+body.rr-cursor-active input,
+body.rr-cursor-active textarea,
+body.rr-cursor-active select { cursor: none; }
+
+.rr-cursor-dot {
+  position: fixed;
+  top: 0; left: 0;
+  width: 6px; height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 50%;
+  background: var(--brand-light);
+  pointer-events: none;
+  z-index: calc(var(--z-cursor) + 2);
+  will-change: transform;
+  transition: width 0.2s, height 0.2s, margin 0.2s, opacity 0.2s;
+}
+.rr-cursor-dot.is-small {
+  width: 3px; height: 3px;
+  margin: -1.5px 0 0 -1.5px;
+}
+.rr-cursor-dot.is-hidden { opacity: 0; }
+.rr-cursor-dot.is-crosshair {
+  width: 2px; height: 20px;
+  margin: -10px 0 0 -1px;
+  border-radius: 1px;
+  background: var(--brand);
+}
+
+.rr-cursor-ring {
+  position: fixed;
+  top: 0; left: 0;
+  width: 36px; height: 36px;
+  margin: -18px 0 0 -18px;
+  border-radius: 50%;
+  border: 1.5px solid var(--brand-light);
+  pointer-events: none;
+  z-index: var(--z-cursor);
+  will-change: transform;
+  transition: width 0.35s var(--ease-spring),
+              height 0.35s var(--ease-spring),
+              margin 0.35s var(--ease-spring),
+              border-radius 0.35s var(--ease-spring),
+              background 0.25s,
+              border-color 0.25s,
+              opacity 0.25s;
+}
+.rr-cursor-ring.is-link {
+  width: 56px; height: 56px;
+  margin: -28px 0 0 -28px;
+  background: rgba(156,204,101,0.1);
+  border-color: var(--brand);
+}
+.rr-cursor-ring.is-cta {
+  width: 80px; height: 80px;
+  margin: -40px 0 0 -40px;
+  background: rgba(124,179,66,0.12);
+  border-color: var(--brand);
+}
+.rr-cursor-ring.is-crosshair {
+  width: 24px; height: 24px;
+  margin: -12px 0 0 -12px;
+  border-color: var(--brand);
+  opacity: 0.6;
+}
+
+.rr-cursor-label {
+  position: fixed;
+  pointer-events: none;
+  z-index: calc(var(--z-cursor) + 1);
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--brand-dark);
+  opacity: 0;
+  transition: opacity 0.2s;
+  will-change: transform;
+  transform: translate(-50%, -50%);
+}
+.rr-cursor-label.is-visible { opacity: 1; }
+
+@media (hover: none), (pointer: coarse) {
+  .rr-cursor-dot, .rr-cursor-ring, .rr-cursor-label { display: none !important; }
+  body.rr-cursor-active { cursor: auto; }
+}
+
+
+/* ───── HOVER MICRO-INTERACTIONS (Phase 4) ───── */
+.rr-underline {
+  position: relative;
+}
+.rr-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--brand);
+  transform: scaleX(var(--rr-underline-scale, 0));
+  transform-origin: var(--rr-underline-origin, 100% 50%);
+  transition: transform 0.3s var(--ease-spring);
+}
+.rr-underline:hover::after {
+  --rr-underline-scale: 1;
+  --rr-underline-origin: 0% 50%;
+}
+
+.rr-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.rr-shimmer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: var(--rr-shimmer-x, -100%);
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.2),
+    transparent
+  );
+  transform: skewX(-20deg);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.rr-focused {
+  outline: 2px solid var(--brand) !important;
+  outline-offset: 2px;
+  border-color: var(--brand) !important;
+}
+
+
 /* ───── PAGE TRANSITION OVERLAY ───── */
 .page-transition {
   position: fixed;
