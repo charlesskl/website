@@ -406,6 +406,40 @@ body.rr-cursor-active select { cursor: none; }
   pointer-events: none;
 }
 
+/* ───── PAGE TRANSITION (Phase 4) ───── */
+.rr-page-transition {
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--z-modal) + 200);
+  background: var(--brand);
+  clip-path: inset(0 100% 0 0);
+  will-change: clip-path;
+  pointer-events: none;
+}
+
+/* ───── NAVBAR SMART SCROLL (Phase 4) ───── */
+#navbar.rr-nav-hidden {
+  transform: translateY(-100%);
+}
+
+/* ───── MOBILE MENU GSAP (Phase 4) ───── */
+@media (max-width: 768px) {
+  .rr-menu-managed .nav-links > li {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+}
+
+.hamburger.is-x span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.is-x span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.is-x span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
+}
+
 
 /* ───── NAVIGATION ───── */
 #navbar {
