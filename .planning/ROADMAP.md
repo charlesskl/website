@@ -13,7 +13,7 @@ Transform the Royal Regent website from functional-but-generic animations into a
 - [x] **Phase 1: Foundation** - Scroll infrastructure, module registry, and animation architecture baseline (completed 2026-03-12)
 - [x] **Phase 2: Hero & Text** - Opening sequence master timeline and SplitText kinetic typography system (completed 2026-03-12)
 - [ ] **Phase 3: Scroll Experiences** - Clip-path reveals, parallax, velocity skew, and staggered choreography
-- [ ] **Phase 4: Cursor & Nav** - Custom cursor states, magnetic buttons, nav transitions, and micro-interactions
+- [x] **Phase 4: Cursor & Nav** - Custom cursor states, magnetic buttons, nav transitions, and micro-interactions (completed 2026-03-12)
 - [ ] **Phase 5: WebGL** - Three.js shader backgrounds, card showcase, and GPU memory safety
 - [ ] **Phase 6: Polish & Parity** - Integration audit, multi-language sync, performance validation, and horizontal scroll
 
@@ -127,6 +127,6 @@ Plans:
 | 1. Foundation | 1/1 | Complete   | 2026-03-12 |
 | 2. Hero & Text | 2/2 | Complete | 2026-03-12 |
 | 3. Scroll Experiences | 0/2 | Not started | - |
-| 4. Cursor & Nav | 0/2 | Not started | - |
+| 4. Cursor & Nav | 0/2 | Complete    | 2026-03-12 |
 | 5. WebGL | 0/2 | Not started | - |
 | 6. Polish & Parity | 0/2 | Not started | - |
