@@ -1801,3 +1801,32 @@ html.js-loaded .reveal-up.rr-choreographed {
 @media (hover: none), (pointer: coarse) {
   #rr-webgl-bg { display: none !important; }
 }
+
+
+/* ───── CARD EFFECTS (Phase 5) ───── */
+/* 3D tilt perspective context */
+.cap-card {
+  transform-style: preserve-3d;
+}
+
+/* Card info layer sits forward in 3D space for depth during tilt */
+.cap-card-info {
+  transform: translateZ(20px);
+}
+
+/* Desktop: enhanced hover with tilt-compatible shadow */
+@media (hover: hover) and (pointer: fine) {
+  .cap-card:hover {
+    box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+  }
+  .cap-card:hover .cap-card-shadow {
+    opacity: 1;
+  }
+}
+
+/* Touch devices: no 3D, keep simple hover effects */
+@media (hover: none), (pointer: coarse) {
+  .cap-card {
+    transform-style: flat;
+  }
+}
