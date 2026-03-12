@@ -1823,3 +1823,29 @@ html.js-loaded .reveal-up.rr-choreographed {
     transform-style: flat;
   }
 }
+
+/* ───── HORIZONTAL SCROLL SHOWCASE (Phase 6) ───── */
+/* Activated by JS adding .is-horizontal class to .caps-section */
+.caps-section.is-horizontal {
+  overflow: visible; /* Allow pin-spacer to work */
+}
+.caps-section.is-horizontal .caps-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 24px;
+  width: max-content;
+}
+.caps-section.is-horizontal .cap-card {
+  flex: 0 0 clamp(280px, 30vw, 400px);
+}
+/* Mobile: never activate horizontal layout */
+@media (pointer: coarse) {
+  .caps-section.is-horizontal .caps-grid {
+    display: grid;
+    flex-wrap: unset;
+    width: auto;
+  }
+  .caps-section.is-horizontal .cap-card {
+    flex: unset;
+  }
+}

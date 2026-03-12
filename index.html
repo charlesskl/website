@@ -113,7 +113,7 @@
     .hero-bg { position: absolute; inset: 0; pointer-events: none; }
 
     /* 4-layer parallax containers */
-    .parallax-layer { position: absolute; inset: 0; will-change: transform; }
+    .parallax-layer { position: absolute; inset: 0; }
     .parallax-bg { z-index: 0; }
     .parallax-mid { z-index: 1; }
     .parallax-headline { z-index: 2; }
@@ -348,7 +348,6 @@
       overflow: hidden;
       background: #fff;
       aspect-ratio: 3 / 4.5;
-      will-change: transform, opacity;
       cursor: pointer;
     }
 
@@ -358,7 +357,6 @@
       inset: 0;
       z-index: 0;
       opacity: 0;
-      will-change: opacity, transform;
       overflow: hidden;
       border-radius: 0;
     }
@@ -367,7 +365,6 @@
       height: 100%;
       object-fit: cover;
       transform: scale(1.08);
-      will-change: transform;
     }
     /* Gradient overlay on top of bg image */
     .cap-card-bg::after {
@@ -398,7 +395,6 @@
       position: absolute;
       inset: 0;
       z-index: 2;
-      will-change: transform;
       overflow: hidden;
     }
     .cap-card-img img {
@@ -449,7 +445,6 @@
       color: #fff;
       opacity: 0;
       transform: translateY(8px);
-      will-change: opacity, transform;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -484,7 +479,6 @@
       height: 100%;
       object-fit: cover;
       transform: scale(1.05);
-      will-change: transform;
     }
     /* Subtle dark overlay for white text readability */
     .history-bg::before {
