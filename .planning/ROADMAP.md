@@ -10,7 +10,7 @@ Transform the Royal Regent website from functional-but-generic animations into a
 - Integer phases (1, 2, 3): Planned milestone work
 - Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
 
-- [ ] **Phase 1: Foundation** - Scroll infrastructure, module registry, and animation architecture baseline
+- [x] **Phase 1: Foundation** - Scroll infrastructure, module registry, and animation architecture baseline (completed 2026-03-12)
 - [ ] **Phase 2: Hero & Text** - Opening sequence master timeline and SplitText kinetic typography system
 - [ ] **Phase 3: Scroll Experiences** - Clip-path reveals, parallax, velocity skew, and staggered choreography
 - [ ] **Phase 4: Cursor & Nav** - Custom cursor states, magnetic buttons, nav transitions, and micro-interactions
@@ -124,7 +124,7 @@ Plans:
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/1 | Not started | - |
+| 1. Foundation | 1/1 | Complete   | 2026-03-12 |
 | 2. Hero & Text | 0/2 | Not started | - |
 | 3. Scroll Experiences | 0/2 | Not started | - |
 | 4. Cursor & Nav | 0/2 | Not started | - |
