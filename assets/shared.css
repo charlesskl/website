@@ -35,24 +35,15 @@
   --brand:        #7CB342;
   --brand-light:  #9CCC65;
   --brand-dark:   #558B2F;
-  --brand-deep:   #33691E;
   --brand-5:      rgba(124,179,66,0.05);
   --brand-8:      rgba(124,179,66,0.08);
-  --brand-12:     rgba(124,179,66,0.12);
   --brand-20:     rgba(124,179,66,0.20);
   --brand-40:     rgba(124,179,66,0.40);
 
   /* Neutrals — warm, not sterile */
   --white:        #FFFFFF;
-  --off-white:    #FAFDF7;
   --cream:        #F5F8F0;
-  --gray-50:      #F0F3EC;
   --gray-100:     #E4E8DE;
-  --gray-200:     #C8CEBF;
-  --gray-400:     #8A9178;
-  --gray-600:     #5C6350;
-  --gray-800:     #2D3225;
-  --gray-900:     #1A1E14;
 
   /* Semantic */
   --text:         #1A1E14;
@@ -65,7 +56,6 @@
 
   /* Gradients */
   --gradient:     linear-gradient(135deg, #9CCC65 0%, #7CB342 50%, #558B2F 100%);
-  --gradient-soft: linear-gradient(135deg, rgba(124,179,66,0.08) 0%, rgba(124,179,66,0.02) 100%);
   --gradient-hero: linear-gradient(160deg, #FAFDF7 0%, #F0F5E8 40%, #FAFDF7 100%);
 
   /* Typography scale — fluid */
@@ -105,8 +95,6 @@
   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
 
   /* Z-index */
-  --z-base:     1;
-  --z-content:  10;
   --z-header:   100;
   --z-cursor:   500;
   --z-overlay:  900;
@@ -559,7 +547,7 @@ h4, h5 {
 }
 
 .section { padding: var(--space-2xl) 0; }
-.section-sm { padding: var(--space-xl) 0; }
+
 
 
 /* ───── BUTTONS ───── */
@@ -897,16 +885,6 @@ footer.footer-reveal {
 }
 
 
-/* ───── WEBGL CANVAS (Three.js) ───── */
-.webgl-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
-}
-
 
 /* ───── PAGE HERO (inner pages) ───── */
 .page-hero {
@@ -1117,26 +1095,6 @@ footer.footer-reveal {
 }
 
 
-/* ───── CAPABILITIES HUB ───── */
-.cap-list-item {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 24px;
-  align-items: center;
-  padding: 32px 0;
-  border-bottom: 1px solid var(--border);
-  text-decoration: none;
-  color: inherit;
-  transition: background 0.3s;
-}
-@media (hover: hover) and (pointer: fine) {
-  .cap-list-item:hover { background: var(--brand-5); }
-}
-.cap-list-num { font-family: var(--font-display); font-size: var(--text-xs); font-weight: 700; color: var(--brand); letter-spacing: 0.1em; }
-.cap-list-item h3 { font-size: var(--text-xl); font-weight: 700; margin-bottom: 4px; }
-.cap-list-item p { font-size: var(--text-sm); color: var(--text-muted); }
-.cap-list-tags { display: flex; gap: 8px; flex-wrap: wrap; }
-
 
 /* ───── RESPONSIVE ───── */
 @media (max-width: 1024px) {
@@ -1222,11 +1180,6 @@ footer.footer-reveal {
 @keyframes shimmer {
   from { left: -100%; }
   to   { left: 150%; }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-12px); }
 }
 
 
@@ -1627,4 +1580,20 @@ html.js-loaded [data-reveal="fade"]  { transform: none; opacity: 0; }
   [data-reveal] {
     will-change: auto;
   }
+}
+
+/* ─── Scroll Progress Indicator (SCROLL-07) ──────────────────────────────── */
+.rr-scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--brand);
+  transform-origin: left center;
+  transform: scaleX(0);
+  z-index: 99998; /* below preloader (99999), above everything else */
+  pointer-events: none;
+  will-change: transform;
+  transition: none; /* GSAP handles all transitions */
 }
