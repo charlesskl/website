@@ -264,7 +264,7 @@
 
   // ── Load jobs ──
   function loadJobs() {
-    fetch('../jobs.json')
+    fetch('jobs.json')
       .then(function(r) { return r.json(); })
       .then(function(data) {
         jobs = data;
