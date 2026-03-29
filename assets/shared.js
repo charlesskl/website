@@ -607,8 +607,8 @@
         );
       });
 
-      // Safety: force-reveal any elements still hidden after 4s
-      // (covers edge cases where ScrollTrigger fails on mobile)
+      // Safety: force-reveal any elements still hidden after 1.5s
+      // (covers edge cases where ScrollTrigger fails on mobile or initial viewport)
       setTimeout(function() {
         els.forEach(function(el) {
           var style = window.getComputedStyle(el);
@@ -616,7 +616,7 @@
             gsap.to(el, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
           }
         });
-      }, 4000);
+      }, 1500);
     } else {
       // Fallback IntersectionObserver
       var observer = new IntersectionObserver(function (entries) {
@@ -1188,7 +1188,7 @@
     var ringFill = loader.querySelector('.loader-ring-fill');
     var taglineSpans = loader.querySelectorAll('.loader-tagline span');
     var startTime = Date.now();
-    var DURATION = 2200;
+    var DURATION = 1600;
     var dismissed = false;
     var current = 0;
     var target = 0;
@@ -1321,13 +1321,12 @@
       fontsLoaded = true;
     }
 
-    // Absolute fallback — never stay stuck longer than 4s
+    // Absolute fallback — never stay stuck longer than 3s
     setTimeout(function() {
       if (!dismissed) {
-        console.warn('Loader fallback: force dismiss after 4s');
         target = 100;
       }
-    }, 4000);
+    }, 3000);
   }
 
 

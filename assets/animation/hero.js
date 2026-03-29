@@ -257,8 +257,19 @@
   // ─── MODULE LIFECYCLE ─────────────────────────────────────────
 
   function init() {
-    // CDN graceful degradation: GSAP required
-    if (typeof gsap === 'undefined') return;
+    // CDN graceful degradation: show hero elements immediately if GSAP unavailable
+    if (typeof gsap === 'undefined') {
+      var sel = getSelectors();
+      var titleEl = sel.title ? document.querySelector(sel.title) : null;
+      var tagEl = sel.tag ? document.querySelector(sel.tag) : null;
+      var subEl = sel.sub ? document.querySelector(sel.sub) : null;
+      var actionsEl = sel.actions ? document.querySelector(sel.actions) : null;
+      [titleEl, tagEl, subEl, actionsEl].filter(Boolean).forEach(function(el) {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      });
+      return;
+    }
 
     // Reduced motion gate (HERO-05): instant reveal, no animation
     if (window.RR && window.RR.state && window.RR.state.hasReducedMotion) {
