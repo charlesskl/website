@@ -2,3 +2,4 @@
 *.heic
 *.code-workspace
 preview-*.html
+.gstack/

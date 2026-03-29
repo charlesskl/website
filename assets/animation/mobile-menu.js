@@ -232,8 +232,8 @@
 
     isActive = true;
 
-    // Set initial panel position for GSAP animation
-    if (hasGsap) {
+    // Set initial panel position for GSAP animation (mobile only)
+    if (hasGsap && window.innerWidth <= 768) {
       gsap.set(navLinks, { x: '100%' });
     }
 

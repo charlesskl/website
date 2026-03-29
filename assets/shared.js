@@ -727,12 +727,15 @@
     if (path.indexOf('/cn/') !== -1) currentLang = 'cn';
     else if (path.indexOf('/id/') !== -1) currentLang = 'id';
 
-    // Mark active language in dropdown
+    // Mark active language in dropdown and set real hrefs for SEO / no-JS fallback
     var langLinks = document.querySelectorAll('.lang-dropdown a');
     langLinks.forEach(function(link) {
-      if (link.getAttribute('data-lang') === currentLang) {
+      var lang = link.getAttribute('data-lang');
+      if (lang === currentLang) {
         link.classList.add('active');
       }
+      // Set real href so crawlers and no-JS users get a working link
+      link.setAttribute('href', getLangHref(lang, currentLang));
       link.addEventListener('click', function(e) {
         e.preventDefault();
         var lang = this.getAttribute('data-lang');
@@ -754,6 +757,24 @@
     if (preferred && preferred !== currentLang) {
       showLangBanner(preferred, currentLang);
     }
+  }
+
+  function getLangHref(targetLang, currentLang) {
+    var path = window.location.pathname;
+    var cleanPath = path;
+    if (currentLang !== 'en') {
+      cleanPath = cleanPath.replace('/' + currentLang + '/', '/');
+    }
+    if (targetLang === 'en') return cleanPath;
+    var parts = cleanPath.split('/');
+    for (var i = 0; i < parts.length; i++) {
+      if (parts[i].indexOf('.html') !== -1 || parts[i] === 'capabilities') {
+        parts.splice(i, 0, targetLang);
+        return parts.join('/');
+      }
+    }
+    var base = cleanPath.endsWith('/') ? cleanPath : cleanPath + '/';
+    return base + targetLang + '/';
   }
 
   function navigateToLang(targetLang, currentLang) {
