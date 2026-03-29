@@ -295,8 +295,12 @@
       }, 1200);
 
       buildTimeline(function (tl) {
-        clearTimeout(safetyTimer);
         if (!tl) return;
+        // Clear the safety timer only after the animation has started and
+        // elements are confirmed visible (onStart fires once first frame renders).
+        tl.eventCallback('onStart', function () {
+          clearTimeout(safetyTimer);
+        });
         tl.play();
       });
     } else {
