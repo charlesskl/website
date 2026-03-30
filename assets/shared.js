@@ -33,9 +33,10 @@
   const hasHover = window.matchMedia('(hover: hover)').matches;
 
 
-  // ─── 1. ADVANCED TWO-PART CURSOR ────────────────────────────
+  // ─── 1. ADVANCED TWO-PART CURSOR (deprecated — replaced by Phase 4 cursor.js) ────
   function initCursor() {
-    if (isTouch || !hasHover) return;
+    return; // disabled: Phase 4 cursor.js handles all cursor behaviour
+    if (isTouch || !hasHover) return; // eslint-disable-line no-unreachable
 
     var dot = document.createElement('div');
     dot.className = 'cursor-dot';

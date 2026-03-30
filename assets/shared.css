@@ -163,92 +163,7 @@ ul, ol { list-style: none; }
   .admin-overlay input, .admin-overlay textarea, .admin-overlay select, .apply-overlay input, .apply-overlay textarea, .apply-overlay select { cursor: text !important; }
 }
 
-/* Dot — instant follow, 4px solid */
-.cursor-dot {
-  position: fixed;
-  top: 0; left: 0;
-  width: 4px; height: 4px;
-  margin: -2px 0 0 -2px;
-  border-radius: 50%;
-  background: var(--brand-light);
-  pointer-events: none;
-  z-index: calc(var(--z-cursor) + 2);
-  transition: opacity 0.2s;
-}
-.cursor-dot.hide { opacity: 0; }
-
-/* Ring — 32px, follows with lerp lag */
-.cursor-ring {
-  position: fixed;
-  top: 0; left: 0;
-  width: 32px; height: 32px;
-  margin: -16px 0 0 -16px;
-  border-radius: 50%;
-  border: 1.5px solid var(--brand-light);
-  pointer-events: none;
-  z-index: var(--z-cursor);
-  transition: width 0.3s var(--ease-spring),
-              height 0.3s var(--ease-spring),
-              margin 0.3s var(--ease-spring),
-              border-radius 0.3s var(--ease-spring),
-              background 0.2s,
-              border-color 0.2s,
-              opacity 0.2s;
-}
-
-/* State: hovering a link/button */
-.cursor-ring.link {
-  width: 48px; height: 48px;
-  margin: -24px 0 0 -24px;
-  background: rgba(156,204,101,0.15);
-  border-color: var(--brand);
-}
-
-/* State: hovering an image — crosshair style + VIEW label */
-.cursor-ring.view {
-  width: 64px; height: 64px;
-  margin: -32px 0 0 -32px;
-  background: rgba(124,179,66,0.1);
-  border-color: var(--brand);
-}
-
-/* State: hovering body text — thin horizontal line */
-.cursor-ring.text {
-  width: 40px; height: 2px;
-  margin: -1px 0 0 -20px;
-  border-radius: 1px;
-  background: var(--brand-40);
-  border-color: transparent;
-}
-
-/* Label inside ring */
-.cursor-label {
-  position: fixed;
-  pointer-events: none;
-  z-index: calc(var(--z-cursor) + 1);
-  transform: translate(-50%, -50%);
-  font-family: var(--font-body);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--brand-dark);
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-.cursor-label.visible { opacity: 1; }
-
-@media (hover: none), (pointer: coarse), (max-width: 1024px) {
-  .cursor-dot, .cursor-ring, .cursor-label { display: none !important; }
-}
-
-
-/* ───── NEW CURSOR SYSTEM (Phase 4) ───── */
-/* Hides old cursor elements when new system is active */
-body.rr-cursor-active .cursor-dot,
-body.rr-cursor-active .cursor-ring,
-body.rr-cursor-active .cursor-label { display: none !important; }
-
+/* ───── CURSOR SYSTEM (Phase 4) ───── */
 body.rr-cursor-active { cursor: none; }
 body.rr-cursor-active a,
 body.rr-cursor-active button,
@@ -339,7 +254,6 @@ body.rr-cursor-active select { cursor: none; }
 
 /* GPU promotion for cursor elements — only on devices with a fine pointer */
 @media (pointer: fine) and (hover: hover) {
-  .cursor-dot, .cursor-ring, .cursor-label,
   .rr-cursor-dot, .rr-cursor-ring, .rr-cursor-label {
     will-change: transform;
   }
