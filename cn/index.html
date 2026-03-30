@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-Hant" class="no-js">
 <head>
+  <script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js-loaded');</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -184,9 +185,11 @@
 
 
     /* ═══ MARQUEE ═══ */
+    :root { --marquee-duration: 40s; }
+    @media (max-width: 768px) { :root { --marquee-duration: 60s; } }
     .marquee { position: relative; z-index: 10; }
     .marquee-track {
-      animation: marqueeScroll 40s linear infinite;
+      animation: marqueeScroll var(--marquee-duration) linear infinite;
     }
     .marquee:hover .marquee-track {
       animation-play-state: paused;
@@ -744,11 +747,11 @@
     @keyframes fallbackReveal {
       to { opacity: 1; transform: translateY(0); }
     }
-    .hero-tag, .hero-title, .hero-sub, .hero-actions {
+    .no-js .hero-tag, .no-js .hero-title, .no-js .hero-sub, .no-js .hero-actions {
       animation: fallbackReveal 0.6s ease forwards;
       animation-delay: 0.5s;
     }
-    .hero-scroll-hint {
+    .no-js .hero-scroll-hint {
       animation: fallbackReveal 0.6s ease forwards;
       animation-delay: 1.2s;
     }
@@ -766,7 +769,7 @@
 <nav id="navbar">
   <div class="nav-container">
     <a href="index.html" class="nav-logo">
-      <img src="../assets/logo.webp" alt="Royal Regent">
+      <img src="../assets/logo.webp" alt="Royal Regent Toys">
     </a>
     <ul class="nav-links" id="navLinks">
       <li><a href="about.html">關於我們</a></li>
@@ -1074,8 +1077,19 @@
   <div class="footer-container">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="../assets/logo.webp" alt="Royal Regent" class="footer-logo">
+        <img src="../assets/logo.webp" alt="Royal Regent Toys" class="footer-logo">
         <p>自1987年以來，一直是全球領先玩具品牌的製造夥伴。五大產品品類、四個生產基地、一個統一標準——符合全球法規。</p>
+        <div class="footer-factories">
+          <div class="footer-factory">
+            <div class="footer-factory-label">中國</div>
+            <p>廣東省東莞市及河源市</p>
+          </div>
+          <div class="footer-factories-divider"></div>
+          <div class="footer-factory">
+            <div class="footer-factory-label">印尼</div>
+            <p>萬丹省丹格朗市</p>
+          </div>
+        </div>
       </div>
       <div class="footer-col">
         <h4>公司</h4>
@@ -1099,7 +1113,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 Royal Regent. 版權所有。</p>
+      <p>&copy; <span class="footer-year"></span> Royal Regent Toys. 版權所有。</p>
     </div>
   </div>
 </footer>
