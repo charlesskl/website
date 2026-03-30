@@ -1449,6 +1449,11 @@
     if (typeof ScrollTrigger !== 'undefined') {
       requestAnimationFrame(function() { ScrollTrigger.refresh(); });
     }
+
+    // Dynamic copyright year
+    var yearEls = document.querySelectorAll('.footer-year, #footerYear');
+    var currentYear = new Date().getFullYear().toString();
+    yearEls.forEach(function(el) { el.textContent = currentYear; });
   }
 
   if (document.readyState === 'loading') {

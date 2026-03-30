@@ -562,6 +562,7 @@ body[data-page="contact"] .nav-links a[href="../contact.html"] {
   padding: 10px 24px !important;
   border-radius: var(--radius-sm) !important;
   font-weight: 600 !important;
+  box-shadow: 0 0 0 2px rgba(124,179,66,0.3) !important;
   transition: transform 0.3s var(--ease-spring), box-shadow 0.3s !important;
 }
 @media (hover: hover) and (pointer: fine) {

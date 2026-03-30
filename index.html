@@ -216,9 +216,11 @@
 
 
     /* ═══ MARQUEE ═══ */
+    :root { --marquee-duration: 40s; }
+    @media (max-width: 768px) { :root { --marquee-duration: 60s; } }
     .marquee { position: relative; z-index: 10; }
     .marquee-track {
-      animation: marqueeScroll 40s linear infinite;
+      animation: marqueeScroll var(--marquee-duration) linear infinite;
     }
     .marquee:hover .marquee-track {
       animation-play-state: paused;
@@ -846,7 +848,7 @@
 <nav id="navbar" class="page-reveal">
   <div class="nav-container">
     <a href="index.html" class="nav-logo">
-      <img src="assets/logo.webp" alt="Royal Regent">
+      <img src="assets/logo.webp" alt="Royal Regent Toys">
     </a>
     <ul class="nav-links" id="navLinks">
       <li><a href="about.html">About</a></li>
