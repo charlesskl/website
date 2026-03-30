@@ -694,7 +694,9 @@ h4, h5 {
   background-clip: text;
 }
 .text-gradient .char,
-.text-gradient .word {
+.text-gradient .rr-char,
+.text-gradient .word,
+.text-gradient .rr-word {
   background: inherit;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
