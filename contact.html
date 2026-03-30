@@ -541,24 +541,10 @@
   }
 
 
-  // ─── STAGGERED CONTACT DETAILS REVEAL ──────────────────────
-  function detailsReveal() {
-    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-    var details = document.querySelectorAll('.contact-detail');
-    details.forEach(function(el, i) {
-      gsap.fromTo(el,
-        { opacity: 0, x: -20 },
-        {
-          opacity: 1, x: 0, duration: 0.6, ease: 'power3.out',
-          delay: i * 0.15,
-          scrollTrigger: { trigger: el, start: 'top 85%', once: true }
-        }
-      );
-    });
-
-  }
-
-
+  // detailsReveal() removed — contact details use .reveal-up class
+  // and are animated by the shared initReveal() system in shared.js.
+  // The duplicate gsap.fromTo here conflicted (set x:-20 that was
+  // never cleared), leaving elements permanently offset.
 
 
   // ─── INIT ──────────────────────────────────────────────────
@@ -566,7 +552,6 @@
     initFloatingLabels();
     updateProgress();
     initFormSubmit();
-    detailsReveal();
   }
 
   if (document.readyState === 'loading') {

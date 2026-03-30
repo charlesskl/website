@@ -944,48 +944,76 @@
         var items = result[splitBy === 'chars' ? 'chars' : 'words'];
         if (!items || !items.length) return;
 
-        // Set initial state
-        gsap.set(items, { opacity: 0, y: 30, rotation: splitBy === 'chars' ? 6 : 0 });
+        // text-gradient spans use background-clip:text + transparent text-fill.
+        // Per-char opacity animation on these elements can fail in some browsers
+        // (the background doesn't repaint correctly during opacity transitions).
+        // Fix: animate the .text-gradient span as a whole unit instead.
+        var gradientSpan = result.el.querySelector('.text-gradient');
+        var regularItems = items;
+
+        if (gradientSpan) {
+          regularItems = Array.prototype.filter.call(items, function(item) {
+            return !gradientSpan.contains(item);
+          });
+          // Hide gradient span as whole; leave its children at default opacity
+          gsap.set(gradientSpan, { opacity: 0, y: 30 });
+        }
+
+        // Set initial state for regular (non-gradient) chars
+        if (regularItems.length) {
+          gsap.set(regularItems, { opacity: 0, y: 30, rotation: splitBy === 'chars' ? 6 : 0 });
+        }
 
         // Check if element is already in viewport (hero at top of page)
         var rect = result.el.getBoundingClientRect();
         var inView = rect.top < window.innerHeight * 0.9;
+        var staggerVal = splitBy === 'chars' ? 0.02 : 0.05;
+        var gradientDelay = regularItems.length ? 0.3 + regularItems.length * staggerVal : 0.3;
 
         if (inView) {
           // Already visible — animate immediately with a short delay
-          gsap.to(items, {
-            opacity: 1,
-            y: 0,
-            rotation: 0,
-            duration: 0.5,
-            ease: 'power3.out',
-            stagger: splitBy === 'chars' ? 0.02 : 0.05,
-            delay: 0.3
-          });
+          if (regularItems.length) {
+            gsap.to(regularItems, {
+              opacity: 1, y: 0, rotation: 0,
+              duration: 0.5, ease: 'power3.out',
+              stagger: staggerVal, delay: 0.3
+            });
+          }
+          if (gradientSpan) {
+            gsap.to(gradientSpan, {
+              opacity: 1, y: 0, duration: 0.6,
+              ease: 'power3.out', delay: gradientDelay
+            });
+          }
         } else if (typeof ScrollTrigger !== 'undefined') {
-          gsap.to(items, {
-            opacity: 1,
-            y: 0,
-            rotation: 0,
-            duration: 0.5,
-            ease: 'power3.out',
-            stagger: splitBy === 'chars' ? 0.02 : 0.05,
-            scrollTrigger: {
-              trigger: result.el,
-              start: 'top 85%',
-              once: true
-            }
-          });
+          if (regularItems.length) {
+            gsap.to(regularItems, {
+              opacity: 1, y: 0, rotation: 0,
+              duration: 0.5, ease: 'power3.out',
+              stagger: staggerVal,
+              scrollTrigger: { trigger: result.el, start: 'top 85%', once: true }
+            });
+          }
+          if (gradientSpan) {
+            gsap.to(gradientSpan, {
+              opacity: 1, y: 0, duration: 0.6, ease: 'power3.out',
+              scrollTrigger: { trigger: result.el, start: 'top 85%', once: true }
+            });
+          }
         } else {
-          gsap.to(items, {
-            opacity: 1,
-            y: 0,
-            rotation: 0,
-            duration: 0.5,
-            ease: 'power3.out',
-            stagger: splitBy === 'chars' ? 0.02 : 0.05,
-            delay: 0.3
-          });
+          if (regularItems.length) {
+            gsap.to(regularItems, {
+              opacity: 1, y: 0, rotation: 0,
+              duration: 0.5, ease: 'power3.out',
+              stagger: staggerVal, delay: 0.3
+            });
+          }
+          if (gradientSpan) {
+            gsap.to(gradientSpan, {
+              opacity: 1, y: 0, duration: 0.6,
+              ease: 'power3.out', delay: gradientDelay
+            });
+          }
         }
       });
     } catch (e) {
