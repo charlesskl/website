@@ -289,7 +289,7 @@
       font-size: clamp(120px, 18vw, 220px);
       font-weight: 700;
       color: var(--brand);
-      opacity: 0.06;
+      opacity: 0.10;
       line-height: 1;
       user-select: none;
       pointer-events: none;
@@ -1167,8 +1167,19 @@
   <div class="footer-container">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="assets/logo.webp" alt="Royal Regent" class="footer-logo">
+        <img src="assets/logo.webp" alt="Royal Regent Toys" class="footer-logo">
         <p>Manufacturing partner to the world's leading toy brands since 1987. Five product categories, four production sites, one consistent standard &mdash; US and EU compliant.</p>
+        <div class="footer-factories">
+          <div class="footer-factory">
+            <div class="footer-factory-label">China</div>
+            <p>Dongguan &amp; Heyuan,<br>Guangdong Province</p>
+          </div>
+          <div class="footer-factories-divider"></div>
+          <div class="footer-factory">
+            <div class="footer-factory-label">Indonesia</div>
+            <p>Tangerang,<br>Banten Province</p>
+          </div>
+        </div>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
@@ -1192,7 +1203,8 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 Royal Regent. All rights reserved.</p>
+      <p>&copy; <span id="footerYear"></span> Royal Regent Toys. All rights reserved.</p>
+      <script>document.getElementById('footerYear').textContent=new Date().getFullYear();</script>
     </div>
   </div>
 </footer>

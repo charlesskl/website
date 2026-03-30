@@ -415,6 +415,26 @@ body.rr-cursor-active select { cursor: none; }
   }
 }
 
+/* Active page state via body[data-page] */
+body[data-page="about"] .nav-links a[href="about.html"],
+body[data-page="about"] .nav-links a[href="../about.html"] {
+  color: var(--brand-dark);
+  background: var(--brand-5);
+  font-weight: 600;
+}
+body[data-page="careers"] .nav-links a[href="careers.html"],
+body[data-page="careers"] .nav-links a[href="../careers.html"] {
+  color: var(--brand-dark);
+  background: var(--brand-5);
+  font-weight: 600;
+}
+body[data-page="contact"] .nav-links a[href="contact.html"],
+body[data-page="contact"] .nav-links a[href="../contact.html"] {
+  color: var(--brand-dark);
+  background: var(--brand-5);
+  font-weight: 600;
+}
+
 .has-dropdown { position: relative; }
 .has-dropdown > a .arrow {
   font-size: 0.7rem;
