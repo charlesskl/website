@@ -118,7 +118,9 @@
     .careers-values { background:var(--surface-alt); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding-top:var(--space-2xl); padding-bottom:var(--space-xl); }
     .values-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border-top:1px solid var(--border); border-left:1px solid var(--border); }
     .value-card { border-right:1px solid var(--border); border-bottom:1px solid var(--border); padding:48px 36px; background:var(--white); transition:background 0.3s, border-color 0.3s; }
-    .value-card:hover { background:var(--brand-5); border-color:var(--brand-20); }
+    @media (hover: hover) and (pointer: fine) {
+      .value-card:hover { background:var(--brand-5); border-color:var(--brand-20); }
+    }
     .value-icon { font-size:2rem; margin-bottom:16px; }
     .value-card h3 { font-family:var(--font-display); font-size:var(--text-base); font-weight:700; color:var(--text); margin-bottom:10px; letter-spacing:-0.01em; }
     .value-card p { font-size:var(--text-sm); color:var(--text-muted); line-height:1.7; }

@@ -259,9 +259,11 @@
       transition: transform 0.4s var(--ease-spring), box-shadow 0.4s;
       box-shadow: 0 4px 24px rgba(124,179,66,0.25);
     }
-    .submit-btn:hover {
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 12px 40px rgba(124,179,66,0.35);
+    @media (hover: hover) and (pointer: fine) {
+      .submit-btn:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 12px 40px rgba(124,179,66,0.35);
+      }
     }
     .submit-btn:active {
       transform: translateY(0) scale(0.98);
@@ -277,7 +279,7 @@
     .submit-btn.sent .btn-text { opacity: 0; transform: translateY(10px); }
     .submit-btn.sent .btn-success { opacity: 1; transform: scale(1); }
     .submit-btn.sent {
-      background: linear-gradient(135deg, #66BB6A, #43A047);
+      background: var(--gradient);
       pointer-events: none;
     }
 
@@ -557,7 +559,7 @@
       required.forEach(function(f) {
         if (!f.value.trim()) {
           valid = false;
-          f.style.borderColor = '#e57373';
+          f.style.borderColor = 'var(--error, #D32F2F)';
           setTimeout(function() { f.style.borderColor = ''; }, 2000);
         }
       });
