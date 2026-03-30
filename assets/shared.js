@@ -1379,6 +1379,39 @@
   }
 
 
+  // ─── BACK-TO-TOP BUTTON ──────────────────────────────────
+  function initBackToTop() {
+    var btn = document.createElement('button');
+    btn.className = 'back-to-top';
+    btn.setAttribute('aria-label', 'Back to top');
+    btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>';
+    document.body.appendChild(btn);
+
+    var visible = false;
+    function check() {
+      var scrollY = window.pageYOffset || document.documentElement.scrollTop;
+      if (scrollY > 400 && !visible) {
+        visible = true;
+        btn.classList.add('visible');
+      } else if (scrollY <= 400 && visible) {
+        visible = false;
+        btn.classList.remove('visible');
+      }
+    }
+
+    window.addEventListener('scroll', check, { passive: true });
+    check();
+
+    btn.addEventListener('click', function() {
+      if (window.__lenis) {
+        window.__lenis.scrollTo(0, { duration: 1.2 });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
+  }
+
+
   // ─── INIT ON DOM READY ────────────────────────────────────
   function init() {
     initLoader();
@@ -1407,6 +1440,7 @@
     };
     initCapHoverImage();
     initTypewriter();
+    initBackToTop();
     // Page transitions last — they intercept clicks
     initPageTransitions();
 

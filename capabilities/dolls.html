@@ -112,8 +112,9 @@
       .photo-panels { flex-direction:column; height:auto; }
       .photo-panel { flex:none !important; width:100%; height:280px; }
       .photo-panels:hover .photo-panel, .photo-panels:hover .photo-panel:hover { flex:none !important; }
-      .photo-panel-overlay { opacity:0 !important; }
-      .photo-panel-label { opacity:0 !important; }
+      .photo-panel-overlay { opacity:1 !important; }
+      .photo-panel-label { opacity:1 !important; }
+      .photo-panel-label .label-line { transform:scaleX(1) !important; }
     }
   </style>
 </head>
@@ -211,14 +212,17 @@
     <div class="photo-panel">
       <img src="../assets/face-painting.webp" alt="Dolls manufacturing" loading="lazy">
       <div class="photo-panel-overlay"></div>
+      <div class="photo-panel-label"><div class="label-line"></div><span>Face Painting</span></div>
     </div>
     <div class="photo-panel">
       <img src="../assets/doll.webp" alt="Doll assembly" loading="lazy">
       <div class="photo-panel-overlay"></div>
+      <div class="photo-panel-label"><div class="label-line"></div><span>Assembly</span></div>
     </div>
     <div class="photo-panel">
       <img src="../assets/hair-rooting.webp" alt="Doll hair rooting" loading="lazy">
       <div class="photo-panel-overlay"></div>
+      <div class="photo-panel-label"><div class="label-line"></div><span>Hair Rooting</span></div>
     </div>
   </div>
 </section>
@@ -228,6 +232,35 @@
     <h2>Ready to discuss your project?</h2>
     <p>Tell us about your requirements and our team will get back to you promptly.</p>
     <a href="../contact.html" class="btn btn-primary magnetic" data-strength="0.2">Contact Us &rarr;</a>
+  </div>
+</section>
+
+<!-- SEE ALSO -->
+<section class="see-also">
+  <div class="container">
+    <span class="see-also-label">Explore other capabilities</span>
+    <div class="see-also-grid">
+      <a href="plastic-toys.html" class="see-also-card">
+        <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+        <span>Plastic Toys</span>
+        <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="plush.html" class="see-also-card">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>
+        <span>Plush</span>
+        <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="rc-vehicle.html" class="see-also-card">
+        <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        <span>RC Vehicles</span>
+        <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="costume.html" class="see-also-card">
+        <svg viewBox="0 0 24 24"><path d="M12 3l1.5 3.2 3.5.5-2.5 2.5.6 3.5L12 11l-3.1 1.7.6-3.5L7 6.7l3.5-.5z"/><path d="M5 16l-1.5 3.2-3.5.5L2.5 22l-.6 2L5 22.3 8.1 24l-.6-2L10 19.5l-3.5-.5z"/><path d="M19 16l-1.5 3.2-3.5.5 2.5 2.5-.6 2L19 22.3l3.1 1.7-.6-2L24 19.5l-3.5-.5z"/></svg>
+        <span>Costumes</span>
+        <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
   </div>
 </section>
 

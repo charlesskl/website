@@ -91,8 +91,9 @@
       .photo-panels { flex-direction:column; height:auto; }
       .photo-panel { flex:none !important; width:100%; height:280px; }
       .photo-panels:hover .photo-panel, .photo-panels:hover .photo-panel:hover { flex:none !important; }
-      .photo-panel-overlay { opacity:0 !important; }
-      .photo-panel-label { opacity:0 !important; }
+      .photo-panel-overlay { opacity:1 !important; }
+      .photo-panel-label { opacity:1 !important; }
+      .photo-panel-label .label-line { transform:scaleX(1) !important; }
     }
   </style>
 </head>
@@ -188,14 +189,17 @@
     <div class="photo-panel">
       <img src="../../assets/electronics-assembly.webp" alt="Manufaktur kendaraan RC" loading="lazy">
       <div class="photo-panel-overlay"></div>
+      <div class="photo-panel-label"><div class="label-line"></div><span>Perakitan Elektronik</span></div>
     </div>
     <div class="photo-panel">
       <img src="../../assets/rc-assembly.webp" alt="Perakitan elektronik RC" loading="lazy">
       <div class="photo-panel-overlay"></div>
+      <div class="photo-panel-label"><div class="label-line"></div><span>Perakitan RC</span></div>
     </div>
     <div class="photo-panel">
       <img src="../../assets/rc-vehicle-testing.webp" alt="Pengujian kendaraan RC" loading="lazy">
       <div class="photo-panel-overlay"></div>
+      <div class="photo-panel-label"><div class="label-line"></div><span>Pengujian Kendaraan</span></div>
     </div>
   </div>
 </section>
@@ -205,6 +209,35 @@
     <h2>Siap mendiskusikan proyek Anda?</h2>
     <p>Sampaikan kebutuhan Anda dan tim kami akan segera menghubungi Anda.</p>
     <a href="../contact.html" class="btn btn-primary magnetic" data-strength="0.2">Hubungi Kami &rarr;</a>
+  </div>
+</section>
+
+<!-- SEE ALSO -->
+<section class="see-also">
+  <div class="container">
+    <span class="see-also-label">Jelajahi kapabilitas lainnya</span>
+    <div class="see-also-grid">
+      <a href="plastic-toys.html" class="see-also-card">
+        <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+        <span>Mainan Plastik</span>
+        <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="plush.html" class="see-also-card">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>
+        <span>Boneka Plush</span>
+        <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="dolls.html" class="see-also-card">
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <span>Boneka</span>
+        <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="costume.html" class="see-also-card">
+        <svg viewBox="0 0 24 24"><path d="M12 3l1.5 3.2 3.5.5-2.5 2.5.6 3.5L12 11l-3.1 1.7.6-3.5L7 6.7l3.5-.5z"/><path d="M5 16l-1.5 3.2-3.5.5L2.5 22l-.6 2L5 22.3 8.1 24l-.6-2L10 19.5l-3.5-.5z"/><path d="M19 16l-1.5 3.2-3.5.5 2.5 2.5-.6 2L19 22.3l3.1 1.7-.6-2L24 19.5l-3.5-.5z"/></svg>
+        <span>Kostum</span>
+        <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
   </div>
 </section>
 

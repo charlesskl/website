@@ -1849,3 +1849,119 @@ html.js-loaded .reveal-up.rr-choreographed {
     flex: unset;
   }
 }
+
+/* ───── BACK-TO-TOP BUTTON ───── */
+.back-to-top {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 900;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--white);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity 300ms ease, visibility 300ms ease, transform 300ms ease, background 200ms ease, border-color 200ms ease;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.back-to-top:hover {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #fff;
+}
+.back-to-top svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+@media (max-width: 768px) {
+  .back-to-top { bottom: 20px; right: 20px; width: 44px; height: 44px; }
+}
+
+/* ───── CAPABILITY CROSS-LINKS ("See Also") ───── */
+.see-also {
+  padding: var(--space-xl) 0;
+  background: var(--white);
+  border-top: 1px solid var(--border);
+}
+.see-also .container { max-width: var(--max-w); margin: 0 auto; padding: 0 var(--space-md); }
+.see-also-label {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brand);
+  margin-bottom: 24px;
+  display: block;
+}
+.see-also-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.see-also-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 24px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface-alt);
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+}
+.see-also-card:hover {
+  border-color: var(--brand);
+  box-shadow: 0 4px 16px rgba(124,179,66,0.12);
+  transform: translateY(-2px);
+}
+.see-also-card svg {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  stroke: var(--brand);
+  stroke-width: 1.5;
+  fill: none;
+}
+.see-also-card span {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.see-also-card .see-also-arrow {
+  margin-left: auto;
+  width: 16px;
+  height: 16px;
+  stroke: var(--text-light);
+  transition: stroke 200ms ease, transform 200ms ease;
+}
+.see-also-card:hover .see-also-arrow {
+  stroke: var(--brand);
+  transform: translateX(3px);
+}
+@media (max-width: 1024px) {
+  .see-also-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .see-also-grid { grid-template-columns: 1fr; }
+}
