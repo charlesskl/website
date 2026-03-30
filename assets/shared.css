@@ -1209,7 +1209,13 @@ footer.footer-reveal {
     box-shadow: 0 20px 40px rgba(0,0,0,0.06);
   }
   .nav-links > li { width: 100%; text-align: center; }
-  .nav-links > li > a { display: block; padding: 14px 16px; min-height: 44px; }
+  .nav-links > li > a { display: block; padding: 14px 16px; min-height: 44px; border-radius: var(--radius-sm); }
+  .nav-links > li > a:active,
+  .nav-links > li > a:focus {
+    background: var(--brand-5);
+    color: var(--brand-dark);
+    outline: none;
+  }
   /* Dropdowns: collapsed by default, toggle on tap */
   .has-dropdown > .dropdown {
     position: static;
@@ -1370,6 +1376,15 @@ textarea:focus-visible, select:focus-visible, [tabindex]:focus-visible {
   .page-transition { display: none !important; }
   .scroll-progress { display: none !important; }
   .hero-3d-container { display: none !important; }
+  /* Hero elements are initially opacity:0 for GSAP — reveal immediately */
+  .hero-tag, .hero-title, .hero-sub, .hero-actions, .hero-scroll-hint {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  /* Stop marquee from scrolling */
+  .marquee-track { animation: none !important; }
+  /* Scroll line hint */
+  .scroll-line { animation: none !important; opacity: 0.5; }
 }
 
 
