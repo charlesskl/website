@@ -25,12 +25,49 @@
   <meta property="og:site_name" content="Royal Regent Toys">
   <meta property="og:image" content="https://royalregentgroup.com/assets/images/og-image.png">
   <meta property="og:locale" content="zh_TW">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="id_ID">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="遙控車製造 — Royal Regent Toys | 遙控車代工廠">
   <meta name="twitter:description" content="SMT電子元件、底盤工程及嚴格性能測試。遙控玩具OEM代工廠。">
   <meta name="twitter:image" content="https://royalregentgroup.com/assets/images/og-image.png">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://royalregentgroup.com/cn/" },
+          { "@type": "ListItem", "position": 2, "name": "生產能力", "item": "https://royalregentgroup.com/cn/#capabilities" },
+          { "@type": "ListItem", "position": 3, "name": "遙控車", "item": "https://royalregentgroup.com/cn/capabilities/rc-vehicle.html" }
+        ]
+      },
+      {
+        "@type": "Service",
+        "name": "遙控車製造",
+        "provider": { "@type": "Organization", "name": "Royal Regent Toys", "url": "https://royalregentgroup.com" },
+        "description": "OEM遙控車製造——SMT電子、底盤工程及性能測試。",
+        "url": "https://royalregentgroup.com/cn/capabilities/rc-vehicle.html",
+        "serviceType": "Toy Manufacturing",
+        "areaServed": "Worldwide"
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+
+  <!-- Preload critical fonts -->
+  <link rel="preload" href="../../assets/fonts/clash-display-600.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../assets/fonts/clash-display-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../assets/fonts/satoshi-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../../assets/fonts/satoshi-700.woff2" as="font" type="font/woff2" crossorigin>
 
   <link rel="stylesheet" href="https://unpkg.com/splitting@1.0.6/dist/splitting.css" integrity="sha384-6z/M4zCNHzM59q8BnJ1btvx5I7ArdKNNBgb/V4m7ZTUPI4e2SVF0o5IQAGCO414a" crossorigin="anonymous">
   <link rel="stylesheet" href="../../assets/shared.css">
@@ -62,8 +99,8 @@
     .editorial-feat + .editorial-feat { padding-top:28px; }
     .editorial-feat:last-child { border-bottom:none; }
     .editorial-feat-num { font-family:var(--font-display); font-size:var(--text-sm); font-weight:700; color:var(--brand); letter-spacing:0.06em; padding-top:2px; }
-    .editorial-feat h3 { font-size:var(--text-base); font-weight:700; color:#1a1a1a; margin-bottom:6px; letter-spacing:-0.01em; }
-    .editorial-feat p { font-size:15px; color:#555; line-height:1.6; margin:0; }
+    .editorial-feat h3 { font-size:var(--text-base); font-weight:700; color:var(--text); margin-bottom:6px; letter-spacing:-0.01em; }
+    .editorial-feat p { font-size:var(--text-sm); color:var(--text-muted); line-height:1.6; margin:0; }
     .photo-panels { display:flex; width:100vw; margin-left:calc(-50vw + 50%); overflow:hidden; margin-top:100px; }
     .photo-panel { flex:1 1 33.333%; height:520px; overflow:hidden; position:relative; transition:flex 600ms cubic-bezier(0.4, 0, 0.2, 1); }
     .photo-panels:hover .photo-panel { flex:0 0 25%; }
@@ -88,11 +125,13 @@
       .editorial-left { position:static; }
       .sub-hero { min-height:60vh; }
       .sub-hero-title { font-size:var(--text-3xl); }
+      .sub-hero-scroll { display:none; }
       .photo-panels { flex-direction:column; height:auto; }
       .photo-panel { flex:none !important; width:100%; height:280px; }
       .photo-panels:hover .photo-panel, .photo-panels:hover .photo-panel:hover { flex:none !important; }
-      .photo-panel-overlay { opacity:0 !important; }
-      .photo-panel-label { opacity:0 !important; }
+      .photo-panel-overlay { opacity:1 !important; }
+      .photo-panel-label { opacity:1 !important; }
+      .photo-panel-label .label-line { transform:scaleX(1) !important; }
     }
   </style>
 </head>
@@ -102,7 +141,7 @@
 
 <nav id="navbar">
   <div class="nav-container">
-    <a href="../index.html" class="nav-logo"><img src="../../assets/logo.png" alt="Royal Regent"></a>
+    <a href="../index.html" class="nav-logo"><img src="../../assets/logo.webp" alt="Royal Regent Toys"></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="../about.html">關於我們</a></li>
       <li class="has-dropdown">
@@ -188,14 +227,17 @@
     <div class="photo-panel">
       <img src="../../assets/electronics-assembly.webp" alt="遙控車製造" loading="lazy">
       <div class="photo-panel-overlay"></div>
+      <div class="photo-panel-label"><div class="label-line"></div><span>電子組裝</span></div>
     </div>
     <div class="photo-panel">
       <img src="../../assets/rc-assembly.webp" alt="遙控車電子組裝" loading="lazy">
       <div class="photo-panel-overlay"></div>
+      <div class="photo-panel-label"><div class="label-line"></div><span>遙控車組裝</span></div>
     </div>
     <div class="photo-panel">
       <img src="../../assets/rc-vehicle-testing.webp" alt="遙控車測試" loading="lazy">
       <div class="photo-panel-overlay"></div>
+      <div class="photo-panel-label"><div class="label-line"></div><span>車輛測試</span></div>
     </div>
   </div>
 </section>
@@ -208,17 +250,46 @@
   </div>
 </section>
 
+<!-- SEE ALSO -->
+<section class="see-also">
+  <div class="container">
+    <span class="see-also-label">探索其他生產能力</span>
+    <div class="see-also-grid">
+      <a href="plastic-toys.html" class="see-also-card">
+        <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+        <span>塑膠玩具</span>
+        <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="plush.html" class="see-also-card">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>
+        <span>毛絨玩具</span>
+        <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="dolls.html" class="see-also-card">
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <span>娃娃</span>
+        <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="costume.html" class="see-also-card">
+        <svg viewBox="0 0 24 24"><path d="M12 3l1.5 3.2 3.5.5-2.5 2.5.6 3.5L12 11l-3.1 1.7.6-3.5L7 6.7l3.5-.5z"/><path d="M5 16l-1.5 3.2-3.5.5L2.5 22l-.6 2L5 22.3 8.1 24l-.6-2L10 19.5l-3.5-.5z"/><path d="M19 16l-1.5 3.2-3.5.5 2.5 2.5-.6 2L19 22.3l3.1 1.7-.6-2L24 19.5l-3.5-.5z"/></svg>
+        <span>角色服裝</span>
+        <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
 </div>
 
 <footer class="footer-reveal">
   <div class="footer-container">
     <div class="footer-top">
-      <div class="footer-brand"><img src="../../assets/logo.png" alt="Royal Regent" class="footer-logo"><p>自1987年以來，一直是全球領先玩具品牌的製造合作夥伴。五大產品類別、四個生產基地、一個統一標準 &mdash; 符合全球法規。</p></div>
+      <div class="footer-brand"><img src="../../assets/logo.webp" alt="Royal Regent Toys" class="footer-logo"><p>自1987年以來，一直是全球領先玩具品牌的製造合作夥伴。五大產品類別、四個生產基地、一個統一標準 &mdash; 符合全球法規。</p></div>
       <div class="footer-col"><h4>公司</h4><a href="../about.html">關於我們</a><a href="../careers.html">招聘</a><a href="../contact.html">聯繫我們</a></div>
       <div class="footer-col"><h4>生產能力</h4><a href="plastic-toys.html">塑膠玩具</a><a href="plush.html">毛絨玩具</a><a href="dolls.html">娃娃</a><a href="rc-vehicle.html">遙控車</a><a href="costume.html">服裝</a></div>
       <div class="footer-col"><h4>聯繫方式</h4><p class="footer-address">Unit 07-08, 12/F, Greenfield Tower,<br>Concordia Plaza, No.1 Science Museum Road,<br>Tsim Sha Tsui, Kowloon, Hong Kong</p><a href="mailto:info@royalregenthk.com">info@royalregenthk.com</a><a href="tel:+85224250720">(852) 2425 0720</a></div>
     </div>
-    <div class="footer-bottom"><p>&copy; 2026 Royal Regent. 版權所有。</p></div>
+    <div class="footer-bottom"><p>&copy; <span class="footer-year"></span> Royal Regent Toys. 版權所有。</p></div>
   </div>
 </footer>
 
@@ -265,7 +336,9 @@
 <script src="../../assets/animation/section-choreography.js"></script>
 <script src="../../assets/animation/cursor.js"></script>
 <script src="../../assets/animation/magnetic.js"></script>
-<script src="../../assets/animation/hover-effects.js"></script></body>
+<script src="../../assets/animation/hover-effects.js"></script>
 <script src="../../assets/animation/navbar.js"></script>
 <script src="../../assets/animation/mobile-menu.js"></script>
-<script src="../../assets/animation/page-transition.js"></script></html>
+<script src="../../assets/animation/page-transition.js"></script>
+</body>
+</html>

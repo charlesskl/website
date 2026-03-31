@@ -1,0 +1,29 @@
+[
+  {
+    "id": "admin-officer",
+    "title": "行政主管",
+    "department": "Office",
+    "location": "印尼，肯達爾",
+    "type": "Full-Time",
+    "arrangement": "On-site",
+    "description": "負責日常行政運營，包括文件管理、辦公室協調及內部溝通。支援跨部門工作流程，確保辦公室運作順暢。"
+  },
+  {
+    "id": "exim-officer-import",
+    "title": "進出口主管 — 進口",
+    "department": "Office",
+    "location": "印尼，肯達爾",
+    "type": "Full-Time",
+    "arrangement": "On-site",
+    "description": "管理進口文件，與貨運代理協調，確保原材料和零件的及時清關。遵守海關法規及公司採購計劃。"
+  },
+  {
+    "id": "exim-officer-customs",
+    "title": "進出口主管 — 報關",
+    "department": "Office",
+    "location": "印尼，肯達爾",
+    "type": "Full-Time",
+    "arrangement": "On-site",
+    "description": "處理出口報關申報，與報關行及物流合作夥伴協調，確保所有貨物符合法規要求。維護準確的審計及合規記錄。"
+  }
+]

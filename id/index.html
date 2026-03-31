@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="no-js">
 <head>
+  <script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js-loaded');</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -25,6 +26,8 @@
   <meta property="og:site_name" content="Royal Regent Toys">
   <meta property="og:image" content="https://royalregentgroup.com/assets/images/og-image.png">
   <meta property="og:locale" content="id_ID">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="zh_TW">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
@@ -32,9 +35,42 @@
   <meta name="twitter:description" content="39 tahun manufaktur mainan OEM. Mainan plastik, boneka plush, boneka, kendaraan RC & kostum.">
   <meta name="twitter:image" content="https://royalregentgroup.com/assets/images/og-image.png">
 
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Royal Regent Toys",
+    "url": "https://royalregentgroup.com",
+    "logo": "https://royalregentgroup.com/assets/logo.webp",
+    "description": "Produsen mainan OEM sejak 1987. Mainan plastik, boneka plush, boneka, kendaraan RC & kostum. Pabrik di Tiongkok & Indonesia.",
+    "foundingDate": "1987",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Unit 07-08, 12/F, Greenfield Tower, Concordia Plaza, No.1 Science Museum Road",
+      "addressLocality": "Tsim Sha Tsui, Kowloon",
+      "addressCountry": "HK"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+852-2425-0720",
+      "email": "info@royalregenthk.com",
+      "contactType": "sales"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/company/royalregentgroup"
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+
   <!-- Preload critical fonts -->
   <link rel="preload" href="../assets/fonts/clash-display-600.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/clash-display-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../assets/fonts/satoshi-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/satoshi-700.woff2" as="font" type="font/woff2" crossorigin>
 
   <!-- Shared Design System -->
   <link rel="stylesheet" href="https://unpkg.com/splitting@1.0.6/dist/splitting.css" integrity="sha384-6z/M4zCNHzM59q8BnJ1btvx5I7ArdKNNBgb/V4m7ZTUPI4e2SVF0o5IQAGCO414a" crossorigin="anonymous">
@@ -149,9 +185,11 @@
 
 
     /* ═══ MARQUEE ═══ */
+    :root { --marquee-duration: 40s; }
+    @media (max-width: 768px) { :root { --marquee-duration: 60s; } }
     .marquee { position: relative; z-index: 10; }
     .marquee-track {
-      animation: marqueeScroll 40s linear infinite;
+      animation: marqueeScroll var(--marquee-duration) linear infinite;
     }
     .marquee:hover .marquee-track {
       animation-play-state: paused;
@@ -200,6 +238,7 @@
       line-height: 1.5;
       letter-spacing: 0.02em;
       white-space: nowrap;
+      max-width: 680px;
     }
     .statement-text .stmt-line {
       display: block;
@@ -661,6 +700,33 @@
     }
 
 
+    /* ═══ CTA BANNER ═══ */
+    .cta-banner {
+      padding: var(--space-2xl) 0;
+      background: linear-gradient(135deg, var(--surface-alt) 0%, var(--white) 100%);
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    .cta-banner h2 {
+      font-family: var(--font-display);
+      font-size: var(--text-3xl);
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .cta-banner p {
+      font-size: var(--text-base);
+      color: var(--text-muted);
+      max-width: 560px;
+      margin: 0 auto 32px;
+      line-height: 1.7;
+    }
+    @media (max-width: 768px) {
+      .cta-banner h2 { font-size: var(--text-2xl); }
+      .cta-banner p { font-size: var(--text-sm); }
+    }
+
     /* ═══ FOOTER REVEAL ═══ */
     footer.footer-reveal {
       clip-path: inset(0 0 0 0);
@@ -669,7 +735,9 @@
 
     /* ═══ RESPONSIVE ═══ */
     @media (max-width: 1024px) {
-      .caps-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+      .caps-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; justify-content: center; }
+      .caps-grid > *:nth-child(4) { grid-column-start: 1; }
+      .caps-grid > *:nth-child(5) { grid-column-start: 2; }
       .cap-card { aspect-ratio: 3 / 4; }
     }
     @media (max-width: 768px) {
@@ -709,11 +777,11 @@
     @keyframes fallbackReveal {
       to { opacity: 1; transform: translateY(0); }
     }
-    .hero-tag, .hero-title, .hero-sub, .hero-actions {
+    .no-js .hero-tag, .no-js .hero-title, .no-js .hero-sub, .no-js .hero-actions {
       animation: fallbackReveal 0.6s ease forwards;
       animation-delay: 0.5s;
     }
-    .hero-scroll-hint {
+    .no-js .hero-scroll-hint {
       animation: fallbackReveal 0.6s ease forwards;
       animation-delay: 1.2s;
     }
@@ -731,7 +799,7 @@
 <nav id="navbar">
   <div class="nav-container">
     <a href="index.html" class="nav-logo">
-      <img src="../assets/logo.png" alt="Royal Regent">
+      <img src="../assets/logo.webp" alt="Royal Regent Toys">
     </a>
     <ul class="nav-links" id="navLinks">
       <li><a href="about.html">Tentang Kami</a></li>
@@ -803,6 +871,9 @@
       <a href="about.html" class="btn btn-outline magnetic" data-strength="0.2">Kisah Kami →</a>
     </div>
   </div>
+
+  <!-- 3D Model Container (P0) — placeholder icosahedron, swap for GLB later -->
+  <div class="hero-3d-container" id="hero3dContainer"></div>
 
   <div class="hero-scroll-hint" id="heroScroll">
     <span>Gulir</span>
@@ -895,7 +966,7 @@
       <!-- Plastic Toys -->
       <a href="capabilities/plastic-toys.html" class="cap-card" data-cap="plastic">
         <div class="cap-card-bg">
-          <img src="../assets/images/stock/cap-plastic-bg.webp" alt="" loading="lazy">
+          <img src="../assets/images/stock/cap-plastic-bg.webp" alt="Plastic toy injection molding factory floor" loading="lazy">
         </div>
         <div class="cap-card-img">
           <img src="../assets/images/stock/cap-plastic-fg.webp" alt="Figur mainan plastik berwarna-warni" loading="lazy">
@@ -909,7 +980,7 @@
       <!-- Plush -->
       <a href="capabilities/plush.html" class="cap-card" data-cap="plush">
         <div class="cap-card-bg">
-          <img src="../assets/images/stock/cap-plush-bg.webp" alt="" loading="lazy">
+          <img src="../assets/images/stock/cap-plush-bg.webp" alt="Plush toy sewing and assembly workshop" loading="lazy">
         </div>
         <div class="cap-card-img">
           <img src="../assets/images/stock/cap-plush-fg.webp" alt="Boneka beruang plush" loading="lazy">
@@ -923,7 +994,7 @@
       <!-- Dolls -->
       <a href="capabilities/dolls.html" class="cap-card" data-cap="dolls">
         <div class="cap-card-bg">
-          <img src="../assets/images/stock/cap-dolls-bg.webp" alt="" loading="lazy">
+          <img src="../assets/images/stock/cap-dolls-bg.webp" alt="Doll manufacturing and painting workshop" loading="lazy">
         </div>
         <div class="cap-card-img">
           <img src="../assets/images/stock/cap-dolls-fg.webp" alt="Boneka fashion" loading="lazy">
@@ -937,7 +1008,7 @@
       <!-- RC Vehicles -->
       <a href="capabilities/rc-vehicle.html" class="cap-card" data-cap="rc">
         <div class="cap-card-bg">
-          <img src="../assets/images/stock/cap-rc-bg.webp" alt="" loading="lazy">
+          <img src="../assets/images/stock/cap-rc-bg.webp" alt="RC vehicle electronics assembly line" loading="lazy">
         </div>
         <div class="cap-card-img">
           <img src="../assets/images/stock/cap-rc-fg.webp" alt="Mobil RC mainan" loading="lazy">
@@ -951,7 +1022,7 @@
       <!-- Costumes -->
       <a href="capabilities/costume.html" class="cap-card" data-cap="costumes">
         <div class="cap-card-bg">
-          <img src="../assets/images/stock/cap-costumes-bg.webp" alt="" loading="lazy">
+          <img src="../assets/images/stock/cap-costumes-bg.webp" alt="Costume fabric cutting and sewing workshop" loading="lazy">
         </div>
         <div class="cap-card-img">
           <img src="../assets/images/stock/cap-costumes-fg.webp" alt="Anak dengan kostum superhero" loading="lazy">
@@ -974,7 +1045,7 @@
 
   <!-- Full-bleed background image -->
   <div class="history-bg" id="historyBg">
-    <img src="../assets/images/stock/history-bg.webp" alt="" loading="lazy">
+    <img src="../assets/images/stock/history-bg.webp" alt="Royal Regent factory aerial view" loading="lazy">
   </div>
 
   <!-- Top bar -->
@@ -1028,6 +1099,14 @@
 
 </section>
 
+<section class="cta-banner clip-section" data-reveal>
+  <div class="container">
+    <h2>Siap mewujudkan produk Anda berikutnya?</h2>
+    <p>39 tahun keahlian manufaktur OEM, empat lokasi produksi, satu standar konsisten.</p>
+    <a href="contact.html" class="btn btn-primary magnetic" data-strength="0.2">Mulai Percakapan</a>
+  </div>
+</section>
+
 </div><!-- /.main-content -->
 
 
@@ -1038,8 +1117,19 @@
   <div class="footer-container">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="../assets/logo.png" alt="Royal Regent" class="footer-logo">
+        <img src="../assets/logo.webp" alt="Royal Regent Toys" class="footer-logo">
         <p>Mitra manufaktur bagi merek mainan terkemuka dunia sejak 1987. Lima kategori produk, empat lokasi produksi, satu standar konsisten &mdash; sesuai standar AS dan UE.</p>
+        <div class="footer-factories">
+          <div class="footer-factory">
+            <div class="footer-factory-label">Tiongkok</div>
+            <p>Dongguan &amp; Heyuan,<br>Provinsi Guangdong</p>
+          </div>
+          <div class="footer-factories-divider"></div>
+          <div class="footer-factory">
+            <div class="footer-factory-label">Indonesia</div>
+            <p>Tangerang,<br>Provinsi Banten</p>
+          </div>
+        </div>
       </div>
       <div class="footer-col">
         <h4>Perusahaan</h4>
@@ -1074,7 +1164,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 Royal Regent. Hak cipta dilindungi.</p>
+      <p>&copy; <span class="footer-year"></span> Royal Regent Toys. Hak cipta dilindungi.</p>
     </div>
   </div>
 </footer>
@@ -1095,16 +1185,188 @@
 <!-- Shared Interaction Engine -->
 <script src="../assets/shared.js"></script>
 
-<!-- Three.js — loaded async so it doesn't block page interactivity -->
+<!-- Hero geometric canvas — no CDN dependency -->
 <script>
 (function() {
-  var s = document.createElement('script');
-  s.src = 'https://cdn.jsdelivr.net/npm/three@0.183.0/build/three.min.js';
-  s.crossOrigin = 'anonymous';
-  s.onload = function() {
-    if (typeof window.__initThreeEffects === 'function') window.__initThreeEffects();
-  };
-  document.head.appendChild(s);
+  'use strict';
+
+  function initHeroCanvas() {
+    var container = document.getElementById('hero3dContainer');
+    if (!container) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var canvas = document.createElement('canvas');
+    canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;display:block;';
+    container.appendChild(canvas);
+
+    var ctx = canvas.getContext('2d');
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var W = 0, H = 0;
+    var mouseX = -9999, mouseY = -9999;
+    var isVisible = true;
+    var raf = null;
+    var t = 0;
+
+    // Node definition — 28 floating nodes in two loose orbital layers
+    var NODE_COUNT = 28;
+    var nodes = [];
+    var BRAND   = { r: 124, g: 179, b: 66 };   // #7CB342
+    var CONNECT_DIST = 180; // px (logical)
+
+    function resize() {
+      W = container.offsetWidth  || 500;
+      H = container.offsetHeight || 400;
+      canvas.width  = W * dpr;
+      canvas.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function initNodes() {
+      nodes = [];
+      for (var i = 0; i < NODE_COUNT; i++) {
+        var layer = i < 14 ? 0 : 1;          // inner / outer layer
+        var angle = (i % 14) * (Math.PI * 2 / 14) + (layer * 0.4);
+        var radiusFrac = layer === 0 ? 0.22 + Math.random() * 0.14 : 0.38 + Math.random() * 0.18;
+        nodes.push({
+          ax: 0.5 + Math.cos(angle) * radiusFrac,     // anchor x (0-1 of W)
+          ay: 0.5 + Math.sin(angle) * radiusFrac,     // anchor y (0-1 of H)
+          phase: Math.random() * Math.PI * 2,
+          speed: 0.3 + Math.random() * 0.4,
+          drift: 18 + Math.random() * 18,             // px drift radius
+          r: layer === 0 ? 3.5 : 2.5,                 // visual radius
+          alpha: layer === 0 ? 0.9 : 0.65
+        });
+      }
+    }
+
+    function getNodePos(n, time) {
+      var px = n.ax * W + Math.cos(n.phase + time * n.speed * 0.7) * n.drift;
+      var py = n.ay * H + Math.sin(n.phase + time * n.speed * 0.9) * n.drift;
+      // Subtle mouse attraction (max 18px pull)
+      var dx = mouseX - px;
+      var dy = mouseY - py;
+      var dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 220 && dist > 0) {
+        var pull = (1 - dist / 220) * 18;
+        px += (dx / dist) * pull;
+        py += (dy / dist) * pull;
+      }
+      return { x: px, y: py };
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      t += 0.012;
+
+      var positions = nodes.map(function(n) { return getNodePos(n, t); });
+
+      // Draw connections
+      for (var i = 0; i < NODE_COUNT; i++) {
+        for (var j = i + 1; j < NODE_COUNT; j++) {
+          var dx = positions[i].x - positions[j].x;
+          var dy = positions[i].y - positions[j].y;
+          var d  = Math.sqrt(dx * dx + dy * dy);
+          if (d < CONNECT_DIST) {
+            var alpha = (1 - d / CONNECT_DIST) * 0.22;
+            ctx.beginPath();
+            ctx.moveTo(positions[i].x, positions[i].y);
+            ctx.lineTo(positions[j].x, positions[j].y);
+            ctx.strokeStyle = 'rgba(' + BRAND.r + ',' + BRAND.g + ',' + BRAND.b + ',' + alpha + ')';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw nodes
+      for (var k = 0; k < NODE_COUNT; k++) {
+        var p = positions[k];
+        var n = nodes[k];
+        var pulse = 0.75 + 0.25 * Math.sin(t * n.speed + n.phase);
+
+        // Glow
+        var grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, n.r * 3.5);
+        grd.addColorStop(0, 'rgba(' + BRAND.r + ',' + BRAND.g + ',' + BRAND.b + ',' + (n.alpha * pulse * 0.5) + ')');
+        grd.addColorStop(1, 'rgba(' + BRAND.r + ',' + BRAND.g + ',' + BRAND.b + ',0)');
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, n.r * 3.5, 0, Math.PI * 2);
+        ctx.fillStyle = grd;
+        ctx.fill();
+
+        // Core dot
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, n.r * pulse, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(' + BRAND.r + ',' + BRAND.g + ',' + BRAND.b + ',' + (n.alpha * pulse) + ')';
+        ctx.fill();
+      }
+
+      // Central accent ring (slow rotation)
+      var cx = W * 0.5, cy = H * 0.5;
+      var ringR = Math.min(W, H) * 0.28;
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(t * 0.08);
+      ctx.beginPath();
+      ctx.arc(0, 0, ringR, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(' + BRAND.r + ',' + BRAND.g + ',' + BRAND.b + ',0.07)';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([6, 18]);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.restore();
+
+      // Second counter-rotating ring
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(-t * 0.05);
+      ctx.beginPath();
+      ctx.arc(0, 0, ringR * 0.62, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(' + BRAND.r + ',' + BRAND.g + ',' + BRAND.b + ',0.05)';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([3, 24]);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.restore();
+    }
+
+    function loop() {
+      if (!isVisible) { raf = null; return; }
+      raf = requestAnimationFrame(loop);
+      draw();
+    }
+
+    // IntersectionObserver to pause when off-screen
+    var obs = new IntersectionObserver(function(entries) {
+      isVisible = entries[0].isIntersecting;
+      if (isVisible && !raf) { raf = requestAnimationFrame(loop); }
+    }, { threshold: 0 });
+    obs.observe(container);
+
+    document.addEventListener('mousemove', function(e) {
+      var rect = container.getBoundingClientRect();
+      mouseX = e.clientX - rect.left;
+      mouseY = e.clientY - rect.top;
+    });
+
+    document.addEventListener('mouseleave', function() {
+      mouseX = mouseY = -9999;
+    });
+
+    window.addEventListener('resize', function() {
+      resize();
+      initNodes();
+    });
+
+    resize();
+    initNodes();
+    raf = requestAnimationFrame(loop);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeroCanvas);
+  } else {
+    initHeroCanvas();
+  }
 })();
 </script>
 

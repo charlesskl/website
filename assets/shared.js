@@ -33,9 +33,10 @@
   const hasHover = window.matchMedia('(hover: hover)').matches;
 
 
-  // ─── 1. ADVANCED TWO-PART CURSOR ────────────────────────────
+  // ─── 1. ADVANCED TWO-PART CURSOR (deprecated — replaced by Phase 4 cursor.js) ────
   function initCursor() {
-    if (isTouch || !hasHover) return;
+    return; // disabled: Phase 4 cursor.js handles all cursor behaviour
+    if (isTouch || !hasHover) return; // eslint-disable-line no-unreachable
 
     var dot = document.createElement('div');
     dot.className = 'cursor-dot';
@@ -607,8 +608,8 @@
         );
       });
 
-      // Safety: force-reveal any elements still hidden after 4s
-      // (covers edge cases where ScrollTrigger fails on mobile)
+      // Safety: force-reveal any elements still hidden after 1.5s
+      // (covers edge cases where ScrollTrigger fails on mobile or initial viewport)
       setTimeout(function() {
         els.forEach(function(el) {
           var style = window.getComputedStyle(el);
@@ -616,7 +617,7 @@
             gsap.to(el, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
           }
         });
-      }, 4000);
+      }, 1500);
     } else {
       // Fallback IntersectionObserver
       var observer = new IntersectionObserver(function (entries) {
@@ -727,12 +728,15 @@
     if (path.indexOf('/cn/') !== -1) currentLang = 'cn';
     else if (path.indexOf('/id/') !== -1) currentLang = 'id';
 
-    // Mark active language in dropdown
+    // Mark active language in dropdown and set real hrefs for SEO / no-JS fallback
     var langLinks = document.querySelectorAll('.lang-dropdown a');
     langLinks.forEach(function(link) {
-      if (link.getAttribute('data-lang') === currentLang) {
+      var lang = link.getAttribute('data-lang');
+      if (lang === currentLang) {
         link.classList.add('active');
       }
+      // Set real href so crawlers and no-JS users get a working link
+      link.setAttribute('href', getLangHref(lang, currentLang));
       link.addEventListener('click', function(e) {
         e.preventDefault();
         var lang = this.getAttribute('data-lang');
@@ -754,6 +758,24 @@
     if (preferred && preferred !== currentLang) {
       showLangBanner(preferred, currentLang);
     }
+  }
+
+  function getLangHref(targetLang, currentLang) {
+    var path = window.location.pathname;
+    var cleanPath = path;
+    if (currentLang !== 'en') {
+      cleanPath = cleanPath.replace('/' + currentLang + '/', '/');
+    }
+    if (targetLang === 'en') return cleanPath;
+    var parts = cleanPath.split('/');
+    for (var i = 0; i < parts.length; i++) {
+      if (parts[i].indexOf('.html') !== -1 || parts[i] === 'capabilities') {
+        parts.splice(i, 0, targetLang);
+        return parts.join('/');
+      }
+    }
+    var base = cleanPath.endsWith('/') ? cleanPath : cleanPath + '/';
+    return base + targetLang + '/';
   }
 
   function navigateToLang(targetLang, currentLang) {
@@ -923,48 +945,76 @@
         var items = result[splitBy === 'chars' ? 'chars' : 'words'];
         if (!items || !items.length) return;
 
-        // Set initial state
-        gsap.set(items, { opacity: 0, y: 30, rotation: splitBy === 'chars' ? 6 : 0 });
+        // text-gradient spans use background-clip:text + transparent text-fill.
+        // Per-char opacity animation on these elements can fail in some browsers
+        // (the background doesn't repaint correctly during opacity transitions).
+        // Fix: animate the .text-gradient span as a whole unit instead.
+        var gradientSpan = result.el.querySelector('.text-gradient');
+        var regularItems = items;
+
+        if (gradientSpan) {
+          regularItems = Array.prototype.filter.call(items, function(item) {
+            return !gradientSpan.contains(item);
+          });
+          // Hide gradient span as whole; leave its children at default opacity
+          gsap.set(gradientSpan, { opacity: 0, y: 30 });
+        }
+
+        // Set initial state for regular (non-gradient) chars
+        if (regularItems.length) {
+          gsap.set(regularItems, { opacity: 0, y: 30, rotation: splitBy === 'chars' ? 6 : 0 });
+        }
 
         // Check if element is already in viewport (hero at top of page)
         var rect = result.el.getBoundingClientRect();
         var inView = rect.top < window.innerHeight * 0.9;
+        var staggerVal = splitBy === 'chars' ? 0.02 : 0.05;
+        var gradientDelay = regularItems.length ? 0.3 + regularItems.length * staggerVal : 0.3;
 
         if (inView) {
           // Already visible — animate immediately with a short delay
-          gsap.to(items, {
-            opacity: 1,
-            y: 0,
-            rotation: 0,
-            duration: 0.5,
-            ease: 'power3.out',
-            stagger: splitBy === 'chars' ? 0.02 : 0.05,
-            delay: 0.3
-          });
+          if (regularItems.length) {
+            gsap.to(regularItems, {
+              opacity: 1, y: 0, rotation: 0,
+              duration: 0.5, ease: 'power3.out',
+              stagger: staggerVal, delay: 0.3
+            });
+          }
+          if (gradientSpan) {
+            gsap.to(gradientSpan, {
+              opacity: 1, y: 0, duration: 0.6,
+              ease: 'power3.out', delay: gradientDelay
+            });
+          }
         } else if (typeof ScrollTrigger !== 'undefined') {
-          gsap.to(items, {
-            opacity: 1,
-            y: 0,
-            rotation: 0,
-            duration: 0.5,
-            ease: 'power3.out',
-            stagger: splitBy === 'chars' ? 0.02 : 0.05,
-            scrollTrigger: {
-              trigger: result.el,
-              start: 'top 85%',
-              once: true
-            }
-          });
+          if (regularItems.length) {
+            gsap.to(regularItems, {
+              opacity: 1, y: 0, rotation: 0,
+              duration: 0.5, ease: 'power3.out',
+              stagger: staggerVal,
+              scrollTrigger: { trigger: result.el, start: 'top 85%', once: true }
+            });
+          }
+          if (gradientSpan) {
+            gsap.to(gradientSpan, {
+              opacity: 1, y: 0, duration: 0.6, ease: 'power3.out',
+              scrollTrigger: { trigger: result.el, start: 'top 85%', once: true }
+            });
+          }
         } else {
-          gsap.to(items, {
-            opacity: 1,
-            y: 0,
-            rotation: 0,
-            duration: 0.5,
-            ease: 'power3.out',
-            stagger: splitBy === 'chars' ? 0.02 : 0.05,
-            delay: 0.3
-          });
+          if (regularItems.length) {
+            gsap.to(regularItems, {
+              opacity: 1, y: 0, rotation: 0,
+              duration: 0.5, ease: 'power3.out',
+              stagger: staggerVal, delay: 0.3
+            });
+          }
+          if (gradientSpan) {
+            gsap.to(gradientSpan, {
+              opacity: 1, y: 0, duration: 0.6,
+              ease: 'power3.out', delay: gradientDelay
+            });
+          }
         }
       });
     } catch (e) {
@@ -1188,7 +1238,7 @@
     var ringFill = loader.querySelector('.loader-ring-fill');
     var taglineSpans = loader.querySelectorAll('.loader-tagline span');
     var startTime = Date.now();
-    var DURATION = 2200;
+    var DURATION = 1600;
     var dismissed = false;
     var current = 0;
     var target = 0;
@@ -1321,13 +1371,45 @@
       fontsLoaded = true;
     }
 
-    // Absolute fallback — never stay stuck longer than 4s
+    // Absolute fallback — never stay stuck longer than 3s
     setTimeout(function() {
       if (!dismissed) {
-        console.warn('Loader fallback: force dismiss after 4s');
         target = 100;
       }
-    }, 4000);
+    }, 3000);
+  }
+
+
+  // ─── BACK-TO-TOP BUTTON ──────────────────────────────────
+  function initBackToTop() {
+    var btn = document.createElement('button');
+    btn.className = 'back-to-top';
+    btn.setAttribute('aria-label', 'Back to top');
+    btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>';
+    document.body.appendChild(btn);
+
+    var visible = false;
+    function check() {
+      var scrollY = window.pageYOffset || document.documentElement.scrollTop;
+      if (scrollY > 400 && !visible) {
+        visible = true;
+        btn.classList.add('visible');
+      } else if (scrollY <= 400 && visible) {
+        visible = false;
+        btn.classList.remove('visible');
+      }
+    }
+
+    window.addEventListener('scroll', check, { passive: true });
+    check();
+
+    btn.addEventListener('click', function() {
+      if (window.__lenis) {
+        window.__lenis.scrollTo(0, { duration: 1.2 });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    });
   }
 
 
@@ -1359,6 +1441,7 @@
     };
     initCapHoverImage();
     initTypewriter();
+    initBackToTop();
     // Page transitions last — they intercept clicks
     initPageTransitions();
 
@@ -1366,6 +1449,11 @@
     if (typeof ScrollTrigger !== 'undefined') {
       requestAnimationFrame(function() { ScrollTrigger.refresh(); });
     }
+
+    // Dynamic copyright year
+    var yearEls = document.querySelectorAll('.footer-year, #footerYear');
+    var currentYear = new Date().getFullYear().toString();
+    yearEls.forEach(function(el) { el.textContent = currentYear; });
   }
 
   if (document.readyState === 'loading') {

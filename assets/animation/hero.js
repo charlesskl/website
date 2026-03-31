@@ -257,8 +257,19 @@
   // ─── MODULE LIFECYCLE ─────────────────────────────────────────
 
   function init() {
-    // CDN graceful degradation: GSAP required
-    if (typeof gsap === 'undefined') return;
+    // CDN graceful degradation: show hero elements immediately if GSAP unavailable
+    if (typeof gsap === 'undefined') {
+      var sel = getSelectors();
+      var titleEl = sel.title ? document.querySelector(sel.title) : null;
+      var tagEl = sel.tag ? document.querySelector(sel.tag) : null;
+      var subEl = sel.sub ? document.querySelector(sel.sub) : null;
+      var actionsEl = sel.actions ? document.querySelector(sel.actions) : null;
+      [titleEl, tagEl, subEl, actionsEl].filter(Boolean).forEach(function(el) {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      });
+      return;
+    }
 
     // Reduced motion gate (HERO-05): instant reveal, no animation
     if (window.RR && window.RR.state && window.RR.state.hasReducedMotion) {
@@ -268,18 +279,36 @@
 
     var isHomepage = window.RR && window.RR.page === 'home';
 
-    // Build the hero timeline, then decide when to play it
-    buildTimeline(function (tl) {
-      if (!tl) return; // No hero title found
+    // Safety: force-reveal hero elements if animation hasn't started within 1.2s
+    // Covers slow CDN font loading that delays textSystem.split() resolution
+    if (!isHomepage) {
+      var sel = getSelectors();
+      var safetyTimer = setTimeout(function() {
+        var els = [sel.title, sel.tag, sel.sub, sel.actions].filter(Boolean)
+          .map(function(s) { return document.querySelector(s); }).filter(Boolean);
+        els.forEach(function(el) {
+          if (parseFloat(window.getComputedStyle(el).opacity) < 0.05) {
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+          }
+        });
+      }, 1200);
 
-      if (isHomepage) {
-        // Homepage: wait for preloader exit-bg class, then play
-        waitForPreloaderExit(tl);
-      } else {
-        // Non-homepage: play immediately (fonts already gated by textSystem.split)
+      buildTimeline(function (tl) {
+        if (!tl) return;
+        // Clear the safety timer only after the animation has started and
+        // elements are confirmed visible (onStart fires once first frame renders).
+        tl.eventCallback('onStart', function () {
+          clearTimeout(safetyTimer);
+        });
         tl.play();
-      }
-    });
+      });
+    } else {
+      buildTimeline(function (tl) {
+        if (!tl) return;
+        waitForPreloaderExit(tl);
+      });
+    }
   }
 
   function kill() {
@@ -313,6 +342,13 @@
 
   if (typeof window.RR.register === 'function') {
     window.RR.register('hero', { init: init, kill: kill, refresh: refresh });
+  }
+
+  // Self-initialize on DOMContentLoaded (module system may not call initAll)
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    requestAnimationFrame(init);
   }
 
 }());

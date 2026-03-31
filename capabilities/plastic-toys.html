@@ -22,6 +22,8 @@
   <meta property="og:image" content="https://royalregentgroup.com/assets/images/og-image.png">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="zh_TW">
+  <meta property="og:locale:alternate" content="id_ID">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Plastic Toy Manufacturer — Royal Regent Toys">
   <meta name="twitter:description" content="Injection molding, in-house mold development & precision assembly. OEM plastic toy manufacturer for global brands.">
@@ -53,6 +55,15 @@
   </script>
   <link rel="dns-prefetch" href="//unpkg.com">
   <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+
+  <!-- Preload critical fonts -->
+  <link rel="preload" href="../assets/fonts/clash-display-600.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/clash-display-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/satoshi-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/satoshi-700.woff2" as="font" type="font/woff2" crossorigin>
+
   <link rel="stylesheet" href="https://unpkg.com/splitting@1.0.6/dist/splitting.css" integrity="sha384-6z/M4zCNHzM59q8BnJ1btvx5I7ArdKNNBgb/V4m7ZTUPI4e2SVF0o5IQAGCO414a" crossorigin="anonymous">
   <link rel="stylesheet" href="../assets/shared.css">
   <style>
@@ -100,11 +111,11 @@
       color:var(--brand); letter-spacing:0.06em; padding-top:2px;
     }
     .editorial-feat h3 {
-      font-size:var(--text-base); font-weight:700; color:#1a1a1a;
+      font-size:var(--text-base); font-weight:700; color:var(--text);
       margin-bottom:6px; letter-spacing:-0.01em;
     }
     .editorial-feat p {
-      font-size:15px; color:#555; line-height:1.6; margin:0;
+      font-size:var(--text-sm); color:var(--text-muted); line-height:1.6; margin:0;
     }
 
     /* Expanding photo panels */
@@ -159,12 +170,14 @@
       .editorial-left { position:static; }
       .sub-hero { min-height:60vh; }
       .sub-hero-title { font-size:var(--text-3xl); }
+      .sub-hero-scroll { display:none; }
       .photo-panels { flex-direction:column; height:auto; }
       .photo-panel { flex:none !important; width:100%; height:280px; }
       .photo-panels:hover .photo-panel,
       .photo-panels:hover .photo-panel:hover { flex:none !important; }
-      .photo-panel-overlay { opacity:0 !important; }
-      .photo-panel-label { opacity:0 !important; }
+      .photo-panel-overlay { opacity:1 !important; }
+      .photo-panel-label { opacity:1 !important; }
+      .photo-panel-label .label-line { transform:scaleX(1) !important; }
     }
   </style>
 </head>
@@ -175,7 +188,7 @@
 <!-- NAVBAR -->
 <nav id="navbar">
   <div class="nav-container">
-    <a href="../index.html" class="nav-logo"><img src="../assets/logo.png" alt="Royal Regent"></a>
+    <a href="../index.html" class="nav-logo"><img src="../assets/logo.webp" alt="Royal Regent Toys"></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="../about.html">About</a></li>
       <li class="has-dropdown">
@@ -279,14 +292,17 @@
     <div class="photo-panel">
       <img src="../assets/injection-molding.webp" alt="Injection molding production" loading="lazy">
       <div class="photo-panel-overlay"></div>
+      <div class="photo-panel-label"><div class="label-line"></div><span>Injection Molding</span></div>
     </div>
     <div class="photo-panel">
       <img src="../assets/images/factory-assembly-line.webp" alt="Plastic figures manufacturing" loading="lazy">
       <div class="photo-panel-overlay"></div>
+      <div class="photo-panel-label"><div class="label-line"></div><span>Assembly Line</span></div>
     </div>
     <div class="photo-panel">
       <img src="../assets/quality-control.webp" alt="Quality control inspection" loading="lazy">
       <div class="photo-panel-overlay"></div>
+      <div class="photo-panel-label"><div class="label-line"></div><span>Quality Control</span></div>
     </div>
   </div>
 </section>
@@ -300,6 +316,35 @@
   </div>
 </section>
 
+<!-- SEE ALSO -->
+<section class="see-also">
+  <div class="container">
+    <span class="see-also-label">Explore other capabilities</span>
+    <div class="see-also-grid">
+      <a href="plush.html" class="see-also-card">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>
+        <span>Plush</span>
+        <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="dolls.html" class="see-also-card">
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <span>Dolls</span>
+        <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="rc-vehicle.html" class="see-also-card">
+        <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        <span>RC Vehicles</span>
+        <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="costume.html" class="see-also-card">
+        <svg viewBox="0 0 24 24"><path d="M12 3l1.5 3.2 3.5.5-2.5 2.5.6 3.5L12 11l-3.1 1.7.6-3.5L7 6.7l3.5-.5z"/><path d="M5 16l-1.5 3.2-3.5.5L2.5 22l-.6 2L5 22.3 8.1 24l-.6-2L10 19.5l-3.5-.5z"/><path d="M19 16l-1.5 3.2-3.5.5 2.5 2.5-.6 2L19 22.3l3.1 1.7-.6-2L24 19.5l-3.5-.5z"/></svg>
+        <span>Costumes</span>
+        <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
 </div>
 
 <!-- FOOTER -->
@@ -307,7 +352,7 @@
   <div class="footer-container">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="../assets/logo.png" alt="Royal Regent" class="footer-logo">
+        <img src="../assets/logo.webp" alt="Royal Regent Toys" class="footer-logo">
         <p>Manufacturing partner to the world's leading toy brands since 1987. Five product categories, four production sites, one consistent standard &mdash; US and EU compliant.</p>
       </div>
       <div class="footer-col">
@@ -332,7 +377,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 Royal Regent. All rights reserved.</p>
+      <p>&copy; <span class="footer-year"></span> Royal Regent Toys. All rights reserved.</p>
     </div>
   </div>
 </footer>
@@ -413,7 +458,9 @@
 <script src="../assets/animation/section-choreography.js"></script>
 <script src="../assets/animation/cursor.js"></script>
 <script src="../assets/animation/magnetic.js"></script>
-<script src="../assets/animation/hover-effects.js"></script></body>
+<script src="../assets/animation/hover-effects.js"></script>
 <script src="../assets/animation/navbar.js"></script>
 <script src="../assets/animation/mobile-menu.js"></script>
-<script src="../assets/animation/page-transition.js"></script></html>
+<script src="../assets/animation/page-transition.js"></script>
+</body>
+</html>

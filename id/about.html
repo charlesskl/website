@@ -25,12 +25,61 @@
   <meta property="og:site_name" content="Royal Regent Toys">
   <meta property="og:image" content="https://royalregentgroup.com/assets/images/og-image.png">
   <meta property="og:locale" content="id_ID">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="zh_TW">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Tentang Royal Regent Toys — Produsen Mainan OEM | PT RRI, PT RRM">
   <meta name="twitter:description" content="Perjalanan 39 tahun dari bengkel di Hong Kong hingga produsen mainan global. Bersertifikat EN 71 & ASTM F963.">
   <meta name="twitter:image" content="https://royalregentgroup.com/assets/images/og-image.png">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://royalregentgroup.com/id/" },
+          { "@type": "ListItem", "position": 2, "name": "Tentang Kami", "item": "https://royalregentgroup.com/id/about.html" }
+        ]
+      },
+      {
+        "@type": "Organization",
+        "name": "Royal Regent Toys",
+        "url": "https://royalregentgroup.com",
+        "logo": "https://royalregentgroup.com/assets/logo.webp",
+        "description": "Produsen mainan OEM sejak 1987. Mainan plastik, boneka plush, boneka, kendaraan RC & kostum. Pabrik di Tiongkok & Indonesia.",
+        "foundingDate": "1987",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Unit 07-08, 12/F, Greenfield Tower, Concordia Plaza, No.1 Science Museum Road",
+          "addressLocality": "Tsim Sha Tsui, Kowloon",
+          "addressCountry": "HK"
+        },
+        "numberOfEmployees": {
+          "@type": "QuantitativeValue",
+          "minValue": 1000,
+          "maxValue": 5000
+        },
+        "sameAs": [
+          "https://www.linkedin.com/company/royalregentgroup"
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+
+  <!-- Preload critical fonts -->
+  <link rel="preload" href="../assets/fonts/clash-display-600.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/clash-display-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/satoshi-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/satoshi-700.woff2" as="font" type="font/woff2" crossorigin>
 
   <!-- Shared Design System -->
   <link rel="stylesheet" href="https://unpkg.com/splitting@1.0.6/dist/splitting.css" integrity="sha384-6z/M4zCNHzM59q8BnJ1btvx5I7ArdKNNBgb/V4m7ZTUPI4e2SVF0o5IQAGCO414a" crossorigin="anonymous">
@@ -128,7 +177,7 @@
     .statement-accent {
       display: flex; align-items: center; justify-content: flex-end;
       font-family: var(--font-display); font-size: clamp(120px, 18vw, 220px);
-      font-weight: 700; color: var(--brand); opacity: 0.06;
+      font-weight: 700; color: var(--brand); opacity: 0.12;
       line-height: 1; user-select: none; pointer-events: none; z-index: 0;
     }
     @media (max-width: 1024px) {
@@ -403,7 +452,7 @@
 <!-- NAVBAR -->
 <nav id="navbar">
   <div class="nav-container">
-    <a href="index.html" class="nav-logo"><img src="../assets/logo.png" alt="Royal Regent"></a>
+    <a href="index.html" class="nav-logo"><img src="../assets/logo.webp" alt="Royal Regent Toys"></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="about.html" style="color:var(--brand-dark);background:var(--brand-5);">Tentang Kami</a></li>
       <li class="has-dropdown">
@@ -542,7 +591,7 @@
   <div class="footer-container">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="../assets/logo.png" alt="Royal Regent" class="footer-logo">
+        <img src="../assets/logo.webp" alt="Royal Regent Toys" class="footer-logo">
         <p>Mitra manufaktur bagi merek mainan terkemuka dunia sejak 1987. Lima kategori produk, empat lokasi produksi, satu standar konsisten &mdash; sesuai standar AS dan UE.</p>
       </div>
       <div class="footer-col">
@@ -578,7 +627,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 Royal Regent. Hak cipta dilindungi.</p>
+      <p>&copy; <span class="footer-year"></span> Royal Regent Toys. Hak cipta dilindungi.</p>
     </div>
   </div>
 </footer>
