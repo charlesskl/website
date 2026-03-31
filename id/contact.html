@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+  <script>document.documentElement.classList.add('js-loaded');</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -294,12 +295,80 @@
     }
 
 
+    /* ═══ FORM CARD HEADER ═══ */
+    .form-card-header {
+      padding: 0 0 28px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 28px;
+    }
+    .form-card-header h3 {
+      font-size: var(--text-xl);
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+    .form-card-header p {
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ═══ TRUST STRIP ═══ */
+    .contact-trust {
+      padding: var(--space-xl) 0;
+      text-align: center;
+      background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(124,179,66,0.08) 0%, transparent 70%), var(--cream);
+      border-top: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-trust::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .contact-trust .container { position: relative; z-index: 1; }
+    .contact-trust-items {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-xl);
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+    .contact-trust-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+    }
+    .contact-trust-item svg {
+      width: 18px; height: 18px;
+      stroke: var(--brand); fill: none;
+      stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+    .contact-trust h2 {
+      font-size: var(--text-2xl);
+      margin-bottom: 12px;
+    }
+    .contact-trust > .container > p {
+      color: var(--text-muted);
+      font-size: var(--text-base);
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
     /* ═══ RESPONSIVE ═══ */
     @media (max-width: 768px) {
       .contact-grid { grid-template-columns: 1fr; gap: var(--space-lg); }
       .contact-form-card { padding: 48px 24px; }
       .form-row { grid-template-columns: 1fr; }
       .page-hero h1 { font-size: var(--text-3xl); }
+      .contact-trust-items { gap: var(--space-md); }
     }
   </style>
 </head>
@@ -342,6 +411,7 @@
 
 <!-- PAGE HERO -->
 <section class="page-hero">
+  <div class="hero-grid-pattern"></div>
   <div class="container">
     <span class="page-hero-tag">Hubungi Kami</span>
     <h1>Mari diskusikan<br><span class="text-gradient">proyek Anda.</span></h1>
@@ -396,6 +466,11 @@
           <!-- Progress bar -->
           <div class="form-progress">
             <div class="form-progress-fill" id="progressFill"></div>
+          </div>
+
+          <div class="form-card-header">
+            <h3>Kirim pesan</h3>
+            <p>Tim kami meninjau setiap pertanyaan secara personal dan merespons dalam 1–2 hari kerja.</p>
           </div>
 
           <form id="contactForm" novalidate>
@@ -460,6 +535,30 @@
   </div>
 </section>
 
+<!-- ═══ TRUST STRIP ═══ -->
+<section class="contact-trust">
+  <div class="container">
+    <div class="section-label reveal-up" style="text-align:center;">Yang Bisa Anda Harapkan</div>
+    <h2 class="reveal-up">Kami menangani setiap pertanyaan dengan serius.</h2>
+    <p class="reveal-up">Dari pesan pertama hingga produksi — tim kami merespons secara personal dan bergerak cepat.</p>
+    <div class="contact-trust-items">
+      <div class="contact-trust-item reveal-up">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>Respons dalam 1–2 hari kerja</span>
+      </div>
+      <div class="contact-trust-item reveal-up">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        <span>Tim account khusus untuk Anda</span>
+      </div>
+      <div class="contact-trust-item reveal-up">
+        <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        <span>Mitra OEM terpercaya sejak 1987</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <!-- ═══ FOOTER ═══ -->
 <footer>
   <div class="footer-container">
@@ -511,10 +610,11 @@
 <!-- Lenis Smooth Scroll -->
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.18/dist/lenis.min.js"></script>
 <script src="https://unpkg.com/splitting@1.0.6/dist/splitting.min.js" integrity="sha384-taxnKSnzdVS5gZB4jZcieFZlmBPQMFqhdEmCScZsrIFCxX8Zizq4fKJJH5kBwMXT" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js" integrity="sha384-pEQB1h4Zmn9xhS6jotzltHSIQq6N0Oh3BXkCNOH5LKI81R2NRbb9efarAJYw9gTY" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js" integrity="sha384-TgZ1GoXcDnrw/czNfaiSZSFV1zgIRv8aQOevBA8ppS4SkNONmzYfjARpXsDfdnUE" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/SplitText.min.js"></script>
 <script src="../assets/shared.js"></script>
+<script src="../assets/animations.js"></script>
 
 <script>
 (function() {
@@ -654,5 +754,13 @@
 <script src="../assets/animation/navbar.js"></script>
 <script src="../assets/animation/mobile-menu.js"></script>
 <script src="../assets/animation/page-transition.js"></script>
+<!-- Force ScrollTrigger refresh so form card reveals on mobile initial viewport -->
+<script>
+window.addEventListener('load', function() {
+  if (typeof ScrollTrigger !== 'undefined') {
+    setTimeout(function() { ScrollTrigger.refresh(); }, 200);
+  }
+});
+</script>
 </body>
 </html>
