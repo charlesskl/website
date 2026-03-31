@@ -3,3 +3,6 @@
 *.code-workspace
 preview-*.html
 .gstack/
+image-picker.html
+img-preview.html
+img-previews/
