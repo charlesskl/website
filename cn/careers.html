@@ -81,9 +81,9 @@
     /* ═══ VALUES GRID ═══ */
     .careers-values { background:var(--surface-alt); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding-top:var(--space-2xl); }
     .values-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border-top:1px solid var(--border); border-left:1px solid var(--border); }
-    .value-card { border-right:1px solid var(--border); border-bottom:1px solid var(--border); padding:48px 36px; background:var(--white); transition:background 0.3s, border-color 0.3s; }
+    .value-card { border-right:1px solid var(--border); border-bottom:1px solid var(--border); padding:48px 36px; background:var(--white); transition:background 0.3s, border-color 0.3s, transform 0.4s var(--ease-spring), box-shadow 0.4s; }
     @media (hover: hover) and (pointer: fine) {
-      .value-card:hover { background:var(--brand-5); border-color:var(--brand-20); }
+      .value-card:hover { background:var(--brand-5); border-color:var(--brand-20); transform:translateY(-6px); box-shadow:0 16px 48px rgba(124,179,66,0.10); }
     }
     .value-icon { font-size:2rem; margin-bottom:16px; }
     .value-card h3 { font-family:var(--font-display); font-size:var(--text-base); font-weight:700; color:var(--text); margin-bottom:10px; letter-spacing:-0.01em; }
@@ -92,6 +92,25 @@
     /* ═══ POSITIONS ═══ */
     .positions-section { padding:var(--space-2xl) 0; }
     .section-title { font-size:var(--text-3xl); font-weight:700; margin-bottom:var(--space-lg); }
+
+    /* ═══ CTA BANNER OVERRIDE — match homepage radial gradient + grain ═══ */
+    .cta-banner {
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 50%, rgba(124,179,66,0.08) 0%, transparent 70%),
+        linear-gradient(135deg, var(--surface-alt) 0%, var(--white) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .cta-banner .container { position: relative; z-index: 1; }
 
     /* ═══ ADMIN TRIGGER ═══ */
     .admin-trigger { color:var(--text-muted); font-size:11px; opacity:0.3; text-decoration:none; cursor:pointer; margin-left:12px; }
@@ -164,10 +183,11 @@
 
 <!-- PAGE HERO -->
 <section class="page-hero">
+  <div class="hero-grid-pattern"></div>
   <div class="container">
     <span class="page-hero-tag">加入我們的團隊</span>
     <h1>共同建造<br><span class="text-gradient">持久的事業。</span></h1>
-    <p>39年來，Royal Regent 始終致力於人才投資。我們正在尋找製造、工程、品質和營運領域的專業人才，與我們共同成長。</p>
+    <p>製造、工程、品質和營運領域的專業人才——在一家為長久而建的製造商，開展你的成長之路。</p>
   </div>
 </section>
 
