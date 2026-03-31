@@ -344,9 +344,20 @@
 
     .caps-grid {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 20px;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 16px;
+      height: 540px;
     }
+    /* Plastic Toys — featured card spans 2 rows */
+    .caps-grid .cap-card:first-child {
+      grid-row: 1 / 3;
+      aspect-ratio: unset;
+    }
+    .caps-grid .cap-card:nth-child(2) { grid-column: 2; grid-row: 1; aspect-ratio: unset; }
+    .caps-grid .cap-card:nth-child(3) { grid-column: 2; grid-row: 2; aspect-ratio: unset; }
+    .caps-grid .cap-card:nth-child(4) { grid-column: 3; grid-row: 1; aspect-ratio: unset; }
+    .caps-grid .cap-card:nth-child(5) { grid-column: 3; grid-row: 2; aspect-ratio: unset; }
 
     /* Mana-style tall portrait card */
     .cap-card {
@@ -461,6 +472,16 @@
       gap: 6px;
     }
 
+    /* Hover lift + shadow */
+    .cap-card {
+      transform: translateY(0);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s cubic-bezier(0.22,1,0.36,1);
+    }
+    .cap-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.14);
+    }
     /* Hover shadow — GSAP controlled but declaring base */
     .cap-card-shadow {
       box-shadow: none;
@@ -734,10 +755,24 @@
     /* ═══ CTA BANNER ═══ */
     .cta-banner {
       padding: var(--space-2xl) 0;
-      background: linear-gradient(135deg, var(--surface-alt) 0%, var(--white) 100%);
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 50%, rgba(124,179,66,0.08) 0%, transparent 70%),
+        linear-gradient(135deg, var(--surface-alt) 0%, var(--white) 100%);
       border-top: 1px solid var(--border);
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
+    .cta-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .cta-banner .container { position: relative; z-index: 1; }
     .cta-banner h2 {
       font-family: var(--font-display);
       font-size: var(--text-3xl);
@@ -766,13 +801,21 @@
 
     /* ═══ RESPONSIVE ═══ */
     @media (max-width: 1024px) {
-      .caps-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; justify-content: center; }
-      .caps-grid > *:nth-child(4) { grid-column-start: 1; }
-      .caps-grid > *:nth-child(5) { grid-column-start: 2; }
-      .cap-card { aspect-ratio: 3 / 4; }
+      .caps-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        height: auto;
+        gap: 16px;
+      }
+      .caps-grid .cap-card:first-child { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 16/7; }
+      .caps-grid .cap-card:nth-child(2),
+      .caps-grid .cap-card:nth-child(3),
+      .caps-grid .cap-card:nth-child(4),
+      .caps-grid .cap-card:nth-child(5) { grid-column: auto; grid-row: auto; aspect-ratio: 3/4; }
     }
     @media (max-width: 768px) {
       .caps-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+      .caps-grid .cap-card:first-child { grid-column: 1 / -1; aspect-ratio: 16/7; }
       .cap-card { aspect-ratio: 3 / 4; }
       /* Mobile: always show background + white text */
       .cap-card-bg { opacity: 1 !important; }
@@ -914,7 +957,7 @@
       <span class="text-gradient">Craftsmanship.</span><br>
       Global Scale.
     </h1>
-    <p class="hero-sub" id="heroSub">Great manufacturing isn't just about production — it's about partnership. For 39 years, we've worked alongside brands to bring their visions to life, with the craftsmanship, compliance, and consistency the world's most demanding markets expect.</p>
+    <p class="hero-sub" id="heroSub">39 years. 4 production sites. The OEM partner behind the world's most recognised toy brands.</p>
     <div class="hero-actions" id="heroActions">
       <a href="capabilities/plastic-toys.html" class="btn btn-primary magnetic" data-strength="0.2">Explore Capabilities</a>
       <a href="about.html" class="btn btn-outline magnetic" data-strength="0.2">Our Story →</a>
@@ -999,6 +1042,7 @@
     <div class="statement-accent" id="stmtAccent">1987</div>
   </div>
 </section>
+
 
 <!-- ═══════════════════════════════════════════════════════════════
      CAPABILITIES — Mana-style hover-reveal portrait cards
@@ -1751,6 +1795,7 @@
 
     // Intro statement — removed old parallax (replaced by statementEntrance)
   }
+
 
 
   // ─── INIT ALL ─────────────────────────────────────────────
