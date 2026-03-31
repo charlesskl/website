@@ -123,8 +123,27 @@
     .photo-panel-label span { font-family:var(--font-display); font-size:13px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:#fff; }
 
     /* ═══ CTA ═══ */
-    .cta-section { padding:var(--space-2xl) 0; background:var(--surface-alt); border-top:1px solid var(--border); border-bottom:1px solid var(--border); text-align:center; }
-    .cta-section h2 { font-size:var(--text-3xl); margin-bottom:16px; }
+    .cta-section {
+      padding:var(--space-2xl) 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 50%, rgba(124,179,66,0.08) 0%, transparent 70%),
+        linear-gradient(135deg, var(--surface-alt) 0%, var(--white) 100%);
+      border-top:1px solid var(--border);
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .cta-section::before {
+      content:'';
+      position:absolute;
+      inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      background-size:200px 200px;
+      pointer-events:none;
+      z-index:0;
+    }
+    .cta-section .container { position:relative; z-index:1; }
+    .cta-section h2 { font-family:var(--font-display); font-size:var(--text-3xl); font-weight:700; letter-spacing:-0.02em; margin-bottom:16px; }
     .cta-section p { color:var(--text-muted); margin-bottom:36px; font-size:var(--text-base); max-width:520px; margin-left:auto; margin-right:auto; line-height:1.7; }
 
     footer.footer-reveal { clip-path:inset(0 0 0 0); }
