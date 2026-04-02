@@ -1,0 +1,1819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GFT Group Ltd | Hong Kong Toy Manufacturer OEM/ODM</title>
+  <meta name="description" content="Hong Kong-based toy OEM/ODM manufacturer since 1993. BSCI certified factory in Dongguan. Plush, plastic, die-cast toys for global brands. Request a quote.">
+  <meta property="og:title" content="GFT Group Ltd | Hong Kong Toy Manufacturer OEM/ODM">
+  <meta property="og:description" content="30+ years manufacturing quality toys for global brands. BSCI certified. 50M+ units annually. Request a quote today.">
+  <meta property="og:type" content="website">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* =============================================
+       CSS RESET + BASE
+    ============================================= */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: #1E293B;
+      background: #FFFFFF;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* =============================================
+       DESIGN TOKENS
+    ============================================= */
+    :root {
+      --navy: #0F172A;
+      --steel: #1E3A5F;
+      --blue: #2563EB;
+      --blue-dark: #1D4ED8;
+      --blue-light: #EFF6FF;
+      --gold: #D97706;
+      --white: #FFFFFF;
+      --grey-bg: #F8FAFC;
+      --border: #E2E8F0;
+      --text-primary: #1E293B;
+      --text-secondary: #64748B;
+      --text-inverse: #FFFFFF;
+
+      --font-heading: 'Plus Jakarta Sans', 'Inter', sans-serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+
+      --max-w: 1280px;
+      --pad-desktop: 48px;
+      --pad-tablet: 32px;
+      --pad-mobile: 20px;
+      --section-py: 112px;
+
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-full: 9999px;
+
+      --shadow-card: 0 4px 16px rgba(0,0,0,0.06);
+      --shadow-card-hover: 0 12px 32px rgba(0,0,0,0.12);
+      --shadow-nav: 0 1px 3px rgba(0,0,0,0.1);
+
+      --transition: 0.2s ease;
+    }
+
+    /* =============================================
+       LAYOUT UTILITIES
+    ============================================= */
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--pad-desktop);
+    }
+
+    section {
+      padding: var(--section-py) 0;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 40px;
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+
+    .section-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
+    /* =============================================
+       BUTTONS
+    ============================================= */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 600;
+      height: 52px;
+      padding: 0 28px;
+      border-radius: 26px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all var(--transition);
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: var(--white);
+      border-color: var(--blue);
+    }
+
+    .btn-primary:hover {
+      background: var(--blue-dark);
+      border-color: var(--blue-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(37,99,235,0.35);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--white);
+      border-color: rgba(255,255,255,0.5);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.8);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--blue);
+      border-color: var(--blue);
+    }
+
+    .btn-outline:hover {
+      background: var(--blue);
+      color: var(--white);
+    }
+
+    .btn svg {
+      flex-shrink: 0;
+    }
+
+    /* =============================================
+       NAVIGATION
+    ============================================= */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 72px;
+      background: var(--white);
+      box-shadow: var(--shadow-nav);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .nav-logo-mark {
+      width: 36px;
+      height: 36px;
+      background: var(--navy);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-primary);
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      transition: color var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--blue);
+    }
+
+    .nav-cta {
+      font-size: 15px;
+      height: 44px;
+      padding: 0 20px;
+      border-radius: 22px;
+    }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+      background: none;
+      border: none;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--navy);
+      border-radius: 2px;
+      transition: all var(--transition);
+    }
+
+    /* Mobile nav overlay */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--white);
+      z-index: 999;
+      flex-direction: column;
+      padding: 100px var(--pad-mobile) 40px;
+    }
+
+    .mobile-nav.open {
+      display: flex;
+    }
+
+    .mobile-nav a {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--navy);
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mobile-nav a:last-child {
+      border-bottom: none;
+    }
+
+    .mobile-nav .btn {
+      margin-top: 32px;
+      justify-content: center;
+    }
+
+    .mobile-nav-close {
+      position: absolute;
+      top: 20px;
+      right: var(--pad-mobile);
+      background: none;
+      border: none;
+      font-size: 28px;
+      cursor: pointer;
+      color: var(--navy);
+    }
+
+    /* =============================================
+       HERO SECTION
+    ============================================= */
+    .hero {
+      min-height: 100vh;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      padding: 72px 0 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Geometric background elements */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 40%, rgba(37,99,235,0.2) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(30,58,95,0.6) 0%, transparent 50%);
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 80px 0;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--gold);
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: 64px;
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 24px;
+      max-width: 720px;
+    }
+
+    .hero-title span {
+      color: var(--gold);
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.7;
+      max-width: 560px;
+      margin-bottom: 40px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      margin-top: 72px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .hero-stat-num {
+      font-family: var(--font-heading);
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1;
+    }
+
+    .hero-stat-label {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      margin-top: 4px;
+    }
+
+    /* Hero decorative card */
+    .hero-visual {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 45%;
+      padding-right: var(--pad-desktop);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.07);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-md);
+      padding: 24px;
+    }
+
+    .hero-card-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .hero-card-value {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .hero-cert-badges {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .cert-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .cert-badge svg {
+      color: var(--gold);
+    }
+
+    /* =============================================
+       TRUST BAR
+    ============================================= */
+    .trust-bar {
+      background: var(--grey-bg);
+      padding: 0;
+    }
+
+    .trust-bar section {
+      padding: 48px 0;
+    }
+
+    .trust-items {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex: 1;
+    }
+
+    .trust-item + .trust-item {
+      padding-left: 24px;
+      border-left: 1px solid var(--border);
+    }
+
+    .trust-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--blue-light);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--blue);
+    }
+
+    .trust-num {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1;
+    }
+
+    .trust-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 2px;
+    }
+
+    /* =============================================
+       CAPABILITIES SECTION
+    ============================================= */
+    .capabilities {
+      background: var(--white);
+    }
+
+    .capabilities-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .capabilities-header .section-subtitle {
+      margin: 0 auto;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .cap-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 32px;
+      box-shadow: var(--shadow-card);
+      transition: all var(--transition);
+      cursor: default;
+    }
+
+    .cap-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card-hover);
+      border-color: transparent;
+    }
+
+    .cap-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--blue-light);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--blue);
+      margin-bottom: 20px;
+    }
+
+    .cap-title {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+
+    .cap-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+
+    .cap-link {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--blue);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: gap var(--transition);
+    }
+
+    .cap-card:hover .cap-link {
+      gap: 8px;
+    }
+
+    .capabilities-cta {
+      text-align: center;
+      margin-top: 48px;
+    }
+
+    /* =============================================
+       WHY GFT SECTION
+    ============================================= */
+    .why-gft {
+      background: var(--grey-bg);
+    }
+
+    .why-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .why-header .section-subtitle {
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .feature-item {
+      display: flex;
+      gap: 16px;
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--blue);
+      flex-shrink: 0;
+      box-shadow: var(--shadow-card);
+    }
+
+    .feature-title {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .feature-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    /* =============================================
+       SOCIAL PROOF
+    ============================================= */
+    .social-proof {
+      background: var(--white);
+    }
+
+    .social-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .client-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+      flex-wrap: wrap;
+      margin-bottom: 64px;
+    }
+
+    .client-logo {
+      padding: 20px 32px;
+      border: 1px solid var(--border);
+      margin: -1px 0 0 -1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .client-logo-text {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #CBD5E1;
+      text-transform: uppercase;
+    }
+
+    .testimonial-card {
+      max-width: 680px;
+      margin: 0 auto;
+      background: var(--grey-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      text-align: center;
+      position: relative;
+    }
+
+    .testimonial-quote-mark {
+      font-size: 80px;
+      line-height: 0.8;
+      color: var(--blue);
+      font-family: Georgia, serif;
+      margin-bottom: 24px;
+      opacity: 0.3;
+    }
+
+    .testimonial-text {
+      font-size: 18px;
+      font-style: italic;
+      color: var(--text-primary);
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+
+    .testimonial-author {
+      font-weight: 600;
+      color: var(--navy);
+      font-size: 15px;
+    }
+
+    .testimonial-company {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    /* =============================================
+       FACTORY SHOWCASE
+    ============================================= */
+    .factory {
+      background: var(--navy);
+      padding: var(--section-py) 0;
+    }
+
+    .factory-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .factory-header .section-title {
+      color: var(--white);
+    }
+
+    .factory-header .section-subtitle {
+      color: rgba(255,255,255,0.6);
+      margin: 0 auto;
+    }
+
+    .factory-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .factory-card {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 4/3;
+      background: var(--steel);
+    }
+
+    .factory-img-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: linear-gradient(135deg, var(--steel) 0%, #162D4E 100%);
+    }
+
+    .factory-img-placeholder svg {
+      color: rgba(255,255,255,0.2);
+    }
+
+    .factory-img-placeholder span {
+      font-size: 13px;
+      color: rgba(255,255,255,0.3);
+      font-weight: 500;
+    }
+
+    .factory-card-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 20px 24px;
+      background: linear-gradient(0deg, rgba(15,23,42,0.95) 0%, transparent 100%);
+    }
+
+    .factory-caption-title {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .factory-caption-sub {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* =============================================
+       CERTIFICATIONS
+    ============================================= */
+    .certifications {
+      background: var(--grey-bg);
+    }
+
+    .cert-content {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .cert-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .cert-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .cert-icon-wrap {
+      width: 48px;
+      height: 48px;
+      background: var(--navy);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .cert-name {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .cert-full {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    .cert-right .section-title {
+      margin-bottom: 16px;
+    }
+
+    .cert-description {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+
+    .cert-highlight {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 16px 20px;
+      font-size: 15px;
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+
+    /* =============================================
+       CTA SECTION
+    ============================================= */
+    .cta-section {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--steel) 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(37,99,235,0.2) 0%, transparent 70%);
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta-section .section-title {
+      color: var(--white);
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+
+    .cta-section .section-subtitle {
+      color: rgba(255,255,255,0.7);
+      margin: 0 auto 40px;
+      max-width: 500px;
+    }
+
+    .cta-actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .cta-contact {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .cta-contact a {
+      color: rgba(255,255,255,0.75);
+      transition: color var(--transition);
+    }
+
+    .cta-contact a:hover {
+      color: var(--white);
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    .footer {
+      background: var(--navy);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 64px 0 32px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+
+    .footer-logo-mark {
+      width: 32px;
+      height: 32px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    .footer-tagline {
+      font-size: 14px;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .footer-address {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.7;
+    }
+
+    .footer-col-title {
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 16px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links a {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      transition: color var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: var(--white);
+    }
+
+    .footer-bottom {
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .footer-cert-row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .footer-cert-badge {
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.06);
+      border-radius: 4px;
+      padding: 4px 8px;
+    }
+
+    /* =============================================
+       RESPONSIVE — TABLET (768px)
+    ============================================= */
+    @media (max-width: 1279px) {
+      :root {
+        --section-py: 80px;
+      }
+
+      .container {
+        padding: 0 var(--pad-tablet);
+      }
+
+      .hero-title {
+        font-size: 52px;
+      }
+
+      .section-title {
+        font-size: 34px;
+      }
+
+      .hero-visual {
+        display: none;
+      }
+
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .trust-items {
+        flex-wrap: wrap;
+        gap: 0;
+      }
+
+      .trust-item {
+        width: 33.33%;
+        padding: 16px;
+      }
+
+      .trust-item + .trust-item {
+        border-left: none;
+        border-top: 1px solid var(--border);
+      }
+
+      .trust-item:nth-child(-n+3) {
+        border-top: none;
+      }
+
+      .trust-item:nth-child(n+4) {
+        border-top: 1px solid var(--border);
+      }
+
+      .factory-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .factory-grid .factory-card:last-child {
+        grid-column: span 2;
+      }
+
+      .cert-content {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+
+      .cta-section .section-title {
+        font-size: 38px;
+      }
+
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* =============================================
+       RESPONSIVE — MOBILE (767px)
+    ============================================= */
+    @media (max-width: 767px) {
+      :root {
+        --section-py: 64px;
+      }
+
+      .container {
+        padding: 0 var(--pad-mobile);
+      }
+
+      .nav-links,
+      .nav-cta {
+        display: none;
+      }
+
+      .nav-hamburger {
+        display: flex;
+      }
+
+      .hero-title {
+        font-size: 40px;
+      }
+
+      .hero-stats {
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+
+      .hero-stat-num {
+        font-size: 28px;
+      }
+
+      .section-title {
+        font-size: 28px;
+      }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .trust-items {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0;
+      }
+
+      .trust-item {
+        width: auto;
+        padding: 16px;
+      }
+
+      .trust-item + .trust-item {
+        border-left: none;
+      }
+
+      .trust-item:nth-child(odd) {
+        border-right: 1px solid var(--border);
+      }
+
+      .trust-item:nth-child(n+3) {
+        border-top: 1px solid var(--border);
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .factory-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .factory-grid .factory-card:last-child {
+        grid-column: auto;
+      }
+
+      .cert-list {
+        gap: 12px;
+      }
+
+      .cta-section .section-title {
+        font-size: 30px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .client-logos {
+        justify-content: flex-start;
+      }
+
+      .client-logo {
+        padding: 14px 20px;
+      }
+
+      .testimonial-card {
+        padding: 32px 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============= NAVIGATION ============= -->
+  <nav class="nav" id="main-nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#" class="nav-logo">
+          <div class="nav-logo-mark">GFT</div>
+          GFT Group
+        </a>
+        <ul class="nav-links">
+          <li><a href="#capabilities">Products</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#capabilities">Capabilities</a></li>
+          <li><a href="#certifications">Certifications</a></li>
+        </ul>
+        <a href="#contact" class="btn btn-primary nav-cta">Get Quote →</a>
+        <button class="nav-hamburger" onclick="toggleMobileNav()" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Nav Overlay -->
+  <div class="mobile-nav" id="mobile-nav">
+    <button class="mobile-nav-close" onclick="toggleMobileNav()">✕</button>
+    <a href="#capabilities" onclick="toggleMobileNav()">Products</a>
+    <a href="#about" onclick="toggleMobileNav()">About</a>
+    <a href="#capabilities" onclick="toggleMobileNav()">Capabilities</a>
+    <a href="#certifications" onclick="toggleMobileNav()">Certifications</a>
+    <a href="#contact" class="btn btn-primary" onclick="toggleMobileNav()">Get a Quote →</a>
+  </div>
+
+  <!-- ============= HERO ============= -->
+  <section class="hero" id="home">
+    <div class="hero-grid"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-eyebrow">Hong Kong Toy Manufacturer</div>
+        <h1 class="hero-title">
+          30 Years.<br>
+          <span>50 Million Units.</span><br>
+          Zero Compromises.
+        </h1>
+        <p class="hero-subtitle">
+          Hong Kong-based toy OEM/ODM manufacturer. BSCI certified factory in Dongguan, shipping plush, plastic, and die-cast toys to global brands since 1993.
+        </p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">
+            Request a Quote
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#capabilities" class="btn btn-ghost">View Our Products ↓</a>
+        </div>
+
+        <div class="hero-stats">
+          <div>
+            <div class="hero-stat-num">30+</div>
+            <div class="hero-stat-label">Years Experience</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">50M+</div>
+            <div class="hero-stat-label">Units Annually</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">80+</div>
+            <div class="hero-stat-label">Global Clients</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">5</div>
+            <div class="hero-stat-label">Certifications</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero decorative right panel -->
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-card-label">Production Capacity</div>
+        <div class="hero-card-value">50M+ units/year</div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-label">Certifications</div>
+        <div class="hero-cert-badges">
+          <span class="cert-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+            BSCI
+          </span>
+          <span class="cert-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+            ISO 9001
+          </span>
+          <span class="cert-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+            ICTI
+          </span>
+          <span class="cert-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+            EN 71
+          </span>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-label">Lead Time</div>
+        <div class="hero-card-value">45–90 Days</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= TRUST BAR ============= -->
+  <div class="trust-bar">
+    <section>
+      <div class="container">
+        <div class="trust-items">
+          <div class="trust-item">
+            <div class="trust-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12h8M12 8v8"/></svg>
+            </div>
+            <div>
+              <div class="trust-num">30+</div>
+              <div class="trust-label">Years in Business</div>
+            </div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div class="trust-num">50M+</div>
+              <div class="trust-label">Units Per Year</div>
+            </div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div>
+              <div class="trust-num">80+</div>
+              <div class="trust-label">Global Clients</div>
+            </div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <div class="trust-num">BSCI</div>
+              <div class="trust-label">Certified</div>
+            </div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+            </div>
+            <div>
+              <div class="trust-num">ISO</div>
+              <div class="trust-label">9001:2015</div>
+            </div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+            </div>
+            <div>
+              <div class="trust-num">ICTI</div>
+              <div class="trust-label">Certified</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============= CAPABILITIES ============= -->
+  <section class="capabilities" id="capabilities">
+    <div class="container">
+      <div class="capabilities-header">
+        <div class="section-label">What We Make</div>
+        <h2 class="section-title">Full-Range Toy Manufacturing</h2>
+        <p class="section-subtitle">From soft plush to precision die-cast, we manufacture across every major toy category — all under one roof.</p>
+      </div>
+      <div class="cards-grid">
+        <div class="cap-card">
+          <div class="cap-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+          </div>
+          <h3 class="cap-title">Plush &amp; Soft Toys</h3>
+          <p class="cap-desc">Custom stuffed animals, character plush, and soft toys. EN71 and ASTM compliant. MOQ from 1,000 units.</p>
+          <a href="#contact" class="cap-link">Learn more →</a>
+        </div>
+        <div class="cap-card">
+          <div class="cap-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <h3 class="cap-title">Plastic Injection Toys</h3>
+          <p class="cap-desc">Action figures, building sets, playsets, and novelty items. Full colour-matching and surface finish capability.</p>
+          <a href="#contact" class="cap-link">Learn more →</a>
+        </div>
+        <div class="cap-card">
+          <div class="cap-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <h3 class="cap-title">Die-Cast Vehicles</h3>
+          <p class="cap-desc">Precision die-cast cars, trucks, and collectibles. Zinc alloy or aluminium. Custom liveries and packaging.</p>
+          <a href="#contact" class="cap-link">Learn more →</a>
+        </div>
+        <div class="cap-card">
+          <div class="cap-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+          </div>
+          <h3 class="cap-title">Electronic &amp; Interactive</h3>
+          <p class="cap-desc">Light-up toys, sound modules, remote-controlled vehicles, and basic electronic learning toys.</p>
+          <a href="#contact" class="cap-link">Learn more →</a>
+        </div>
+      </div>
+      <div class="capabilities-cta">
+        <a href="#contact" class="btn btn-outline">View Full Product Range →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= WHY GFT ============= -->
+  <section class="why-gft" id="about">
+    <div class="container">
+      <div class="why-header">
+        <div class="section-label">Why GFT</div>
+        <h2 class="section-title">Why Global Brands Choose GFT</h2>
+        <p class="section-subtitle">We don't just manufacture. We partner with brands to bring products from concept to shelf — on time, on spec, and on budget.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          </div>
+          <div>
+            <div class="feature-title">Full OEM/ODM Capability</div>
+            <p class="feature-desc">From your brief to finished goods — design, tooling, sampling, production, and QC all in-house.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div>
+            <div class="feature-title">QC at Every Stage</div>
+            <p class="feature-desc">In-line quality control, pre-shipment inspection, and third-party audit acceptance. Zero surprises at destination.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="feature-title">On-Time Delivery</div>
+            <p class="feature-desc">98.5% on-time delivery rate across 30 years. Critical for retail buyers hitting seasonal windows.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+          </div>
+          <div>
+            <div class="feature-title">Rapid Prototyping</div>
+            <p class="feature-desc">3D sample within 7 days. Production sample within 21 days. Iterate faster than competitors.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <div class="feature-title">Compliance Expertise</div>
+            <p class="feature-desc">Deep knowledge of EN71, ASTM F963, REACH, and CPSIA. We handle compliance documentation end-to-end.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <div>
+            <div class="feature-title">Competitive Pricing</div>
+            <p class="feature-desc">Factory-direct pricing with transparent cost breakdowns. No middlemen, no hidden fees.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= SOCIAL PROOF ============= -->
+  <section class="social-proof" id="clients">
+    <div class="container">
+      <div class="social-header">
+        <div class="section-label">Our Clients</div>
+        <h2 class="section-title">Trusted by Leading Toy Brands</h2>
+      </div>
+      <div class="client-logos">
+        <div class="client-logo"><span class="client-logo-text">Mattel</span></div>
+        <div class="client-logo"><span class="client-logo-text">Spin Master</span></div>
+        <div class="client-logo"><span class="client-logo-text">Bandai</span></div>
+        <div class="client-logo"><span class="client-logo-text">Ravensburger</span></div>
+        <div class="client-logo"><span class="client-logo-text">MGA Ent.</span></div>
+        <div class="client-logo"><span class="client-logo-text">Schleich</span></div>
+        <div class="client-logo"><span class="client-logo-text">PlayMonster</span></div>
+        <div class="client-logo"><span class="client-logo-text">Jazwares</span></div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote-mark">"</div>
+        <p class="testimonial-text">GFT has been our go-to manufacturing partner for over a decade. Their quality control is exceptional, and they've never missed a critical shipping deadline. When we need a new product built right, we call GFT first.</p>
+        <div class="testimonial-author">David Chen, VP Product Development</div>
+        <div class="testimonial-company">Senior Buyer, Global Toys Ltd (placeholder)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= FACTORY SHOWCASE ============= -->
+  <section class="factory" id="factory">
+    <div class="container">
+      <div class="factory-header">
+        <div class="section-label" style="color: var(--gold)">Our Facilities</div>
+        <h2 class="section-title">Built for Scale. Built for Quality.</h2>
+        <p class="section-subtitle">500,000 sq ft of modern manufacturing space in Dongguan, China — with our HQ and showroom in Hong Kong.</p>
+      </div>
+      <div class="factory-grid">
+        <div class="factory-card">
+          <div class="factory-img-placeholder">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M2 14h20"/></svg>
+            <span>Factory Photo — Dongguan HQ</span>
+          </div>
+          <div class="factory-card-caption">
+            <div class="factory-caption-title">Dongguan HQ</div>
+            <div class="factory-caption-sub">Production floor · 300,000 sq ft</div>
+          </div>
+        </div>
+        <div class="factory-card">
+          <div class="factory-img-placeholder">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span>Factory Photo — Quality Lab</span>
+          </div>
+          <div class="factory-card-caption">
+            <div class="factory-caption-title">Quality Control Lab</div>
+            <div class="factory-caption-sub">ISO 9001:2015 certified · 24/7 testing</div>
+          </div>
+        </div>
+        <div class="factory-card">
+          <div class="factory-img-placeholder">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span>Factory Photo — HK Showroom</span>
+          </div>
+          <div class="factory-card-caption">
+            <div class="factory-caption-title">Hong Kong Showroom</div>
+            <div class="factory-caption-sub">Product display &amp; client meetings · TST</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= CERTIFICATIONS ============= -->
+  <section class="certifications" id="certifications">
+    <div class="container">
+      <div class="cert-content">
+        <div class="cert-list">
+          <div class="cert-item">
+            <div class="cert-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <div class="cert-name">BSCI</div>
+              <div class="cert-full">Business Social Compliance Initiative</div>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+            </div>
+            <div>
+              <div class="cert-name">ISO 9001:2015</div>
+              <div class="cert-full">Quality Management System</div>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+            </div>
+            <div>
+              <div class="cert-name">ICTI</div>
+              <div class="cert-full">International Council of Toy Industries</div>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <div>
+              <div class="cert-name">EN 71</div>
+              <div class="cert-full">European Toy Safety Standard</div>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-icon-wrap">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+            </div>
+            <div>
+              <div class="cert-name">ASTM F963</div>
+              <div class="cert-full">US Toy Safety Standard</div>
+            </div>
+          </div>
+        </div>
+        <div class="cert-right">
+          <div class="section-label">Compliance</div>
+          <h2 class="section-title">Safety Certified for Every Market</h2>
+          <p class="cert-description">
+            Every product we ship meets the safety and compliance standards of your target market — whether that's North America, Europe, or Asia Pacific. Our in-house compliance team handles all documentation, testing coordination, and audit facilitation.
+          </p>
+          <div class="cert-highlight">
+            "We've been audited by BSCI, ICTI, and Disney. We pass every time — because compliance isn't a box we check, it's how we operate."<br>
+            <strong style="font-size:13px; color: var(--text-secondary); display:block; margin-top:8px">— GFT Quality Director</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= CTA SECTION ============= -->
+  <section class="cta-section" id="contact">
+    <div class="container">
+      <div class="cta-content">
+        <div class="section-label" style="color: var(--gold); margin-bottom: 20px">Start a Project</div>
+        <h2 class="section-title" style="color: white; font-size: 48px; margin-bottom: 20px">Ready to Start Your Next Project?</h2>
+        <p class="section-subtitle" style="color: rgba(255,255,255,0.65); max-width: 480px; margin: 0 auto 40px">
+          Tell us about your product idea or send us your spec sheet. Our team will respond within 24 hours with a preliminary assessment.
+        </p>
+        <div class="cta-actions">
+          <a href="mailto:info@gftgroup.com.hk" class="btn btn-primary" style="font-size: 18px; height: 60px; padding: 0 36px;">
+            Tell Us About Your Product →
+          </a>
+          <a href="tel:+85200000000" class="btn btn-ghost">
+            +852 0000 0000
+          </a>
+        </div>
+        <div class="cta-contact">
+          Or email us at <a href="mailto:info@gftgroup.com.hk">info@gftgroup.com.hk</a> · WhatsApp available
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= FOOTER ============= -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">
+            <div class="footer-logo-mark">GFT</div>
+            GFT Group Ltd
+          </div>
+          <p class="footer-tagline">Hong Kong's trusted toy OEM/ODM manufacturer since 1993. From concept to shelf — we make it happen.</p>
+          <p class="footer-address">
+            HQ: Unit XX, XX/F, XX Building<br>
+            Tsim Sha Tsui, Kowloon, Hong Kong<br>
+            Factory: Dongguan, Guangdong, China
+          </p>
+        </div>
+        <div>
+          <div class="footer-col-title">Products</div>
+          <ul class="footer-links">
+            <li><a href="#capabilities">Plush Toys</a></li>
+            <li><a href="#capabilities">Plastic Toys</a></li>
+            <li><a href="#capabilities">Die-Cast</a></li>
+            <li><a href="#capabilities">Electronic</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Company</div>
+          <ul class="footer-links">
+            <li><a href="#about">About GFT</a></li>
+            <li><a href="#factory">Our Factory</a></li>
+            <li><a href="#certifications">Certifications</a></li>
+            <li><a href="#clients">Clients</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Contact</div>
+          <ul class="footer-links">
+            <li><a href="tel:+85200000000">+852 0000 0000</a></li>
+            <li><a href="mailto:info@gftgroup.com.hk">info@gftgroup.com.hk</a></li>
+            <li><a href="#contact">Request Quote</a></li>
+            <li><a href="#contact">WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 GFT Group Ltd. All rights reserved.</p>
+        <div class="footer-cert-row">
+          <span class="footer-cert-badge">BSCI</span>
+          <span class="footer-cert-badge">ISO 9001</span>
+          <span class="footer-cert-badge">ICTI</span>
+          <span class="footer-cert-badge">EN 71</span>
+          <span class="footer-cert-badge">ASTM F963</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============= JAVASCRIPT ============= -->
+  <script>
+    // Mobile nav toggle
+    function toggleMobileNav() {
+      const nav = document.getElementById('mobile-nav');
+      nav.classList.toggle('open');
+      document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+    }
+
+    // Close mobile nav on scroll
+    window.addEventListener('scroll', function() {
+      const mobileNav = document.getElementById('mobile-nav');
+      if (mobileNav.classList.contains('open')) {
+        toggleMobileNav();
+      }
+    }, { passive: true });
+
+    // Scroll reveal animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.cap-card, .feature-item, .cert-item, .factory-card, .trust-item').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
