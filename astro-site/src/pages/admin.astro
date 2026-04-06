@@ -1,0 +1,64 @@
+---
+import AdminPanel from '../components/AdminPanel.tsx';
+import '../styles/shared.css';
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin — Manage Jobs</title>
+  <link rel="preload" href="/fonts/clash-display-600.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/satoshi-400.woff2" as="font" type="font/woff2" crossorigin>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; cursor: auto !important; }
+    a, button { cursor: pointer !important; }
+    input, textarea, select { cursor: text !important; }
+    .cursor-dot, .cursor-ring, .cursor-label { display: none !important; }
+    body { font-family: var(--font-body); background: var(--surface-alt, #f5f5f7); color: var(--text, #1d1d1f); min-height: 100vh; padding: 40px 20px; }
+
+    .admin-container { max-width: 800px; margin: 0 auto; background: var(--white, #fff); border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); overflow: hidden; }
+    .admin-header { padding: 24px 28px; border-bottom: 1px solid var(--border, #e5e5ea); display: flex; align-items: center; justify-content: space-between; }
+    .admin-header-actions { display: flex; gap: 8px; align-items: center; }
+
+    .admin-body { padding: 24px 28px; }
+
+    .admin-job-list { list-style: none; padding: 0; margin: 0; }
+    .admin-job-item { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--border, #e5e5ea); }
+    .admin-job-item:last-child { border-bottom: none; }
+    .admin-job-actions { display: flex; gap: 6px; }
+    .admin-job-actions button { padding: 6px 12px; border: 1px solid var(--border, #e5e5ea); border-radius: 6px; background: var(--white, #fff); font-size: 13px; cursor: pointer !important; transition: all 0.2s; }
+    .admin-job-actions .edit-btn:hover { border-color: var(--brand); color: var(--brand); }
+    .admin-job-actions .delete-btn:hover { border-color: #c0392b; color: #c0392b; }
+
+    .admin-form label { display: block; font-size: 13px; font-weight: 500; color: var(--text-muted, #86868b); margin-bottom: 4px; margin-top: 16px; }
+    .admin-form label:first-child { margin-top: 0; }
+    .admin-form input, .admin-form textarea, .admin-form select { width: 100%; padding: 10px 14px; border: 1px solid var(--border, #e5e5ea); border-radius: 8px; font-size: 14px; font-family: var(--font-body); box-sizing: border-box; }
+    .admin-form textarea { min-height: 80px; resize: vertical; }
+    .admin-form .form-row { display: flex; gap: 12px; }
+    .admin-form .form-row > div { flex: 1; }
+
+    .btn-sm { padding: 8px 18px; font-size: 13px; border-radius: 8px; border: none; cursor: pointer !important; font-weight: 500; transition: all 0.2s; }
+    .btn-sm.primary { background: var(--brand, #7cb342); color: #fff; }
+    .btn-sm.primary:hover { background: var(--brand-dark, #558b2f); }
+    .btn-sm.ghost { background: transparent; border: 1px solid var(--border, #e5e5ea); color: var(--text, #1d1d1f); }
+    .btn-sm.ghost:hover { border-color: var(--text-muted, #86868b); }
+    .btn-sm.export { background: #2c3e50; color: #fff; }
+    .btn-sm.export:hover { background: #1a252f; }
+
+    .back-link { display: inline-block; margin-bottom: 20px; color: var(--text-muted, #86868b); text-decoration: none; font-size: 14px; }
+    .back-link:hover { color: var(--text, #1d1d1f); }
+
+    @media(max-width:768px) {
+      .admin-container { border-radius: 12px; }
+      .admin-form .form-row { flex-direction: column; gap: 0; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <a href="/careers.html" class="back-link">&larr; Back to Careers</a>
+  <AdminPanel client:load />
+</body>
+</html>

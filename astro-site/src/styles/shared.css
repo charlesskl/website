@@ -483,7 +483,8 @@ body[data-page="contact"] .nav-links a[href="../contact.html"] {
 }
 
 .dropdown li { list-style: none; }
-.dropdown a {
+.dropdown a,
+.dropdown button {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -494,9 +495,16 @@ body[data-page="contact"] .nav-links a[href="../contact.html"] {
   font-size: var(--text-sm);
   color: var(--text-muted);
   transition: background 0.2s, color 0.2s;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  width: 100%;
+  text-align: left;
 }
 @media (hover: hover) and (pointer: fine) {
-  .dropdown a:hover {
+  .dropdown a:hover,
+  .dropdown button:hover {
     background: rgba(124,179,66,0.06);
     color: var(--brand);
   }
@@ -534,7 +542,8 @@ body[data-page="contact"] .nav-links a[href="../contact.html"] {
   transition: opacity 0.2s, transform 0.2s;
 }
 @media (hover: hover) and (pointer: fine) {
-  .dropdown a:hover .dd-arrow {
+  .dropdown a:hover .dd-arrow,
+  .dropdown button:hover .dd-arrow {
     opacity: 1;
     transform: translateX(0);
   }
@@ -1303,7 +1312,7 @@ footer.footer-reveal {
   }
   .has-dropdown.dd-open > .dropdown { display: block; }
   .dropdown li { text-align: center; }
-  .dropdown a { justify-content: center; padding: 12px 16px; min-height: 44px; }
+  .dropdown a, .dropdown button { justify-content: center; padding: 12px 16px; min-height: 44px; }
   .dropdown .dd-icon { display: none; }
   .dropdown .dd-arrow { display: none; }
   /* Lang dropdown always visible */
@@ -1370,10 +1379,10 @@ h1 .char, h1 .word {
 }
 
 /* ───── LANGUAGE SELECTOR ───── */
-.lang-selector > a { font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.05em; }
+.lang-selector > a, .lang-selector > button { font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.05em; }
 .lang-dropdown { min-width: 160px; }
-.lang-dropdown a { font-size: var(--text-sm); }
-.lang-dropdown a.active { color: var(--brand); font-weight: 600; }
+.lang-dropdown a, .lang-dropdown button { font-size: var(--text-sm); }
+.lang-dropdown a.active, .lang-dropdown button.active { color: var(--brand); font-weight: 600; }
 
 /* Language mismatch banner */
 .lang-banner {
