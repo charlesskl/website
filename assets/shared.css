@@ -436,13 +436,15 @@ body[data-page="contact"] .nav-links a[href="../contact.html"] {
 }
 
 .has-dropdown { position: relative; }
-.has-dropdown > a .arrow {
+.has-dropdown > a .arrow,
+.has-dropdown > button .arrow {
   font-size: 0.7rem;
   margin-left: 3px;
   display: inline-block;
   transition: transform 0.3s var(--ease-out);
 }
-.has-dropdown.dd-open > a .arrow { transform: rotate(180deg); }
+.has-dropdown.dd-open > a .arrow,
+.has-dropdown.dd-open > button .arrow { transform: rotate(180deg); }
 
 /* Invisible bridge between nav item and dropdown */
 .has-dropdown::after {

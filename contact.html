@@ -406,19 +406,19 @@
             <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
             <div class="form-row">
               <div class="float-group">
-                <input type="text" id="firstName" name="firstName" required data-field autocomplete="given-name">
+                <input type="text" id="firstName" name="firstName" required data-field autocomplete="given-name" aria-describedby="firstNameError">
                 <label for="firstName">First Name</label>
                 <div class="error-message" id="firstNameError" role="alert" aria-live="polite"></div>
               </div>
               <div class="float-group">
-                <input type="text" id="lastName" name="lastName" required data-field autocomplete="family-name">
+                <input type="text" id="lastName" name="lastName" required data-field autocomplete="family-name" aria-describedby="lastNameError">
                 <label for="lastName">Last Name</label>
                 <div class="error-message" id="lastNameError" role="alert" aria-live="polite"></div>
               </div>
             </div>
 
             <div class="float-group">
-              <input type="email" id="email" name="email" required data-field autocomplete="email">
+              <input type="email" id="email" name="email" required data-field autocomplete="email" aria-describedby="emailError">
               <label for="email">Email Address</label>
               <div class="error-message" id="emailError" role="alert" aria-live="polite"></div>
             </div>
@@ -446,7 +446,7 @@
             </div>
 
             <div class="float-group">
-              <textarea id="message" name="message" required data-field></textarea>
+              <textarea id="message" name="message" required data-field aria-describedby="messageError"></textarea>
               <label for="message">Message</label>
               <div class="error-message" id="messageError" role="alert" aria-live="polite"></div>
             </div>
