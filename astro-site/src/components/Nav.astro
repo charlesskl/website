@@ -1,5 +1,6 @@
 ---
 import LanguageSwitcher from './LanguageSwitcher.tsx';
+import NavKeyboard from './NavKeyboard.tsx';
 
 interface Props {
   lang: 'en' | 'cn' | 'id';
@@ -72,4 +73,5 @@ const nav = {
       <span></span><span></span><span></span>
     </button>
   </div>
+  <NavKeyboard client:load />
 </nav>
