@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import CareersJobBoard from '../../components/CareersJobBoard.tsx';
 import '../../styles/careers.css';
 
 const lang = 'id' as const;
@@ -106,35 +107,10 @@ const prefix = '/id';
       <div class="section-label reveal-up">Posisi Terbuka</div>
       <h2 class="section-title reveal-up">Peluang saat ini.</h2>
 
-      <div class="filter-bar" id="filterBar"></div>
-
-      <div class="job-grid" id="jobGrid"></div>
+      <CareersJobBoard lang="id" client:load />
     </div>
   </section>
 
-  <!-- APPLY MODAL -->
-  <div class="apply-overlay" id="applyOverlay" role="dialog" aria-modal="true" aria-labelledby="applyModalTitle">
-    <div class="apply-modal">
-      <div class="apply-modal-header">
-        <h3 id="applyModalTitle">Lamar posisi ini</h3>
-        <button class="apply-modal-close" id="applyClose" aria-label="Tutup">&times;</button>
-      </div>
-      <div class="apply-modal-body">
-        <label>Posisi</label>
-        <div class="apply-job-title" id="applyJobTitle"></div>
-        <label>Nama Anda</label>
-        <input type="text" id="applyName" placeholder="Nama lengkap">
-        <label>Kirim lamaran ke</label>
-        <div class="apply-entity-group">
-          <label><input type="radio" name="applyEntity" value="recruitment.rri@royalregentgroup.com" checked><span><strong>PT Royal Regent Indonesia</strong><br><small style="font-weight:400;color:var(--text-muted)">Kendal, Jawa Tengah</small></span></label>
-          <label><input type="radio" name="applyEntity" value="recruitment.rrm@royalregentid.com"><span><strong>PT Royal Regent Manufacturing</strong><br><small style="font-weight:400;color:var(--text-muted)">Ngawi, Jawa Timur</small></span></label>
-        </div>
-      </div>
-      <div class="apply-modal-footer">
-        <button id="applySubmit">Kirim Lamaran →</button>
-      </div>
-    </div>
-  </div>
 
   <!-- SPECULATIVE / CTA -->
   <section class="cta-banner">
@@ -151,7 +127,4 @@ const prefix = '/id';
 
   <Footer lang={lang} />
 
-  <Fragment slot="page-scripts">
-    <script is:inline src="/assets/careers-animations.js"></script>
-  </Fragment>
 </BaseLayout>

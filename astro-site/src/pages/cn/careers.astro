@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
+import CareersJobBoard from '../../components/CareersJobBoard.tsx';
 import '../../styles/careers.css';
 
 const lang = 'cn' as const;
@@ -106,35 +107,10 @@ const prefix = '/cn';
       <div class="section-label reveal-up">招聘職位</div>
       <h2 class="section-title reveal-up">目前的機會。</h2>
 
-      <div class="filter-bar" id="filterBar"></div>
-
-      <div class="job-grid" id="jobGrid"></div>
+      <CareersJobBoard lang="cn" client:load />
     </div>
   </section>
 
-  <!-- APPLY MODAL -->
-  <div class="apply-overlay" id="applyOverlay" role="dialog" aria-modal="true" aria-labelledby="applyModalTitle">
-    <div class="apply-modal">
-      <div class="apply-modal-header">
-        <h3 id="applyModalTitle">申請此職位</h3>
-        <button class="apply-modal-close" id="applyClose" aria-label="關閉">&times;</button>
-      </div>
-      <div class="apply-modal-body">
-        <label>職位</label>
-        <div class="apply-job-title" id="applyJobTitle"></div>
-        <label>您的姓名</label>
-        <input type="text" id="applyName" placeholder="全名">
-        <label>發送申請至</label>
-        <div class="apply-entity-group">
-          <label><input type="radio" name="applyEntity" value="recruitment.rri@royalregentgroup.com" checked><span><strong>PT Royal Regent Indonesia</strong><br><small style="font-weight:400;color:var(--text-muted)">肯德爾，中爪哇</small></span></label>
-          <label><input type="radio" name="applyEntity" value="recruitment.rrm@royalregentid.com"><span><strong>PT Royal Regent Manufacturing</strong><br><small style="font-weight:400;color:var(--text-muted)">恩加維，東爪哇</small></span></label>
-        </div>
-      </div>
-      <div class="apply-modal-footer">
-        <button id="applySubmit">提交申請 →</button>
-      </div>
-    </div>
-  </div>
 
   <!-- SPECULATIVE / CTA -->
   <section class="cta-banner">
@@ -151,7 +127,4 @@ const prefix = '/cn';
 
   <Footer lang={lang} />
 
-  <Fragment slot="page-scripts">
-    <script is:inline src="/assets/careers-animations.js"></script>
-  </Fragment>
 </BaseLayout>
