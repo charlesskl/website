@@ -445,7 +445,7 @@
     dropdowns.forEach(function(dd) {
       var closeTimer = null;
       var menu = dd.querySelector('.dropdown');
-      var toggle = dd.querySelector(':scope > a');
+      var toggle = dd.querySelector(':scope > a, :scope > button');
       var items = menu ? menu.querySelectorAll('li') : [];
       var menuLinks = menu ? menu.querySelectorAll('a') : [];
 
@@ -747,7 +747,7 @@
     });
 
     // Update selector display text
-    var selectorLabel = document.querySelector('.lang-selector > a');
+    var selectorLabel = document.querySelector('.lang-selector > a, .lang-selector > button');
     if (selectorLabel) {
       var labels = { en: 'EN', cn: '中文', id: 'ID' };
       selectorLabel.innerHTML = labels[currentLang] + ' <span class="arrow">&#8964;</span>';

@@ -448,6 +448,8 @@
   </style>
 </head>
 <body data-page="about">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
 
 <!-- PAGE TRANSITION OVERLAY -->
 <div class="page-transition"></div>
@@ -458,11 +460,11 @@
 <!-- NAVBAR -->
 <nav id="navbar">
   <div class="nav-container">
-    <a href="index.html" class="nav-logo"><img src="assets/logo.webp" alt="Royal Regent Toys"></a>
+    <a href="index.html" class="nav-logo"><img src="assets/logo.webp" alt="Royal Regent Toys" width="200" height="40"></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="about.html" style="color:var(--brand-dark);background:var(--brand-5);">About</a></li>
       <li class="has-dropdown">
-        <a href="#" onclick="return false" style="cursor:default">Capabilities <span class="arrow">&#8964;</span></a>
+        <button type="button" aria-expanded="false" aria-haspopup="true">Capabilities <span class="arrow">&#8964;</span></button>
         <ul class="dropdown">
           <li><a href="capabilities/plastic-toys.html"><svg class="dd-icon" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>Plastic Toys<svg class="dd-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
           <li><a href="capabilities/plush.html"><svg class="dd-icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>Plush<svg class="dd-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
@@ -473,7 +475,7 @@
       </li>
       <li><a href="careers.html">Careers</a></li>
       <li class="has-dropdown lang-selector">
-        <a href="#" onclick="return false" style="cursor:default">EN <span class="arrow">&#8964;</span></a>
+        <button type="button" aria-expanded="false" aria-haspopup="true">EN <span class="arrow">&#8964;</span></button>
         <ul class="dropdown lang-dropdown">
           <li><a href="#" data-lang="en">English</a></li>
           <li><a href="#" data-lang="cn">繁體中文</a></li>
@@ -517,7 +519,7 @@
 <!-- ═══════════════════════════════════════════════════════════════
      MAIN CONTENT (for footer reveal)
      ═══════════════════════════════════════════════════════════════ -->
-<div class="main-content">
+<div class="main-content" id="main-content">
 
 <!-- ═══ INTRO STATEMENT ═══ -->
 <section class="intro-statement clip-section" id="introStatement">
@@ -597,7 +599,7 @@
   <div class="footer-container">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="assets/logo.webp" alt="Royal Regent Toys" class="footer-logo">
+        <img src="assets/logo.webp" alt="Royal Regent Toys" class="footer-logo" width="200" height="40">
         <p>Manufacturing partner to the world's leading toy brands since 1987. Five product categories, four production sites, one consistent standard &mdash; US and EU compliant.</p>
       </div>
       <div class="footer-col">

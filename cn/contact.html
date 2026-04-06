@@ -208,10 +208,12 @@
     }
 
     /* Float up when focused or has value */
-    .float-group input:focus,
-    .float-group textarea:focus,
-    .float-group select:focus {
+    .float-group input:focus-visible,
+    .float-group textarea:focus-visible,
+    .float-group select:focus-visible {
       border-color: var(--brand);
+      outline: 2px solid var(--brand);
+      outline-offset: 2px;
       box-shadow: 0 0 0 4px var(--brand-8);
       transform: scale(1.005);
     }
@@ -233,6 +235,12 @@
       display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
     }
 
+    .error-message {
+      color: var(--error, #D32F2F);
+      font-size: 0.85rem;
+      margin-top: 4px;
+      min-height: 1.2em;
+    }
 
     /* ═══ SUBMIT BUTTON ═══ */
     .submit-btn {
@@ -304,15 +312,17 @@
   </style>
 </head>
 <body data-page="contact">
+  <a href="#main-content" class="skip-link">跳到主要內容</a>
+
 
 <!-- NAVBAR -->
 <nav id="navbar">
   <div class="nav-container">
-    <a href="index.html" class="nav-logo"><img src="../assets/logo.webp" alt="Royal Regent Toys"></a>
+    <a href="index.html" class="nav-logo"><img src="../assets/logo.webp" alt="Royal Regent Toys" width="200" height="40"></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="about.html">關於我們</a></li>
       <li class="has-dropdown">
-        <a href="#" onclick="return false" style="cursor:default">生產能力 <span class="arrow">&#8964;</span></a>
+        <button type="button" aria-expanded="false" aria-haspopup="true">生產能力 <span class="arrow">&#8964;</span></button>
         <ul class="dropdown">
           <li><a href="capabilities/plastic-toys.html"><svg class="dd-icon" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>塑膠玩具<svg class="dd-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
           <li><a href="capabilities/plush.html"><svg class="dd-icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>毛絨玩具<svg class="dd-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
@@ -323,7 +333,7 @@
       </li>
       <li><a href="careers.html">招聘</a></li>
       <li class="has-dropdown lang-selector">
-        <a href="#" onclick="return false" style="cursor:default">中文 <span class="arrow">&#8964;</span></a>
+        <button type="button" aria-expanded="false" aria-haspopup="true">中文 <span class="arrow">&#8964;</span></button>
         <ul class="dropdown lang-dropdown">
           <li><a href="#" data-lang="en">English</a></li>
           <li><a href="#" data-lang="cn">繁體中文</a></li>
@@ -341,7 +351,7 @@
 
 
 <!-- PAGE HERO -->
-<section class="page-hero">
+<section class="page-hero" id="main-content">
   <div class="container">
     <span class="page-hero-tag">聯繫我們</span>
     <h1>讓我們一起討論<br><span class="text-gradient">您的項目。</span></h1>
@@ -390,22 +400,25 @@
             <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
             <div class="form-row">
               <div class="float-group">
-                <input type="text" id="firstName" name="firstName" required data-field>
+                <input type="text" id="firstName" name="firstName" required data-field autocomplete="given-name" aria-describedby="firstNameError">
                 <label for="firstName">名字</label>
+                <div class="error-message" id="firstNameError" role="alert" aria-live="polite"></div>
               </div>
               <div class="float-group">
-                <input type="text" id="lastName" name="lastName" required data-field>
+                <input type="text" id="lastName" name="lastName" required data-field autocomplete="family-name" aria-describedby="lastNameError">
                 <label for="lastName">姓氏</label>
+                <div class="error-message" id="lastNameError" role="alert" aria-live="polite"></div>
               </div>
             </div>
 
             <div class="float-group">
-              <input type="email" id="email" name="email" required data-field>
+              <input type="email" id="email" name="email" required data-field autocomplete="email" aria-describedby="emailError">
               <label for="email">電子郵件地址</label>
+              <div class="error-message" id="emailError" role="alert" aria-live="polite"></div>
             </div>
 
             <div class="float-group">
-              <input type="text" id="company" name="company" data-field>
+              <input type="text" id="company" name="company" data-field autocomplete="organization">
               <label for="company">公司</label>
             </div>
 
@@ -427,8 +440,9 @@
             </div>
 
             <div class="float-group">
-              <textarea id="message" name="message" required data-field></textarea>
+              <textarea id="message" name="message" required data-field aria-describedby="messageError"></textarea>
               <label for="message">留言</label>
+              <div class="error-message" id="messageError" role="alert" aria-live="polite"></div>
             </div>
 
             <button type="submit" class="submit-btn magnetic" data-strength="0.15" id="submitBtn">
@@ -453,7 +467,7 @@
   <div class="footer-container">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="../assets/logo.webp" alt="Royal Regent Toys" class="footer-logo">
+        <img src="../assets/logo.webp" alt="Royal Regent Toys" class="footer-logo" width="200" height="40">
         <p>自1987年以來，一直是全球領先玩具品牌的製造夥伴。五大產品品類、四個生產基地、一個統一標準——符合全球法規。</p>
       </div>
       <div class="footer-col">
@@ -510,6 +524,15 @@
       field.addEventListener('input', function() {
         field.classList.toggle('has-value', !!field.value);
         updateProgress();
+        // Clear error when user starts typing
+        if (field.hasAttribute('required') && field.value.trim()) {
+          field.setAttribute('aria-invalid', 'false');
+          var errorId = field.id + 'Error';
+          var errorEl = document.getElementById(errorId);
+          if (errorEl) {
+            errorEl.textContent = '';
+          }
+        }
       });
       field.addEventListener('change', function() {
         field.classList.toggle('has-value', !!field.value);
@@ -551,14 +574,26 @@
     form.addEventListener('submit', function(e) {
       e.preventDefault();
 
+      // Clear previous errors
+      form.querySelectorAll('[required]').forEach(function(f) {
+        f.setAttribute('aria-invalid', 'false');
+      });
+      form.querySelectorAll('.error-message').forEach(function(em) {
+        em.textContent = '';
+      });
+
       // Basic validation
       var required = form.querySelectorAll('[required]');
       var valid = true;
       required.forEach(function(f) {
         if (!f.value.trim()) {
           valid = false;
-          f.style.borderColor = 'var(--error, #D32F2F)';
-          setTimeout(function() { f.style.borderColor = ''; }, 2000);
+          f.setAttribute('aria-invalid', 'true');
+          var errorId = f.id + 'Error';
+          var errorEl = document.getElementById(errorId);
+          if (errorEl) {
+            errorEl.textContent = '此欄位為必填';
+          }
         }
       });
       if (!valid) {

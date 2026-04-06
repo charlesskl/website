@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <title>Admin — Manage Jobs</title>
+  <link rel="preload" href="assets/fonts/clash-display-600.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/clash-display-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/satoshi-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/satoshi-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/shared.css">
   <style>
     :root {
@@ -72,6 +76,8 @@
   </style>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
 
 <a href="careers.html" class="back-link">&larr; Back to Careers</a>
 
@@ -85,6 +91,7 @@
 </div>
 
 <div class="admin-container" id="adminPanel" style="display:none;">
+  <div id="main-content">
   <div class="admin-header">
     <h2 id="adminTitle">Manage Jobs</h2>
     <div class="admin-header-actions">
@@ -149,6 +156,7 @@
   <div class="admin-footer" id="adminFooter">
     <button class="btn-sm ghost" id="formCancel">Cancel</button>
     <button class="btn-sm primary" id="formSave">Save Job</button>
+  </div>
   </div>
 </div>
 
