@@ -1317,7 +1317,7 @@ footer.footer-reveal {
   .dropdown .dd-arrow { display: none; }
   /* Lang dropdown always visible */
   .lang-selector > .dropdown { display: block; background: transparent; }
-  .lang-dropdown a { justify-content: center; }
+  .lang-dropdown a, .lang-dropdown button { justify-content: center; }
   .nav-linkedin a {
     margin-right: 0;
     padding: 12px 16px !important;
