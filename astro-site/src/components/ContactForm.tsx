@@ -40,7 +40,7 @@ const i18n = {
     invalidEmail: '請輸入有效的電子郵件地址',
     subjects: [
       'OEM製造諮詢',
-      '樣品需求',
+      '樣品要求',
       '塑膠玩具',
       '毛絨玩具',
       '娃娃',
@@ -65,13 +65,13 @@ const i18n = {
     subjects: [
       'Pertanyaan Manufaktur OEM',
       'Permintaan Sampel',
-      'Plastik',
-      'Plush',
+      'Mainan Plastik',
+      'Boneka Lembut',
       'Boneka',
-      'RC',
+      'Kendaraan RC',
       'Kostum',
       'Produk Berlisensi / Bermerek',
-      'Karier',
+      'Karir',
       'Lainnya',
     ],
   },
@@ -101,9 +101,9 @@ export default function ContactForm({ lang }: Props) {
   });
   const [isSent, setIsSent] = useState(false);
 
-  const totalFields = 6;
-  const filledCount = Object.values(fields).filter((f) => f.value.trim()).length;
-  const progress = (filledCount / totalFields) * 100;
+  const requiredFields = ['firstName', 'lastName', 'email', 'message', 'subject'] as const;
+  const filledCount = requiredFields.filter((k) => fields[k].value.trim()).length;
+  const progress = (filledCount / requiredFields.length) * 100;
 
   const updateField = useCallback((name: string, value: string) => {
     setFields((prev) => ({
