@@ -1,0 +1,217 @@
+/* ═══ CONTACT LAYOUT ═══ */
+.contact-section { padding: var(--space-2xl) 0; background: var(--white); }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+/* Left: Info — sticky so it follows scroll alongside the taller form */
+.contact-info {
+  position: sticky;
+  top: calc(var(--nav-h) + 32px);
+}
+.contact-info h2 {
+  font-size: var(--text-2xl); margin-bottom: 16px;
+}
+.contact-info > p {
+  color: var(--text-muted); margin-bottom: 40px; line-height: 1.7;
+}
+.contact-detail {
+  display: flex; gap: 16px; align-items: flex-start; margin-bottom: 24px;
+}
+.contact-icon {
+  width: 44px; height: 44px;
+  background: var(--brand-8); border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.4s var(--ease-spring), border-color 0.3s;
+}
+.contact-icon svg {
+  width: 20px; height: 20px; stroke: var(--brand); fill: none;
+  stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+}
+.contact-detail:hover .contact-icon {
+  transform: translateY(-4px);
+  border-color: var(--brand-20);
+}
+.contact-detail h4 {
+  font-family: var(--font-body); font-size: var(--text-sm);
+  font-weight: 600; margin-bottom: 2px; letter-spacing: normal;
+}
+.contact-detail p {
+  font-size: var(--text-xs); color: var(--text-muted);
+}
+
+
+/* ═══ FORM CONTAINER ═══ */
+.contact-form-card {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 80px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Progress indicator */
+.form-progress {
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--gray-100);
+}
+.form-progress-fill {
+  height: 100%; width: 0%;
+  background: var(--gradient);
+  border-radius: 0 3px 3px 0;
+  transition: width 0.5s var(--ease-spring);
+}
+
+
+/* ═══ FLOATING LABELS ═══ */
+.float-group {
+  position: relative;
+  margin-bottom: 16px;
+}
+.float-group input,
+.float-group textarea,
+.float-group select {
+  width: 100%;
+  padding: 20px 18px 8px;
+  background: var(--white);
+  border: 1.5px solid var(--border-solid);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.4s var(--ease-spring), transform 0.4s var(--ease-spring);
+}
+.float-group textarea {
+  height: 140px; resize: vertical; padding-top: 28px;
+}
+.float-group select {
+  padding-top: 20px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A9178' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+}
+.float-group label {
+  position: absolute;
+  left: 18px; top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--text-sm);
+  color: var(--text-light);
+  pointer-events: none;
+  transition: all 0.3s var(--ease-spring);
+  transform-origin: left;
+}
+.float-group textarea ~ label {
+  top: 20px; transform: translateY(0);
+}
+
+/* Float up when focused or has value */
+.float-group input:focus-visible,
+.float-group textarea:focus-visible,
+.float-group select:focus-visible {
+  border-color: var(--brand);
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--brand-8);
+  transform: scale(1.005);
+}
+.float-group input:focus ~ label,
+.float-group input.has-value ~ label,
+.float-group textarea:focus ~ label,
+.float-group textarea.has-value ~ label,
+.float-group select:focus ~ label,
+.float-group select.has-value ~ label {
+  top: 8px;
+  transform: translateY(0) scale(0.75);
+  color: var(--brand);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.form-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+}
+
+.error-message {
+  color: var(--error, #D32F2F);
+  font-size: 0.85rem;
+  margin-top: 4px;
+  min-height: 1.2em;
+}
+
+/* ═══ SUBMIT BUTTON ═══ */
+.submit-btn {
+  width: 100%;
+  height: 56px;
+  padding: 0 36px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--gradient);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--text-base);
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s var(--ease-spring), box-shadow 0.4s;
+  box-shadow: 0 4px 24px rgba(124,179,66,0.25);
+}
+@media (hover: hover) and (pointer: fine) {
+  .submit-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(124,179,66,0.35);
+  }
+}
+.submit-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+.submit-btn .btn-text { transition: opacity 0.3s, transform 0.3s; }
+.submit-btn .btn-success {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transform: scale(0.8);
+  transition: opacity 0.4s, transform 0.4s var(--ease-spring);
+  font-weight: 700;
+}
+.submit-btn.sent .btn-text { opacity: 0; transform: translateY(10px); }
+.submit-btn.sent .btn-success { opacity: 1; transform: scale(1); }
+.submit-btn.sent {
+  background: var(--gradient);
+  pointer-events: none;
+}
+
+/* Success check animation */
+.check-circle {
+  width: 24px; height: 24px; margin-right: 10px;
+  border: 2px solid var(--white); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.check-circle svg { width: 14px; height: 14px; }
+.check-circle svg path {
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  animation: checkDraw 0.4s 0.2s ease forwards;
+}
+@keyframes checkDraw {
+  to { stroke-dashoffset: 0; }
+}
+
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 768px) {
+  .contact-grid { grid-template-columns: 1fr; gap: var(--space-lg); }
+  .contact-form-card { padding: 48px 24px; }
+  .form-row { grid-template-columns: 1fr; }
+  .page-hero h1 { font-size: var(--text-3xl); }
+}

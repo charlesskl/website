@@ -1,0 +1,154 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/about.css';
+
+const lang = 'cn' as const;
+const prefix = '/cn';
+
+const milestones = [
+  { year: '1987', text: '公司在沙頭角成立，正式開始其製造之路。' },
+  { year: '1990', text: '遷至龍華，大幅擴大生產規模。' },
+  { year: '1997', text: '擴展至東莞，以滿足快速增長的市場需求。' },
+  { year: '2000', text: '東莞工廠擴建完成並投產，引入毛絨玩具和服裝生產線，標誌著公司首次進入軟體玩具製造領域。' },
+  { year: '2003', text: '將製造業務延伸至河源，建立多地點營運以增強供應鏈韌性。' },
+  { year: '2005', text: '河源工廠擴建完成，有效支持產品線多元化和產能升級。' },
+  { year: '2010', text: '推出娃娃生產線，將縫紉工藝與塑膠成型技術相結合。' },
+  { year: '2016', text: '進入遙控車製造領域，應對更高的技術要求，增強結構複雜性和電子集成方面的能力。' },
+  { year: '2018', text: '將生產擴展至湖南，大幅提升整體製造產能。' },
+  { year: '2023', text: '正式進入印尼市場，標誌著公司全球擴張戰略和供應鏈多元化的重要里程碑。' },
+  { year: '2025', text: '印尼工廠二期投入運營，進一步擴大區域生產能力，增強對國際市場的響應能力。' },
+];
+---
+
+<BaseLayout
+  title="關於 Royal Regent Toys — 香港OEM玩具製造商"
+  description="Royal Regent Toys從沙頭角一間小工廠發展至遍佈中國（東莞、河源、湖南）與印尼（PT RRI、PT RRM）的39年玩具代工歷程。EN 71及ASTM F963認證。"
+  lang="zh-Hant"
+  canonical="https://royalregentgroup.com/cn/about.html"
+  ogLocale="zh_TW"
+  ogLocaleAlternates={['en_US', 'id_ID']}
+  dataPage="about"
+>
+  <Fragment slot="head-extra">
+    <meta name="keywords" content="Royal Regent Toys, 關於Royal Regent, 香港玩具製造商, 玩具代工歷史, PT RRI, PT RRM, RRI, RRM, EN 71, ASTM F963">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://royalregentgroup.com/cn/" },
+            { "@type": "ListItem", "position": 2, "name": "關於我們", "item": "https://royalregentgroup.com/cn/about.html" }
+          ]
+        },
+        {
+          "@type": "Organization",
+          "name": "Royal Regent Toys",
+          "url": "https://royalregentgroup.com",
+          "logo": "https://royalregentgroup.com/assets/logo.webp",
+          "description": "自1987年的OEM玩具製造商。塑膠玩具、毛絨玩具、娃娃、遙控車及服裝代工。中國及印尼生產基地。",
+          "foundingDate": "1987",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Unit 07-08, 12/F, Greenfield Tower, Concordia Plaza, No.1 Science Museum Road",
+            "addressLocality": "Tsim Sha Tsui, Kowloon",
+            "addressCountry": "HK"
+          },
+          "numberOfEmployees": {
+            "@type": "QuantitativeValue",
+            "minValue": 1000,
+            "maxValue": 5000
+          },
+          "sameAs": ["https://www.linkedin.com/company/royalregentgroup"]
+        }
+      ]
+    })} />
+  </Fragment>
+
+  <Nav lang={lang} />
+
+  <!-- HERO -->
+  <section class="about-hero" id="aboutHero">
+    <div class="hero-grid-pattern"></div>
+    <div class="aurora">
+      <div class="aurora-blob"></div>
+      <div class="aurora-blob"></div>
+      <div class="aurora-blob"></div>
+    </div>
+
+    <div class="about-hero-content">
+      <span class="about-hero-tag" id="aboutTag">我們的故事</span>
+      <h1 class="about-hero-title" id="aboutTitle">39年<br><span class="text-gradient">匠心製造。</span></h1>
+      <p class="about-hero-sub" id="aboutSub">從香港沙頭角的一間工廠起步，Royal Regent 已發展成為一家多基地OEM玩具製造商，深受全球領先品牌信賴——從中國和印尼向全球市場交付安全、合規、精密設計的玩具產品。</p>
+    </div>
+
+    <div class="about-hero-scroll" id="aboutScroll">
+      <span>向下滾動</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Main content wrapper (for footer reveal) -->
+  <div class="main-content" id="main-content">
+
+    <!-- INTRO STATEMENT -->
+    <section class="intro-statement clip-section" id="introStatement">
+      <div class="statement-grid">
+        <div class="statement-left">
+          <div class="statement-line" id="stmtLine"></div>
+          <div class="statement-content">
+            <p class="statement-text">
+              <span class="stmt-line">夥伴關係勝於生產。</span>
+              <span class="stmt-line">歷經39年精煉。</span>
+              <span class="stmt-line">隨時滿足您的下一個需求。</span>
+            </p>
+            <div class="statement-rule" id="stmtRule"></div>
+          </div>
+        </div>
+        <div class="statement-accent" id="stmtAccent">1987</div>
+      </div>
+    </section>
+
+    <!-- HISTORY — Interactive timeline -->
+    <section class="history-section" id="historySection" data-milestones={JSON.stringify(milestones)}>
+      <div class="history-top">
+        <h2 class="history-heading">發展歷程</h2>
+      </div>
+
+      <div class="history-center">
+        <div class="history-watermark" id="historyWatermark">1987</div>
+        <div class="history-milestone" id="historyMilestone">
+          <p>公司在沙頭角成立，正式開始其製造之路。</p>
+        </div>
+      </div>
+
+      <div class="history-scroll-progress">
+        <div class="history-scroll-fill" id="historyScrollFill"></div>
+      </div>
+
+      <div class="history-scroll-hint" id="historyScrollHint">
+        <span>滾動瀏覽</span>
+        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+
+      <div class="history-timeline">
+        <div class="timeline-track" id="timelineTrack">
+          {milestones.map((m, i) => (
+            <button class={`timeline-node${i === 0 ? ' active' : ''}`} data-index={i}>
+              <div class="timeline-dot"><span>{m.year}</span></div>
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <Footer lang={lang} />
+
+  <Fragment slot="page-scripts">
+    <script is:inline src="/assets/about-animations.js"></script>
+  </Fragment>
+</BaseLayout>

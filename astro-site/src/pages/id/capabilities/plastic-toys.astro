@@ -1,0 +1,183 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+import '../../../styles/capability.css';
+
+const lang = 'id' as const;
+const prefix = '/id';
+---
+
+<BaseLayout
+  title="Produsen Mainan Plastik — Royal Regent Toys | PT RRI, PT RRM"
+  description="Manufaktur mainan plastik Royal Regent Toys — pencetakan injeksi, pengembangan cetakan & perakitan presisi. Produsen mainan plastik OEM untuk merek global. PT RRI, PT RRM."
+  lang="id"
+  canonical="https://royalregentgroup.com/id/capabilities/plastic-toys.html"
+  ogLocale="id_ID"
+  ogLocaleAlternates={['en_US', 'zh_TW']}
+  dataPage="capabilities-plastic-toys"
+>
+  <Fragment slot="head-extra">
+    <meta name="keywords" content="Royal Regent Toys, produsen mainan plastik, pencetakan injeksi, pengembangan cetakan, mainan plastik OEM, PT RRI, PT RRM, RRI, RRM">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://royalregentgroup.com/id/" },
+            { "@type": "ListItem", "position": 2, "name": "Kemampuan", "item": "https://royalregentgroup.com/id/#capabilities" },
+            { "@type": "ListItem", "position": 3, "name": "Mainan Plastik", "item": "https://royalregentgroup.com/id/capabilities/plastic-toys.html" }
+          ]
+        },
+        {
+          "@type": "Service",
+          "name": "Manufaktur Mainan Plastik",
+          "provider": {"@type": "Organization", "name": "Royal Regent Toys", "url": "https://royalregentgroup.com"},
+          "description": "Manufaktur mainan plastik OEM — pencetakan injeksi, pengembangan cetakan & perakitan presisi.",
+          "url": "https://royalregentgroup.com/id/capabilities/plastic-toys.html",
+          "serviceType": "Toy Manufacturing",
+          "areaServed": "Worldwide"
+        }
+      ]
+    })} />
+  </Fragment>
+
+  <Nav lang={lang} />
+
+  <!-- HERO -->
+  <section class="sub-hero" id="subHero">
+    <div class="hero-grid-pattern"></div>
+    <div class="aurora">
+      <div class="aurora-blob"></div>
+      <div class="aurora-blob"></div>
+      <div class="aurora-blob"></div>
+    </div>
+    <div class="sub-hero-content">
+      <div class="breadcrumb" id="heroBreadcrumb">
+        <a href={`${prefix}/`}>Beranda</a><span class="sep">/</span>
+        <span>Mainan Plastik</span>
+      </div>
+      <span class="sub-hero-tag" id="heroTag">Mainan Plastik</span>
+      <h1 class="sub-hero-title" id="heroTitle">Figur plastik &amp;<br><span class="text-gradient">mainan fungsional</span></h1>
+      <p class="sub-hero-sub" id="heroSub">Pengembangan cetakan internal dan pencetakan injeksi presisi untuk figur karakter dan mainan fungsional, disesuaikan sepenuhnya dengan desain dan spesifikasi klien.</p>
+    </div>
+    <div class="sub-hero-scroll" id="heroScroll"><span>Gulir</span><div class="scroll-line"></div></div>
+  </section>
+
+  <div class="main-content" id="main-content">
+
+  <!-- EDITORIAL — merged intro + overview + gallery -->
+  <section class="editorial">
+    <div class="container">
+      <div class="editorial-watermark">Plastik</div>
+      <div class="editorial-inner">
+
+        <!-- Left: Statement -->
+        <div class="editorial-left">
+          <span class="section-label reveal-up">Ikhtisar manufaktur</span>
+          <div class="editorial-intro reveal-up">
+            <div class="editorial-intro-line"></div>
+            <div>
+              <p>Cetakan presisi tinggi.<br>Milik klien sejak hari pertama.<br>Siap untuk skala produksi.</p>
+              <div class="stmt-rule"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Features -->
+        <div class="editorial-right">
+          <div class="editorial-features">
+            <div class="editorial-feat reveal-up">
+              <div class="editorial-feat-num">01</div>
+              <div>
+                <h3>Dari sampel pertama hingga karton akhir</h3>
+                <p>Setiap tahap produksi dilakukan di satu atap — dari prototipe cetak 3D awal hingga pencetakan injeksi, pengecatan, perakitan, dan pengemasan karton keluar. Tanpa serah terima, tanpa keterlambatan pihak ketiga, visibilitas penuh sepanjang proses.</p>
+              </div>
+            </div>
+            <div class="editorial-feat reveal-up">
+              <div class="editorial-feat-num">02</div>
+              <div>
+                <h3>Dibangun untuk volume, siap untuk kompleksitas</h3>
+                <p>Baik produk Anda berupa figur sederhana maupun mainan fungsional multi-komponen, pengaturan manufaktur terintegrasi kami dirancang untuk berkembang secara efisien — menjaga waktu tunggu tetap singkat dan biaya tetap terprediksi seiring bertambahnya volume pesanan.</p>
+              </div>
+            </div>
+            <div class="editorial-feat reveal-up">
+              <div class="editorial-feat-num">03</div>
+              <div>
+                <h3>Otomasi internal</h3>
+                <p>Kami mengoperasikan departemen otomasi khusus yang merancang dan menerapkan proses otomatis kustom untuk produksi volume tinggi. Ini menjaga output kami tetap konsisten, mengurangi variasi tenaga kerja, dan membuat biaya per unit kami benar-benar kompetitif dalam skala besar.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Expanding photo panels -->
+    <div class="photo-panels">
+      <div class="photo-panel">
+        <img src="/assets/injection-molding.webp" alt="Produksi pencetakan injeksi" loading="lazy" width="1920" height="2193">
+        <div class="photo-panel-overlay"></div>
+        <div class="photo-panel-label"><div class="label-line"></div><span>Cetak Injeksi</span></div>
+      </div>
+      <div class="photo-panel">
+        <img src="/assets/images/factory-assembly-line.webp" alt="Manufaktur figur plastik" loading="lazy" width="1706" height="1280">
+        <div class="photo-panel-overlay"></div>
+        <div class="photo-panel-label"><div class="label-line"></div><span>Lini Perakitan</span></div>
+      </div>
+      <div class="photo-panel">
+        <img src="/assets/quality-control.webp" alt="Inspeksi kontrol kualitas" loading="lazy" width="1279" height="1635">
+        <div class="photo-panel-overlay"></div>
+        <div class="photo-panel-label"><div class="label-line"></div><span>Kontrol Kualitas</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container reveal-up">
+      <h2>Siap mendiskusikan proyek Anda?</h2>
+      <p>Sampaikan kebutuhan Anda dan tim kami akan segera menghubungi Anda.</p>
+      <a href={`${prefix}/contact.html`} class="btn btn-primary magnetic" data-strength="0.2">Hubungi Kami &rarr;</a>
+    </div>
+  </section>
+
+  <!-- SEE ALSO -->
+  <section class="see-also">
+    <div class="container">
+      <span class="see-also-label">Jelajahi kapabilitas lainnya</span>
+      <div class="see-also-grid">
+        <a href={`${prefix}/capabilities/plush.html`} class="see-also-card">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>
+          <span>Boneka Plush</span>
+          <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href={`${prefix}/capabilities/dolls.html`} class="see-also-card">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span>Boneka</span>
+          <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href={`${prefix}/capabilities/rc-vehicle.html`} class="see-also-card">
+          <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          <span>Kendaraan RC</span>
+          <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href={`${prefix}/capabilities/costume.html`} class="see-also-card">
+          <svg viewBox="0 0 24 24"><path d="M12 3l1.5 3.2 3.5.5-2.5 2.5.6 3.5L12 11l-3.1 1.7.6-3.5L7 6.7l3.5-.5z"/><path d="M5 16l-1.5 3.2-3.5.5L2.5 22l-.6 2L5 22.3 8.1 24l-.6-2L10 19.5l-3.5-.5z"/><path d="M19 16l-1.5 3.2-3.5.5 2.5 2.5-.6 2L19 22.3l3.1 1.7-.6-2L24 19.5l-3.5-.5z"/></svg>
+          <span>Kostum</span>
+          <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  </div>
+
+  <Footer lang={lang} />
+
+  <Fragment slot="page-scripts">
+    <script is:inline src="/assets/capability-animations.js"></script>
+  </Fragment>
+</BaseLayout>

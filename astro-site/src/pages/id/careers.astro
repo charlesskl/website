@@ -1,0 +1,157 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/careers.css';
+
+const lang = 'id' as const;
+const prefix = '/id';
+---
+
+<BaseLayout
+  title="Karier — Royal Regent Toys | PT RRI, PT RRM"
+  description="Bergabunglah dengan Royal Regent Toys. Karier di manufaktur mainan, teknik, jaminan kualitas & operasi di Hong Kong, Tiongkok & Indonesia (PT RRI, PT RRM)."
+  lang="id"
+  canonical="https://royalregentgroup.com/id/careers.html"
+  ogLocale="id_ID"
+  ogLocaleAlternates={['en_US', 'zh_TW']}
+  dataPage="careers"
+>
+  <Fragment slot="head-extra">
+    <meta name="keywords" content="Royal Regent Toys karier, lowongan pabrik mainan, PT RRI lowongan, PT RRM lowongan, RRI, RRM, karier manufaktur mainan Indonesia">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://royalregentgroup.com/id/" },
+            { "@type": "ListItem", "position": 2, "name": "Karier", "item": "https://royalregentgroup.com/id/careers.html" }
+          ]
+        },
+        {
+          "@type": "JobPosting",
+          "title": "Admin Officer",
+          "description": "Handle day-to-day administrative operations including document management, office coordination, and internal communications.",
+          "datePosted": "2025-01-01",
+          "employmentType": "FULL_TIME",
+          "jobLocation": {
+            "@type": "Place",
+            "address": { "@type": "PostalAddress", "addressLocality": "Kendal", "addressCountry": "ID" }
+          },
+          "hiringOrganization": {
+            "@type": "Organization",
+            "name": "Royal Regent Toys",
+            "sameAs": "https://royalregentgroup.com"
+          }
+        }
+      ]
+    })} />
+  </Fragment>
+
+  <Nav lang={lang} />
+
+  <!-- PAGE HERO -->
+  <section class="page-hero" id="main-content">
+    <div class="container">
+      <span class="page-hero-tag">Bergabunglah dengan Tim Kami</span>
+      <h1>Bangun sesuatu<br><span class="text-gradient">yang bertahan.</span></h1>
+      <p>Selama lebih dari 39 tahun, Royal Regent berkembang dengan berinvestasi pada sumber daya manusia. Kami mencari profesional terampil di bidang manufaktur, teknik, kualitas, dan operasi untuk tumbuh bersama kami.</p>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="careers-values">
+    <div class="container">
+      <div class="section-label reveal-up">Mengapa Royal Regent</div>
+      <h2 class="section-title reveal-up">Produsen yang dibangun<br>dengan mengutamakan manusia.</h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card reveal-up">
+        <div class="value-icon">&#127775;</div>
+        <h3>39 tahun stabilitas</h3>
+        <p>Didirikan pada 1987, Royal Regent telah berkembang selama empat dekade — menawarkan stabilitas karier jangka panjang dan pertumbuhan yang stabil di Tiongkok dan Indonesia.</p>
+      </div>
+      <div class="value-card reveal-up">
+        <div class="value-icon">&#127760;</div>
+        <h3>Skala global</h3>
+        <p>Bekerja di berbagai lokasi manufaktur di Dongguan, Heyuan, Hunan, dan Indonesia — mendapatkan eksposur ke rantai pasok yang benar-benar internasional.</p>
+      </div>
+      <div class="value-card reveal-up">
+        <div class="value-icon">&#128218;</div>
+        <h3>Pengembangan keterampilan</h3>
+        <p>Dari pengembangan cetakan hingga elektronik RC dan produksi mainan lunak — keluasan kategori kami menciptakan peluang unik untuk mengembangkan keahlian lintas fungsi yang mendalam.</p>
+      </div>
+      <div class="value-card reveal-up">
+        <div class="value-icon">&#9989;</div>
+        <h3>Budaya kualitas</h3>
+        <p>Kami memproduksi sesuai standar keamanan AS dan UE. Kualitas bukan sebuah departemen — melainkan tertanam dalam cara setiap tim beroperasi, dari perkakas hingga inspeksi akhir.</p>
+      </div>
+      <div class="value-card reveal-up">
+        <div class="value-icon">&#129309;</div>
+        <h3>Tim kolaboratif</h3>
+        <p>Struktur datar, komunikasi langsung, dan budaya kepemilikan. Tim kami bekerja erat lintas fungsi — teknik, produksi, pengadaan, dan QA.</p>
+      </div>
+      <div class="value-card reveal-up">
+        <div class="value-icon">&#127941;</div>
+        <h3>Tumbuh bersama kami</h3>
+        <p>Kami memasuki fase ekspansi baru di Indonesia dan sekitarnya. Bergabunglah sekarang dan berkembang bersama produsen yang berada di momen penting dalam sejarahnya.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPEN POSITIONS -->
+  <section class="positions-section">
+    <div class="container">
+      <div class="section-label reveal-up">Posisi Terbuka</div>
+      <h2 class="section-title reveal-up">Peluang saat ini.</h2>
+
+      <div class="filter-bar" id="filterBar"></div>
+
+      <div class="job-grid" id="jobGrid"></div>
+    </div>
+  </section>
+
+  <!-- APPLY MODAL -->
+  <div class="apply-overlay" id="applyOverlay" role="dialog" aria-modal="true" aria-labelledby="applyModalTitle">
+    <div class="apply-modal">
+      <div class="apply-modal-header">
+        <h3 id="applyModalTitle">Lamar posisi ini</h3>
+        <button class="apply-modal-close" id="applyClose" aria-label="Tutup">&times;</button>
+      </div>
+      <div class="apply-modal-body">
+        <label>Posisi</label>
+        <div class="apply-job-title" id="applyJobTitle"></div>
+        <label>Nama Anda</label>
+        <input type="text" id="applyName" placeholder="Nama lengkap">
+        <label>Kirim lamaran ke</label>
+        <div class="apply-entity-group">
+          <label><input type="radio" name="applyEntity" value="recruitment.rri@royalregentgroup.com" checked><span><strong>PT Royal Regent Indonesia</strong><br><small style="font-weight:400;color:var(--text-muted)">Kendal, Jawa Tengah</small></span></label>
+          <label><input type="radio" name="applyEntity" value="recruitment.rrm@royalregentid.com"><span><strong>PT Royal Regent Manufacturing</strong><br><small style="font-weight:400;color:var(--text-muted)">Ngawi, Jawa Timur</small></span></label>
+        </div>
+      </div>
+      <div class="apply-modal-footer">
+        <button id="applySubmit">Kirim Lamaran →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPECULATIVE / CTA -->
+  <section class="cta-banner">
+    <div class="container">
+      <div class="section-label reveal-up" style="text-align:center;">Tidak Menemukan Posisi Anda?</div>
+      <h2 class="reveal-up">Kirimkan lamaran<br>spekulatif kepada kami.</h2>
+      <p class="reveal-up">Kami selalu terbuka untuk mendengar dari orang-orang berbakat di bidang teknik manufaktur, kualitas, pengadaan, dan operasi. Kirimkan CV dan perkenalan singkat Anda kepada tim kami.</p>
+      <div class="reveal-up" style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="mailto:recruitment.rrm@royalregentid.com" class="btn btn-primary">Kirim CV Anda →</a>
+        <a href={`${prefix}/contact.html`} class="btn btn-ghost">Hubungi Kami</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer lang={lang} />
+
+  <Fragment slot="page-scripts">
+    <script is:inline src="/assets/careers-animations.js"></script>
+  </Fragment>
+</BaseLayout>

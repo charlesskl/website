@@ -1,0 +1,185 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+import '../../../styles/capability.css';
+
+const lang = 'cn' as const;
+const prefix = '/cn';
+---
+
+<BaseLayout
+  title="毛絨玩具製造 — Royal Regent Toys | 毛絨公仔代工"
+  description="Royal Regent Toys毛絨玩具製造——裁剪、縫紉、填充及電子整合。全球品牌毛絨玩具OEM代工廠。"
+  lang="zh-Hant"
+  canonical="https://royalregentgroup.com/cn/capabilities/plush.html"
+  ogLocale="zh_TW"
+  ogLocaleAlternates={['en_US', 'id_ID']}
+  dataPage="capabilities-plush"
+>
+  <Fragment slot="head-extra">
+    <meta name="keywords" content="Royal Regent Toys, 毛絨玩具製造, 軟體玩具廠, 毛絨公仔, 電子毛絨, 授權IP毛絨, PT RRI, PT RRM, RRI, RRM">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://royalregentgroup.com/cn/" },
+            { "@type": "ListItem", "position": 2, "name": "生產能力", "item": "https://royalregentgroup.com/cn/#capabilities" },
+            { "@type": "ListItem", "position": 3, "name": "毛絨玩具", "item": "https://royalregentgroup.com/cn/capabilities/plush.html" }
+          ]
+        },
+        {
+          "@type": "Service",
+          "name": "毛絨玩具製造",
+          "provider": {"@type": "Organization", "name": "Royal Regent Toys", "url": "https://royalregentgroup.com"},
+          "description": "OEM毛絨玩具製造——裁剪、縫紉、填充及電子整合。",
+          "url": "https://royalregentgroup.com/cn/capabilities/plush.html",
+          "serviceType": "Toy Manufacturing",
+          "areaServed": "Worldwide"
+        }
+      ]
+    })} />
+  </Fragment>
+
+  <Nav lang={lang} />
+
+  <!-- HERO -->
+  <section class="sub-hero" id="subHero">
+    <div class="hero-grid-pattern"></div>
+    <div class="aurora">
+      <div class="aurora-blob"></div>
+      <div class="aurora-blob"></div>
+      <div class="aurora-blob"></div>
+    </div>
+    <div class="sub-hero-content">
+      <div class="breadcrumb" id="heroBreadcrumb">
+        <a href={`${prefix}/`}>首頁</a><span class="sep">/</span>
+        <span>毛絨玩具</span>
+      </div>
+      <span class="sub-hero-tag" id="heroTag">毛絨玩具</span>
+      <h1 class="sub-hero-title" id="heroTitle">毛絨公仔與<br><span class="text-gradient">軟體玩具</span></h1>
+      <p class="sub-hero-sub" id="heroSub">授權IP、禮品及功能毛絨產品，配備完整的自有軟體玩具生產線——裁剪、縫紉、填充及最終檢驗均在同一工廠內完成。</p>
+    </div>
+    <div class="sub-hero-scroll" id="heroScroll"><span>向下滾動</span><div class="scroll-line"></div></div>
+  </section>
+
+  <div class="main-content" id="main-content">
+
+  <!-- EDITORIAL -->
+  <section class="editorial">
+    <div class="container">
+      <div class="editorial-watermark">Plush</div>
+      <div class="editorial-inner">
+
+        <div class="editorial-left">
+          <span class="section-label reveal-up">製造概覽</span>
+
+          <div class="editorial-intro reveal-up">
+            <div class="editorial-intro-line"></div>
+            <div>
+              <p>
+                <span class="stmt-line">從版型到成品。</span>
+                <span class="stmt-line">每一針都在廠內完成。</span>
+                <span class="stmt-line">授權及品牌就緒。</span>
+              </p>
+              <div class="stmt-rule"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="editorial-right">
+          <div class="editorial-features">
+            <div class="editorial-feat reveal-up">
+              <div class="editorial-feat-num">01</div>
+              <div>
+                <h3>電子及混合毛絨玩具，輕鬆搞定</h3>
+                <p>憑藉自有的SMT電子部門和塑膠製造能力，我們可以生產互動毛絨、電子毛絨及任何需要整合塑膠組件的軟體玩具——全部在同一屋簷下完成。無需協調多個供應商，品質毫不妥協。</p>
+              </div>
+            </div>
+            <div class="editorial-feat reveal-up">
+              <div class="editorial-feat-num">02</div>
+              <div>
+                <h3>全流程自主生產</h3>
+                <p>從面料選擇和版型裁剪到縫紉、填充、刺繡及最終檢驗——每一步都在內部完成，絕不外包。我們在所有品類中貫徹同樣的品質標準。</p>
+              </div>
+            </div>
+            <div class="editorial-feat reveal-up">
+              <div class="editorial-feat-num">03</div>
+              <div>
+                <h3>授權IP及禮品市場經驗</h3>
+                <p>我們為授權IP持有者、禮品品牌和促銷客戶生產角色毛絨玩具——具備這些合作所要求的色彩準確性、審批流程經驗和批量一致性。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="photo-panels">
+      <div class="photo-panel">
+        <img src="/assets/images/factory-pattern-cutting.webp" alt="毛絨玩具製造" loading="lazy" width="1600" height="1066">
+        <div class="photo-panel-overlay"></div>
+        <div class="photo-panel-label"><div class="label-line"></div><span>裁切</span></div>
+      </div>
+      <div class="photo-panel">
+        <img src="/assets/sewing-production.webp" alt="毛絨玩具縫紉生產" loading="lazy" width="1314" height="774">
+        <div class="photo-panel-overlay"></div>
+        <div class="photo-panel-label"><div class="label-line"></div><span>縫紉生產</span></div>
+      </div>
+      <div class="photo-panel">
+        <img src="/assets/quality-inspection.webp" alt="毛絨玩具品質檢驗" loading="lazy" width="2450" height="1580">
+        <div class="photo-panel-overlay"></div>
+        <div class="photo-panel-label"><div class="label-line"></div><span>品質檢驗</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container reveal-up">
+      <h2>準備好討論您的項目了嗎？</h2>
+      <p>告訴我們您的需求，我們的團隊將盡快與您聯繫。</p>
+      <a href={`${prefix}/contact.html`} class="btn btn-primary magnetic" data-strength="0.2">聯繫我們 &rarr;</a>
+    </div>
+  </section>
+
+  <!-- SEE ALSO -->
+  <section class="see-also">
+    <div class="container">
+      <span class="see-also-label">探索其他生產能力</span>
+      <div class="see-also-grid">
+        <a href={`${prefix}/capabilities/plastic-toys.html`} class="see-also-card">
+          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          <span>塑膠玩具</span>
+          <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href={`${prefix}/capabilities/dolls.html`} class="see-also-card">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span>娃娃</span>
+          <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href={`${prefix}/capabilities/rc-vehicle.html`} class="see-also-card">
+          <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          <span>遙控車</span>
+          <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href={`${prefix}/capabilities/costume.html`} class="see-also-card">
+          <svg viewBox="0 0 24 24"><path d="M12 3l1.5 3.2 3.5.5-2.5 2.5.6 3.5L12 11l-3.1 1.7.6-3.5L7 6.7l3.5-.5z"/><path d="M5 16l-1.5 3.2-3.5.5L2.5 22l-.6 2L5 22.3 8.1 24l-.6-2L10 19.5l-3.5-.5z"/><path d="M19 16l-1.5 3.2-3.5.5 2.5 2.5-.6 2L19 22.3l3.1 1.7-.6-2L24 19.5l-3.5-.5z"/></svg>
+          <span>角色服裝</span>
+          <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  </div>
+
+  <Footer lang={lang} />
+
+  <Fragment slot="page-scripts">
+    <script is:inline src="/assets/capability-animations.js"></script>
+  </Fragment>
+</BaseLayout>

@@ -1,0 +1,180 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  lang: string;
+  canonical: string;
+  ogLocale: string;
+  ogLocaleAlternates: string[];
+  dataPage: string;
+  pageStyles?: string;
+}
+
+const {
+  title,
+  description,
+  lang,
+  canonical,
+  ogLocale,
+  ogLocaleAlternates,
+  dataPage,
+  pageStyles,
+} = Astro.props;
+
+import '../styles/shared.css';
+
+const ogImage = 'https://royalregentgroup.com/assets/images/og-image.png';
+const base = 'https://royalregentgroup.com';
+
+// Derive hreflang URLs from canonical — strip base + locale prefix to get page path
+const path = canonical.replace(base, '');
+// Detect if this is a locale homepage (/cn.html, /id.html) or root (/)
+const isHome = path === '/' || /^\/(cn|id)\.html$/.test(path);
+// For subpages, strip locale prefix to get the language-neutral page path
+const pagePath = isHome ? '/' : path.replace(/^\/(cn|id)\//, '/');
+const hreflangEn = isHome ? `${base}/` : `${base}${pagePath}`;
+const hreflangCn = isHome ? `${base}/cn.html` : `${base}/cn${pagePath}`;
+const hreflangId = isHome ? `${base}/id.html` : `${base}/id${pagePath}`;
+---
+
+<!DOCTYPE html>
+<html lang={lang} class="no-js">
+<head>
+  <script is:inline>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js-loaded');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <meta name="description" content={description}>
+  <title>{title}</title>
+
+  <!-- Canonical & Hreflang -->
+  <link rel="canonical" href={canonical}>
+  <link rel="alternate" hreflang="en" href={hreflangEn}>
+  <link rel="alternate" hreflang="zh-Hant" href={hreflangCn}>
+  <link rel="alternate" hreflang="id" href={hreflangId}>
+  <link rel="alternate" hreflang="x-default" href={hreflangEn}>
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:url" content={canonical}>
+  <meta property="og:site_name" content="Royal Regent Toys">
+  <meta property="og:image" content={ogImage}>
+  <meta property="og:locale" content={ogLocale}>
+  {ogLocaleAlternates.map((locale) => (
+    <meta property="og:locale:alternate" content={locale} />
+  ))}
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content={title}>
+  <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content={ogImage}>
+
+  <slot name="head-extra" />
+
+  <!-- DNS prefetch for CDN resources -->
+  <link rel="dns-prefetch" href="//unpkg.com">
+  <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+
+  <!-- Preload critical fonts -->
+  <link rel="preload" href="/fonts/clash-display-600.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/clash-display-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/satoshi-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/satoshi-700.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- Splitting CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/splitting@1.0.6/dist/splitting.css" integrity="sha384-6z/M4zCNHzM59q8BnJ1btvx5I7ArdKNNBgb/V4m7ZTUPI4e2SVF0o5IQAGCO414a" crossorigin="anonymous">
+
+  <!-- Loader critical CSS -->
+  <style is:inline>
+    .brand-loader{position:fixed;inset:0;z-index:99999;background:#FAFDF7;display:flex;align-items:center;justify-content:center;flex-direction:column;pointer-events:all}
+    .loader-ring-wrap{position:relative;width:clamp(110px,18vw,180px);height:clamp(110px,18vw,180px)}
+    .loader-ring{position:absolute;top:50%;left:50%;width:calc(100% + 32px);height:calc(100% + 32px);transform:translate(-50%,-50%);opacity:0;transition:opacity .8s ease .3s}
+    .loader-ring.visible{opacity:1}
+    .loader-ring circle{fill:none;stroke-linecap:round}
+    .loader-ring-bg{stroke:rgba(124,179,66,.15);stroke-width:1}
+    .loader-ring-fill{stroke:rgba(124,179,66,.4);stroke-width:1.5;stroke-dasharray:0,999;transition:stroke-dasharray .4s cubic-bezier(.16,1,.3,1);transform:rotate(-90deg);transform-origin:center}
+    .loader-logo{width:100%;height:100%;opacity:0;transform:scale(.92);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
+    .loader-logo.visible{opacity:1;transform:scale(1)}
+    .loader-logo img{width:100%;height:100%;object-fit:contain}
+    .loader-percent{font-family:'Clash Display',sans-serif;font-weight:700;font-size:clamp(2.2rem,4vw,3.5rem);color:rgba(124,179,66,.7);letter-spacing:-.04em;font-variant-numeric:tabular-nums;margin-top:16px;opacity:0;transform:translateY(12px);transition:opacity .7s cubic-bezier(.16,1,.3,1) .2s,transform .7s cubic-bezier(.16,1,.3,1) .2s}
+    .loader-percent.visible{opacity:1;transform:translateY(0)}
+    .loader-tagline{font-family:'Satoshi',sans-serif;font-weight:400;font-size:clamp(.55rem,.9vw,.65rem);letter-spacing:.3em;color:rgba(124,179,66,.4);margin-top:20px;display:flex}
+    .loader-tagline span{opacity:0;transform:translateY(8px);transition:opacity .3s ease,transform .3s ease;display:inline-block}
+    .loader-tagline span.visible{opacity:1;transform:translateY(0)}
+    .loader-tagline span.space{width:.35em}
+    .brand-loader.exit-counter .loader-percent,.brand-loader.exit-counter .loader-tagline{opacity:0;transform:translateY(-8px);transition:opacity .35s ease,transform .35s ease}
+    .brand-loader.exit-counter .loader-ring{opacity:0;transition:opacity .4s ease}
+    .brand-loader.exit-logo .loader-logo{opacity:0;transform:scale(1.08);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+    .brand-loader.exit-bg{opacity:0;transition:opacity .9s cubic-bezier(.65,0,.35,1);pointer-events:none}
+    .page-reveal{opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+    .page-reveal.revealed{opacity:1;transform:translateY(0)}
+  </style>
+
+  <!-- Page-specific styles -->
+  {pageStyles && <style set:html={pageStyles} />}
+</head>
+<body data-page={dataPage}>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- BRAND LOADER -->
+  <slot name="loader" />
+
+  <!-- PAGE TRANSITION OVERLAY -->
+  <div class="page-transition"></div>
+
+  <!-- SCROLL PROGRESS -->
+  <div class="scroll-progress"></div>
+
+  <!-- Main content -->
+  <slot />
+
+  <!-- CDN Dependencies -->
+  <script is:inline src="https://cdn.jsdelivr.net/npm/lenis@1.3.18/dist/lenis.min.js" integrity="sha384-KkYh7KGBvRRt0VqhEwR3gggZKwN2tGznSiszALb8QHSvgA8o8/OfHyFZhydgtzNH" crossorigin="anonymous"></script>
+  <script is:inline src="https://unpkg.com/splitting@1.0.6/dist/splitting.min.js" integrity="sha384-taxnKSnzdVS5gZB4jZcieFZlmBPQMFqhdEmCScZsrIFCxX8Zizq4fKJJH5kBwMXT" crossorigin="anonymous"></script>
+
+  <!-- Shared Interaction Engine -->
+  <script is:inline src="/assets/shared.js"></script>
+
+  <!-- Page-specific inline scripts -->
+  <slot name="page-scripts" />
+
+  <!-- Three.js (required by webgl-bg.js) -->
+  <script is:inline src="https://cdn.jsdelivr.net/npm/three@0.183.0/build/three.min.js" integrity="sha384-ZiNlHCo+yYOH/KHiXjwmn/CbGsC3Qyj4zcxMFoO6zgdInr3XteSQob6zFQV1HfT0" crossorigin="anonymous"></script>
+
+  <!-- GSAP Core -->
+  <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js" integrity="sha384-sG0Hv1tP1lZCk9KQmrIbY/XNwi+OY84GQqhMscbnsoBFqAz8KNCil1kvfL3Hbbk2" crossorigin="anonymous"></script>
+  <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/ScrollTrigger.min.js" integrity="sha384-xNHNOfrykny9oFwnmpfNbkSc6isny38d1GZvTRVuFV0l9fTMIZKhULvomyQJSMRl" crossorigin="anonymous"></script>
+  <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/SplitText.min.js" integrity="sha384-iJQU/7haAHHrfeX4o0uooRF7Po6K7IhD+YU5dustu1NfalmSBYI7pbX6wAtx2f9j" crossorigin="anonymous"></script>
+  <script is:inline src="/assets/animations.js"></script>
+
+  <!-- Animation Module System (all 21 modules, same load order as original) -->
+  <script is:inline src="/animation/controller.js"></script>
+  <script is:inline src="/animation/scroll-engine.js"></script>
+  <script is:inline src="/animation/responsive.js"></script>
+  <script is:inline src="/animation/text-system.js"></script>
+  <script is:inline src="/animation/hero.js"></script>
+  <script is:inline src="/animation/text-scramble.js"></script>
+  <script is:inline src="/animation/scroll-text.js"></script>
+  <script is:inline src="/animation/scroll-reveals.js"></script>
+  <script is:inline src="/animation/parallax.js"></script>
+  <script is:inline src="/animation/scroll-skew.js"></script>
+  <script is:inline src="/animation/scroll-progress.js"></script>
+  <script is:inline src="/animation/section-choreography.js"></script>
+  <script is:inline src="/animation/horizontal-showcase.js"></script>
+  <script is:inline src="/animation/cursor.js"></script>
+  <script is:inline src="/animation/magnetic.js"></script>
+  <script is:inline src="/animation/hover-effects.js"></script>
+  <script is:inline src="/animation/navbar.js"></script>
+  <script is:inline src="/animation/mobile-menu.js"></script>
+  <script is:inline src="/animation/page-transition.js"></script>
+  <script is:inline src="/animation/webgl-bg.js"></script>
+  <script is:inline src="/animation/card-effects.js"></script>
+</body>
+</html>

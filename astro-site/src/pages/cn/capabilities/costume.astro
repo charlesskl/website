@@ -1,0 +1,164 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+import '../../../styles/capability.css';
+
+const lang = 'cn' as const;
+const prefix = '/cn';
+---
+
+<BaseLayout
+  title="角色服裝製造 — Royal Regent Toys | 角色服裝代工廠"
+  description="Royal Regent Toys服裝製造——裁剪、縫製、塑膠組件及角色服裝。OEM角色服裝代工廠。PT RRI、PT RRM。"
+  lang="zh-Hant"
+  canonical="https://royalregentgroup.com/cn/capabilities/costume.html"
+  ogLocale="zh_TW"
+  ogLocaleAlternates={['en_US', 'id_ID']}
+  dataPage="capabilities-costume"
+>
+  <Fragment slot="head-extra">
+    <meta name="keywords" content="Royal Regent Toys, 服裝製造, 角色服裝, 角色服裝代工, 服裝代工廠, PT RRI, PT RRM, RRI, RRM">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://royalregentgroup.com/cn/" },
+            { "@type": "ListItem", "position": 2, "name": "生產能力", "item": "https://royalregentgroup.com/cn/#capabilities" },
+            { "@type": "ListItem", "position": 3, "name": "服裝", "item": "https://royalregentgroup.com/cn/capabilities/costume.html" }
+          ]
+        },
+        {
+          "@type": "Service",
+          "name": "服裝製造",
+          "provider": {"@type": "Organization", "name": "Royal Regent Toys", "url": "https://royalregentgroup.com"},
+          "description": "OEM角色服裝製造——裁剪、縫製、塑膠組件及精心設計的服裝。",
+          "url": "https://royalregentgroup.com/cn/capabilities/costume.html",
+          "serviceType": "Toy Manufacturing",
+          "areaServed": "Worldwide"
+        }
+      ]
+    })} />
+  </Fragment>
+
+  <Nav lang={lang} />
+
+  <section class="sub-hero" id="subHero">
+    <div class="hero-grid-pattern"></div>
+    <div class="aurora"><div class="aurora-blob"></div><div class="aurora-blob"></div><div class="aurora-blob"></div></div>
+    <div class="sub-hero-content">
+      <div class="breadcrumb" id="heroBreadcrumb">
+        <a href="/cn/">首頁</a><span class="sep">/</span><span>服裝</span>
+      </div>
+      <span class="sub-hero-tag" id="heroTag">服裝</span>
+      <h1 class="sub-hero-title" id="heroTitle">角色<br><span class="text-gradient">服裝</span></h1>
+      <p class="sub-hero-sub" id="heroSub">柔軟安全的面料與精心設計的授權及定制角色服裝——從換裝服飾到主題系列，適合兒童。</p>
+    </div>
+    <div class="sub-hero-scroll" id="heroScroll"><span>向下滾動</span><div class="scroll-line"></div></div>
+  </section>
+
+  <div class="main-content" id="main-content">
+
+    <section class="editorial">
+      <div class="container">
+        <div class="editorial-watermark">Costumes</div>
+        <div class="editorial-inner">
+          <div class="editorial-left">
+            <span class="section-label reveal-up">製造概覽</span>
+            <div class="editorial-intro reveal-up">
+              <div class="editorial-intro-line"></div>
+              <div>
+                <p>
+                  <span class="stmt-line">裁剪、縫製、完成。</span>
+                  <span class="stmt-line">全部在同一屋簷下。</span>
+                  <span class="stmt-line">授權角色就位。</span>
+                </p>
+                <div class="stmt-rule"></div>
+              </div>
+            </div>
+          </div>
+          <div class="editorial-right">
+            <div class="editorial-features">
+              <div class="editorial-feat reveal-up">
+                <div class="editorial-feat-num">01</div>
+                <div><h3>簡單到複雜的服裝構造</h3><p>我們的縫製和面料加工產線涵蓋全系列——從簡單的公主裙到複雜結構的角色服裝，包括多個組件、泡沫襯墊、塑膠附件和精細裝飾。複雜程度不會改變工廠效率。</p></div>
+              </div>
+              <div class="editorial-feat reveal-up">
+                <div class="editorial-feat-num">02</div>
+                <div><h3>塑膠與軟性商品一站式</h3><p>角色服裝常常需要塑膠面具、武器、盔甲片和道具與服裝搭配。由於我們的塑膠成型和縫製部門在同一屋簷下，我們能生產完整的服裝套裝，無需分開訂單。</p></div>
+              </div>
+              <div class="editorial-feat reveal-up">
+                <div class="editorial-feat-num">03</div>
+                <div><h3>為玩具業而建</h3><p>我們與持牌的玩具公司和品牌方合作——理解零售級生產標準、品質期望及將角色服裝運送到全球市場所需的交期要求。</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="photo-panels">
+        <div class="photo-panel">
+          <img src="/assets/fabric-cutting.webp" alt="服裝製造" loading="lazy" width="1920" height="1280">
+          <div class="photo-panel-overlay"></div>
+          <div class="photo-panel-label"><div class="label-line"></div><span>面料裁剪</span></div>
+        </div>
+        <div class="photo-panel">
+          <img src="/assets/costume01.webp" alt="服裝縫製生產" loading="lazy" width="1279" height="1706">
+          <div class="photo-panel-overlay"></div>
+          <div class="photo-panel-label"><div class="label-line"></div><span>縫製生產</span></div>
+        </div>
+        <div class="photo-panel">
+          <img src="/assets/costume.webp" alt="服裝品質精修" loading="lazy" width="1920" height="1440">
+          <div class="photo-panel-overlay"></div>
+          <div class="photo-panel-label"><div class="label-line"></div><span>品質精修</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="container reveal-up">
+        <h2>準備好討論您的項目了嗎？</h2>
+        <p>告訴我們您的需求，我們的團隊將盡快與您聯繫。</p>
+        <a href="/cn/contact.html" class="btn btn-primary magnetic" data-strength="0.2">聯繫我們 →</a>
+      </div>
+    </section>
+
+    <!-- SEE ALSO -->
+    <section class="see-also">
+      <div class="container">
+        <span class="see-also-label">探索其他生產能力</span>
+        <div class="see-also-grid">
+          <a href="/cn/capabilities/plastic-toys.html" class="see-also-card">
+            <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+            <span>塑膠玩具</span>
+            <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="/cn/capabilities/plush.html" class="see-also-card">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>
+            <span>毛絨玩具</span>
+            <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="/cn/capabilities/dolls.html" class="see-also-card">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span>娃娃</span>
+            <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="/cn/capabilities/rc-vehicle.html" class="see-also-card">
+            <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            <span>遙控車</span>
+            <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <Footer lang={lang} />
+
+  <Fragment slot="page-scripts">
+    <script is:inline src="/assets/capability-animations.js"></script>
+  </Fragment>
+</BaseLayout>

@@ -1,0 +1,182 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/contact.css';
+
+const lang = 'en' as const;
+const prefix = '';
+---
+
+<BaseLayout
+  title="Contact Royal Regent Toys — Hong Kong Toy Manufacturer"
+  description="Contact Royal Regent Toys for OEM toy manufacturing inquiries. Hong Kong headquarters, factories in Dongguan, Heyuan, Hunan (China) & Indonesia (PT RRI, PT RRM)."
+  lang="en"
+  canonical="https://royalregentgroup.com/contact.html"
+  ogLocale="en_US"
+  ogLocaleAlternates={['zh_TW', 'id_ID']}
+  dataPage="contact"
+>
+  <Fragment slot="head-extra">
+    <meta name="keywords" content="Royal Regent Toys contact, toy manufacturer Hong Kong, Dongguan toy factory, Indonesia toy factory, PT RRI, PT RRM, RRI, RRM, OEM toy inquiry">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://royalregentgroup.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://royalregentgroup.com/contact.html" }
+          ]
+        },
+        {
+          "@type": "LocalBusiness",
+          "name": "Royal Regent Toys",
+          "url": "https://royalregentgroup.com",
+          "logo": "https://royalregentgroup.com/assets/logo.webp",
+          "description": "OEM toy manufacturer since 1987 — Hong Kong headquarters with factories in China & Indonesia.",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Unit 07-08, 12/F, Greenfield Tower, Concordia Plaza, No.1 Science Museum Road",
+            "addressLocality": "Tsim Sha Tsui, Kowloon",
+            "addressCountry": "HK"
+          },
+          "telephone": "+852-2425-0720",
+          "email": "info@royalregenthk.com",
+          "contactPoint": [
+            {
+              "@type": "ContactPoint",
+              "telephone": "+852-2425-0720",
+              "email": "info@royalregenthk.com",
+              "contactType": "sales",
+              "availableLanguage": ["English", "Chinese"]
+            }
+          ],
+          "sameAs": [
+            "https://www.linkedin.com/company/royalregentgroup"
+          ]
+        }
+      ]
+    })} />
+  </Fragment>
+
+  <Nav lang={lang} />
+
+  <!-- PAGE HERO -->
+  <section class="page-hero" id="main-content">
+    <div class="container">
+      <span class="page-hero-tag">Get In Touch</span>
+      <h1>Let's discuss<br><span class="text-gradient">your project.</span></h1>
+      <p>Whether you need OEM manufacturing, a sample run, or just want to learn more — our team is ready to respond.</p>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       CONTACT SECTION
+       ═══════════════════════════════════════════════════════════════ -->
+  <section class="contact-section">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- Left: Contact Info -->
+        <div class="contact-info">
+          <div class="section-label reveal-up">Contact Information</div>
+          <h2 class="reveal-up">Every inquiry matters. We'll get back to you as soon as we can.</h2>
+          <p class="reveal-up">From initial inquiry through sampling and into full production — our team supports every stage of the process. Whether you are a brand owner, retailer, or distributor, tell us about your project and we will respond promptly.</p>
+
+          <div class="contact-detail reveal-up">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            </div>
+            <div><h4>Production sites</h4><p>China and Indonesia</p></div>
+          </div>
+          <div class="contact-detail reveal-up">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
+            </div>
+            <div><h4>Email</h4><p>info@royalregenthk.com</p></div>
+          </div>
+
+        </div>
+
+        <!-- Right: Form -->
+        <div class="reveal-up">
+          <div class="contact-form-card">
+            <!-- Progress bar -->
+            <div class="form-progress">
+              <div class="form-progress-fill" id="progressFill"></div>
+            </div>
+
+            <form id="contactForm" novalidate>
+              <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+              <div class="form-row">
+                <div class="float-group">
+                  <input type="text" id="firstName" name="firstName" required data-field autocomplete="given-name" aria-describedby="firstNameError">
+                  <label for="firstName">First Name</label>
+                  <div class="error-message" id="firstNameError" role="alert" aria-live="polite"></div>
+                </div>
+                <div class="float-group">
+                  <input type="text" id="lastName" name="lastName" required data-field autocomplete="family-name" aria-describedby="lastNameError">
+                  <label for="lastName">Last Name</label>
+                  <div class="error-message" id="lastNameError" role="alert" aria-live="polite"></div>
+                </div>
+              </div>
+
+              <div class="float-group">
+                <input type="email" id="email" name="email" required data-field autocomplete="email" aria-describedby="emailError">
+                <label for="email">Email Address</label>
+                <div class="error-message" id="emailError" role="alert" aria-live="polite"></div>
+              </div>
+
+              <div class="float-group">
+                <input type="text" id="company" name="company" data-field autocomplete="organization">
+                <label for="company">Company</label>
+              </div>
+
+              <div class="float-group">
+                <select id="subject" name="subject" data-field>
+                  <option value="" disabled selected></option>
+                  <option>OEM Manufacturing Inquiry</option>
+                  <option>Sample Request</option>
+                  <option>Plastic</option>
+                  <option>Plush</option>
+                  <option>Dolls</option>
+                  <option>RC</option>
+                  <option>Costumes</option>
+                  <option>Licensed / Branded Products</option>
+                  <option>Careers</option>
+                  <option>Other</option>
+                </select>
+                <label for="subject">Subject</label>
+              </div>
+
+              <div class="float-group">
+                <textarea id="message" name="message" required data-field aria-describedby="messageError"></textarea>
+                <label for="message">Message</label>
+                <div class="error-message" id="messageError" role="alert" aria-live="polite"></div>
+              </div>
+
+              <button type="submit" class="submit-btn magnetic" data-strength="0.15" id="submitBtn">
+                <span class="btn-text">Send Message &rarr;</span>
+                <span class="btn-success">
+                  <span class="check-circle">
+                    <svg viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                  Sent Successfully
+                </span>
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <Footer lang={lang} />
+
+  <Fragment slot="page-scripts">
+    <script is:inline src="/assets/contact-animations.js"></script>
+  </Fragment>
+</BaseLayout>
