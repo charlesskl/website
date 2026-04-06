@@ -1,0 +1,183 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+import '../../../styles/capability.css';
+
+const lang = 'cn' as const;
+const prefix = '/cn';
+---
+
+<BaseLayout
+  title="塑膠玩具製造 — Royal Regent Toys | 注塑成型代工"
+  description="Royal Regent Toys塑膠玩具製造——注塑成型、模具開發及精密組裝。全球品牌塑膠玩具OEM代工廠。"
+  lang="zh-Hant"
+  canonical="https://royalregentgroup.com/cn/capabilities/plastic-toys.html"
+  ogLocale="zh_TW"
+  ogLocaleAlternates={['en_US', 'id_ID']}
+  dataPage="capabilities-plastic-toys"
+>
+  <Fragment slot="head-extra">
+    <meta name="keywords" content="Royal Regent Toys, 塑膠玩具製造, 注塑成型, 模具開發, OEM塑膠玩具, 玩具代工廠, PT RRI, PT RRM, RRI, RRM">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://royalregentgroup.com/cn/" },
+            { "@type": "ListItem", "position": 2, "name": "生產能力", "item": "https://royalregentgroup.com/cn/#capabilities" },
+            { "@type": "ListItem", "position": 3, "name": "塑膠玩具", "item": "https://royalregentgroup.com/cn/capabilities/plastic-toys.html" }
+          ]
+        },
+        {
+          "@type": "Service",
+          "name": "塑膠玩具製造",
+          "provider": {"@type": "Organization", "name": "Royal Regent Toys", "url": "https://royalregentgroup.com"},
+          "description": "OEM塑膠玩具製造——注塑成型、模具開發及精密組裝。",
+          "url": "https://royalregentgroup.com/cn/capabilities/plastic-toys.html",
+          "serviceType": "Toy Manufacturing",
+          "areaServed": "Worldwide"
+        }
+      ]
+    })} />
+  </Fragment>
+
+  <Nav lang={lang} />
+
+  <!-- HERO -->
+  <section class="sub-hero" id="subHero">
+    <div class="hero-grid-pattern"></div>
+    <div class="aurora">
+      <div class="aurora-blob"></div>
+      <div class="aurora-blob"></div>
+      <div class="aurora-blob"></div>
+    </div>
+    <div class="sub-hero-content">
+      <div class="breadcrumb" id="heroBreadcrumb">
+        <a href={`${prefix}/`}>首頁</a><span class="sep">/</span>
+        <span>塑膠玩具</span>
+      </div>
+      <span class="sub-hero-tag" id="heroTag">塑膠玩具</span>
+      <h1 class="sub-hero-title" id="heroTitle">塑膠公仔與<br><span class="text-gradient">功能性玩具</span></h1>
+      <p class="sub-hero-sub" id="heroSub">精密注塑成型，專為角色公仔和功能性玩具打造，完全按照客戶設計和規格進行定制生產。</p>
+    </div>
+    <div class="sub-hero-scroll" id="heroScroll"><span>向下滾動</span><div class="scroll-line"></div></div>
+  </section>
+
+  <div class="main-content" id="main-content">
+
+  <!-- EDITORIAL — merged intro + overview + gallery -->
+  <section class="editorial">
+    <div class="container">
+      <div class="editorial-watermark">Plastic</div>
+      <div class="editorial-inner">
+
+        <!-- Left: Statement -->
+        <div class="editorial-left">
+          <span class="section-label reveal-up">製造概覽</span>
+          <div class="editorial-intro reveal-up">
+            <div class="editorial-intro-line"></div>
+            <div>
+              <p>從確認模具到成品<br>每個工序均能在廠內完成<br>為量產規模而建。</p>
+              <div class="stmt-rule"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Features -->
+        <div class="editorial-right">
+          <div class="editorial-features">
+            <div class="editorial-feat reveal-up">
+              <div class="editorial-feat-num">01</div>
+              <div>
+                <h3>從首件樣品到最終裝箱</h3>
+                <p>生產的每個環節都在同一屋簷下完成——從最初的3D打印原型到注塑成型、噴油、組裝和出貨裝箱。無需交接、無第三方延誤，全程可見可控。</p>
+              </div>
+            </div>
+            <div class="editorial-feat reveal-up">
+              <div class="editorial-feat-num">02</div>
+              <div>
+                <h3>為量產而建，應對複雜設計</h3>
+                <p>無論您的產品是簡單公仔還是多組件功能性玩具，我們的一體化製造體系都能高效擴展產能——在訂單量增長的同時，保持交期緊湊、成本可控。</p>
+              </div>
+            </div>
+            <div class="editorial-feat reveal-up">
+              <div class="editorial-feat-num">03</div>
+              <div>
+                <h3>自主自動化部門</h3>
+                <p>我們設有專門的自動化部門，為大批量生產設計和部署定制自動化流程。這確保了產出的一致性，減少了人工差異，使我們的單位成本在規模化生產中極具競爭力。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Expanding photo panels -->
+    <div class="photo-panels">
+      <div class="photo-panel">
+        <img src="/assets/injection-molding.webp" alt="注塑成型生產" loading="lazy" width="1920" height="2193">
+        <div class="photo-panel-overlay"></div>
+        <div class="photo-panel-label"><div class="label-line"></div><span>注塑成型</span></div>
+      </div>
+      <div class="photo-panel">
+        <img src="/assets/images/factory-assembly-line.webp" alt="塑膠人偶製造" loading="lazy" width="1706" height="1280">
+        <div class="photo-panel-overlay"></div>
+        <div class="photo-panel-label"><div class="label-line"></div><span>組裝線</span></div>
+      </div>
+      <div class="photo-panel">
+        <img src="/assets/quality-control.webp" alt="品質控制檢驗" loading="lazy" width="1279" height="1635">
+        <div class="photo-panel-overlay"></div>
+        <div class="photo-panel-label"><div class="label-line"></div><span>品質控制</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container reveal-up">
+      <h2>準備好討論您的項目了嗎？</h2>
+      <p>告訴我們您的需求，我們的團隊將盡快與您聯繫。</p>
+      <a href={`${prefix}/contact.html`} class="btn btn-primary magnetic" data-strength="0.2">聯繫我們 &rarr;</a>
+    </div>
+  </section>
+
+  <!-- SEE ALSO -->
+  <section class="see-also">
+    <div class="container">
+      <span class="see-also-label">探索其他生產能力</span>
+      <div class="see-also-grid">
+        <a href={`${prefix}/capabilities/plush.html`} class="see-also-card">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>
+          <span>毛絨玩具</span>
+          <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href={`${prefix}/capabilities/dolls.html`} class="see-also-card">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span>娃娃</span>
+          <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href={`${prefix}/capabilities/rc-vehicle.html`} class="see-also-card">
+          <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          <span>遙控車</span>
+          <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href={`${prefix}/capabilities/costume.html`} class="see-also-card">
+          <svg viewBox="0 0 24 24"><path d="M12 3l1.5 3.2 3.5.5-2.5 2.5.6 3.5L12 11l-3.1 1.7.6-3.5L7 6.7l3.5-.5z"/><path d="M5 16l-1.5 3.2-3.5.5L2.5 22l-.6 2L5 22.3 8.1 24l-.6-2L10 19.5l-3.5-.5z"/><path d="M19 16l-1.5 3.2-3.5.5 2.5 2.5-.6 2L19 22.3l3.1 1.7-.6-2L24 19.5l-3.5-.5z"/></svg>
+          <span>角色服裝</span>
+          <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  </div>
+
+  <Footer lang={lang} />
+
+  <Fragment slot="page-scripts">
+    <script is:inline src="/assets/capability-animations.js"></script>
+  </Fragment>
+</BaseLayout>

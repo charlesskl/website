@@ -1,0 +1,189 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/careers.css';
+
+const lang = 'en' as const;
+const prefix = '';
+---
+
+<BaseLayout
+  title="Careers — Royal Regent Toys | Join Our Team"
+  description="Join Royal Regent Toys. Careers in toy manufacturing, engineering, quality assurance & operations across Hong Kong, China & Indonesia (PT RRI, PT RRM)."
+  lang="en"
+  canonical="https://royalregentgroup.com/careers.html"
+  ogLocale="en_US"
+  ogLocaleAlternates={['zh_TW', 'id_ID']}
+  dataPage="careers"
+>
+  <Fragment slot="head-extra">
+    <meta name="keywords" content="Royal Regent Toys careers, toy manufacturing jobs, PT RRI jobs, PT RRM jobs, RRI, RRM, Hong Kong toy manufacturer careers, Indonesia toy factory jobs">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://royalregentgroup.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Careers", "item": "https://royalregentgroup.com/careers.html" }
+          ]
+        },
+        {
+          "@type": "JobPosting",
+          "title": "Admin Officer",
+          "description": "Handle day-to-day administrative operations including document management, office coordination, and internal communications.",
+          "datePosted": "2025-01-01",
+          "employmentType": "FULL_TIME",
+          "jobLocation": {
+            "@type": "Place",
+            "address": { "@type": "PostalAddress", "addressLocality": "Kendal", "addressCountry": "ID" }
+          },
+          "hiringOrganization": {
+            "@type": "Organization",
+            "name": "Royal Regent Toys",
+            "sameAs": "https://royalregentgroup.com"
+          }
+        },
+        {
+          "@type": "JobPosting",
+          "title": "EXIM Officer — Import",
+          "description": "Manage import documentation, coordinate with freight forwarders, and ensure timely clearance of raw materials and components.",
+          "datePosted": "2025-01-01",
+          "employmentType": "FULL_TIME",
+          "jobLocation": {
+            "@type": "Place",
+            "address": { "@type": "PostalAddress", "addressLocality": "Kendal", "addressCountry": "ID" }
+          },
+          "hiringOrganization": {
+            "@type": "Organization",
+            "name": "Royal Regent Toys",
+            "sameAs": "https://royalregentgroup.com"
+          }
+        },
+        {
+          "@type": "JobPosting",
+          "title": "EXIM Officer — Custom Clearance",
+          "description": "Handle export customs declarations, coordinate with brokers and logistics partners, and ensure all shipments meet regulatory requirements.",
+          "datePosted": "2025-01-01",
+          "employmentType": "FULL_TIME",
+          "jobLocation": {
+            "@type": "Place",
+            "address": { "@type": "PostalAddress", "addressLocality": "Kendal", "addressCountry": "ID" }
+          },
+          "hiringOrganization": {
+            "@type": "Organization",
+            "name": "Royal Regent Toys",
+            "sameAs": "https://royalregentgroup.com"
+          }
+        }
+      ]
+    })} />
+  </Fragment>
+
+  <Nav lang={lang} />
+
+  <!-- PAGE HERO -->
+  <section class="page-hero" id="main-content">
+    <div class="container">
+      <span class="page-hero-tag">Join Our Team</span>
+      <h1>Build something<br><span class="text-gradient">that lasts.</span></h1>
+      <p>For over 39 years, Royal Regent has grown by investing in people. We are looking for skilled professionals across manufacturing, engineering, quality, and operations to grow with us.</p>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="careers-values">
+    <div class="container">
+      <div class="section-label reveal-up">Why Royal Regent</div>
+      <h2 class="section-title reveal-up">A manufacturer built<br>on people first.</h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card reveal-up">
+        <div class="value-icon">&#127775;</div>
+        <h3>39 years of stability</h3>
+        <p>Founded in 1987, Royal Regent has grown across four decades — offering long-term career stability and steady growth across China and Indonesia.</p>
+      </div>
+      <div class="value-card reveal-up">
+        <div class="value-icon">&#127760;</div>
+        <h3>Global scale</h3>
+        <p>Work across manufacturing sites in Dongguan, Heyuan, Hunan, and Indonesia — gaining exposure to a truly international supply chain.</p>
+      </div>
+      <div class="value-card reveal-up">
+        <div class="value-icon">&#128218;</div>
+        <h3>Skill development</h3>
+        <p>From mold development to RC electronics and soft toy production — our breadth of categories creates unique opportunities to develop deep, cross-functional expertise.</p>
+      </div>
+      <div class="value-card reveal-up">
+        <div class="value-icon">&#9989;</div>
+        <h3>Quality culture</h3>
+        <p>We produce to US and EU safety standards. Quality is not a department — it is embedded in how every team operates, from tooling through final inspection.</p>
+      </div>
+      <div class="value-card reveal-up">
+        <div class="value-icon">&#129309;</div>
+        <h3>Collaborative teams</h3>
+        <p>Flat structure, direct communication, and a culture of ownership. Our teams work closely across functions — engineering, production, sourcing, and QA.</p>
+      </div>
+      <div class="value-card reveal-up">
+        <div class="value-icon">&#127941;</div>
+        <h3>Grow with us</h3>
+        <p>We are entering a new phase of expansion in Indonesia and beyond. Join now and grow alongside a manufacturer at a pivotal moment in its history.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPEN POSITIONS -->
+  <section class="positions-section">
+    <div class="container">
+      <div class="section-label reveal-up">Open Positions</div>
+      <h2 class="section-title reveal-up">Current opportunities.</h2>
+
+      <div class="filter-bar" id="filterBar"></div>
+
+      <div class="job-grid" id="jobGrid"></div>
+    </div>
+  </section>
+
+  <!-- APPLY MODAL -->
+  <div class="apply-overlay" id="applyOverlay" role="dialog" aria-modal="true" aria-labelledby="applyModalTitle">
+    <div class="apply-modal">
+      <div class="apply-modal-header">
+        <h3 id="applyModalTitle">Apply for this position</h3>
+        <button class="apply-modal-close" id="applyClose" aria-label="Close">&times;</button>
+      </div>
+      <div class="apply-modal-body">
+        <label>Position</label>
+        <div class="apply-job-title" id="applyJobTitle"></div>
+        <label>Your Name</label>
+        <input type="text" id="applyName" placeholder="Full name">
+        <label>Send application to</label>
+        <div class="apply-entity-group">
+          <label><input type="radio" name="applyEntity" value="recruitment.rri@royalregentgroup.com" checked><span><strong>PT Royal Regent Indonesia</strong><br><small style="font-weight:400;color:var(--text-muted)">Kendal, Central Java</small></span></label>
+          <label><input type="radio" name="applyEntity" value="recruitment.rrm@royalregentid.com"><span><strong>PT Royal Regent Manufacturing</strong><br><small style="font-weight:400;color:var(--text-muted)">Ngawi, East Java</small></span></label>
+        </div>
+      </div>
+      <div class="apply-modal-footer">
+        <button id="applySubmit">Submit Application →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPECULATIVE / CTA -->
+  <section class="cta-banner">
+    <div class="container">
+      <div class="section-label reveal-up" style="text-align:center;">Don't See Your Role?</div>
+      <h2 class="reveal-up">Send us a speculative<br>application.</h2>
+      <p class="reveal-up">We are always open to hearing from talented people in manufacturing engineering, quality, sourcing, and operations. Send your CV and a short introduction to our team.</p>
+      <div class="reveal-up" style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="mailto:info@royalregenthk.com" class="btn btn-primary">Send Your CV →</a>
+        <a href={`${prefix}/contact.html`} class="btn btn-ghost">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer lang={lang} />
+
+  <Fragment slot="page-scripts">
+    <script is:inline src="/assets/careers-animations.js"></script>
+  </Fragment>
+</BaseLayout>

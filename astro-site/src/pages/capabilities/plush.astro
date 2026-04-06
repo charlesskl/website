@@ -1,0 +1,185 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/capability.css';
+
+const lang = 'en' as const;
+const prefix = '';
+---
+
+<BaseLayout
+  title="Plush Toy Manufacturer — Royal Regent Toys"
+  description="Royal Regent Toys plush & stuffed toy manufacturing — cutting, sewing, filling & electronic integration. OEM plush toy manufacturer for licensed IP & global brands."
+  lang="en"
+  canonical="https://royalregentgroup.com/capabilities/plush.html"
+  ogLocale="en_US"
+  ogLocaleAlternates={['zh_TW', 'id_ID']}
+  dataPage="capabilities-plush"
+>
+  <Fragment slot="head-extra">
+    <meta name="keywords" content="Royal Regent Toys, plush toy manufacturer, stuffed toy factory, soft toy OEM, electronic plush, licensed IP plush, PT RRI, PT RRM, RRI, RRM">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://royalregentgroup.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Capabilities", "item": "https://royalregentgroup.com/#capabilities" },
+            { "@type": "ListItem", "position": 3, "name": "Plush Toys", "item": "https://royalregentgroup.com/capabilities/plush.html" }
+          ]
+        },
+        {
+          "@type": "Service",
+          "name": "Plush Toy Manufacturing",
+          "provider": {"@type": "Organization", "name": "Royal Regent Toys", "url": "https://royalregentgroup.com"},
+          "description": "OEM plush & stuffed toy manufacturing — cutting, sewing, filling & electronic integration for licensed IP & global brands.",
+          "url": "https://royalregentgroup.com/capabilities/plush.html",
+          "serviceType": "Toy Manufacturing",
+          "areaServed": "Worldwide"
+        }
+      ]
+    })} />
+  </Fragment>
+
+  <Nav lang={lang} />
+
+  <!-- HERO -->
+  <section class="sub-hero" id="subHero">
+    <div class="hero-grid-pattern"></div>
+    <div class="aurora">
+      <div class="aurora-blob"></div>
+      <div class="aurora-blob"></div>
+      <div class="aurora-blob"></div>
+    </div>
+    <div class="sub-hero-content">
+      <div class="breadcrumb" id="heroBreadcrumb">
+        <a href={`${prefix}/`}>Home</a><span class="sep">/</span>
+        <span>Plush</span>
+      </div>
+      <span class="sub-hero-tag" id="heroTag">Plush</span>
+      <h1 class="sub-hero-title" id="heroTitle">Plush figures &amp;<br><span class="text-gradient">soft toys</span></h1>
+      <p class="sub-hero-sub" id="heroSub">Licensed IP, gift, and branded merchandise plush produced with full in-house soft toy production lines — cutting, sewing, stuffing, and final inspection under one roof.</p>
+    </div>
+    <div class="sub-hero-scroll" id="heroScroll"><span>Scroll</span><div class="scroll-line"></div></div>
+  </section>
+
+  <div class="main-content" id="main-content">
+
+  <!-- EDITORIAL -->
+  <section class="editorial">
+    <div class="container">
+      <div class="editorial-watermark">Plush</div>
+      <div class="editorial-inner">
+
+        <div class="editorial-left">
+          <span class="section-label reveal-up">Manufacturing overview</span>
+
+          <div class="editorial-intro reveal-up">
+            <div class="editorial-intro-line"></div>
+            <div>
+              <p>
+                <span class="stmt-line">Pattern to product.</span>
+                <span class="stmt-line">Every stitch in-house.</span>
+                <span class="stmt-line">Licensed and brand-ready.</span>
+              </p>
+              <div class="stmt-rule"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="editorial-right">
+          <div class="editorial-features">
+            <div class="editorial-feat reveal-up">
+              <div class="editorial-feat-num">01</div>
+              <div>
+                <h3>Electronic &amp; hybrid plush, made simple</h3>
+                <p>With our in-house SMT electronics department and plastic manufacturing capability, we can produce interactive plush, electronic plush, and any soft toy requiring integrated plastic components — all under one roof. No coordination between suppliers, no compromises.</p>
+              </div>
+            </div>
+            <div class="editorial-feat reveal-up">
+              <div class="editorial-feat-num">02</div>
+              <div>
+                <h3>Full plush production in-house</h3>
+                <p>From fabric selection and pattern cutting through sewing, stuffing, embroidery, and final inspection — every step is handled internally with no outsourcing. The same quality discipline we apply across all categories applies here.</p>
+              </div>
+            </div>
+            <div class="editorial-feat reveal-up">
+              <div class="editorial-feat-num">03</div>
+              <div>
+                <h3>Licensed IP &amp; gift market experience</h3>
+                <p>We produce character plush for licensed IP holders, gift brands, and promotional clients — with the colour accuracy, approval process experience, and volume consistency those partnerships demand.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="photo-panels">
+      <div class="photo-panel">
+        <img src="/assets/images/factory-pattern-cutting.webp" alt="Plush manufacturing" loading="lazy" width="1600" height="1066">
+        <div class="photo-panel-overlay"></div>
+        <div class="photo-panel-label"><div class="label-line"></div><span>Pattern Cutting</span></div>
+      </div>
+      <div class="photo-panel">
+        <img src="/assets/sewing-production.webp" alt="Plush sewing production" loading="lazy" width="1314" height="774">
+        <div class="photo-panel-overlay"></div>
+        <div class="photo-panel-label"><div class="label-line"></div><span>Sewing Production</span></div>
+      </div>
+      <div class="photo-panel">
+        <img src="/assets/quality-inspection.webp" alt="Plush quality inspection" loading="lazy" width="2450" height="1580">
+        <div class="photo-panel-overlay"></div>
+        <div class="photo-panel-label"><div class="label-line"></div><span>Quality Inspection</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container reveal-up">
+      <h2>Ready to discuss your project?</h2>
+      <p>Tell us about your requirements and our team will get back to you promptly.</p>
+      <a href={`${prefix}/contact.html`} class="btn btn-primary magnetic" data-strength="0.2">Contact Us &rarr;</a>
+    </div>
+  </section>
+
+  <!-- SEE ALSO -->
+  <section class="see-also">
+    <div class="container">
+      <span class="see-also-label">Explore other capabilities</span>
+      <div class="see-also-grid">
+        <a href={`${prefix}/capabilities/plastic-toys.html`} class="see-also-card">
+          <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          <span>Plastic Toys</span>
+          <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href={`${prefix}/capabilities/dolls.html`} class="see-also-card">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span>Dolls</span>
+          <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href={`${prefix}/capabilities/rc-vehicle.html`} class="see-also-card">
+          <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          <span>RC Vehicles</span>
+          <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href={`${prefix}/capabilities/costume.html`} class="see-also-card">
+          <svg viewBox="0 0 24 24"><path d="M12 3l1.5 3.2 3.5.5-2.5 2.5.6 3.5L12 11l-3.1 1.7.6-3.5L7 6.7l3.5-.5z"/><path d="M5 16l-1.5 3.2-3.5.5L2.5 22l-.6 2L5 22.3 8.1 24l-.6-2L10 19.5l-3.5-.5z"/><path d="M19 16l-1.5 3.2-3.5.5 2.5 2.5-.6 2L19 22.3l3.1 1.7-.6-2L24 19.5l-3.5-.5z"/></svg>
+          <span>Costumes</span>
+          <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  </div>
+
+  <Footer lang={lang} />
+
+  <Fragment slot="page-scripts">
+    <script is:inline src="/assets/capability-animations.js"></script>
+  </Fragment>
+</BaseLayout>

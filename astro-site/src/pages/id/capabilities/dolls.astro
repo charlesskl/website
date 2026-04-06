@@ -1,0 +1,165 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+import '../../../styles/capability.css';
+
+const lang = 'id' as const;
+const prefix = '/id';
+---
+
+<BaseLayout
+  title="Produsen Boneka — Royal Regent Toys | PT RRI, PT RRM"
+  description="Manufaktur boneka Royal Regent Toys — pengecatan wajah, penanaman rambut, perakitan pakaian & penyelesaian kualitas. Produsen boneka OEM. PT RRI, PT RRM."
+  lang="id"
+  canonical="https://royalregentgroup.com/id/capabilities/dolls.html"
+  ogLocale="id_ID"
+  ogLocaleAlternates={['en_US', 'zh_TW']}
+  dataPage="capabilities-dolls"
+>
+  <Fragment slot="head-extra">
+    <meta name="keywords" content="Royal Regent Toys, produsen boneka, pabrik boneka OEM, boneka fashion, boneka bayi, PT RRI, PT RRM, RRI, RRM">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://royalregentgroup.com/id/" },
+            { "@type": "ListItem", "position": 2, "name": "Kemampuan", "item": "https://royalregentgroup.com/id/#capabilities" },
+            { "@type": "ListItem", "position": 3, "name": "Boneka", "item": "https://royalregentgroup.com/id/capabilities/dolls.html" }
+          ]
+        },
+        {
+          "@type": "Service",
+          "name": "Manufaktur Boneka",
+          "provider": {"@type": "Organization", "name": "Royal Regent Toys", "url": "https://royalregentgroup.com"},
+          "description": "Manufaktur boneka OEM — pengecatan wajah, penanaman rambut, perakitan pakaian & finishing kualitas.",
+          "url": "https://royalregentgroup.com/id/capabilities/dolls.html",
+          "serviceType": "Toy Manufacturing",
+          "areaServed": "Worldwide"
+        }
+      ]
+    })} />
+  </Fragment>
+
+  <Nav lang={lang} />
+
+  <!-- HERO -->
+  <section class="sub-hero" id="subHero">
+    <div class="hero-grid-pattern"></div>
+    <div class="aurora"><div class="aurora-blob"></div><div class="aurora-blob"></div><div class="aurora-blob"></div></div>
+    <div class="sub-hero-content">
+      <div class="breadcrumb" id="heroBreadcrumb">
+        <a href="/id/">Beranda</a><span class="sep">/</span><span>Boneka</span>
+      </div>
+      <span class="sub-hero-tag" id="heroTag">Boneka</span>
+      <h1 class="sub-hero-title" id="heroTitle">Boneka fashion &amp;<br><span class="text-gradient">boneka bayi</span></h1>
+      <p class="sub-hero-sub" id="heroSub">Manufaktur boneka OEM lengkap — pengecatan wajah, penanaman rambut, dan perakitan pakaian — diproduksi sesuai standar keselamatan EN 71 dan ASTM F963 untuk pasar AS dan UE.</p>
+    </div>
+    <div class="sub-hero-scroll" id="heroScroll"><span>Gulir</span><div class="scroll-line"></div></div>
+  </section>
+
+  <div class="main-content" id="main-content">
+
+    <section class="editorial">
+      <div class="container">
+        <div class="editorial-watermark">Boneka</div>
+        <div class="editorial-inner">
+          <div class="editorial-left">
+            <span class="section-label reveal-up">Ikhtisar manufaktur</span>
+            <div class="editorial-intro reveal-up">
+              <div class="editorial-intro-line"></div>
+              <div>
+                <p>
+                  <span class="stmt-line">Detail di setiap skala.</span>
+                  <span class="stmt-line">Cat wajah hingga jahitan akhir.</span>
+                  <span class="stmt-line">Produksi proses lengkap.</span>
+                </p>
+                <div class="stmt-rule"></div>
+              </div>
+            </div>
+          </div>
+          <div class="editorial-right">
+            <div class="editorial-features">
+              <div class="editorial-feat reveal-up">
+                <div class="editorial-feat-num">01</div>
+                <div><h3>Dekorasi &amp; finishing wajah</h3><p>Dengan lantai dekorasi wajah khusus yang dilengkapi untuk Digital Inkjet (DIJ), pengecatan presisi, dan pad printing — kami memiliki kemampuan untuk mengeksekusi finishing wajah apa pun yang dibutuhkan desain Anda, secara konsisten dalam produksi volume tinggi. Lini boneka bayi dan boneka fashion diproduksi seluruhnya secara internal.</p></div>
+              </div>
+              <div class="editorial-feat reveal-up">
+                <div class="editorial-feat-num">02</div>
+                <div><h3>Penanaman rambut</h3><p>Penanaman rambut nylon dan sintetis dengan warna dan gaya kustom — direkayasa untuk daya tahan dan performa aman-bermain sepanjang masa pakai produk.</p></div>
+              </div>
+              <div class="editorial-feat reveal-up">
+                <div class="editorial-feat-num">03</div>
+                <div><h3>Perakitan pakaian &amp; aksesori</h3><p>Produksi garmen lengkap dan perakitan aksesori secara internal — mendukung persyaratan IP berlisensi, desain kustom, dan paket boneka dress-up lengkap.</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="photo-panels">
+        <div class="photo-panel">
+          <img src="/assets/face-painting.webp" alt="Manufaktur boneka" loading="lazy" width="1600" height="1066">
+          <div class="photo-panel-overlay"></div>
+          <div class="photo-panel-label"><div class="label-line"></div><span>Pengecatan Wajah</span></div>
+        </div>
+        <div class="photo-panel">
+          <img src="/assets/doll.webp" alt="Perakitan boneka" loading="lazy" width="1024" height="576">
+          <div class="photo-panel-overlay"></div>
+          <div class="photo-panel-label"><div class="label-line"></div><span>Perakitan</span></div>
+        </div>
+        <div class="photo-panel">
+          <img src="/assets/hair-rooting.webp" alt="Penanaman rambut boneka" loading="lazy" width="1152" height="896">
+          <div class="photo-panel-overlay"></div>
+          <div class="photo-panel-label"><div class="label-line"></div><span>Penanaman Rambut</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="container reveal-up">
+        <h2>Siap mendiskusikan proyek Anda?</h2>
+        <p>Sampaikan kebutuhan Anda dan tim kami akan segera menghubungi Anda.</p>
+        <a href="/id/contact.html" class="btn btn-primary magnetic" data-strength="0.2">Hubungi Kami →</a>
+      </div>
+    </section>
+
+    <!-- SEE ALSO -->
+    <section class="see-also">
+      <div class="container">
+        <span class="see-also-label">Jelajahi kapabilitas lainnya</span>
+        <div class="see-also-grid">
+          <a href="/id/capabilities/plastic-toys.html" class="see-also-card">
+            <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+            <span>Mainan Plastik</span>
+            <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="/id/capabilities/plush.html" class="see-also-card">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>
+            <span>Boneka Plush</span>
+            <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="/id/capabilities/rc-vehicle.html" class="see-also-card">
+            <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            <span>Kendaraan RC</span>
+            <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="/id/capabilities/costume.html" class="see-also-card">
+            <svg viewBox="0 0 24 24"><path d="M12 3l1.5 3.2 3.5.5-2.5 2.5.6 3.5L12 11l-3.1 1.7.6-3.5L7 6.7l3.5-.5z"/><path d="M5 16l-1.5 3.2-3.5.5L2.5 22l-.6 2L5 22.3 8.1 24l-.6-2L10 19.5l-3.5-.5z"/><path d="M19 16l-1.5 3.2-3.5.5 2.5 2.5-.6 2L19 22.3l3.1 1.7-.6-2L24 19.5l-3.5-.5z"/></svg>
+            <span>Kostum</span>
+            <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <Footer lang={lang} />
+
+  <Fragment slot="page-scripts">
+    <script is:inline src="/assets/capability-animations.js"></script>
+  </Fragment>
+</BaseLayout>

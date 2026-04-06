@@ -1,0 +1,164 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+import '../../../styles/capability.css';
+
+const lang = 'cn' as const;
+const prefix = '/cn';
+---
+
+<BaseLayout
+  title="遙控車製造 — Royal Regent Toys | 遙控玩具代工廠"
+  description="Royal Regent Toys遙控車製造——SMT電子組件、底盤工程及性能測試。OEM遙控玩具代工廠。PT RRI、PT RRM。"
+  lang="zh-Hant"
+  canonical="https://royalregentgroup.com/cn/capabilities/rc-vehicle.html"
+  ogLocale="zh_TW"
+  ogLocaleAlternates={['en_US', 'id_ID']}
+  dataPage="capabilities-rc-vehicle"
+>
+  <Fragment slot="head-extra">
+    <meta name="keywords" content="Royal Regent Toys, 遙控車, 遙控玩具代工, 遙控車製造, SMT電子, PT RRI, PT RRM, RRI, RRM">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://royalregentgroup.com/cn/" },
+            { "@type": "ListItem", "position": 2, "name": "生產能力", "item": "https://royalregentgroup.com/cn/#capabilities" },
+            { "@type": "ListItem", "position": 3, "name": "遙控車", "item": "https://royalregentgroup.com/cn/capabilities/rc-vehicle.html" }
+          ]
+        },
+        {
+          "@type": "Service",
+          "name": "遙控車製造",
+          "provider": {"@type": "Organization", "name": "Royal Regent Toys", "url": "https://royalregentgroup.com"},
+          "description": "OEM遙控車製造——SMT電子、底盤工程及性能測試。",
+          "url": "https://royalregentgroup.com/cn/capabilities/rc-vehicle.html",
+          "serviceType": "Toy Manufacturing",
+          "areaServed": "Worldwide"
+        }
+      ]
+    })} />
+  </Fragment>
+
+  <Nav lang={lang} />
+
+  <section class="sub-hero" id="subHero">
+    <div class="hero-grid-pattern"></div>
+    <div class="aurora"><div class="aurora-blob"></div><div class="aurora-blob"></div><div class="aurora-blob"></div></div>
+    <div class="sub-hero-content">
+      <div class="breadcrumb" id="heroBreadcrumb">
+        <a href="/cn/">首頁</a><span class="sep">/</span><span>遙控車</span>
+      </div>
+      <span class="sub-hero-tag" id="heroTag">遙控車</span>
+      <h1 class="sub-hero-title" id="heroTitle">遙控<br><span class="text-gradient">車輛</span></h1>
+      <p class="sub-hero-sub" id="heroSub">全面的OEM遙控車製造——從基礎到進階型號——結構強度、控制精度及完整的電子安全認證。</p>
+    </div>
+    <div class="sub-hero-scroll" id="heroScroll"><span>向下滾動</span><div class="scroll-line"></div></div>
+  </section>
+
+  <div class="main-content" id="main-content">
+
+    <section class="editorial">
+      <div class="container">
+        <div class="editorial-watermark">RC</div>
+        <div class="editorial-inner">
+          <div class="editorial-left">
+            <span class="section-label reveal-up">製造概覽</span>
+            <div class="editorial-intro reveal-up">
+              <div class="editorial-intro-line"></div>
+              <div>
+                <p>
+                  <span class="stmt-line">最複雜的產品類別。</span>
+                  <span class="stmt-line">機械與電子結合。</span>
+                  <span class="stmt-line">從概念到認證產品。</span>
+                </p>
+                <div class="stmt-rule"></div>
+              </div>
+            </div>
+          </div>
+          <div class="editorial-right">
+            <div class="editorial-features">
+              <div class="editorial-feat reveal-up">
+                <div class="editorial-feat-num">01</div>
+                <div><h3>廠內SMT電子組件</h3><p>我們專門的表面貼裝技術（SMT）部門在廠內處理電路板組裝和電子集成——使我們能夠完全控制馬達性能、控制反應速度，及確保每一件產品的一致性。</p></div>
+              </div>
+              <div class="editorial-feat reveal-up">
+                <div class="editorial-feat-num">02</div>
+                <div><h3>遊玩耐久性的結構工程</h3><p>多年的遙控車生產經驗完善了我們的底盤和車體結構設計與加強方案。我們的車輛經過壓力測試，能夠承受兒童遙控玩具所需的真實遊玩、搬運和衝擊。</p></div>
+              </div>
+              <div class="editorial-feat reveal-up">
+                <div class="editorial-feat-num">03</div>
+                <div><h3>完整系列能力</h3><p>從簡單的前後操控模型到帶有燈光、聲音及複雜控制系統的進階多功能車輛——我們結合的SMT、塑膠成型和自動化能力讓我們能在一個廠房內處理完整的遙控車系列。</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="photo-panels">
+        <div class="photo-panel">
+          <img src="/assets/electronics-assembly.webp" alt="遙控車製造" loading="lazy" width="1600" height="1066">
+          <div class="photo-panel-overlay"></div>
+          <div class="photo-panel-label"><div class="label-line"></div><span>電子組件組裝</span></div>
+        </div>
+        <div class="photo-panel">
+          <img src="/assets/rc-assembly.webp" alt="遙控電子組裝" loading="lazy" width="1600" height="1066">
+          <div class="photo-panel-overlay"></div>
+          <div class="photo-panel-label"><div class="label-line"></div><span>遙控組裝</span></div>
+        </div>
+        <div class="photo-panel">
+          <img src="/assets/rc-vehicle-testing.webp" alt="遙控車測試" loading="lazy" width="784" height="1168">
+          <div class="photo-panel-overlay"></div>
+          <div class="photo-panel-label"><div class="label-line"></div><span>車輛測試</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="container reveal-up">
+        <h2>準備好討論您的項目了嗎？</h2>
+        <p>告訴我們您的需求，我們的團隊將盡快與您聯繫。</p>
+        <a href="/cn/contact.html" class="btn btn-primary magnetic" data-strength="0.2">聯繫我們 →</a>
+      </div>
+    </section>
+
+    <!-- SEE ALSO -->
+    <section class="see-also">
+      <div class="container">
+        <span class="see-also-label">探索其他生產能力</span>
+        <div class="see-also-grid">
+          <a href="/cn/capabilities/plastic-toys.html" class="see-also-card">
+            <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+            <span>塑膠玩具</span>
+            <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="/cn/capabilities/plush.html" class="see-also-card">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>
+            <span>毛絨玩具</span>
+            <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="/cn/capabilities/dolls.html" class="see-also-card">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <span>娃娃</span>
+            <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="/cn/capabilities/costume.html" class="see-also-card">
+            <svg viewBox="0 0 24 24"><path d="M12 3l1.5 3.2 3.5.5-2.5 2.5.6 3.5L12 11l-3.1 1.7.6-3.5L7 6.7l3.5-.5z"/><path d="M5 16l-1.5 3.2-3.5.5L2.5 22l-.6 2L5 22.3 8.1 24l-.6-2L10 19.5l-3.5-.5z"/><path d="M19 16l-1.5 3.2-3.5.5 2.5 2.5-.6 2L19 22.3l3.1 1.7-.6-2L24 19.5l-3.5-.5z"/></svg>
+            <span>角色服裝</span>
+            <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <Footer lang={lang} />
+
+  <Fragment slot="page-scripts">
+    <script is:inline src="/assets/capability-animations.js"></script>
+  </Fragment>
+</BaseLayout>

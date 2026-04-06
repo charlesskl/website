@@ -1,0 +1,268 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Loader from '../components/Loader.astro';
+import '../styles/home.css';
+
+const lang = 'en' as const;
+const prefix = '';
+
+const milestones = [
+  { year: '1987', text: 'Founded in Sha Tau Kok — the first step in a 39-year manufacturing journey.' },
+  { year: '2000', text: 'First soft toy production line launched — entering plush and costume manufacturing.' },
+  { year: '2010', text: 'Doll production lines integrated sewing craftsmanship with plastic molding technology.' },
+  { year: '2016', text: 'Entered remote control vehicle manufacturing — our highest-complexity category.' },
+  { year: '2023', text: 'Officially entered Indonesia — a key milestone in global supply chain diversification.' },
+  { year: '2025', text: 'Indonesia Phase II commences — strengthening responsiveness to international markets.' },
+];
+
+const marqueeItems = [
+  'RC Car', 'Action Figures', 'Fashion Dolls', 'Baby Dolls', 'Vehicles',
+  'Play Sets', 'Figurines / Collectibles', 'Outdoor Toys', 'Bath Toys',
+  'Spinning Tops', 'Water Guns', 'Blaster', 'Stuffed Plush', 'Character Plush',
+  'Weighted Plush', 'Musical / Sound Plush', 'Interactive Plush', 'Costumes',
+];
+---
+
+<BaseLayout
+  title="Royal Regent Toys — OEM Toy Manufacturer Since 1987"
+  description="Royal Regent Toys — 39 years of OEM toy manufacturing. Plastic toys, plush, dolls, RC vehicles & costumes. Factories in China & Indonesia (PT RRI, PT RRM)."
+  lang="en"
+  canonical="https://royalregentgroup.com/"
+  ogLocale="en_US"
+  ogLocaleAlternates={['zh_TW', 'id_ID']}
+  dataPage="home"
+>
+  <Fragment slot="head-extra">
+    <meta name="keywords" content="Royal Regent Toys, Royal Regent, OEM toy manufacturer, toy factory China, toy factory Indonesia, PT RRI, PT RRM, RRI, RRM, plastic toys, plush toys, dolls, RC vehicles, costumes, toy manufacturing partner">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Royal Regent Toys",
+      "url": "https://royalregentgroup.com",
+      "logo": "https://royalregentgroup.com/assets/logo.webp",
+      "description": "OEM toy manufacturer since 1987. Plastic toys, plush, dolls, RC vehicles & costumes. Factories in China & Indonesia.",
+      "foundingDate": "1987",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Unit 07-08, 12/F, Greenfield Tower, Concordia Plaza, No.1 Science Museum Road",
+        "addressLocality": "Tsim Sha Tsui, Kowloon",
+        "addressCountry": "HK"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+852-2425-0720",
+        "email": "info@royalregenthk.com",
+        "contactType": "sales"
+      },
+      "sameAs": ["https://www.linkedin.com/company/royalregentgroup"]
+    })} />
+  </Fragment>
+
+  <Loader slot="loader" tagline="CRAFTING DREAMS SINCE 1987" />
+
+  <Nav lang={lang} />
+
+  <!-- HERO -->
+  <section class="hero page-reveal" id="hero">
+    <div class="hero-bg">
+      <div class="parallax-layer parallax-bg">
+        <div class="hero-grid-pattern"></div>
+      </div>
+      <div class="parallax-layer parallax-mid">
+        <div class="aurora">
+          <div class="aurora-blob"></div>
+          <div class="aurora-blob"></div>
+          <div class="aurora-blob"></div>
+        </div>
+      </div>
+      <div class="parallax-layer parallax-fg">
+        <canvas id="heroParticles"></canvas>
+      </div>
+    </div>
+
+    <div class="hero-content parallax-layer parallax-headline">
+      <div class="hero-tag" id="heroTag">OEM Toy Manufacturer · Est. 1987</div>
+      <h1 class="hero-title" id="heroTitle">
+        Precision.<br>
+        <span class="text-gradient">Craftsmanship.</span><br>
+        Global Scale.
+      </h1>
+      <p class="hero-sub" id="heroSub">Great manufacturing isn't just about production — it's about partnership. For 39 years, we've worked alongside brands to bring their visions to life, with the craftsmanship, compliance, and consistency the world's most demanding markets expect.</p>
+      <div class="hero-actions" id="heroActions">
+        <a href="/capabilities/plastic-toys.html" class="btn btn-primary magnetic" data-strength="0.2">Explore Capabilities</a>
+        <a href="/about.html" class="btn btn-outline magnetic" data-strength="0.2">Our Story →</a>
+      </div>
+    </div>
+
+    <div class="hero-3d-container" id="hero3dContainer"></div>
+
+    <div class="hero-scroll-hint" id="heroScroll">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee" data-cursor="Drag">
+    <div class="marquee-track" id="marqueeTrack">
+      {[...marqueeItems, ...marqueeItems].map((item) => (
+        <span class="marquee-item">{item} <span class="marquee-dot"></span></span>
+      ))}
+    </div>
+  </div>
+
+  <!-- Main content wrapper (for footer reveal) -->
+  <div class="main-content" id="main-content">
+
+    <!-- INTRO STATEMENT -->
+    <section class="intro-statement clip-section" id="introStatement">
+      <div class="statement-grid">
+        <div class="statement-left">
+          <div class="statement-line" id="stmtLine"></div>
+          <div class="statement-content">
+            <p class="statement-text">
+              <span class="stmt-line">Built on trust.</span>
+              <span class="stmt-line">Refined over decades.</span>
+              <span class="stmt-line">Ready for what you need next.</span>
+            </p>
+            <div class="statement-rule" id="stmtRule"></div>
+          </div>
+        </div>
+        <div class="statement-accent" id="stmtAccent">1987</div>
+      </div>
+    </section>
+
+    <!-- CAPABILITIES -->
+    <section class="caps-section clip-section" id="capsSection">
+      <div class="container">
+        <div class="section-label reveal-up">Manufacturing Capabilities</div>
+        <h2 class="section-title reveal-up">Five categories.<br><span>One trusted partner.</span></h2>
+      </div>
+
+      <div class="container">
+        <div class="caps-grid" id="capsGrid">
+          <a href="/capabilities/plastic-toys.html" class="cap-card" data-cap="plastic">
+            <div class="cap-card-bg">
+              <img src="/assets/images/stock/cap-plastic-bg.webp" alt="Colorful plastic toy bricks" loading="lazy" width="800" height="500">
+            </div>
+            <div class="cap-card-img">
+              <img src="/assets/images/stock/cap-plastic-fg.webp" alt="Colorful plastic toy figures" loading="lazy" width="600" height="400">
+            </div>
+            <div class="cap-card-info">
+              <div class="cap-card-name">Plastic Toys</div>
+              <div class="cap-card-link">Explore this capability <span>→</span></div>
+            </div>
+          </a>
+
+          <a href="/capabilities/plush.html" class="cap-card" data-cap="plush">
+            <div class="cap-card-bg">
+              <img src="/assets/images/stock/cap-plush-bg.webp" alt="Plush toy workshop" loading="lazy" width="800" height="533">
+            </div>
+            <div class="cap-card-img">
+              <img src="/assets/images/stock/cap-plush-fg.webp" alt="Plush teddy bear" loading="lazy" width="600" height="900">
+            </div>
+            <div class="cap-card-info">
+              <div class="cap-card-name">Plush</div>
+              <div class="cap-card-link">Explore this capability <span>→</span></div>
+            </div>
+          </a>
+
+          <a href="/capabilities/dolls.html" class="cap-card" data-cap="dolls">
+            <div class="cap-card-bg">
+              <img src="/assets/images/stock/cap-dolls-bg.webp" alt="Doll manufacturing" loading="lazy" width="800" height="1200">
+            </div>
+            <div class="cap-card-img">
+              <img src="/assets/images/stock/cap-dolls-fg.webp" alt="Fashion dolls" loading="lazy" width="600" height="401">
+            </div>
+            <div class="cap-card-info">
+              <div class="cap-card-name">Dolls</div>
+              <div class="cap-card-link">Explore this capability <span>→</span></div>
+            </div>
+          </a>
+
+          <a href="/capabilities/rc-vehicle.html" class="cap-card" data-cap="rc">
+            <div class="cap-card-bg">
+              <img src="/assets/images/stock/cap-rc-bg.webp" alt="RC vehicle parts" loading="lazy" width="800" height="533">
+            </div>
+            <div class="cap-card-img">
+              <img src="/assets/images/stock/cap-rc-fg.webp" alt="Toy RC car" loading="lazy" width="600" height="338">
+            </div>
+            <div class="cap-card-info">
+              <div class="cap-card-name">RC Vehicles</div>
+              <div class="cap-card-link">Explore this capability <span>→</span></div>
+            </div>
+          </a>
+
+          <a href="/capabilities/costume.html" class="cap-card" data-cap="costumes">
+            <div class="cap-card-bg">
+              <img src="/assets/images/stock/cap-costumes-bg.webp" alt="Costume display" loading="lazy" width="800" height="533">
+            </div>
+            <div class="cap-card-img">
+              <img src="/assets/images/stock/cap-costumes-fg.webp" alt="Child in superhero costume" loading="lazy" width="600" height="401">
+            </div>
+            <div class="cap-card-info">
+              <div class="cap-card-name">Costumes</div>
+              <div class="cap-card-link">Explore this capability <span>→</span></div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- HISTORY -->
+    <section class="history-section clip-section" id="historySection" data-milestones={JSON.stringify(milestones)}>
+      <div class="history-bg" id="historyBg">
+        <img src="/assets/images/stock/history-bg.webp" alt="Child playing with toys" loading="lazy" width="1920" height="2891">
+      </div>
+
+      <div class="history-top">
+        <h2 class="history-heading">Development history</h2>
+      </div>
+
+      <div class="history-center">
+        <div class="history-watermark" id="historyWatermark">1987</div>
+        <div class="history-milestone" id="historyMilestone">
+          <p>Founded in Sha Tau Kok — the first step in a 39-year manufacturing journey.</p>
+        </div>
+      </div>
+
+      <div class="history-scroll-progress">
+        <div class="history-scroll-fill" id="historyScrollFill"></div>
+      </div>
+
+      <div class="history-scroll-hint" id="historyScrollHint">
+        <span>Scroll to explore</span>
+        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+
+      <div class="history-timeline">
+        <div class="timeline-track" id="timelineTrack">
+          {milestones.map((m, i) => (
+            <button class={`timeline-node${i === 0 ? ' active' : ''}`} data-index={i}>
+              <div class="timeline-dot"><span>{m.year}</span></div>
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section class="cta-banner clip-section" data-reveal>
+      <div class="container">
+        <h2>Ready to bring your next product to life?</h2>
+        <p>39 years of OEM manufacturing expertise, four production sites, one consistent standard.</p>
+        <a href="/contact.html" class="btn btn-primary magnetic" data-strength="0.2">Start a Conversation</a>
+      </div>
+    </section>
+
+  </div>
+
+  <Footer lang={lang} />
+
+  <Fragment slot="page-scripts">
+    <script is:inline src="/assets/home-canvas.js"></script>
+    <script is:inline src="/assets/home-animations.js"></script>
+  </Fragment>
+</BaseLayout>

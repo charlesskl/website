@@ -1,0 +1,268 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import Loader from '../../components/Loader.astro';
+import '../../styles/home.css';
+
+const lang = 'cn' as const;
+const prefix = '/cn';
+
+const milestones = [
+  { year: '1987', text: '創立於沙頭角——39年製造歷程的第一步。' },
+  { year: '2000', text: '首條毛絨玩具生產線投產——進入毛絨玩具和服裝製造領域。' },
+  { year: '2010', text: '娃娃生產線將縫紉工藝與塑膠成型技術相結合。' },
+  { year: '2016', text: '進入遙控車製造——我們複雜度最高的產品品類。' },
+  { year: '2023', text: '正式進入印尼——全球供應鏈多元化的重要里程碑。' },
+  { year: '2025', text: '印尼二期工程啟動——增強對國際市場的響應能力。' },
+];
+
+const marqueeItems = [
+  '遙控車', '可動人偶', '時裝娃娃', '嬰兒娃娃', '車輛',
+  '遊戲套裝', '公仔 / 收藏品', '戶外玩具', '水上玩具',
+  '水槍', '橡膠子彈槍', '普通毛絨', '卡通毛絨',
+  '加重毛絨', '發聲毛絨', '機芯毛絨', '角色服裝',
+];
+---
+
+<BaseLayout
+  title="Royal Regent Toys — 自1987年的OEM玩具製造商 | 玩具代工廠"
+  description="Royal Regent Toys — 39年OEM玩具製造經驗。塑膠玩具、毛絨玩具、娃娃、遙控車及服裝代工。中國（東莞、河源、湖南）及印尼（PT RRI、PT RRM）生產基地。"
+  lang="zh-Hant"
+  canonical="https://royalregentgroup.com/cn/"
+  ogLocale="zh_TW"
+  ogLocaleAlternates={['en_US', 'id_ID']}
+  dataPage="home"
+>
+  <Fragment slot="head-extra">
+    <meta name="keywords" content="Royal Regent Toys, OEM玩具製造商, 玩具代工廠, 香港玩具製造, 東莞玩具工廠, PT RRI, PT RRM, RRI, RRM, 塑膠玩具, 毛絨玩具, 娃娃代工, 遙控車製造">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Royal Regent Toys",
+      "url": "https://royalregentgroup.com",
+      "logo": "https://royalregentgroup.com/assets/logo.webp",
+      "description": "自1987年起的OEM玩具製造商。塑膠玩具、毛絨玩具、娃娃、遙控車及服裝。中國及印尼工廠。",
+      "foundingDate": "1987",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Unit 07-08, 12/F, Greenfield Tower, Concordia Plaza, No.1 Science Museum Road",
+        "addressLocality": "Tsim Sha Tsui, Kowloon",
+        "addressCountry": "HK"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+852-2425-0720",
+        "email": "info@royalregenthk.com",
+        "contactType": "sales"
+      },
+      "sameAs": ["https://www.linkedin.com/company/royalregentgroup"]
+    })} />
+  </Fragment>
+
+  <Loader slot="loader" tagline="CRAFTING DREAMS SINCE 1987" />
+
+  <Nav lang={lang} />
+
+  <!-- HERO -->
+  <section class="hero page-reveal" id="hero">
+    <div class="hero-bg">
+      <div class="parallax-layer parallax-bg">
+        <div class="hero-grid-pattern"></div>
+      </div>
+      <div class="parallax-layer parallax-mid">
+        <div class="aurora">
+          <div class="aurora-blob"></div>
+          <div class="aurora-blob"></div>
+          <div class="aurora-blob"></div>
+        </div>
+      </div>
+      <div class="parallax-layer parallax-fg">
+        <canvas id="heroParticles"></canvas>
+      </div>
+    </div>
+
+    <div class="hero-content parallax-layer parallax-headline">
+      <div class="hero-tag" id="heroTag">OEM玩具製造商 · 創立於1987年</div>
+      <h1 class="hero-title" id="heroTitle">
+        精密。<br>
+        <span class="text-gradient">匠心。</span><br>
+        全球規模。
+      </h1>
+      <p class="hero-sub" id="heroSub">卓越的製造不僅僅是生產——更是夥伴關係。39年來，我們與品牌方並肩合作，將願景變為現實，以全球最嚴格市場所期望的工藝、合規性和一致性，打造每一件產品。</p>
+      <div class="hero-actions" id="heroActions">
+        <a href={`${prefix}/capabilities/plastic-toys.html`} class="btn btn-primary magnetic" data-strength="0.2">探索生產能力</a>
+        <a href={`${prefix}/about.html`} class="btn btn-outline magnetic" data-strength="0.2">我們的故事 →</a>
+      </div>
+    </div>
+
+    <div class="hero-3d-container" id="hero3dContainer"></div>
+
+    <div class="hero-scroll-hint" id="heroScroll">
+      <span>向下滾動</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee" data-cursor="Drag">
+    <div class="marquee-track" id="marqueeTrack">
+      {[...marqueeItems, ...marqueeItems].map((item) => (
+        <span class="marquee-item">{item} <span class="marquee-dot"></span></span>
+      ))}
+    </div>
+  </div>
+
+  <!-- Main content wrapper -->
+  <div class="main-content" id="main-content">
+
+    <!-- INTRO STATEMENT -->
+    <section class="intro-statement clip-section" id="introStatement">
+      <div class="statement-grid">
+        <div class="statement-left">
+          <div class="statement-line" id="stmtLine"></div>
+          <div class="statement-content">
+            <p class="statement-text">
+              <span class="stmt-line">建立於信任之上。</span>
+              <span class="stmt-line">歷經數十年精煉。</span>
+              <span class="stmt-line">隨時滿足您的下一個需求。</span>
+            </p>
+            <div class="statement-rule" id="stmtRule"></div>
+          </div>
+        </div>
+        <div class="statement-accent" id="stmtAccent">1987</div>
+      </div>
+    </section>
+
+    <!-- CAPABILITIES -->
+    <section class="caps-section clip-section" id="capsSection">
+      <div class="container">
+        <div class="section-label reveal-up">製造能力</div>
+        <h2 class="section-title reveal-up">五大品類。<br><span>一個值得信賴的夥伴。</span></h2>
+      </div>
+
+      <div class="container">
+        <div class="caps-grid" id="capsGrid">
+          <a href={`${prefix}/capabilities/plastic-toys.html`} class="cap-card" data-cap="plastic">
+            <div class="cap-card-bg">
+              <img src="/assets/images/stock/cap-plastic-bg.webp" alt="彩色塑膠玩具積木" loading="lazy" width="800" height="500">
+            </div>
+            <div class="cap-card-img">
+              <img src="/assets/images/stock/cap-plastic-fg.webp" alt="彩色塑膠玩具人偶" loading="lazy" width="600" height="400">
+            </div>
+            <div class="cap-card-info">
+              <div class="cap-card-name">塑膠玩具</div>
+              <div class="cap-card-link">探索此能力 <span>→</span></div>
+            </div>
+          </a>
+
+          <a href={`${prefix}/capabilities/plush.html`} class="cap-card" data-cap="plush">
+            <div class="cap-card-bg">
+              <img src="/assets/images/stock/cap-plush-bg.webp" alt="毛絨玩具工坊" loading="lazy" width="800" height="533">
+            </div>
+            <div class="cap-card-img">
+              <img src="/assets/images/stock/cap-plush-fg.webp" alt="毛絨泰迪熊" loading="lazy" width="600" height="900">
+            </div>
+            <div class="cap-card-info">
+              <div class="cap-card-name">毛絨玩具</div>
+              <div class="cap-card-link">探索此能力 <span>→</span></div>
+            </div>
+          </a>
+
+          <a href={`${prefix}/capabilities/dolls.html`} class="cap-card" data-cap="dolls">
+            <div class="cap-card-bg">
+              <img src="/assets/images/stock/cap-dolls-bg.webp" alt="娃娃製造" loading="lazy" width="800" height="1200">
+            </div>
+            <div class="cap-card-img">
+              <img src="/assets/images/stock/cap-dolls-fg.webp" alt="時裝娃娃" loading="lazy" width="600" height="401">
+            </div>
+            <div class="cap-card-info">
+              <div class="cap-card-name">娃娃</div>
+              <div class="cap-card-link">探索此能力 <span>→</span></div>
+            </div>
+          </a>
+
+          <a href={`${prefix}/capabilities/rc-vehicle.html`} class="cap-card" data-cap="rc">
+            <div class="cap-card-bg">
+              <img src="/assets/images/stock/cap-rc-bg.webp" alt="遙控車零件" loading="lazy" width="800" height="533">
+            </div>
+            <div class="cap-card-img">
+              <img src="/assets/images/stock/cap-rc-fg.webp" alt="玩具遙控車" loading="lazy" width="600" height="338">
+            </div>
+            <div class="cap-card-info">
+              <div class="cap-card-name">遙控車</div>
+              <div class="cap-card-link">探索此能力 <span>→</span></div>
+            </div>
+          </a>
+
+          <a href={`${prefix}/capabilities/costume.html`} class="cap-card" data-cap="costumes">
+            <div class="cap-card-bg">
+              <img src="/assets/images/stock/cap-costumes-bg.webp" alt="服裝展示" loading="lazy" width="800" height="533">
+            </div>
+            <div class="cap-card-img">
+              <img src="/assets/images/stock/cap-costumes-fg.webp" alt="穿超級英雄服裝的兒童" loading="lazy" width="600" height="401">
+            </div>
+            <div class="cap-card-info">
+              <div class="cap-card-name">角色服裝</div>
+              <div class="cap-card-link">探索此能力 <span>→</span></div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- HISTORY -->
+    <section class="history-section clip-section" id="historySection" data-milestones={JSON.stringify(milestones)}>
+      <div class="history-bg" id="historyBg">
+        <img src="/assets/images/stock/history-bg.webp" alt="兒童玩玩具" loading="lazy" width="1920" height="2891">
+      </div>
+
+      <div class="history-top">
+        <h2 class="history-heading">發展歷程</h2>
+      </div>
+
+      <div class="history-center">
+        <div class="history-watermark" id="historyWatermark">1987</div>
+        <div class="history-milestone" id="historyMilestone">
+          <p>創立於沙頭角——39年製造歷程的第一步。</p>
+        </div>
+      </div>
+
+      <div class="history-scroll-progress">
+        <div class="history-scroll-fill" id="historyScrollFill"></div>
+      </div>
+
+      <div class="history-scroll-hint" id="historyScrollHint">
+        <span>滾動瀏覽</span>
+        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+
+      <div class="history-timeline">
+        <div class="timeline-track" id="timelineTrack">
+          {milestones.map((m, i) => (
+            <button class={`timeline-node${i === 0 ? ' active' : ''}`} data-index={i}>
+              <div class="timeline-dot"><span>{m.year}</span></div>
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section class="cta-banner clip-section" data-reveal>
+      <div class="container">
+        <h2>準備好打造您的下一個產品了嗎？</h2>
+        <p>39年OEM製造專業，四個生產基地，一貫嚴格標準。</p>
+        <a href={`${prefix}/contact.html`} class="btn btn-primary magnetic" data-strength="0.2">立即聯繫</a>
+      </div>
+    </section>
+
+  </div>
+
+  <Footer lang={lang} />
+
+  <Fragment slot="page-scripts">
+    <script is:inline src="/assets/home-canvas.js"></script>
+    <script is:inline src="/assets/home-animations.js"></script>
+  </Fragment>
+</BaseLayout>

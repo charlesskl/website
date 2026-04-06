@@ -1,0 +1,268 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import Loader from '../../components/Loader.astro';
+import '../../styles/home.css';
+
+const lang = 'id' as const;
+const prefix = '/id';
+
+const milestones = [
+  { year: '1987', text: 'Didirikan di Sha Tau Kok — langkah pertama dalam perjalanan manufaktur selama 39 tahun.' },
+  { year: '2000', text: 'Lini produksi mainan lunak pertama diluncurkan — memasuki manufaktur plush dan kostum.' },
+  { year: '2010', text: 'Lini produksi boneka mengintegrasikan keahlian menjahit dengan teknologi cetakan plastik.' },
+  { year: '2016', text: 'Memasuki manufaktur kendaraan remote control — kategori dengan kompleksitas tertinggi kami.' },
+  { year: '2023', text: 'Resmi memasuki Indonesia — tonggak penting dalam diversifikasi rantai pasok global.' },
+  { year: '2025', text: 'Fase II Indonesia dimulai — memperkuat daya tanggap terhadap pasar internasional.' },
+];
+
+const marqueeItems = [
+  'Mobil RC', 'Figur Aksi', 'Boneka Fashion', 'Boneka Bayi', 'Kendaraan',
+  'Set Permainan', 'Figur / Koleksi', 'Mainan Luar Ruangan', 'Mainan Mandi',
+  'Gasing', 'Pistol Air', 'Blaster', 'Boneka Plush Isi', 'Plush Karakter',
+  'Plush Berbobot', 'Plush Musik / Suara', 'Plush Interaktif', 'Kostum',
+];
+---
+
+<BaseLayout
+  title="Royal Regent Toys — Produsen Mainan OEM Sejak 1987"
+  description="Royal Regent Toys — 39 tahun pengalaman manufaktur mainan OEM. Mainan plastik, plush, boneka, kendaraan RC & kostum. Pabrik di Tiongkok & Indonesia (PT RRI, PT RRM)."
+  lang="id"
+  canonical="https://royalregentgroup.com/id/"
+  ogLocale="id_ID"
+  ogLocaleAlternates={['en_US', 'zh_TW']}
+  dataPage="home"
+>
+  <Fragment slot="head-extra">
+    <meta name="keywords" content="Royal Regent Toys, produsen mainan OEM, pabrik mainan Indonesia, PT RRI, PT RRM, mainan plastik, boneka plush, boneka, kendaraan RC, kostum, mitra manufaktur mainan">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Royal Regent Toys",
+      "url": "https://royalregentgroup.com",
+      "logo": "https://royalregentgroup.com/assets/logo.webp",
+      "description": "Produsen mainan OEM sejak 1987. Mainan plastik, plush, boneka, kendaraan RC & kostum. Pabrik di Tiongkok & Indonesia.",
+      "foundingDate": "1987",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Unit 07-08, 12/F, Greenfield Tower, Concordia Plaza, No.1 Science Museum Road",
+        "addressLocality": "Tsim Sha Tsui, Kowloon",
+        "addressCountry": "HK"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+852-2425-0720",
+        "email": "info@royalregenthk.com",
+        "contactType": "sales"
+      },
+      "sameAs": ["https://www.linkedin.com/company/royalregentgroup"]
+    })} />
+  </Fragment>
+
+  <Loader slot="loader" tagline="CRAFTING DREAMS SINCE 1987" />
+
+  <Nav lang={lang} />
+
+  <!-- HERO -->
+  <section class="hero page-reveal" id="hero">
+    <div class="hero-bg">
+      <div class="parallax-layer parallax-bg">
+        <div class="hero-grid-pattern"></div>
+      </div>
+      <div class="parallax-layer parallax-mid">
+        <div class="aurora">
+          <div class="aurora-blob"></div>
+          <div class="aurora-blob"></div>
+          <div class="aurora-blob"></div>
+        </div>
+      </div>
+      <div class="parallax-layer parallax-fg">
+        <canvas id="heroParticles"></canvas>
+      </div>
+    </div>
+
+    <div class="hero-content parallax-layer parallax-headline">
+      <div class="hero-tag" id="heroTag">Produsen Mainan OEM · Berdiri 1987</div>
+      <h1 class="hero-title" id="heroTitle">
+        Presisi.<br>
+        <span class="text-gradient">Keahlian.</span><br>
+        Skala Global.
+      </h1>
+      <p class="hero-sub" id="heroSub">Manufaktur hebat bukan hanya soal produksi — melainkan tentang kemitraan. Selama 39 tahun, kami bekerja bersama merek-merek untuk mewujudkan visi mereka, dengan keahlian, kepatuhan, dan konsistensi yang diharapkan oleh pasar paling menuntut di dunia.</p>
+      <div class="hero-actions" id="heroActions">
+        <a href={`${prefix}/capabilities/plastic-toys.html`} class="btn btn-primary magnetic" data-strength="0.2">Jelajahi Kapabilitas</a>
+        <a href={`${prefix}/about.html`} class="btn btn-outline magnetic" data-strength="0.2">Kisah Kami →</a>
+      </div>
+    </div>
+
+    <div class="hero-3d-container" id="hero3dContainer"></div>
+
+    <div class="hero-scroll-hint" id="heroScroll">
+      <span>Gulir</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee" data-cursor="Drag">
+    <div class="marquee-track" id="marqueeTrack">
+      {[...marqueeItems, ...marqueeItems].map((item) => (
+        <span class="marquee-item">{item} <span class="marquee-dot"></span></span>
+      ))}
+    </div>
+  </div>
+
+  <!-- Main content wrapper -->
+  <div class="main-content" id="main-content">
+
+    <!-- INTRO STATEMENT -->
+    <section class="intro-statement clip-section" id="introStatement">
+      <div class="statement-grid">
+        <div class="statement-left">
+          <div class="statement-line" id="stmtLine"></div>
+          <div class="statement-content">
+            <p class="statement-text">
+              <span class="stmt-line">Dibangun atas kepercayaan.</span>
+              <span class="stmt-line">Disempurnakan selama puluhan tahun.</span>
+              <span class="stmt-line">Siap untuk kebutuhan Anda selanjutnya.</span>
+            </p>
+            <div class="statement-rule" id="stmtRule"></div>
+          </div>
+        </div>
+        <div class="statement-accent" id="stmtAccent">1987</div>
+      </div>
+    </section>
+
+    <!-- CAPABILITIES -->
+    <section class="caps-section clip-section" id="capsSection">
+      <div class="container">
+        <div class="section-label reveal-up">Kapabilitas Manufaktur</div>
+        <h2 class="section-title reveal-up">Lima kategori.<br><span>Satu mitra terpercaya.</span></h2>
+      </div>
+
+      <div class="container">
+        <div class="caps-grid" id="capsGrid">
+          <a href={`${prefix}/capabilities/plastic-toys.html`} class="cap-card" data-cap="plastic">
+            <div class="cap-card-bg">
+              <img src="/assets/images/stock/cap-plastic-bg.webp" alt="Batu bata mainan plastik berwarna-warni" loading="lazy" width="800" height="500">
+            </div>
+            <div class="cap-card-img">
+              <img src="/assets/images/stock/cap-plastic-fg.webp" alt="Figur mainan plastik berwarna-warni" loading="lazy" width="600" height="400">
+            </div>
+            <div class="cap-card-info">
+              <div class="cap-card-name">Mainan Plastik</div>
+              <div class="cap-card-link">Jelajahi kapabilitas ini <span>→</span></div>
+            </div>
+          </a>
+
+          <a href={`${prefix}/capabilities/plush.html`} class="cap-card" data-cap="plush">
+            <div class="cap-card-bg">
+              <img src="/assets/images/stock/cap-plush-bg.webp" alt="Bengkel boneka plush" loading="lazy" width="800" height="533">
+            </div>
+            <div class="cap-card-img">
+              <img src="/assets/images/stock/cap-plush-fg.webp" alt="Boneka beruang plush" loading="lazy" width="600" height="900">
+            </div>
+            <div class="cap-card-info">
+              <div class="cap-card-name">Boneka Plush</div>
+              <div class="cap-card-link">Jelajahi kapabilitas ini <span>→</span></div>
+            </div>
+          </a>
+
+          <a href={`${prefix}/capabilities/dolls.html`} class="cap-card" data-cap="dolls">
+            <div class="cap-card-bg">
+              <img src="/assets/images/stock/cap-dolls-bg.webp" alt="Manufaktur boneka" loading="lazy" width="800" height="1200">
+            </div>
+            <div class="cap-card-img">
+              <img src="/assets/images/stock/cap-dolls-fg.webp" alt="Boneka fashion" loading="lazy" width="600" height="401">
+            </div>
+            <div class="cap-card-info">
+              <div class="cap-card-name">Boneka</div>
+              <div class="cap-card-link">Jelajahi kapabilitas ini <span>→</span></div>
+            </div>
+          </a>
+
+          <a href={`${prefix}/capabilities/rc-vehicle.html`} class="cap-card" data-cap="rc">
+            <div class="cap-card-bg">
+              <img src="/assets/images/stock/cap-rc-bg.webp" alt="Komponen kendaraan RC" loading="lazy" width="800" height="533">
+            </div>
+            <div class="cap-card-img">
+              <img src="/assets/images/stock/cap-rc-fg.webp" alt="Mobil RC mainan" loading="lazy" width="600" height="338">
+            </div>
+            <div class="cap-card-info">
+              <div class="cap-card-name">Kendaraan RC</div>
+              <div class="cap-card-link">Jelajahi kapabilitas ini <span>→</span></div>
+            </div>
+          </a>
+
+          <a href={`${prefix}/capabilities/costume.html`} class="cap-card" data-cap="costumes">
+            <div class="cap-card-bg">
+              <img src="/assets/images/stock/cap-costumes-bg.webp" alt="Pameran kostum" loading="lazy" width="800" height="533">
+            </div>
+            <div class="cap-card-img">
+              <img src="/assets/images/stock/cap-costumes-fg.webp" alt="Anak mengenakan kostum superhero" loading="lazy" width="600" height="401">
+            </div>
+            <div class="cap-card-info">
+              <div class="cap-card-name">Kostum</div>
+              <div class="cap-card-link">Jelajahi kapabilitas ini <span>→</span></div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- HISTORY -->
+    <section class="history-section clip-section" id="historySection" data-milestones={JSON.stringify(milestones)}>
+      <div class="history-bg" id="historyBg">
+        <img src="/assets/images/stock/history-bg.webp" alt="Anak bermain dengan mainan" loading="lazy" width="1920" height="2891">
+      </div>
+
+      <div class="history-top">
+        <h2 class="history-heading">Sejarah perkembangan</h2>
+      </div>
+
+      <div class="history-center">
+        <div class="history-watermark" id="historyWatermark">1987</div>
+        <div class="history-milestone" id="historyMilestone">
+          <p>Didirikan di Sha Tau Kok — langkah pertama dalam perjalanan manufaktur selama 39 tahun.</p>
+        </div>
+      </div>
+
+      <div class="history-scroll-progress">
+        <div class="history-scroll-fill" id="historyScrollFill"></div>
+      </div>
+
+      <div class="history-scroll-hint" id="historyScrollHint">
+        <span>Gulir untuk menjelajahi</span>
+        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+
+      <div class="history-timeline">
+        <div class="timeline-track" id="timelineTrack">
+          {milestones.map((m, i) => (
+            <button class={`timeline-node${i === 0 ? ' active' : ''}`} data-index={i}>
+              <div class="timeline-dot"><span>{m.year}</span></div>
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section class="cta-banner clip-section" data-reveal>
+      <div class="container">
+        <h2>Siap mewujudkan produk Anda berikutnya?</h2>
+        <p>39 tahun keahlian manufaktur OEM, empat lokasi produksi, satu standar konsisten.</p>
+        <a href={`${prefix}/contact.html`} class="btn btn-primary magnetic" data-strength="0.2">Mulai Percakapan</a>
+      </div>
+    </section>
+
+  </div>
+
+  <Footer lang={lang} />
+
+  <Fragment slot="page-scripts">
+    <script is:inline src="/assets/home-canvas.js"></script>
+    <script is:inline src="/assets/home-animations.js"></script>
+  </Fragment>
+</BaseLayout>

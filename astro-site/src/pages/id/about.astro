@@ -1,0 +1,154 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/about.css';
+
+const lang = 'id' as const;
+const prefix = '/id';
+
+const milestones = [
+  { year: '1987', text: 'Perusahaan didirikan di Sha Tau Kok, menandai awal resmi perjalanannya dalam dunia manufaktur.' },
+  { year: '1990', text: 'Pindah ke Longhua, secara signifikan memperluas skala produksi.' },
+  { year: '1997', text: 'Memperluas operasi ke Dongguan untuk memenuhi permintaan pasar yang tumbuh pesat.' },
+  { year: '2000', text: 'Penyelesaian dan commissioning ekspansi pabrik Dongguan, memperkenalkan lini produksi mainan plush dan kostum serta menandai masuknya perusahaan pertama kali ke manufaktur mainan lunak.' },
+  { year: '2003', text: 'Memperluas jejak manufaktur ke Heyuan, membangun operasi multi-lokasi untuk meningkatkan ketahanan rantai pasok.' },
+  { year: '2005', text: 'Penyelesaian ekspansi pabrik Heyuan, secara efektif mendukung diversifikasi lini produk dan peningkatan kapasitas.' },
+  { year: '2010', text: 'Meluncurkan lini produksi boneka, mengintegrasikan keahlian menjahit dengan teknologi cetakan plastik.' },
+  { year: '2016', text: 'Memasuki manufaktur kendaraan remote control, menangani persyaratan teknis yang lebih tinggi dan meningkatkan kemampuan dalam kompleksitas struktural dan integrasi elektronik.' },
+  { year: '2018', text: 'Memperluas produksi ke Hunan, secara signifikan meningkatkan kapasitas manufaktur secara keseluruhan.' },
+  { year: '2023', text: 'Resmi memasuki pasar Indonesia, menandai tonggak penting dalam strategi ekspansi global perusahaan dan mendorong diversifikasi rantai pasok.' },
+  { year: '2025', text: 'Fase II pabrik Indonesia mulai beroperasi, lebih memperluas kapasitas produksi regional dan memperkuat daya tanggap terhadap pasar internasional.' },
+];
+---
+
+<BaseLayout
+  title="Tentang Royal Regent Toys — Produsen Mainan OEM | PT RRI, PT RRM"
+  description="Royal Regent Toys — perjalanan 39 tahun dari bengkel di Hong Kong hingga produsen mainan global. Pabrik di Tiongkok & Indonesia (PT RRI, PT RRM). Bersertifikat EN 71 & ASTM F963."
+  lang="id"
+  canonical="https://royalregentgroup.com/id/about.html"
+  ogLocale="id_ID"
+  ogLocaleAlternates={['en_US', 'zh_TW']}
+  dataPage="about"
+>
+  <Fragment slot="head-extra">
+    <meta name="keywords" content="Royal Regent Toys, tentang Royal Regent, produsen mainan sejak 1987, PT RRI, PT RRM, RRI, RRM, EN 71, ASTM F963, sejarah pabrik mainan">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://royalregentgroup.com/id/" },
+            { "@type": "ListItem", "position": 2, "name": "Tentang Kami", "item": "https://royalregentgroup.com/id/about.html" }
+          ]
+        },
+        {
+          "@type": "Organization",
+          "name": "Royal Regent Toys",
+          "url": "https://royalregentgroup.com",
+          "logo": "https://royalregentgroup.com/assets/logo.webp",
+          "description": "Produsen mainan OEM sejak 1987. Mainan plastik, boneka plush, boneka, kendaraan RC & kostum. Pabrik di Tiongkok & Indonesia.",
+          "foundingDate": "1987",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Unit 07-08, 12/F, Greenfield Tower, Concordia Plaza, No.1 Science Museum Road",
+            "addressLocality": "Tsim Sha Tsui, Kowloon",
+            "addressCountry": "HK"
+          },
+          "numberOfEmployees": {
+            "@type": "QuantitativeValue",
+            "minValue": 1000,
+            "maxValue": 5000
+          },
+          "sameAs": ["https://www.linkedin.com/company/royalregentgroup"]
+        }
+      ]
+    })} />
+  </Fragment>
+
+  <Nav lang={lang} />
+
+  <!-- HERO -->
+  <section class="about-hero" id="aboutHero">
+    <div class="hero-grid-pattern"></div>
+    <div class="aurora">
+      <div class="aurora-blob"></div>
+      <div class="aurora-blob"></div>
+      <div class="aurora-blob"></div>
+    </div>
+
+    <div class="about-hero-content">
+      <span class="about-hero-tag" id="aboutTag">Kisah Kami</span>
+      <h1 class="about-hero-title" id="aboutTitle">39 tahun<br><span class="text-gradient">keahlian.</span></h1>
+      <p class="about-hero-sub" id="aboutSub">Dari sebuah bengkel kecil di Sha Tau Kok, Hong Kong, Royal Regent telah berkembang menjadi produsen mainan OEM multi-lokasi yang dipercaya oleh merek-merek global terkemuka — menghadirkan mainan yang aman, sesuai standar, dan direkayasa dengan presisi dari Tiongkok dan Indonesia ke pasar di seluruh dunia.</p>
+    </div>
+
+    <div class="about-hero-scroll" id="aboutScroll">
+      <span>Gulir</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Main content wrapper (for footer reveal) -->
+  <div class="main-content" id="main-content">
+
+    <!-- INTRO STATEMENT -->
+    <section class="intro-statement clip-section" id="introStatement">
+      <div class="statement-grid">
+        <div class="statement-left">
+          <div class="statement-line" id="stmtLine"></div>
+          <div class="statement-content">
+            <p class="statement-text">
+              <span class="stmt-line">Kemitraan di atas produksi.</span>
+              <span class="stmt-line">Disempurnakan selama 39 tahun.</span>
+              <span class="stmt-line">Siap untuk kebutuhan Anda selanjutnya.</span>
+            </p>
+            <div class="statement-rule" id="stmtRule"></div>
+          </div>
+        </div>
+        <div class="statement-accent" id="stmtAccent">1987</div>
+      </div>
+    </section>
+
+    <!-- HISTORY — Interactive timeline -->
+    <section class="history-section" id="historySection" data-milestones={JSON.stringify(milestones)}>
+      <div class="history-top">
+        <h2 class="history-heading">Sejarah perkembangan</h2>
+      </div>
+
+      <div class="history-center">
+        <div class="history-watermark" id="historyWatermark">1987</div>
+        <div class="history-milestone" id="historyMilestone">
+          <p>Perusahaan didirikan di Sha Tau Kok, menandai awal resmi perjalanannya dalam dunia manufaktur.</p>
+        </div>
+      </div>
+
+      <div class="history-scroll-progress">
+        <div class="history-scroll-fill" id="historyScrollFill"></div>
+      </div>
+
+      <div class="history-scroll-hint" id="historyScrollHint">
+        <span>Gulir untuk menjelajahi</span>
+        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+
+      <div class="history-timeline">
+        <div class="timeline-track" id="timelineTrack">
+          {milestones.map((m, i) => (
+            <button class={`timeline-node${i === 0 ? ' active' : ''}`} data-index={i}>
+              <div class="timeline-dot"><span>{m.year}</span></div>
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <Footer lang={lang} />
+
+  <Fragment slot="page-scripts">
+    <script is:inline src="/assets/about-animations.js"></script>
+  </Fragment>
+</BaseLayout>

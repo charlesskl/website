@@ -1,0 +1,154 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/about.css';
+
+const lang = 'en' as const;
+const prefix = '';
+
+const milestones = [
+  { year: '1987', text: 'The company was founded in Sha Tau Kok, marking the official beginning of its journey in manufacturing.' },
+  { year: '1990', text: 'Relocated to Longhua, significantly expanding production scale.' },
+  { year: '1997', text: 'Expanded operations to Dongguan to meet rapidly growing market demand.' },
+  { year: '2000', text: 'Completion and commissioning of the Dongguan factory expansion, introducing plush toys and costume production lines and marking the company\u2019s first entry into soft toy manufacturing.' },
+  { year: '2003', text: 'Extended manufacturing footprint to Heyuan, establishing a multi-location operation to enhance supply chain resilience.' },
+  { year: '2005', text: 'Completion of the Heyuan factory expansion, effectively supporting product line diversification and capacity upgrades.' },
+  { year: '2010', text: 'Launched doll production lines, integrating sewing craftsmanship with plastic molding technology.' },
+  { year: '2016', text: 'Entered remote control vehicle manufacturing, addressing higher technical requirements and enhancing capabilities in structural complexity and electronic integration.' },
+  { year: '2018', text: 'Expanded production to Hunan, significantly increasing overall manufacturing capacity.' },
+  { year: '2023', text: 'Officially entered the Indonesian market, marking a key milestone in the company\u2019s global expansion strategy and promoting supply chain diversification.' },
+  { year: '2025', text: 'Phase II of the Indonesia factory commenced operations, further expanding regional production capacity and strengthening responsiveness to international markets.' },
+];
+---
+
+<BaseLayout
+  title="About Royal Regent Toys — OEM Toy Manufacturer Since 1987"
+  description="Royal Regent Toys — 39-year journey from Hong Kong to a global OEM toy manufacturer. Factories in China & Indonesia (PT RRI, PT RRM). EN 71 & ASTM F963 certified."
+  lang="en"
+  canonical="https://royalregentgroup.com/about.html"
+  ogLocale="en_US"
+  ogLocaleAlternates={['zh_TW', 'id_ID']}
+  dataPage="about"
+>
+  <Fragment slot="head-extra">
+    <meta name="keywords" content="Royal Regent Toys, about Royal Regent, toy manufacturer since 1987, Hong Kong toy manufacturer, PT RRI, PT RRM, RRI, RRM, EN 71, ASTM F963, toy factory history">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://royalregentgroup.com/" },
+            { "@type": "ListItem", "position": 2, "name": "About", "item": "https://royalregentgroup.com/about.html" }
+          ]
+        },
+        {
+          "@type": "Organization",
+          "name": "Royal Regent Toys",
+          "url": "https://royalregentgroup.com",
+          "logo": "https://royalregentgroup.com/assets/logo.webp",
+          "description": "OEM toy manufacturer since 1987. Plastic toys, plush, dolls, RC vehicles & costumes. Factories in China & Indonesia.",
+          "foundingDate": "1987",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Unit 07-08, 12/F, Greenfield Tower, Concordia Plaza, No.1 Science Museum Road",
+            "addressLocality": "Tsim Sha Tsui, Kowloon",
+            "addressCountry": "HK"
+          },
+          "numberOfEmployees": {
+            "@type": "QuantitativeValue",
+            "minValue": 1000,
+            "maxValue": 5000
+          },
+          "sameAs": ["https://www.linkedin.com/company/royalregentgroup"]
+        }
+      ]
+    })} />
+  </Fragment>
+
+  <Nav lang={lang} />
+
+  <!-- HERO -->
+  <section class="about-hero" id="aboutHero">
+    <div class="hero-grid-pattern"></div>
+    <div class="aurora">
+      <div class="aurora-blob"></div>
+      <div class="aurora-blob"></div>
+      <div class="aurora-blob"></div>
+    </div>
+
+    <div class="about-hero-content">
+      <span class="about-hero-tag" id="aboutTag">Our Story</span>
+      <h1 class="about-hero-title" id="aboutTitle">39 years of<br><span class="text-gradient">craftsmanship.</span></h1>
+      <p class="about-hero-sub" id="aboutSub">From a single workshop in Sha Tau Kok, Hong Kong, Royal Regent has grown into a multi-site OEM toy manufacturer trusted by leading global brands — delivering safe, compliant, and precision-engineered toys from China and Indonesia to markets worldwide.</p>
+    </div>
+
+    <div class="about-hero-scroll" id="aboutScroll">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Main content wrapper (for footer reveal) -->
+  <div class="main-content" id="main-content">
+
+    <!-- INTRO STATEMENT -->
+    <section class="intro-statement clip-section" id="introStatement">
+      <div class="statement-grid">
+        <div class="statement-left">
+          <div class="statement-line" id="stmtLine"></div>
+          <div class="statement-content">
+            <p class="statement-text">
+              <span class="stmt-line">Partnership over production.</span>
+              <span class="stmt-line">Refined over 39 years.</span>
+              <span class="stmt-line">Ready for what you need next.</span>
+            </p>
+            <div class="statement-rule" id="stmtRule"></div>
+          </div>
+        </div>
+        <div class="statement-accent" id="stmtAccent">1987</div>
+      </div>
+    </section>
+
+    <!-- HISTORY — Interactive timeline -->
+    <section class="history-section" id="historySection" data-milestones={JSON.stringify(milestones)}>
+      <div class="history-top">
+        <h2 class="history-heading">Development history</h2>
+      </div>
+
+      <div class="history-center">
+        <div class="history-watermark" id="historyWatermark">1987</div>
+        <div class="history-milestone" id="historyMilestone">
+          <p>The company was founded in Sha Tau Kok, marking the official beginning of its journey in manufacturing.</p>
+        </div>
+      </div>
+
+      <div class="history-scroll-progress">
+        <div class="history-scroll-fill" id="historyScrollFill"></div>
+      </div>
+
+      <div class="history-scroll-hint" id="historyScrollHint">
+        <span>Scroll to explore</span>
+        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+
+      <div class="history-timeline">
+        <div class="timeline-track" id="timelineTrack">
+          {milestones.map((m, i) => (
+            <button class={`timeline-node${i === 0 ? ' active' : ''}`} data-index={i}>
+              <div class="timeline-dot"><span>{m.year}</span></div>
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <Footer lang={lang} />
+
+  <Fragment slot="page-scripts">
+    <script is:inline src="/assets/about-animations.js"></script>
+  </Fragment>
+</BaseLayout>

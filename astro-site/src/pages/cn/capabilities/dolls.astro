@@ -1,0 +1,165 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Nav from '../../../components/Nav.astro';
+import Footer from '../../../components/Footer.astro';
+import '../../../styles/capability.css';
+
+const lang = 'cn' as const;
+const prefix = '/cn';
+---
+
+<BaseLayout
+  title="娃娃製造 — Royal Regent Toys | 娃娃代工廠"
+  description="Royal Regent Toys娃娃製造——面部彩繪、植髮、服裝組裝及品質精修。時裝娃娃及嬰兒娃娃OEM代工廠。PT RRI、PT RRM。"
+  lang="zh-Hant"
+  canonical="https://royalregentgroup.com/cn/capabilities/dolls.html"
+  ogLocale="zh_TW"
+  ogLocaleAlternates={['en_US', 'id_ID']}
+  dataPage="capabilities-dolls"
+>
+  <Fragment slot="head-extra">
+    <meta name="keywords" content="Royal Regent Toys, 娃娃製造, 娃娃代工廠, 時裝娃娃, 嬰兒娃娃, 植髮娃娃, PT RRI, PT RRM, RRI, RRM">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://royalregentgroup.com/cn/" },
+            { "@type": "ListItem", "position": 2, "name": "生產能力", "item": "https://royalregentgroup.com/cn/#capabilities" },
+            { "@type": "ListItem", "position": 3, "name": "娃娃", "item": "https://royalregentgroup.com/cn/capabilities/dolls.html" }
+          ]
+        },
+        {
+          "@type": "Service",
+          "name": "娃娃製造",
+          "provider": {"@type": "Organization", "name": "Royal Regent Toys", "url": "https://royalregentgroup.com"},
+          "description": "OEM娃娃製造——面部彩繪、植髮、服裝組裝及品質修飾。",
+          "url": "https://royalregentgroup.com/cn/capabilities/dolls.html",
+          "serviceType": "Toy Manufacturing",
+          "areaServed": "Worldwide"
+        }
+      ]
+    })} />
+  </Fragment>
+
+  <Nav lang={lang} />
+
+  <!-- HERO -->
+  <section class="sub-hero" id="subHero">
+    <div class="hero-grid-pattern"></div>
+    <div class="aurora"><div class="aurora-blob"></div><div class="aurora-blob"></div><div class="aurora-blob"></div></div>
+    <div class="sub-hero-content">
+      <div class="breadcrumb" id="heroBreadcrumb">
+        <a href="/cn/">首頁</a><span class="sep">/</span><span>娃娃</span>
+      </div>
+      <span class="sub-hero-tag" id="heroTag">娃娃</span>
+      <h1 class="sub-hero-title" id="heroTitle">時尚與嬰兒<br><span class="text-gradient">娃娃</span></h1>
+      <p class="sub-hero-sub" id="heroSub">完整的OEM娃娃製造——面部彩繪、植髮及服裝組裝——符合EN 71及ASTM F963安全標準。</p>
+    </div>
+    <div class="sub-hero-scroll" id="heroScroll"><span>向下滾動</span><div class="scroll-line"></div></div>
+  </section>
+
+  <div class="main-content" id="main-content">
+
+    <section class="editorial">
+      <div class="container">
+        <div class="editorial-watermark">Dolls</div>
+        <div class="editorial-inner">
+          <div class="editorial-left">
+            <span class="section-label reveal-up">製造概覽</span>
+            <div class="editorial-intro reveal-up">
+              <div class="editorial-intro-line"></div>
+              <div>
+                <p>
+                  <span class="stmt-line">每個尺寸都注重細節。</span>
+                  <span class="stmt-line">從面部彩繪到最後一針。</span>
+                  <span class="stmt-line">全流程生產。</span>
+                </p>
+                <div class="stmt-rule"></div>
+              </div>
+            </div>
+          </div>
+          <div class="editorial-right">
+            <div class="editorial-features">
+              <div class="editorial-feat reveal-up">
+                <div class="editorial-feat-num">01</div>
+                <div><h3>面部裝飾與精加工</h3><p>配備專門的面部裝飾車間，具備數碼噴墨（DIJ）、精密噴漆和移印能力——我們有能力按照您的設計要求，在大批量生產中始終如一地完成任何面部妝容。嬰兒娃娃和時尚娃娃產線均在廠內完成。</p></div>
+              </div>
+              <div class="editorial-feat reveal-up">
+                <div class="editorial-feat-num">02</div>
+                <div><h3>植髮工藝</h3><p>尼龍及合成纖維植髮，支持定制顏色和造型——專為產品全生命週期的耐用性和玩耍安全性而設計。</p></div>
+              </div>
+              <div class="editorial-feat reveal-up">
+                <div class="editorial-feat-num">03</div>
+                <div><h3>服裝與配件組裝</h3><p>廠內完成完整的服裝生產和配件組裝——支持授權IP需求、定制設計及完整的換裝娃娃套裝。</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="photo-panels">
+        <div class="photo-panel">
+          <img src="/assets/face-painting.webp" alt="娃娃製造" loading="lazy" width="1600" height="1066">
+          <div class="photo-panel-overlay"></div>
+          <div class="photo-panel-label"><div class="label-line"></div><span>面部彩繪</span></div>
+        </div>
+        <div class="photo-panel">
+          <img src="/assets/doll.webp" alt="娃娃組裝" loading="lazy" width="1024" height="576">
+          <div class="photo-panel-overlay"></div>
+          <div class="photo-panel-label"><div class="label-line"></div><span>組裝</span></div>
+        </div>
+        <div class="photo-panel">
+          <img src="/assets/hair-rooting.webp" alt="娃娃植髮" loading="lazy" width="1152" height="896">
+          <div class="photo-panel-overlay"></div>
+          <div class="photo-panel-label"><div class="label-line"></div><span>植髮</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="container reveal-up">
+        <h2>準備好討論您的項目了嗎？</h2>
+        <p>告訴我們您的需求，我們的團隊將盡快與您聯繫。</p>
+        <a href="/cn/contact.html" class="btn btn-primary magnetic" data-strength="0.2">聯繫我們 →</a>
+      </div>
+    </section>
+
+    <!-- SEE ALSO -->
+    <section class="see-also">
+      <div class="container">
+        <span class="see-also-label">探索其他生產能力</span>
+        <div class="see-also-grid">
+          <a href="/cn/capabilities/plastic-toys.html" class="see-also-card">
+            <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+            <span>塑膠玩具</span>
+            <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="/cn/capabilities/plush.html" class="see-also-card">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>
+            <span>毛絨玩具</span>
+            <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="/cn/capabilities/rc-vehicle.html" class="see-also-card">
+            <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            <span>遙控車</span>
+            <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="/cn/capabilities/costume.html" class="see-also-card">
+            <svg viewBox="0 0 24 24"><path d="M12 3l1.5 3.2 3.5.5-2.5 2.5.6 3.5L12 11l-3.1 1.7.6-3.5L7 6.7l3.5-.5z"/><path d="M5 16l-1.5 3.2-3.5.5L2.5 22l-.6 2L5 22.3 8.1 24l-.6-2L10 19.5l-3.5-.5z"/><path d="M19 16l-1.5 3.2-3.5.5 2.5 2.5-.6 2L19 22.3l3.1 1.7-.6-2L24 19.5l-3.5-.5z"/></svg>
+            <span>角色服裝</span>
+            <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <Footer lang={lang} />
+
+  <Fragment slot="page-scripts">
+    <script is:inline src="/assets/capability-animations.js"></script>
+  </Fragment>
+</BaseLayout>

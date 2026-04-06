@@ -1,0 +1,183 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/capability.css';
+
+const lang = 'en' as const;
+const prefix = '';
+---
+
+<BaseLayout
+  title="Plastic Toy Manufacturer — Royal Regent Toys"
+  description="Royal Regent Toys plastic toy manufacturing — injection molding, in-house mold development & precision assembly. OEM plastic toy manufacturer for global brands."
+  lang="en"
+  canonical="https://royalregentgroup.com/capabilities/plastic-toys.html"
+  ogLocale="en_US"
+  ogLocaleAlternates={['zh_TW', 'id_ID']}
+  dataPage="capabilities-plastic-toys"
+>
+  <Fragment slot="head-extra">
+    <meta name="keywords" content="Royal Regent Toys, plastic toy manufacturer, injection molding toys, mold development, OEM plastic toys, toy factory China, PT RRI, PT RRM, RRI, RRM">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://royalregentgroup.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Capabilities", "item": "https://royalregentgroup.com/#capabilities" },
+            { "@type": "ListItem", "position": 3, "name": "Plastic Toys", "item": "https://royalregentgroup.com/capabilities/plastic-toys.html" }
+          ]
+        },
+        {
+          "@type": "Service",
+          "name": "Plastic Toy Manufacturing",
+          "provider": {"@type": "Organization", "name": "Royal Regent Toys", "url": "https://royalregentgroup.com"},
+          "description": "OEM plastic toy manufacturing — injection molding, in-house mold development & precision assembly for global brands.",
+          "url": "https://royalregentgroup.com/capabilities/plastic-toys.html",
+          "serviceType": "Toy Manufacturing",
+          "areaServed": "Worldwide"
+        }
+      ]
+    })} />
+  </Fragment>
+
+  <Nav lang={lang} />
+
+  <!-- HERO -->
+  <section class="sub-hero" id="subHero">
+    <div class="hero-grid-pattern"></div>
+    <div class="aurora">
+      <div class="aurora-blob"></div>
+      <div class="aurora-blob"></div>
+      <div class="aurora-blob"></div>
+    </div>
+    <div class="sub-hero-content">
+      <div class="breadcrumb" id="heroBreadcrumb">
+        <a href={`${prefix}/`}>Home</a><span class="sep">/</span>
+        <span>Plastic Toys</span>
+      </div>
+      <span class="sub-hero-tag" id="heroTag">Plastic Toys</span>
+      <h1 class="sub-hero-title" id="heroTitle">Plastic figures &amp;<br><span class="text-gradient">functional toys</span></h1>
+      <p class="sub-hero-sub" id="heroSub">In-house mold development and precision injection molding for character figures and functional toys, fully customised to client designs and specifications.</p>
+    </div>
+    <div class="sub-hero-scroll" id="heroScroll"><span>Scroll</span><div class="scroll-line"></div></div>
+  </section>
+
+  <div class="main-content" id="main-content">
+
+  <!-- EDITORIAL — merged intro + overview + gallery -->
+  <section class="editorial">
+    <div class="container">
+      <div class="editorial-watermark">Plastic</div>
+      <div class="editorial-inner">
+
+        <!-- Left: Statement -->
+        <div class="editorial-left">
+          <span class="section-label reveal-up">Manufacturing overview</span>
+          <div class="editorial-intro reveal-up">
+            <div class="editorial-intro-line"></div>
+            <div>
+              <p>Precision-tooled molds.<br>Client-owned from day one.<br>Built to production scale.</p>
+              <div class="stmt-rule"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Features -->
+        <div class="editorial-right">
+          <div class="editorial-features">
+            <div class="editorial-feat reveal-up">
+              <div class="editorial-feat-num">01</div>
+              <div>
+                <h3>From first sample to final carton</h3>
+                <p>Every stage of production happens under one roof — from initial 3D printed prototypes through injection molding, painting, assembly, and outbound carton packing. No handoffs, no third-party delays, full visibility throughout.</p>
+              </div>
+            </div>
+            <div class="editorial-feat reveal-up">
+              <div class="editorial-feat-num">02</div>
+              <div>
+                <h3>Built for volume, ready for complexity</h3>
+                <p>Whether your product is a simple figure or a multi-component functional toy, our integrated manufacturing setup is designed to scale efficiently — keeping lead times tight and costs predictable as order volumes grow.</p>
+              </div>
+            </div>
+            <div class="editorial-feat reveal-up">
+              <div class="editorial-feat-num">03</div>
+              <div>
+                <h3>In-house automation</h3>
+                <p>We operate a dedicated automation department that designs and deploys custom automated processes for high-volume production runs. This keeps our output consistent, reduces labour variance, and makes our unit costs genuinely competitive at scale.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Expanding photo panels -->
+    <div class="photo-panels">
+      <div class="photo-panel">
+        <img src="/assets/injection-molding.webp" alt="Injection molding production" loading="lazy" width="1920" height="2193">
+        <div class="photo-panel-overlay"></div>
+        <div class="photo-panel-label"><div class="label-line"></div><span>Injection Molding</span></div>
+      </div>
+      <div class="photo-panel">
+        <img src="/assets/images/factory-assembly-line.webp" alt="Plastic figures manufacturing" loading="lazy" width="1706" height="1280">
+        <div class="photo-panel-overlay"></div>
+        <div class="photo-panel-label"><div class="label-line"></div><span>Assembly Line</span></div>
+      </div>
+      <div class="photo-panel">
+        <img src="/assets/quality-control.webp" alt="Quality control inspection" loading="lazy" width="1279" height="1635">
+        <div class="photo-panel-overlay"></div>
+        <div class="photo-panel-label"><div class="label-line"></div><span>Quality Control</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container reveal-up">
+      <h2>Ready to discuss your project?</h2>
+      <p>Tell us about your requirements and our team will get back to you promptly.</p>
+      <a href={`${prefix}/contact.html`} class="btn btn-primary magnetic" data-strength="0.2">Contact Us &rarr;</a>
+    </div>
+  </section>
+
+  <!-- SEE ALSO -->
+  <section class="see-also">
+    <div class="container">
+      <span class="see-also-label">Explore other capabilities</span>
+      <div class="see-also-grid">
+        <a href={`${prefix}/capabilities/plush.html`} class="see-also-card">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>
+          <span>Plush</span>
+          <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href={`${prefix}/capabilities/dolls.html`} class="see-also-card">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span>Dolls</span>
+          <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href={`${prefix}/capabilities/rc-vehicle.html`} class="see-also-card">
+          <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          <span>RC Vehicles</span>
+          <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href={`${prefix}/capabilities/costume.html`} class="see-also-card">
+          <svg viewBox="0 0 24 24"><path d="M12 3l1.5 3.2 3.5.5-2.5 2.5.6 3.5L12 11l-3.1 1.7.6-3.5L7 6.7l3.5-.5z"/><path d="M5 16l-1.5 3.2-3.5.5L2.5 22l-.6 2L5 22.3 8.1 24l-.6-2L10 19.5l-3.5-.5z"/><path d="M19 16l-1.5 3.2-3.5.5 2.5 2.5-.6 2L19 22.3l3.1 1.7-.6-2L24 19.5l-3.5-.5z"/></svg>
+          <span>Costumes</span>
+          <svg class="see-also-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  </div>
+
+  <Footer lang={lang} />
+
+  <Fragment slot="page-scripts">
+    <script is:inline src="/assets/capability-animations.js"></script>
+  </Fragment>
+</BaseLayout>

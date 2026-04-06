@@ -1,0 +1,157 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/careers.css';
+
+const lang = 'cn' as const;
+const prefix = '/cn';
+---
+
+<BaseLayout
+  title="招聘 — Royal Regent Toys | 加入我們的團隊"
+  description="加入Royal Regent Toys團隊。玩具製造工程、品質保證、營運等職位。香港、中國東莞及印尼（PT RRI、PT RRM）招聘中。"
+  lang="zh-Hant"
+  canonical="https://royalregentgroup.com/cn/careers.html"
+  ogLocale="zh_TW"
+  ogLocaleAlternates={['en_US', 'id_ID']}
+  dataPage="careers"
+>
+  <Fragment slot="head-extra">
+    <meta name="keywords" content="Royal Regent Toys招聘, 玩具製造職位, PT RRI招聘, PT RRM招聘, RRI, RRM, 香港玩具製造商招聘, 印尼玩具工廠職位">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://royalregentgroup.com/cn/" },
+            { "@type": "ListItem", "position": 2, "name": "招聘", "item": "https://royalregentgroup.com/cn/careers.html" }
+          ]
+        },
+        {
+          "@type": "JobPosting",
+          "title": "Admin Officer",
+          "description": "Handle day-to-day administrative operations including document management, office coordination, and internal communications.",
+          "datePosted": "2025-01-01",
+          "employmentType": "FULL_TIME",
+          "jobLocation": {
+            "@type": "Place",
+            "address": { "@type": "PostalAddress", "addressLocality": "Kendal", "addressCountry": "ID" }
+          },
+          "hiringOrganization": {
+            "@type": "Organization",
+            "name": "Royal Regent Toys",
+            "sameAs": "https://royalregentgroup.com"
+          }
+        }
+      ]
+    })} />
+  </Fragment>
+
+  <Nav lang={lang} />
+
+  <!-- PAGE HERO -->
+  <section class="page-hero" id="main-content">
+    <div class="container">
+      <span class="page-hero-tag">加入我們的團隊</span>
+      <h1>共同建造<br><span class="text-gradient">持久的事業。</span></h1>
+      <p>39年來，Royal Regent 始終致力於人才投資。我們正在尋找製造、工程、品質和營運領域的專業人才，與我們共同成長。</p>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="careers-values">
+    <div class="container">
+      <div class="section-label reveal-up">為什麼選擇 Royal Regent</div>
+      <h2 class="section-title reveal-up">一家以人為本的<br>製造企業。</h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card reveal-up">
+        <div class="value-icon">&#127775;</div>
+        <h3>39年的穩定發展</h3>
+        <p>Royal Regent 創立於1987年，歷經四十年穩步成長——在中國和印尼提供長期職業穩定性和持續發展機會。</p>
+      </div>
+      <div class="value-card reveal-up">
+        <div class="value-icon">&#127760;</div>
+        <h3>全球規模</h3>
+        <p>在東莞、河源、湖南和印尼的多個製造基地工作——接觸真正國際化的供應鏈。</p>
+      </div>
+      <div class="value-card reveal-up">
+        <div class="value-icon">&#128218;</div>
+        <h3>技能發展</h3>
+        <p>從模具開發到遙控電子技術和軟體玩具生產——我們廣泛的產品品類為培養深入的跨職能專業知識創造了獨特機會。</p>
+      </div>
+      <div class="value-card reveal-up">
+        <div class="value-icon">&#9989;</div>
+        <h3>品質文化</h3>
+        <p>我們按照美國和歐盟安全標準生產。品質不僅是一個部門——它融入了從模具到最終檢驗的每個環節。</p>
+      </div>
+      <div class="value-card reveal-up">
+        <div class="value-icon">&#129309;</div>
+        <h3>協作團隊</h3>
+        <p>扁平化結構、直接溝通和主人翁文化。我們的團隊跨職能緊密合作——包括工程、生產、採購和品質保證。</p>
+      </div>
+      <div class="value-card reveal-up">
+        <div class="value-icon">&#127941;</div>
+        <h3>與我們共同成長</h3>
+        <p>我們正進入印尼及其他地區的全新擴張階段。現在加入，與一家正處於歷史關鍵時刻的製造商共同成長。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPEN POSITIONS -->
+  <section class="positions-section">
+    <div class="container">
+      <div class="section-label reveal-up">招聘職位</div>
+      <h2 class="section-title reveal-up">目前的機會。</h2>
+
+      <div class="filter-bar" id="filterBar"></div>
+
+      <div class="job-grid" id="jobGrid"></div>
+    </div>
+  </section>
+
+  <!-- APPLY MODAL -->
+  <div class="apply-overlay" id="applyOverlay" role="dialog" aria-modal="true" aria-labelledby="applyModalTitle">
+    <div class="apply-modal">
+      <div class="apply-modal-header">
+        <h3 id="applyModalTitle">申請此職位</h3>
+        <button class="apply-modal-close" id="applyClose" aria-label="關閉">&times;</button>
+      </div>
+      <div class="apply-modal-body">
+        <label>職位</label>
+        <div class="apply-job-title" id="applyJobTitle"></div>
+        <label>您的姓名</label>
+        <input type="text" id="applyName" placeholder="全名">
+        <label>發送申請至</label>
+        <div class="apply-entity-group">
+          <label><input type="radio" name="applyEntity" value="recruitment.rri@royalregentgroup.com" checked><span><strong>PT Royal Regent Indonesia</strong><br><small style="font-weight:400;color:var(--text-muted)">肯德爾，中爪哇</small></span></label>
+          <label><input type="radio" name="applyEntity" value="recruitment.rrm@royalregentid.com"><span><strong>PT Royal Regent Manufacturing</strong><br><small style="font-weight:400;color:var(--text-muted)">恩加維，東爪哇</small></span></label>
+        </div>
+      </div>
+      <div class="apply-modal-footer">
+        <button id="applySubmit">提交申請 →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPECULATIVE / CTA -->
+  <section class="cta-banner">
+    <div class="container">
+      <div class="section-label reveal-up" style="text-align:center;">沒有看到適合的職位？</div>
+      <h2 class="reveal-up">向我們發送<br>自薦申請。</h2>
+      <p class="reveal-up">我們隨時歡迎製造工程、品質、採購和營運領域的優秀人才。請將您的履歷和簡短介紹發送給我們的團隊。</p>
+      <div class="reveal-up" style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="mailto:info@royalregenthk.com" class="btn btn-primary">發送您的履歷 →</a>
+        <a href={`${prefix}/contact.html`} class="btn btn-ghost">聯繫我們</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer lang={lang} />
+
+  <Fragment slot="page-scripts">
+    <script is:inline src="/assets/careers-animations.js"></script>
+  </Fragment>
+</BaseLayout>

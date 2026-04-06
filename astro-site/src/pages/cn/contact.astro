@@ -1,0 +1,182 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/contact.css';
+
+const lang = 'cn' as const;
+const prefix = '/cn';
+---
+
+<BaseLayout
+  title="聯繫 Royal Regent Toys — 香港玩具製造商"
+  description="聯繫Royal Regent Toys進行OEM玩具製造諮詢。香港總部，東莞、河源、湖南及印尼（PT RRI、PT RRM）工廠。"
+  lang="zh-Hant"
+  canonical="https://royalregentgroup.com/cn/contact.html"
+  ogLocale="zh_TW"
+  ogLocaleAlternates={['en_US', 'id_ID']}
+  dataPage="contact"
+>
+  <Fragment slot="head-extra">
+    <meta name="keywords" content="Royal Regent Toys聯繫, 香港玩具製造商, 東莞玩具工廠, 印尼玩具工廠, PT RRI, PT RRM, RRI, RRM, OEM玩具諮詢">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://royalregentgroup.com/cn/" },
+            { "@type": "ListItem", "position": 2, "name": "聯繫我們", "item": "https://royalregentgroup.com/cn/contact.html" }
+          ]
+        },
+        {
+          "@type": "LocalBusiness",
+          "name": "Royal Regent Toys",
+          "url": "https://royalregentgroup.com",
+          "logo": "https://royalregentgroup.com/assets/logo.webp",
+          "description": "自1987年的OEM玩具製造商——香港總部及中國與印尼多地工廠。",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Unit 07-08, 12/F, Greenfield Tower, Concordia Plaza, No.1 Science Museum Road",
+            "addressLocality": "Tsim Sha Tsui, Kowloon",
+            "addressCountry": "HK"
+          },
+          "telephone": "+852-2425-0720",
+          "email": "info@royalregenthk.com",
+          "contactPoint": [
+            {
+              "@type": "ContactPoint",
+              "telephone": "+852-2425-0720",
+              "email": "info@royalregenthk.com",
+              "contactType": "sales",
+              "availableLanguage": ["English", "Chinese"]
+            }
+          ],
+          "sameAs": [
+            "https://www.linkedin.com/company/royalregentgroup"
+          ]
+        }
+      ]
+    })} />
+  </Fragment>
+
+  <Nav lang={lang} />
+
+  <!-- PAGE HERO -->
+  <section class="page-hero" id="main-content">
+    <div class="container">
+      <span class="page-hero-tag">聯繫我們</span>
+      <h1>讓我們一起討論<br><span class="text-gradient">您的項目。</span></h1>
+      <p>無論您需要OEM製造、樣品生產，還是只想了解更多——我們的團隊隨時準備回應。</p>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       CONTACT SECTION
+       ═══════════════════════════════════════════════════════════════ -->
+  <section class="contact-section">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- Left: Contact Info -->
+        <div class="contact-info">
+          <div class="section-label reveal-up">聯繫資訊</div>
+          <h2 class="reveal-up">每一個諮詢都很重要。我們會盡快回覆您。</h2>
+          <p class="reveal-up">從初步諮詢到樣品製作再到全面量產——我們的團隊支持流程的每個階段。無論您是品牌方、零售商還是經銷商，請告訴我們您的項目，我們會迅速回覆。</p>
+
+          <div class="contact-detail reveal-up">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            </div>
+            <div><h4>生產基地</h4><p>中國和印尼</p></div>
+          </div>
+          <div class="contact-detail reveal-up">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
+            </div>
+            <div><h4>電子郵件</h4><p>info@royalregenthk.com</p></div>
+          </div>
+
+        </div>
+
+        <!-- Right: Form -->
+        <div class="reveal-up">
+          <div class="contact-form-card">
+            <!-- Progress bar -->
+            <div class="form-progress">
+              <div class="form-progress-fill" id="progressFill"></div>
+            </div>
+
+            <form id="contactForm" novalidate>
+              <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+              <div class="form-row">
+                <div class="float-group">
+                  <input type="text" id="firstName" name="firstName" required data-field autocomplete="given-name" aria-describedby="firstNameError">
+                  <label for="firstName">名字</label>
+                  <div class="error-message" id="firstNameError" role="alert" aria-live="polite"></div>
+                </div>
+                <div class="float-group">
+                  <input type="text" id="lastName" name="lastName" required data-field autocomplete="family-name" aria-describedby="lastNameError">
+                  <label for="lastName">姓氏</label>
+                  <div class="error-message" id="lastNameError" role="alert" aria-live="polite"></div>
+                </div>
+              </div>
+
+              <div class="float-group">
+                <input type="email" id="email" name="email" required data-field autocomplete="email" aria-describedby="emailError">
+                <label for="email">電子郵件地址</label>
+                <div class="error-message" id="emailError" role="alert" aria-live="polite"></div>
+              </div>
+
+              <div class="float-group">
+                <input type="text" id="company" name="company" data-field autocomplete="organization">
+                <label for="company">公司</label>
+              </div>
+
+              <div class="float-group">
+                <select id="subject" name="subject" data-field>
+                  <option value="" disabled selected></option>
+                  <option>OEM製造諮詢</option>
+                  <option>樣品要求</option>
+                  <option>塑膠玩具</option>
+                  <option>毛絨玩具</option>
+                  <option>娃娃</option>
+                  <option>遙控車</option>
+                  <option>服裝</option>
+                  <option>授權 / 品牌產品</option>
+                  <option>招聘</option>
+                  <option>其他</option>
+                </select>
+                <label for="subject">主題</label>
+              </div>
+
+              <div class="float-group">
+                <textarea id="message" name="message" required data-field aria-describedby="messageError"></textarea>
+                <label for="message">留言</label>
+                <div class="error-message" id="messageError" role="alert" aria-live="polite"></div>
+              </div>
+
+              <button type="submit" class="submit-btn magnetic" data-strength="0.15" id="submitBtn">
+                <span class="btn-text">發送訊息 &rarr;</span>
+                <span class="btn-success">
+                  <span class="check-circle">
+                    <svg viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                  發送成功
+                </span>
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <Footer lang={lang} />
+
+  <Fragment slot="page-scripts">
+    <script is:inline src="/assets/contact-animations.js"></script>
+  </Fragment>
+</BaseLayout>
