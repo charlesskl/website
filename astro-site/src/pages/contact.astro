@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import ContactForm from '../components/ContactForm.tsx';
 import '../styles/contact.css';
 
 const lang = 'en' as const;
@@ -100,74 +101,9 @@ const prefix = '';
 
         </div>
 
-        <!-- Right: Form -->
+        <!-- Right: Form (React Island) -->
         <div class="reveal-up">
-          <div class="contact-form-card">
-            <!-- Progress bar -->
-            <div class="form-progress">
-              <div class="form-progress-fill" id="progressFill"></div>
-            </div>
-
-            <form id="contactForm" novalidate>
-              <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-              <div class="form-row">
-                <div class="float-group">
-                  <input type="text" id="firstName" name="firstName" required data-field autocomplete="given-name" aria-describedby="firstNameError">
-                  <label for="firstName">First Name</label>
-                  <div class="error-message" id="firstNameError" role="alert" aria-live="polite"></div>
-                </div>
-                <div class="float-group">
-                  <input type="text" id="lastName" name="lastName" required data-field autocomplete="family-name" aria-describedby="lastNameError">
-                  <label for="lastName">Last Name</label>
-                  <div class="error-message" id="lastNameError" role="alert" aria-live="polite"></div>
-                </div>
-              </div>
-
-              <div class="float-group">
-                <input type="email" id="email" name="email" required data-field autocomplete="email" aria-describedby="emailError">
-                <label for="email">Email Address</label>
-                <div class="error-message" id="emailError" role="alert" aria-live="polite"></div>
-              </div>
-
-              <div class="float-group">
-                <input type="text" id="company" name="company" data-field autocomplete="organization">
-                <label for="company">Company</label>
-              </div>
-
-              <div class="float-group">
-                <select id="subject" name="subject" data-field>
-                  <option value="" disabled selected></option>
-                  <option>OEM Manufacturing Inquiry</option>
-                  <option>Sample Request</option>
-                  <option>Plastic</option>
-                  <option>Plush</option>
-                  <option>Dolls</option>
-                  <option>RC</option>
-                  <option>Costumes</option>
-                  <option>Licensed / Branded Products</option>
-                  <option>Careers</option>
-                  <option>Other</option>
-                </select>
-                <label for="subject">Subject</label>
-              </div>
-
-              <div class="float-group">
-                <textarea id="message" name="message" required data-field aria-describedby="messageError"></textarea>
-                <label for="message">Message</label>
-                <div class="error-message" id="messageError" role="alert" aria-live="polite"></div>
-              </div>
-
-              <button type="submit" class="submit-btn magnetic" data-strength="0.15" id="submitBtn">
-                <span class="btn-text">Send Message &rarr;</span>
-                <span class="btn-success">
-                  <span class="check-circle">
-                    <svg viewBox="0 0 14 14" fill="none"><path d="M2 7l4 4 6-7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  </span>
-                  Sent Successfully
-                </span>
-              </button>
-            </form>
-          </div>
+          <ContactForm lang="en" client:load />
         </div>
 
       </div>
@@ -176,7 +112,4 @@ const prefix = '';
 
   <Footer lang={lang} />
 
-  <Fragment slot="page-scripts">
-    <script is:inline src="/assets/contact-animations.js"></script>
-  </Fragment>
 </BaseLayout>
