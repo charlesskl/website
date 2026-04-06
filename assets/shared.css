@@ -501,6 +501,13 @@ body[data-page="contact"] .nav-links a[href="../contact.html"] {
     color: var(--brand);
   }
 }
+
+.dropdown a:focus-visible,
+.dropdown button:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
 /* SVG icons in dropdown */
 .dropdown .dd-icon {
   width: 14px;
@@ -594,6 +601,23 @@ body[data-page="contact"] .nav-links a[href="../contact.html"] {
   display: block;
 }
 
+/* ───── NAV BUTTON RESET ───── */
+.nav-links button,
+.nav-item button {
+  background: none;
+  border: none;
+  font: inherit;
+  color: inherit;
+  cursor: default;
+  padding: 0;
+}
+
+.nav-links button:focus-visible,
+.nav-item button:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 4px;
+}
+
 
 /* ───── TYPOGRAPHY ───── */
 h1, h2, h3, h4, h5, h6 {
@@ -636,6 +660,14 @@ h4, h5 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* SplitText char elements: prevent double letter-spacing on inline-block.
+   Parent's letter-spacing already controls gaps between inline-block chars;
+   inheriting it on the char itself doubles the spacing effect. */
+.rr-char {
+  display: inline-block;
+  letter-spacing: normal;
 }
 
 .section-label {
@@ -1111,13 +1143,27 @@ footer.footer-reveal {
   outline: none;
   transition: border-color 0.3s, box-shadow 0.3s;
 }
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus {
+.form-group input:focus:not(:focus-visible),
+.form-group textarea:focus:not(:focus-visible),
+.form-group select:focus:not(:focus-visible) {
+  outline: none;
+}
+.form-group input:focus-visible,
+.form-group textarea:focus-visible,
+.form-group select:focus-visible {
   border-color: var(--brand);
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
   box-shadow: 0 0 0 4px var(--brand-8);
 }
 .form-group textarea { height: 140px; resize: vertical; }
+
+.error-message {
+  color: var(--error, #D32F2F);
+  font-size: 0.85rem;
+  margin-top: 4px;
+  min-height: 1.2em;
+}
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
 .contact-grid {
@@ -1391,8 +1437,17 @@ textarea:focus-visible, select:focus-visible, [tabindex]:focus-visible {
 /* ───── ACCESSIBILITY: REDUCED MOTION ───── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
-    animation: none !important;
-    transition: none !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+  /* Preserve focus/hover transitions for interactive feedback */
+  a:focus-visible, button:focus-visible, input:focus-visible,
+  textarea:focus-visible, select:focus-visible, [tabindex]:focus-visible,
+  a:hover, button:hover, [role="button"]:hover,
+  .form-group input:focus-visible, .form-group textarea:focus-visible, .form-group select:focus-visible,
+  .float-group input:focus-visible, .float-group textarea:focus-visible, .float-group select:focus-visible {
+    transition: border-color 0.2s, color 0.2s, background-color 0.2s, box-shadow 0.2s !important;
   }
   .page-transition { display: none !important; }
   .scroll-progress { display: none !important; }
@@ -1916,4 +1971,21 @@ html.js-loaded .reveal-up.rr-choreographed {
 }
 @media (max-width: 600px) {
   .see-also-grid { grid-template-columns: 1fr; }
+}
+
+/* ───── SKIP LINK ───── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 10000;
+  padding: 8px 16px;
+  background: var(--brand);
+  color: #fff;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  text-decoration: none;
+}
+.skip-link:focus {
+  top: 16px;
 }

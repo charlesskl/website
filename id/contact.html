@@ -208,10 +208,12 @@
     }
 
     /* Float up when focused or has value */
-    .float-group input:focus,
-    .float-group textarea:focus,
-    .float-group select:focus {
+    .float-group input:focus-visible,
+    .float-group textarea:focus-visible,
+    .float-group select:focus-visible {
       border-color: var(--brand);
+      outline: 2px solid var(--brand);
+      outline-offset: 2px;
       box-shadow: 0 0 0 4px var(--brand-8);
       transform: scale(1.005);
     }
@@ -233,6 +235,12 @@
       display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
     }
 
+    .error-message {
+      color: var(--error, #D32F2F);
+      font-size: 0.85rem;
+      margin-top: 4px;
+      min-height: 1.2em;
+    }
 
     /* ═══ SUBMIT BUTTON ═══ */
     .submit-btn {
@@ -304,15 +312,17 @@
   </style>
 </head>
 <body data-page="contact">
+  <a href="#main-content" class="skip-link">Langsung ke konten utama</a>
+
 
 <!-- NAVBAR -->
 <nav id="navbar">
   <div class="nav-container">
-    <a href="index.html" class="nav-logo"><img src="../assets/logo.webp" alt="Royal Regent Toys"></a>
+    <a href="index.html" class="nav-logo"><img src="../assets/logo.webp" alt="Royal Regent Toys" width="200" height="40"></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="about.html">Tentang Kami</a></li>
       <li class="has-dropdown">
-        <a href="#" onclick="return false" style="cursor:default">Kapabilitas <span class="arrow">&#8964;</span></a>
+        <button type="button" aria-expanded="false" aria-haspopup="true">Kapabilitas <span class="arrow">&#8964;</span></button>
         <ul class="dropdown">
           <li><a href="capabilities/plastic-toys.html"><svg class="dd-icon" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>Mainan Plastik<svg class="dd-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
           <li><a href="capabilities/plush.html"><svg class="dd-icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>Boneka Plush<svg class="dd-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
@@ -323,7 +333,7 @@
       </li>
       <li><a href="careers.html">Karier</a></li>
       <li class="has-dropdown lang-selector">
-        <a href="#" onclick="return false" style="cursor:default">ID <span class="arrow">&#8964;</span></a>
+        <button type="button" aria-expanded="false" aria-haspopup="true">ID <span class="arrow">&#8964;</span></button>
         <ul class="dropdown lang-dropdown">
           <li><a href="#" data-lang="en">English</a></li>
           <li><a href="#" data-lang="cn">繁體中文</a></li>
@@ -341,7 +351,7 @@
 
 
 <!-- PAGE HERO -->
-<section class="page-hero">
+<section class="page-hero" id="main-content">
   <div class="container">
     <span class="page-hero-tag">Hubungi Kami</span>
     <h1>Mari diskusikan<br><span class="text-gradient">proyek Anda.</span></h1>
@@ -402,22 +412,25 @@
             <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
             <div class="form-row">
               <div class="float-group">
-                <input type="text" id="firstName" name="firstName" required data-field>
+                <input type="text" id="firstName" name="firstName" required data-field autocomplete="given-name">
                 <label for="firstName">Nama Depan</label>
+                <div class="error-message" id="firstNameError" role="alert" aria-live="polite"></div>
               </div>
               <div class="float-group">
-                <input type="text" id="lastName" name="lastName" required data-field>
+                <input type="text" id="lastName" name="lastName" required data-field autocomplete="family-name">
                 <label for="lastName">Nama Belakang</label>
+                <div class="error-message" id="lastNameError" role="alert" aria-live="polite"></div>
               </div>
             </div>
 
             <div class="float-group">
-              <input type="email" id="email" name="email" required data-field>
+              <input type="email" id="email" name="email" required data-field autocomplete="email">
               <label for="email">Alamat Email</label>
+              <div class="error-message" id="emailError" role="alert" aria-live="polite"></div>
             </div>
 
             <div class="float-group">
-              <input type="text" id="company" name="company" data-field>
+              <input type="text" id="company" name="company" data-field autocomplete="organization">
               <label for="company">Perusahaan</label>
             </div>
 
@@ -441,6 +454,7 @@
             <div class="float-group">
               <textarea id="message" name="message" required data-field></textarea>
               <label for="message">Pesan</label>
+              <div class="error-message" id="messageError" role="alert" aria-live="polite"></div>
             </div>
 
             <button type="submit" class="submit-btn magnetic" data-strength="0.15" id="submitBtn">
@@ -465,7 +479,7 @@
   <div class="footer-container">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="../assets/logo.webp" alt="Royal Regent Toys" class="footer-logo">
+        <img src="../assets/logo.webp" alt="Royal Regent Toys" class="footer-logo" width="200" height="40">
         <p>Mitra manufaktur bagi merek mainan terkemuka dunia sejak 1987. Lima kategori produk, empat lokasi produksi, satu standar konsisten &mdash; sesuai standar AS dan UE.</p>
       </div>
       <div class="footer-col">
@@ -533,6 +547,15 @@
       field.addEventListener('input', function() {
         field.classList.toggle('has-value', !!field.value);
         updateProgress();
+        // Clear error when user starts typing
+        if (field.hasAttribute('required') && field.value.trim()) {
+          field.setAttribute('aria-invalid', 'false');
+          var errorId = field.id + 'Error';
+          var errorEl = document.getElementById(errorId);
+          if (errorEl) {
+            errorEl.textContent = '';
+          }
+        }
       });
       field.addEventListener('change', function() {
         field.classList.toggle('has-value', !!field.value);
@@ -574,14 +597,26 @@
     form.addEventListener('submit', function(e) {
       e.preventDefault();
 
+      // Clear previous errors
+      form.querySelectorAll('[required]').forEach(function(f) {
+        f.setAttribute('aria-invalid', 'false');
+      });
+      form.querySelectorAll('.error-message').forEach(function(em) {
+        em.textContent = '';
+      });
+
       // Basic validation
       var required = form.querySelectorAll('[required]');
       var valid = true;
       required.forEach(function(f) {
         if (!f.value.trim()) {
           valid = false;
-          f.style.borderColor = 'var(--error, #D32F2F)';
-          setTimeout(function() { f.style.borderColor = ''; }, 2000);
+          f.setAttribute('aria-invalid', 'true');
+          var errorId = f.id + 'Error';
+          var errorEl = document.getElementById(errorId);
+          if (errorEl) {
+            errorEl.textContent = 'Bidang ini wajib diisi';
+          }
         }
       });
       if (!valid) {

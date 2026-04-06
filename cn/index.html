@@ -788,6 +788,8 @@
   </style>
 </head>
 <body data-page="home">
+  <a href="#main-content" class="skip-link">跳到主要內容</a>
+
 
 <!-- PAGE TRANSITION OVERLAY -->
 <div class="page-transition"></div>
@@ -799,12 +801,12 @@
 <nav id="navbar">
   <div class="nav-container">
     <a href="index.html" class="nav-logo">
-      <img src="../assets/logo.webp" alt="Royal Regent Toys">
+      <img src="../assets/logo.webp" alt="Royal Regent Toys" width="200" height="40">
     </a>
     <ul class="nav-links" id="navLinks">
       <li><a href="about.html">關於我們</a></li>
       <li class="has-dropdown">
-        <a href="#" onclick="return false" style="cursor:default">生產能力 <span class="arrow">&#8964;</span></a>
+        <button type="button" aria-expanded="false" aria-haspopup="true">生產能力 <span class="arrow">&#8964;</span></button>
         <ul class="dropdown">
           <li><a href="capabilities/plastic-toys.html"><svg class="dd-icon" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>塑膠玩具<svg class="dd-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
           <li><a href="capabilities/plush.html"><svg class="dd-icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>毛絨玩具<svg class="dd-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
@@ -815,7 +817,7 @@
       </li>
       <li><a href="careers.html">招聘</a></li>
       <li class="has-dropdown lang-selector">
-        <a href="#" onclick="return false" style="cursor:default">中文 <span class="arrow">&#8964;</span></a>
+        <button type="button" aria-expanded="false" aria-haspopup="true">中文 <span class="arrow">&#8964;</span></button>
         <ul class="dropdown lang-dropdown">
           <li><a href="#" data-lang="en">English</a></li>
           <li><a href="#" data-lang="cn">繁體中文</a></li>
@@ -927,7 +929,7 @@
 
 
 <!-- Main content wrapper (for footer reveal) -->
-<div class="main-content">
+<div class="main-content" id="main-content">
 
 <!-- ═══════════════════════════════════════════════════════════════
      INTRO STATEMENT
@@ -964,10 +966,10 @@
       <!-- Plastic Toys -->
       <a href="capabilities/plastic-toys.html" class="cap-card" data-cap="plastic">
         <div class="cap-card-bg">
-          <img src="../assets/images/stock/cap-plastic-bg.webp" alt="Plastic toy injection molding factory floor" loading="lazy">
+          <img src="../assets/images/stock/cap-plastic-bg.webp" alt="Plastic toy injection molding factory floor" loading="lazy" width="800" height="500">
         </div>
         <div class="cap-card-img">
-          <img src="../assets/images/stock/cap-plastic-fg.webp" alt="彩色塑膠玩具人偶" loading="lazy">
+          <img src="../assets/images/stock/cap-plastic-fg.webp" alt="彩色塑膠玩具人偶" loading="lazy" width="600" height="400">
         </div>
         <div class="cap-card-info">
           <div class="cap-card-name">塑膠玩具</div>
@@ -978,10 +980,10 @@
       <!-- Plush -->
       <a href="capabilities/plush.html" class="cap-card" data-cap="plush">
         <div class="cap-card-bg">
-          <img src="../assets/images/stock/cap-plush-bg.webp" alt="Plush toy sewing and assembly workshop" loading="lazy">
+          <img src="../assets/images/stock/cap-plush-bg.webp" alt="Plush toy sewing and assembly workshop" loading="lazy" width="800" height="533">
         </div>
         <div class="cap-card-img">
-          <img src="../assets/images/stock/cap-plush-fg.webp" alt="毛絨泰迪熊" loading="lazy">
+          <img src="../assets/images/stock/cap-plush-fg.webp" alt="毛絨泰迪熊" loading="lazy" width="600" height="900">
         </div>
         <div class="cap-card-info">
           <div class="cap-card-name">毛絨玩具</div>
@@ -992,10 +994,10 @@
       <!-- Dolls -->
       <a href="capabilities/dolls.html" class="cap-card" data-cap="dolls">
         <div class="cap-card-bg">
-          <img src="../assets/images/stock/cap-dolls-bg.webp" alt="Doll manufacturing and painting workshop" loading="lazy">
+          <img src="../assets/images/stock/cap-dolls-bg.webp" alt="Doll manufacturing and painting workshop" loading="lazy" width="800" height="1200">
         </div>
         <div class="cap-card-img">
-          <img src="../assets/images/stock/cap-dolls-fg.webp" alt="時裝娃娃" loading="lazy">
+          <img src="../assets/images/stock/cap-dolls-fg.webp" alt="時裝娃娃" loading="lazy" width="600" height="401">
         </div>
         <div class="cap-card-info">
           <div class="cap-card-name">娃娃</div>
@@ -1006,10 +1008,10 @@
       <!-- RC Vehicles -->
       <a href="capabilities/rc-vehicle.html" class="cap-card" data-cap="rc">
         <div class="cap-card-bg">
-          <img src="../assets/images/stock/cap-rc-bg.webp" alt="RC vehicle electronics assembly line" loading="lazy">
+          <img src="../assets/images/stock/cap-rc-bg.webp" alt="RC vehicle electronics assembly line" loading="lazy" width="800" height="533">
         </div>
         <div class="cap-card-img">
-          <img src="../assets/images/stock/cap-rc-fg.webp" alt="遙控玩具車" loading="lazy">
+          <img src="../assets/images/stock/cap-rc-fg.webp" alt="遙控玩具車" loading="lazy" width="600" height="338">
         </div>
         <div class="cap-card-info">
           <div class="cap-card-name">遙控車</div>
@@ -1020,10 +1022,10 @@
       <!-- Costumes -->
       <a href="capabilities/costume.html" class="cap-card" data-cap="costumes">
         <div class="cap-card-bg">
-          <img src="../assets/images/stock/cap-costumes-bg.webp" alt="Costume fabric cutting and sewing workshop" loading="lazy">
+          <img src="../assets/images/stock/cap-costumes-bg.webp" alt="Costume fabric cutting and sewing workshop" loading="lazy" width="800" height="533">
         </div>
         <div class="cap-card-img">
-          <img src="../assets/images/stock/cap-costumes-fg.webp" alt="穿著超級英雄服裝的兒童" loading="lazy">
+          <img src="../assets/images/stock/cap-costumes-fg.webp" alt="穿著超級英雄服裝的兒童" loading="lazy" width="600" height="401">
         </div>
         <div class="cap-card-info">
           <div class="cap-card-name">角色服裝</div>
@@ -1043,7 +1045,7 @@
 
   <!-- Full-bleed background image -->
   <div class="history-bg" id="historyBg">
-    <img src="../assets/images/stock/history-bg.webp" alt="Royal Regent factory aerial view" loading="lazy">
+    <img src="../assets/images/stock/history-bg.webp" alt="Royal Regent factory aerial view" loading="lazy" width="1920" height="2891">
   </div>
 
   <!-- Top bar -->
@@ -1115,7 +1117,7 @@
   <div class="footer-container">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="../assets/logo.webp" alt="Royal Regent Toys" class="footer-logo">
+        <img src="../assets/logo.webp" alt="Royal Regent Toys" class="footer-logo" width="200" height="40">
         <p>自1987年以來，一直是全球領先玩具品牌的製造夥伴。五大產品品類、四個生產基地、一個統一標準——符合全球法規。</p>
         <div class="footer-factories">
           <div class="footer-factory">
