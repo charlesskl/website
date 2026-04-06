@@ -434,6 +434,11 @@ body[data-page="contact"] .nav-links a[href="../contact.html"] {
   background: var(--brand-5);
   font-weight: 600;
 }
+body[data-page^="capabilities"] .has-dropdown:not(.lang-selector) > button {
+  color: var(--brand-dark);
+  background: var(--brand-5);
+  font-weight: 600;
+}
 
 .has-dropdown { position: relative; }
 .has-dropdown > a .arrow,
