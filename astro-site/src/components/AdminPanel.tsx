@@ -91,6 +91,7 @@ export default function AdminPanel() {
     const hash = await sha256(password);
     if (hash === PASS_HASH) {
       setAuthed(true);
+      setPassword('');
       setPwdError(false);
       loadJobs();
     } else {

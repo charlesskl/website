@@ -575,7 +575,10 @@ body[data-page^="capabilities"] .has-dropdown:not(.lang-selector) > button {
   color: var(--white) !important;
   padding: 10px 24px !important;
   border-radius: var(--radius-sm) !important;
+  font-family: var(--font-body) !important;
+  font-size: var(--text-sm) !important;
   font-weight: 600 !important;
+  letter-spacing: 0.01em !important;
   box-shadow: 0 0 0 2px rgba(124,179,66,0.3) !important;
   transition: transform 0.3s var(--ease-spring), box-shadow 0.3s !important;
 }
@@ -613,10 +616,13 @@ body[data-page^="capabilities"] .has-dropdown:not(.lang-selector) > button {
 .nav-item button {
   background: none;
   border: none;
-  font: inherit;
-  color: inherit;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-muted);
   cursor: default;
-  padding: 0;
+  padding: 10px 16px;
+  letter-spacing: 0.01em;
 }
 
 .nav-links button:focus-visible,

@@ -121,6 +121,7 @@ export default function ContactForm({ lang }: Props) {
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email.value)) {
       errors.email = t.invalidEmail;
     }
+    if (!fields.subject.value.trim()) errors.subject = t.required;
     if (!fields.message.value.trim()) errors.message = t.required;
 
     if (Object.keys(errors).length > 0) {

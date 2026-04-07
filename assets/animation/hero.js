@@ -216,10 +216,11 @@
       for (var i = 0; i < mutations.length; i++) {
         if (mutations[i].type === 'attributes' && mutations[i].attributeName === 'class') {
           if (loader.classList.contains('exit-bg')) {
-            // Preloader background starting to fade — begin hero entrance
-            tl.play();
+            // Preloader background starting to fade — delay hero entrance
+            // slightly so loader is partially transparent before chars animate
             observer.disconnect();
             observer = null;
+            setTimeout(function () { tl.play(); }, 200);
             return;
           }
         }
