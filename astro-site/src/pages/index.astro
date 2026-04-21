@@ -23,6 +23,59 @@ const marqueeItems = [
   'Spinning Tops', 'Water Guns', 'Blaster', 'Stuffed Plush', 'Character Plush',
   'Weighted Plush', 'Musical / Sound Plush', 'Interactive Plush', 'Costumes',
 ];
+
+const capabilities = [
+  {
+    id: 'plastic',
+    num: '01',
+    tag: 'PLASTIC',
+    headline: 'Injection-molded precision.',
+    body: 'Single-shot playsets to multi-material collectibles. Tooled, molded, assembled, and finished without leaving the floor.',
+    href: '/capabilities/plastic-toys.html',
+    image: '/assets/injection-molding.webp',
+    alt: 'Injection molding of plastic toy components',
+  },
+  {
+    id: 'plush',
+    num: '02',
+    tag: 'PLUSH',
+    headline: 'Soft goods, sewn to brand.',
+    body: 'Short pile, long pile, weighted, interactive. Production scale that still carries a hand-finish.',
+    href: '/capabilities/plush.html',
+    image: '/assets/sewing-production.webp',
+    alt: 'Plush toy sewing production line',
+  },
+  {
+    id: 'dolls',
+    num: '03',
+    tag: 'DOLLS',
+    headline: 'Character detail, end-to-end.',
+    body: 'Fashion, baby, and collector dolls — with hair-rooting, face painting, and costume work all finished in-house.',
+    href: '/capabilities/dolls.html',
+    image: '/assets/hair-rooting.webp',
+    alt: 'Doll hair-rooting craftsmanship',
+  },
+  {
+    id: 'rc',
+    num: '04',
+    tag: 'RC VEHICLES',
+    headline: 'Our hardest category.',
+    body: 'Mechatronics, tooling, electronics, and testing under one roof. The reason brands bring their difficult specs to us.',
+    href: '/capabilities/rc-vehicle.html',
+    image: '/assets/rc-assembly.webp',
+    alt: 'RC vehicle assembly line',
+  },
+  {
+    id: 'costumes',
+    num: '05',
+    tag: 'COSTUMES',
+    headline: 'Theatrical wear, production-grade.',
+    body: 'Licensed character, seasonal, and dress-up. Cut, sewn, trimmed, and certified to US and EU safety standards.',
+    href: '/capabilities/costume.html',
+    image: '/assets/costume.webp',
+    alt: 'Costume manufacturing at Royal Regent',
+  },
+];
 ---
 
 <BaseLayout
@@ -64,25 +117,24 @@ const marqueeItems = [
 
   <Nav lang={lang} />
 
-  <!-- HERO -->
-  <section class="hero page-reveal" id="hero">
-    <div class="hero-bg">
-      <div class="parallax-layer parallax-bg">
-        <div class="hero-grid-pattern"></div>
-      </div>
-      <div class="parallax-layer parallax-mid">
-        <div class="aurora">
-          <div class="aurora-blob"></div>
-          <div class="aurora-blob"></div>
-          <div class="aurora-blob"></div>
-        </div>
-      </div>
-      <div class="parallax-layer parallax-fg">
-        <canvas id="heroParticles"></canvas>
-      </div>
+  <!-- HERO — Full-bleed video -->
+  <section class="hero hero-video-section page-reveal" id="hero">
+    <div class="hero-video-wrap">
+      <video
+        class="hero-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        aria-hidden="true"
+      >
+        <source src="/assets/videos/hero.mp4" type="video/mp4">
+      </video>
+      <div class="hero-video-overlay"></div>
     </div>
 
-    <div class="hero-content parallax-layer parallax-headline">
+    <div class="hero-content">
       <div class="hero-tag" id="heroTag">OEM Toy Manufacturer · Est. 1987</div>
       <h1 class="hero-title" id="heroTitle">
         Precision.<br>
@@ -95,8 +147,6 @@ const marqueeItems = [
         <a href="/about.html" class="btn btn-outline magnetic" data-strength="0.2">Our Story →</a>
       </div>
     </div>
-
-    <div class="hero-3d-container" id="hero3dContainer"></div>
 
     <div class="hero-scroll-hint" id="heroScroll">
       <span>Scroll</span>
@@ -116,7 +166,7 @@ const marqueeItems = [
   <!-- Main content wrapper (for footer reveal) -->
   <div class="main-content" id="main-content">
 
-    <!-- INTRO STATEMENT -->
+    <!-- INTRO STATEMENT (unchanged) -->
     <section class="intro-statement clip-section" id="introStatement">
       <div class="statement-grid">
         <div class="statement-left">
@@ -134,87 +184,62 @@ const marqueeItems = [
       </div>
     </section>
 
-    <!-- CAPABILITIES -->
-    <section class="caps-section clip-section" id="capsSection">
-      <div class="container">
+    <!-- CAPABILITIES — Sticky scrollytelling -->
+    <section class="caps-section caps-scrolly-section clip-section" id="capsSection">
+      <div class="container caps-scrolly-header">
         <div class="section-label reveal-up">Manufacturing Capabilities</div>
         <h2 class="section-title reveal-up">Five categories.<br><span>One trusted partner.</span></h2>
       </div>
 
-      <div class="container">
-        <div class="caps-grid" id="capsGrid">
-          <a href="/capabilities/plastic-toys.html" class="cap-card" data-cap="plastic">
-            <div class="cap-card-bg">
-              <img src="/assets/images/stock/cap-plastic-bg.webp" alt="Colorful plastic toy bricks" loading="lazy" width="800" height="500">
-            </div>
-            <div class="cap-card-img">
-              <img src="/assets/images/stock/cap-plastic-fg.webp" alt="Colorful plastic toy figures" loading="lazy" width="600" height="400">
-            </div>
-            <div class="cap-card-info">
-              <div class="cap-card-name">Plastic Toys</div>
-              <div class="cap-card-link">Explore this capability <span>→</span></div>
-            </div>
-          </a>
+      <div class="caps-scrolly">
+        <div class="caps-scrolly-inner">
+          <!-- Left column: scrolling text blocks -->
+          <div class="caps-text-col">
+            {capabilities.map((cap, i) => (
+              <div class={`cap-block${i === 0 ? ' active' : ''}`} data-index={i}>
+                <img class="cap-block-img-mobile" src={cap.image} alt={cap.alt} loading="lazy" width="800" height="1000">
+                <div class="cap-eyebrow">{cap.num} — {cap.tag}</div>
+                <h3 class="cap-headline">{cap.headline}</h3>
+                <p class="cap-body">{cap.body}</p>
+                <a href={cap.href} class="cap-link">Explore capability <span>→</span></a>
+              </div>
+            ))}
+          </div>
 
-          <a href="/capabilities/plush.html" class="cap-card" data-cap="plush">
-            <div class="cap-card-bg">
-              <img src="/assets/images/stock/cap-plush-bg.webp" alt="Plush toy workshop" loading="lazy" width="800" height="533">
+          <!-- Right column: sticky layered visuals -->
+          <div class="caps-visual-col">
+            <div class="caps-visual-sticky">
+              {capabilities.map((cap, i) => (
+                <img
+                  class={`cap-visual${i === 0 ? ' active' : ''}`}
+                  data-index={i}
+                  src={cap.image}
+                  alt={cap.alt}
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  width="800"
+                  height="1000"
+                >
+              ))}
             </div>
-            <div class="cap-card-img">
-              <img src="/assets/images/stock/cap-plush-fg.webp" alt="Plush teddy bear" loading="lazy" width="600" height="900">
-            </div>
-            <div class="cap-card-info">
-              <div class="cap-card-name">Plush</div>
-              <div class="cap-card-link">Explore this capability <span>→</span></div>
-            </div>
-          </a>
-
-          <a href="/capabilities/dolls.html" class="cap-card" data-cap="dolls">
-            <div class="cap-card-bg">
-              <img src="/assets/images/stock/cap-dolls-bg.webp" alt="Doll manufacturing" loading="lazy" width="800" height="1200">
-            </div>
-            <div class="cap-card-img">
-              <img src="/assets/images/stock/cap-dolls-fg.webp" alt="Fashion dolls" loading="lazy" width="600" height="401">
-            </div>
-            <div class="cap-card-info">
-              <div class="cap-card-name">Dolls</div>
-              <div class="cap-card-link">Explore this capability <span>→</span></div>
-            </div>
-          </a>
-
-          <a href="/capabilities/rc-vehicle.html" class="cap-card" data-cap="rc">
-            <div class="cap-card-bg">
-              <img src="/assets/images/stock/cap-rc-bg.webp" alt="RC vehicle parts" loading="lazy" width="800" height="533">
-            </div>
-            <div class="cap-card-img">
-              <img src="/assets/images/stock/cap-rc-fg.webp" alt="Toy RC car" loading="lazy" width="600" height="338">
-            </div>
-            <div class="cap-card-info">
-              <div class="cap-card-name">RC Vehicles</div>
-              <div class="cap-card-link">Explore this capability <span>→</span></div>
-            </div>
-          </a>
-
-          <a href="/capabilities/costume.html" class="cap-card" data-cap="costumes">
-            <div class="cap-card-bg">
-              <img src="/assets/images/stock/cap-costumes-bg.webp" alt="Costume display" loading="lazy" width="800" height="533">
-            </div>
-            <div class="cap-card-img">
-              <img src="/assets/images/stock/cap-costumes-fg.webp" alt="Child in superhero costume" loading="lazy" width="600" height="401">
-            </div>
-            <div class="cap-card-info">
-              <div class="cap-card-name">Costumes</div>
-              <div class="cap-card-link">Explore this capability <span>→</span></div>
-            </div>
-          </a>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- HISTORY -->
+    <!-- HISTORY — Video background -->
     <section class="history-section clip-section" id="historySection" data-milestones={JSON.stringify(milestones)}>
-      <div class="history-bg" id="historyBg">
-        <img src="/assets/images/stock/history-bg.webp" alt="Child playing with toys" loading="lazy" width="1920" height="2891">
+      <div class="history-bg history-bg-video" id="historyBg">
+        <video
+          class="history-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          aria-hidden="true"
+        >
+          <source src="/assets/videos/history.mp4" type="video/mp4">
+        </video>
       </div>
 
       <div class="history-top">
@@ -264,5 +289,59 @@ const marqueeItems = [
   <Fragment slot="page-scripts">
     <script is:inline src="/assets/home-canvas.js"></script>
     <script is:inline src="/assets/home-animations.js"></script>
+    <script is:inline>
+      (function () {
+        'use strict';
+
+        // ── Pause background videos when off-screen (perf) ──
+        var videos = document.querySelectorAll('.hero-video, .history-video');
+        if ('IntersectionObserver' in window) {
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              var v = e.target;
+              if (e.isIntersecting) { v.play().catch(function(){}); }
+              else { v.pause(); }
+            });
+          }, { threshold: 0.1 });
+          videos.forEach(function (v) { io.observe(v); });
+        }
+
+        // ── Capabilities scrollytelling ──
+        var blocks = Array.prototype.slice.call(document.querySelectorAll('.cap-block'));
+        var visuals = Array.prototype.slice.call(document.querySelectorAll('.caps-visual-sticky .cap-visual'));
+        if (!blocks.length || !visuals.length) return;
+
+        function setActive(i) {
+          blocks.forEach(function (b, j) { b.classList.toggle('active', j === i); });
+          visuals.forEach(function (v, j) { v.classList.toggle('active', j === i); });
+        }
+
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+          gsap.registerPlugin(ScrollTrigger);
+          blocks.forEach(function (block, i) {
+            ScrollTrigger.create({
+              trigger: block,
+              start: 'top 55%',
+              end: 'bottom 55%',
+              onEnter: function () { setActive(i); },
+              onEnterBack: function () { setActive(i); },
+            });
+          });
+        } else {
+          // Fallback: IntersectionObserver
+          if ('IntersectionObserver' in window) {
+            var cio = new IntersectionObserver(function (entries) {
+              entries.forEach(function (e) {
+                if (e.isIntersecting) {
+                  var idx = parseInt(e.target.getAttribute('data-index'), 10);
+                  if (!isNaN(idx)) setActive(idx);
+                }
+              });
+            }, { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
+            blocks.forEach(function (b) { cio.observe(b); });
+          }
+        }
+      })();
+    </script>
   </Fragment>
 </BaseLayout>

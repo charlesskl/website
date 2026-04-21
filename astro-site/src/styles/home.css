@@ -705,3 +705,245 @@ footer.footer-reveal {
   animation: fallbackReveal 0.6s ease forwards;
   animation-delay: 0.8s;
 }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   HERO VIDEO — full-bleed background video
+   Overrides the old parallax hero visuals; hero-content unchanged.
+   ═══════════════════════════════════════════════════════════════ */
+.hero-video-section {
+  background: #0a0a0a;
+  min-height: 100vh;
+}
+@supports (min-height: 100dvh) {
+  .hero-video-section { min-height: 100dvh; }
+}
+.hero-video-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* Gradient overlay for text readability without hiding the video */
+.hero-video-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 45%, rgba(0,0,0,0) 80%),
+    linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.35) 100%);
+  pointer-events: none;
+}
+/* Light-on-dark hero text */
+.hero-video-section .hero-content { position: relative; z-index: 10; }
+.hero-video-section .hero-title { color: #fff; }
+.hero-video-section .hero-sub { color: rgba(255, 255, 255, 0.88); }
+.hero-video-section .hero-tag { color: #A8D66F; }
+.hero-video-section .hero-scroll-hint { color: rgba(255, 255, 255, 0.85); }
+.hero-video-section .hero-scroll-hint span { color: inherit; }
+.hero-video-section .btn-outline {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.7);
+}
+.hero-video-section .btn-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #fff;
+}
+
+/* Reduced motion: hide the video, show a brand gradient */
+@media (prefers-reduced-motion: reduce) {
+  .hero-video { display: none; }
+  .hero-video-section { background: var(--gradient-hero, linear-gradient(135deg, #0f1a0a 0%, #1b3310 100%)); }
+}
+
+/* Mobile: video still works but shorter */
+@media (max-width: 768px) {
+  .hero-video-section { min-height: 70vh; align-items: flex-end; padding-top: calc(var(--nav-h) + 40px); }
+  .hero-video-section .hero-content { padding-bottom: 48px; }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   CAPABILITIES — Sticky scrollytelling
+   Left column: 5 text blocks scroll through.
+   Right column: sticky layered images cross-fade on active block.
+   ═══════════════════════════════════════════════════════════════ */
+.caps-scrolly-section {
+  padding: var(--space-lg) 0 var(--space-2xl);
+  background: #fff;
+  position: relative;
+  overflow: visible;
+}
+.caps-scrolly-header {
+  margin-bottom: 40px;
+}
+
+.caps-scrolly {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+.caps-scrolly-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 80px;
+  align-items: start;
+}
+
+/* Left: stacked scrolling blocks */
+.caps-text-col {
+  display: flex;
+  flex-direction: column;
+}
+.cap-block {
+  min-height: 70vh;
+  padding: 12vh 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: opacity 0.45s cubic-bezier(.16,1,.3,1);
+}
+.cap-block-img-mobile {
+  display: none;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  margin-bottom: 24px;
+  border-radius: 4px;
+}
+.cap-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: #8b9a7b;
+  margin-bottom: 20px;
+  transition: color 0.5s ease;
+}
+.cap-headline {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4vw, 58px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: #c8d2bf;
+  margin: 0 0 24px 0;
+  transition: color 0.5s cubic-bezier(.16,1,.3,1);
+}
+.cap-body {
+  font-size: var(--text-base);
+  color: var(--text-muted);
+  max-width: 460px;
+  line-height: 1.75;
+  margin: 0 0 24px 0;
+  opacity: 0.55;
+  transition: opacity 0.45s ease;
+}
+.cap-link {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--brand);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.45s cubic-bezier(.16,1,.3,1), transform 0.45s cubic-bezier(.16,1,.3,1);
+}
+.cap-link span { transition: transform 0.3s ease; }
+.cap-link:hover span { transform: translateX(4px); }
+
+.cap-block.active .cap-eyebrow { color: var(--brand); }
+.cap-block.active .cap-headline { color: #1a1a1a; }
+.cap-block.active .cap-body { opacity: 1; }
+.cap-block.active .cap-link { opacity: 1; transform: translateY(0); }
+
+/* Right: sticky image stack */
+.caps-visual-col {
+  position: relative;
+}
+.caps-visual-sticky {
+  position: sticky;
+  top: calc(var(--nav-h) + 40px);
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  max-height: calc(100vh - var(--nav-h) - 80px);
+  overflow: hidden;
+  border-radius: 6px;
+  background: #0f1a0a;
+}
+.cap-visual {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.05);
+  transition:
+    opacity 0.7s cubic-bezier(.16,1,.3,1),
+    transform 1.4s cubic-bezier(.16,1,.3,1);
+  will-change: opacity, transform;
+}
+.cap-visual.active {
+  opacity: 1;
+  transform: scale(1);
+}
+/* Subtle duotone wash on inactive state (pulled toward brand green) */
+.caps-visual-sticky::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.25) 100%);
+  z-index: 2;
+}
+
+/* Mobile / narrow: stack vertically, images go inline per block */
+@media (max-width: 900px) {
+  .caps-scrolly-inner {
+    grid-template-columns: 1fr;
+    row-gap: 0;
+  }
+  .caps-visual-col { display: none; }
+  .cap-block {
+    min-height: auto;
+    padding: 32px 0 48px;
+    border-bottom: 1px solid var(--border, rgba(0,0,0,0.08));
+    opacity: 1;
+  }
+  .cap-block:last-child { border-bottom: none; }
+  .cap-block-img-mobile { display: block; }
+  .cap-block .cap-eyebrow { color: var(--brand); }
+  .cap-block .cap-headline { color: #1a1a1a; font-size: clamp(28px, 7vw, 38px); }
+  .cap-block .cap-body { opacity: 1; }
+  .cap-block .cap-link { opacity: 1; transform: none; }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   HISTORY VIDEO — replaces the child-face background image
+   ═══════════════════════════════════════════════════════════════ */
+.history-bg-video video.history-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.05);
+  z-index: 0;
+}
+/* The existing .history-bg::before + ::after overlays still apply */
+
+@media (prefers-reduced-motion: reduce) {
+  .history-video { display: none; }
+  .history-bg-video { background: linear-gradient(135deg, #0f1a0a, #1b3310); }
+}
