@@ -725,8 +725,8 @@
   function initLanguageSelector() {
     var path = window.location.pathname;
     var currentLang = 'en';
-    if (path.indexOf('/cn/') !== -1) currentLang = 'cn';
-    else if (path.indexOf('/id/') !== -1) currentLang = 'id';
+    if (path.indexOf('/cn/') !== -1 || path.match(/\/cn\.html$/)) currentLang = 'cn';
+    else if (path.indexOf('/id/') !== -1 || path.match(/\/id\.html$/)) currentLang = 'id';
 
     // Mark active language in dropdown and set real hrefs for SEO / no-JS fallback
     var langLinks = document.querySelectorAll('.lang-dropdown a');
@@ -763,10 +763,19 @@
   function getLangHref(targetLang, currentLang) {
     var path = window.location.pathname;
     var cleanPath = path;
-    if (currentLang !== 'en') {
+    // Handle locale homepage URLs (e.g., /cn.html → /index.html)
+    var isLocaleHome = path.match(/\/(cn|id)\.html$/);
+    if (isLocaleHome) {
+      cleanPath = path.replace(/\/(cn|id)\.html$/, '/index.html');
+    } else if (currentLang !== 'en') {
       cleanPath = cleanPath.replace('/' + currentLang + '/', '/');
     }
+    var isHomePage = cleanPath === '/' || cleanPath.match(/\/index\.html$/);
     if (targetLang === 'en') return cleanPath;
+    if (isHomePage) {
+      var homeBase = cleanPath.replace(/\/?(index\.html)?$/, '');
+      return (homeBase || '') + '/' + targetLang + '.html';
+    }
     var parts = cleanPath.split('/');
     for (var i = 0; i < parts.length; i++) {
       if (parts[i].indexOf('.html') !== -1 || parts[i] === 'capabilities') {
@@ -774,8 +783,7 @@
         return parts.join('/');
       }
     }
-    var base = cleanPath.endsWith('/') ? cleanPath : cleanPath + '/';
-    return base + targetLang + '/';
+    return '/' + targetLang + '.html';
   }
 
   function navigateToLang(targetLang, currentLang) {
@@ -789,29 +797,29 @@
 
     // Strip current lang from path to get the "english" version
     var cleanPath = path;
-    if (currentLang !== 'en') {
+    // Handle locale homepage URLs (e.g., /cn.html → /index.html)
+    var isLocaleHome = path.match(/\/(cn|id)\.html$/);
+    if (isLocaleHome) {
+      cleanPath = path.replace(/\/(cn|id)\.html$/, '/index.html');
+    } else if (currentLang !== 'en') {
       // Replace first occurrence of /cn/ or /id/ with /
       cleanPath = cleanPath.replace('/' + currentLang + '/', '/');
     }
 
+    // Detect if we're on a homepage (index.html or root /)
+    var isHomePage = cleanPath === '/' || cleanPath.match(/\/index\.html$/);
+
     if (targetLang === 'en') {
       window.location.href = cleanPath;
+    } else if (isHomePage) {
+      // Homepage: navigate to /cn.html or /id.html
+      var homeBase = cleanPath.replace(/\/?(index\.html)?$/, '');
+      window.location.href = (homeBase || '') + '/' + targetLang + '.html';
     } else {
-      // Insert target lang after the base path but before the rest
-      // Find the position after the base directory (GitHub Pages or root)
-      // For paths like /website/capabilities/plastic-toys.html
-      // we need /website/cn/capabilities/plastic-toys.html
-      // For paths like /capabilities/plastic-toys.html
-      // we need /cn/capabilities/plastic-toys.html
-      // For paths like /index.html → /cn/index.html
-
-      // Dynamic detection: find the lang insertion point by looking for
-      // the first path segment that is a known page file or subdirectory.
-      // This avoids hardcoding page names and works with any new pages.
+      // Subpages: insert lang prefix before the page path
       var parts = cleanPath.split('/');
       var insertIdx = -1;
       for (var i = 0; i < parts.length; i++) {
-        // A segment ending in .html or a known subdirectory containing pages
         if (parts[i].indexOf('.html') !== -1 || parts[i] === 'capabilities') {
           insertIdx = i;
           break;
@@ -822,9 +830,7 @@
         parts.splice(insertIdx, 0, targetLang);
         window.location.href = parts.join('/');
       } else {
-        // Fallback: append lang + index
-        var base = cleanPath.endsWith('/') ? cleanPath : cleanPath + '/';
-        window.location.href = base + targetLang + '/';
+        window.location.href = '/' + targetLang + '.html';
       }
     }
   }
@@ -839,10 +845,18 @@
     var t = bannerTexts[current] || bannerTexts.en;
     var banner = document.createElement('div');
     banner.className = 'lang-banner';
-    banner.innerHTML =
-      '<span>' + t.msg + names[preferred] + '</span>' +
-      '<a href="#" id="langBannerSwitch">' + t.btn + '</a>' +
-      '<button id="langBannerDismiss">\u2715</button>';
+    var span = document.createElement('span');
+    span.textContent = t.msg + (names[preferred] || '');
+    var switchLink = document.createElement('a');
+    switchLink.href = '#';
+    switchLink.id = 'langBannerSwitch';
+    switchLink.textContent = t.btn;
+    var dismissBtn = document.createElement('button');
+    dismissBtn.id = 'langBannerDismiss';
+    dismissBtn.textContent = '\u2715';
+    banner.appendChild(span);
+    banner.appendChild(switchLink);
+    banner.appendChild(dismissBtn);
     document.body.appendChild(banner);
     requestAnimationFrame(function() {
       requestAnimationFrame(function() { banner.classList.add('visible'); });

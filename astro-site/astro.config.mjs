@@ -6,6 +6,9 @@ import react from '@astrojs/react';
 export default defineConfig({
   site: 'https://royalregentgroup.com',
   integrations: [react()],
+  build: {
+    format: 'file', // Preserve .html URLs to match original site structure
+  },
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'cn', 'id'],
