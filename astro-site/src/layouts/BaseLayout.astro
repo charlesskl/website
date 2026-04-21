@@ -47,6 +47,7 @@ const hreflangId = isHome ? `${base}/id.html` : `${base}/id${pagePath}`;
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <meta name="description" content={description}>
+  <meta name="theme-color" content="#7CB342">
   <title>{title}</title>
 
   <!-- Canonical & Hreflang -->
@@ -63,6 +64,9 @@ const hreflangId = isHome ? `${base}/id.html` : `${base}/id${pagePath}`;
   <meta property="og:url" content={canonical}>
   <meta property="og:site_name" content="Royal Regent Toys">
   <meta property="og:image" content={ogImage}>
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
   <meta property="og:locale" content={ogLocale}>
   {ogLocaleAlternates.map((locale) => (
     <meta property="og:locale:alternate" content={locale} />
@@ -87,6 +91,9 @@ const hreflangId = isHome ? `${base}/id.html` : `${base}/id${pagePath}`;
   <link rel="preload" href="/fonts/clash-display-700.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/satoshi-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/satoshi-700.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- Preload critical assets -->
+  <link rel="preload" href="/assets/logo.webp" as="image" type="image/webp">
 
   <!-- Splitting CSS -->
   <link rel="stylesheet" href="https://unpkg.com/splitting@1.0.6/dist/splitting.css" integrity="sha384-6z/M4zCNHzM59q8BnJ1btvx5I7ArdKNNBgb/V4m7ZTUPI4e2SVF0o5IQAGCO414a" crossorigin="anonymous">
