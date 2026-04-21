@@ -1318,10 +1318,10 @@
       // Step 1: fade out counter + progress line
       loader.classList.add('exit-counter');
 
-      // Step 2: fade out logo (after counter gone)
+      // Step 2: fade out logo (overlap with counter fade)
       setTimeout(function() {
         loader.classList.add('exit-logo');
-      }, 300);
+      }, 150);
 
       // Step 3: fade out loader background → reveal page
       setTimeout(function() {
@@ -1335,13 +1335,13 @@
             el.classList.add('revealed');
           }, i * 120);
         });
-      }, 700);
+      }, 400);
 
       // Clean up
       setTimeout(function() {
         loader.classList.add('dismissed');
         if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
-      }, 1600);
+      }, 1300);
     }
 
     // Push to 100% after DURATION or when fonts ready (whichever is later)

@@ -84,16 +84,13 @@ export default function LanguageSwitcher({ lang }: Props) {
         <ul className="dropdown lang-dropdown" style={{ display: 'block' }}>
           {languages.map((l) => (
             <li key={l.code}>
-              <a
-                href="#"
+              <button
+                type="button"
                 data-lang={l.code}
-                onClick={(e) => {
-                  e.preventDefault();
-                  switchLang(l.code);
-                }}
+                onClick={() => switchLang(l.code)}
               >
                 {l.label}
-              </a>
+              </button>
             </li>
           ))}
         </ul>

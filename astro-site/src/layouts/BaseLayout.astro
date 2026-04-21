@@ -28,10 +28,13 @@ const base = 'https://royalregentgroup.com';
 
 // Derive hreflang URLs from canonical — strip base + locale prefix to get page path
 const path = canonical.replace(base, '');
-const pagePath = path.replace(/^\/(cn|id)\//, '/');
-const hreflangEn = `${base}${pagePath}`;
-const hreflangCn = `${base}/cn${pagePath}`;
-const hreflangId = `${base}/id${pagePath}`;
+// Detect if this is a locale homepage (/cn.html, /id.html) or root (/)
+const isHome = path === '/' || /^\/(cn|id)\.html$/.test(path);
+// For subpages, strip locale prefix to get the language-neutral page path
+const pagePath = isHome ? '/' : path.replace(/^\/(cn|id)\//, '/');
+const hreflangEn = isHome ? `${base}/` : `${base}${pagePath}`;
+const hreflangCn = isHome ? `${base}/cn.html` : `${base}/cn${pagePath}`;
+const hreflangId = isHome ? `${base}/id.html` : `${base}/id${pagePath}`;
 ---
 
 <!DOCTYPE html>
@@ -92,6 +95,9 @@ const hreflangId = `${base}/id${pagePath}`;
   <link rel="preload" href="/fonts/satoshi-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/satoshi-700.woff2" as="font" type="font/woff2" crossorigin>
 
+  <!-- Preload critical assets -->
+  <link rel="preload" href="/assets/logo.webp" as="image" type="image/webp">
+
   <!-- Splitting CSS -->
   <link rel="stylesheet" href="https://unpkg.com/splitting@1.0.6/dist/splitting.css" integrity="sha384-6z/M4zCNHzM59q8BnJ1btvx5I7ArdKNNBgb/V4m7ZTUPI4e2SVF0o5IQAGCO414a" crossorigin="anonymous">
 
@@ -140,7 +146,7 @@ const hreflangId = `${base}/id${pagePath}`;
   <slot />
 
   <!-- CDN Dependencies -->
-  <script is:inline src="https://cdn.jsdelivr.net/npm/lenis@1.3.18/dist/lenis.min.js"></script>
+  <script is:inline src="https://cdn.jsdelivr.net/npm/lenis@1.3.18/dist/lenis.min.js" integrity="sha384-KkYh7KGBvRRt0VqhEwR3gggZKwN2tGznSiszALb8QHSvgA8o8/OfHyFZhydgtzNH" crossorigin="anonymous"></script>
   <script is:inline src="https://unpkg.com/splitting@1.0.6/dist/splitting.min.js" integrity="sha384-taxnKSnzdVS5gZB4jZcieFZlmBPQMFqhdEmCScZsrIFCxX8Zizq4fKJJH5kBwMXT" crossorigin="anonymous"></script>
 
   <!-- Shared Interaction Engine -->
@@ -150,12 +156,12 @@ const hreflangId = `${base}/id${pagePath}`;
   <slot name="page-scripts" />
 
   <!-- Three.js (required by webgl-bg.js) -->
-  <script is:inline src="https://cdn.jsdelivr.net/npm/three@0.183.0/build/three.min.js"></script>
+  <script is:inline src="https://cdn.jsdelivr.net/npm/three@0.183.0/build/three.min.js" integrity="sha384-ZiNlHCo+yYOH/KHiXjwmn/CbGsC3Qyj4zcxMFoO6zgdInr3XteSQob6zFQV1HfT0" crossorigin="anonymous"></script>
 
   <!-- GSAP Core -->
-  <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
-  <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/ScrollTrigger.min.js"></script>
-  <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/SplitText.min.js"></script>
+  <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js" integrity="sha384-sG0Hv1tP1lZCk9KQmrIbY/XNwi+OY84GQqhMscbnsoBFqAz8KNCil1kvfL3Hbbk2" crossorigin="anonymous"></script>
+  <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/ScrollTrigger.min.js" integrity="sha384-xNHNOfrykny9oFwnmpfNbkSc6isny38d1GZvTRVuFV0l9fTMIZKhULvomyQJSMRl" crossorigin="anonymous"></script>
+  <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/SplitText.min.js" integrity="sha384-iJQU/7haAHHrfeX4o0uooRF7Po6K7IhD+YU5dustu1NfalmSBYI7pbX6wAtx2f9j" crossorigin="anonymous"></script>
   <script is:inline src="/assets/animations.js"></script>
 
   <!-- Animation Module System (all 21 modules, same load order as original) -->

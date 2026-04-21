@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 type Lang = 'en' | 'cn' | 'id';
 
 interface Job {
+  id: string;
   title: string;
   department: string;
   location: string;
@@ -107,8 +108,8 @@ export default function CareersJobBoard({ lang }: Props) {
       {/* Job grid */}
       <div className="job-grid">
         {error && <p style={{ color: 'var(--text-muted)' }}>{t.loadError}</p>}
-        {filtered.map((job, i) => (
-          <div key={`${job.title}-${i}`} className="job-card reveal-up" data-dept={job.department}>
+        {filtered.map((job) => (
+          <div key={job.id} className="job-card reveal-up" data-dept={job.department}>
             <div className="job-dept">{job.department}</div>
             <h3>{job.title}</h3>
             <div className="job-meta">
