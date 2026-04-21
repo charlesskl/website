@@ -769,163 +769,265 @@ footer.footer-reveal {
 
 
 /* ═══════════════════════════════════════════════════════════════
-   CAPABILITIES — Sticky scrollytelling
-   Left column: 5 text blocks scroll through.
-   Right column: sticky layered images cross-fade on active block.
+   CAPABILITIES — Pinned scrollytelling
+   Section pins to viewport; scroll progress advances through 5
+   categories (one visible at a time); unpins to history after 5/5.
    ═══════════════════════════════════════════════════════════════ */
-.caps-scrolly-section {
-  padding: var(--space-lg) 0 var(--space-2xl);
+.caps-pin-section {
   background: #fff;
   position: relative;
-  overflow: visible;
-}
-.caps-scrolly-header {
-  margin-bottom: 40px;
 }
 
-.caps-scrolly {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 var(--space-md);
-}
-.caps-scrolly-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 80px;
-  align-items: start;
+.caps-pin-header {
+  padding: var(--space-lg) var(--space-md) 32px;
 }
 
-/* Left: stacked scrolling blocks */
-.caps-text-col {
-  display: flex;
-  flex-direction: column;
-}
-.cap-block {
-  min-height: 70vh;
-  padding: 12vh 0;
+/* GSAP pins .caps-pin-inner for 5x viewport of scroll */
+.caps-pin-wrap { position: relative; }
+.caps-pin-inner {
+  width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  transition: opacity 0.45s cubic-bezier(.16,1,.3,1);
+  padding: calc(var(--nav-h) + 20px) 0 48px;
+  background: #fff;
+  overflow: hidden;
 }
-.cap-block-img-mobile {
-  display: none;
+@supports (height: 100dvh) {
+  .caps-pin-inner { height: 100dvh; }
+}
+
+.caps-pin-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 80px;
+  align-items: center;
+  max-width: 1400px;
   width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  margin-bottom: 24px;
-  border-radius: 4px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
 }
-.cap-eyebrow {
+
+/* LEFT: one text visible at a time, cross-fade */
+.caps-text-slot {
+  position: relative;
+  min-height: 380px;
+}
+.cap-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.55s cubic-bezier(.16,1,.3,1), transform 0.55s cubic-bezier(.16,1,.3,1);
+  pointer-events: none;
+}
+.cap-text.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.cap-text .cap-eyebrow {
   font-family: var(--font-body);
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.22em;
-  color: #8b9a7b;
-  margin-bottom: 20px;
-  transition: color 0.5s ease;
+  color: var(--brand);
+  margin-bottom: 24px;
 }
-.cap-headline {
+.cap-text .cap-headline {
   font-family: var(--font-display);
-  font-size: clamp(36px, 4vw, 58px);
+  font-size: clamp(36px, 4.5vw, 64px);
   font-weight: 700;
   letter-spacing: -0.02em;
-  line-height: 1.05;
-  color: #c8d2bf;
+  line-height: 1.03;
+  color: #1a1a1a;
   margin: 0 0 24px 0;
-  transition: color 0.5s cubic-bezier(.16,1,.3,1);
 }
-.cap-body {
+.cap-text .cap-body {
   font-size: var(--text-base);
   color: var(--text-muted);
-  max-width: 460px;
+  max-width: 480px;
   line-height: 1.75;
-  margin: 0 0 24px 0;
-  opacity: 0.55;
-  transition: opacity 0.45s ease;
+  margin: 0 0 28px 0;
 }
-.cap-link {
+.cap-text .cap-link {
   font-family: var(--font-display);
-  font-size: 0.95rem;
+  font-size: 0.98rem;
   font-weight: 600;
   color: var(--brand);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   align-self: flex-start;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.45s cubic-bezier(.16,1,.3,1), transform 0.45s cubic-bezier(.16,1,.3,1);
 }
-.cap-link span { transition: transform 0.3s ease; }
-.cap-link:hover span { transform: translateX(4px); }
+.cap-text .cap-link span { transition: transform 0.3s ease; }
+.cap-text .cap-link:hover span { transform: translateX(4px); }
 
-.cap-block.active .cap-eyebrow { color: var(--brand); }
-.cap-block.active .cap-headline { color: #1a1a1a; }
-.cap-block.active .cap-body { opacity: 1; }
-.cap-block.active .cap-link { opacity: 1; transform: translateY(0); }
-
-/* Right: sticky image stack */
-.caps-visual-col {
+/* RIGHT: layered bg+fg per category; cross-fade between stacks */
+.caps-visual-slot {
   position: relative;
-}
-.caps-visual-sticky {
-  position: sticky;
-  top: calc(var(--nav-h) + 40px);
   width: 100%;
-  aspect-ratio: 4 / 5;
-  max-height: calc(100vh - var(--nav-h) - 80px);
+  aspect-ratio: 3 / 4;
+  max-height: calc(100vh - var(--nav-h) - 140px);
+  max-width: 560px;
+  border-radius: 4px;
   overflow: hidden;
-  border-radius: 6px;
-  background: #0f1a0a;
+  background: #f5f5f5;
+  justify-self: end;
 }
-.cap-visual {
+.cap-visual-stack {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
   opacity: 0;
-  transform: scale(1.05);
-  transition:
-    opacity 0.7s cubic-bezier(.16,1,.3,1),
-    transform 1.4s cubic-bezier(.16,1,.3,1);
+  transform: scale(1.04);
+  transition: opacity 0.7s cubic-bezier(.16,1,.3,1), transform 1.2s cubic-bezier(.16,1,.3,1);
   will-change: opacity, transform;
 }
-.cap-visual.active {
+.cap-visual-stack.active {
   opacity: 1;
   transform: scale(1);
 }
-/* Subtle duotone wash on inactive state (pulled toward brand green) */
-.caps-visual-sticky::after {
+
+.cap-visual-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.cap-visual-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.08);
+}
+.cap-visual-bg::after {
   content: '';
   position: absolute;
   inset: 0;
-  pointer-events: none;
-  background: linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.25) 100%);
-  z-index: 2;
+  z-index: 1;
+}
+.cap-visual-stack[data-cap="plastic"]  .cap-visual-bg::after {
+  background: linear-gradient(135deg, rgba(245,166,35,0.85), rgba(211,84,0,0.7));
+}
+.cap-visual-stack[data-cap="plush"]    .cap-visual-bg::after {
+  background: linear-gradient(135deg, rgba(236,167,207,0.85), rgba(179,136,255,0.7));
+}
+.cap-visual-stack[data-cap="dolls"]    .cap-visual-bg::after {
+  background: linear-gradient(135deg, rgba(240,180,170,0.85), rgba(255,235,220,0.7));
+}
+.cap-visual-stack[data-cap="rc"]       .cap-visual-bg::after {
+  background: linear-gradient(135deg, rgba(30,100,220,0.85), rgba(0,180,255,0.7));
+}
+.cap-visual-stack[data-cap="costumes"] .cap-visual-bg::after {
+  background: linear-gradient(135deg, rgba(56,120,50,0.88), rgba(30,70,30,0.75));
 }
 
-/* Mobile / narrow: stack vertically, images go inline per block */
+.cap-visual-fg {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+}
+.cap-visual-fg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cap-visual-label {
+  position: absolute;
+  z-index: 3;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 80px 24px 20px;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.2) 55%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Progress indicator */
+.caps-pin-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 20px var(--space-md) 0;
+  color: #999;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+}
+.caps-pin-current { color: var(--brand); min-width: 24px; text-align: right; }
+.caps-pin-total { color: #999; min-width: 24px; }
+.caps-pin-bar {
+  width: 260px;
+  max-width: 40vw;
+  height: 2px;
+  background: rgba(0,0,0,0.08);
+  position: relative;
+  overflow: hidden;
+}
+.caps-pin-bar-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--brand);
+  width: 0%;
+  transition: width 0.2s linear;
+}
+
+/* Mobile / narrow: no pin, stack vertically */
 @media (max-width: 900px) {
-  .caps-scrolly-inner {
+  .caps-pin-wrap { height: auto !important; }
+  .caps-pin-inner {
+    height: auto;
+    position: static !important;
+    padding: 40px 0;
+    overflow: visible;
+  }
+  .caps-pin-grid {
     grid-template-columns: 1fr;
-    row-gap: 0;
+    row-gap: 40px;
   }
-  .caps-visual-col { display: none; }
-  .cap-block {
-    min-height: auto;
-    padding: 32px 0 48px;
-    border-bottom: 1px solid var(--border, rgba(0,0,0,0.08));
+  .caps-text-slot {
+    position: static;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+  .cap-text {
+    position: static;
     opacity: 1;
+    transform: none;
+    pointer-events: auto;
   }
-  .cap-block:last-child { border-bottom: none; }
-  .cap-block-img-mobile { display: block; }
-  .cap-block .cap-eyebrow { color: var(--brand); }
-  .cap-block .cap-headline { color: #1a1a1a; font-size: clamp(28px, 7vw, 38px); }
-  .cap-block .cap-body { opacity: 1; }
-  .cap-block .cap-link { opacity: 1; transform: none; }
+  .caps-visual-slot {
+    max-width: 100%;
+    aspect-ratio: 4 / 5;
+    max-height: none;
+    justify-self: center;
+  }
+  .cap-visual-stack {
+    position: relative;
+    opacity: 1;
+    transform: none;
+  }
+  .cap-visual-stack:not(:first-child) { display: none; }
+  .caps-pin-progress { display: none; }
 }
 
 

@@ -29,51 +29,66 @@ const capabilities = [
     id: 'plastic',
     num: '01',
     tag: 'PLASTIC',
+    label: 'Plastic Toys',
     headline: 'Injection-molded precision.',
     body: 'Single-shot playsets to multi-material collectibles. Tooled, molded, assembled, and finished without leaving the floor.',
     href: '/capabilities/plastic-toys.html',
-    image: '/assets/injection-molding.webp',
-    alt: 'Injection molding of plastic toy components',
+    bgImage: '/assets/images/stock/cap-plastic-bg.webp',
+    fgImage: '/assets/images/stock/cap-plastic-fg.webp',
+    bgAlt: 'Colorful plastic toy bricks',
+    fgAlt: 'Colorful plastic toy figures',
   },
   {
     id: 'plush',
     num: '02',
     tag: 'PLUSH',
+    label: 'Plush',
     headline: 'Soft goods, sewn to brand.',
     body: 'Short pile, long pile, weighted, interactive. Production scale that still carries a hand-finish.',
     href: '/capabilities/plush.html',
-    image: '/assets/sewing-production.webp',
-    alt: 'Plush toy sewing production line',
+    bgImage: '/assets/images/stock/cap-plush-bg.webp',
+    fgImage: '/assets/images/stock/cap-plush-fg.webp',
+    bgAlt: 'Plush toy workshop',
+    fgAlt: 'Plush teddy bear',
   },
   {
     id: 'dolls',
     num: '03',
     tag: 'DOLLS',
+    label: 'Dolls',
     headline: 'Character detail, end-to-end.',
     body: 'Fashion, baby, and collector dolls — with hair-rooting, face painting, and costume work all finished in-house.',
     href: '/capabilities/dolls.html',
-    image: '/assets/hair-rooting.webp',
-    alt: 'Doll hair-rooting craftsmanship',
+    bgImage: '/assets/images/stock/cap-dolls-bg.webp',
+    fgImage: '/assets/images/stock/cap-dolls-fg.webp',
+    bgAlt: 'Doll manufacturing',
+    fgAlt: 'Fashion dolls',
   },
   {
     id: 'rc',
     num: '04',
     tag: 'RC VEHICLES',
+    label: 'RC Vehicles',
     headline: 'Our hardest category.',
     body: 'Mechatronics, tooling, electronics, and testing under one roof. The reason brands bring their difficult specs to us.',
     href: '/capabilities/rc-vehicle.html',
-    image: '/assets/rc-assembly.webp',
-    alt: 'RC vehicle assembly line',
+    bgImage: '/assets/images/stock/cap-rc-bg.webp',
+    fgImage: '/assets/images/stock/cap-rc-fg.webp',
+    bgAlt: 'RC vehicle parts',
+    fgAlt: 'Toy RC car',
   },
   {
     id: 'costumes',
     num: '05',
     tag: 'COSTUMES',
+    label: 'Costumes',
     headline: 'Theatrical wear, production-grade.',
     body: 'Licensed character, seasonal, and dress-up. Cut, sewn, trimmed, and certified to US and EU safety standards.',
     href: '/capabilities/costume.html',
-    image: '/assets/costume.webp',
-    alt: 'Costume manufacturing at Royal Regent',
+    bgImage: '/assets/images/stock/cap-costumes-bg.webp',
+    fgImage: '/assets/images/stock/cap-costumes-fg.webp',
+    bgAlt: 'Costume display',
+    fgAlt: 'Child in superhero costume',
   },
 ];
 ---
@@ -184,43 +199,55 @@ const capabilities = [
       </div>
     </section>
 
-    <!-- CAPABILITIES — Sticky scrollytelling -->
-    <section class="caps-section caps-scrolly-section clip-section" id="capsSection">
-      <div class="container caps-scrolly-header">
+    <!-- CAPABILITIES — Pinned scrollytelling -->
+    <section class="caps-pin-section clip-section" id="capsSection">
+      <!-- Header shown before the pinned area -->
+      <div class="container caps-pin-header">
         <div class="section-label reveal-up">Manufacturing Capabilities</div>
         <h2 class="section-title reveal-up">Five categories.<br><span>One trusted partner.</span></h2>
       </div>
 
-      <div class="caps-scrolly">
-        <div class="caps-scrolly-inner">
-          <!-- Left column: scrolling text blocks -->
-          <div class="caps-text-col">
-            {capabilities.map((cap, i) => (
-              <div class={`cap-block${i === 0 ? ' active' : ''}`} data-index={i}>
-                <img class="cap-block-img-mobile" src={cap.image} alt={cap.alt} loading="lazy" width="800" height="1000">
-                <div class="cap-eyebrow">{cap.num} — {cap.tag}</div>
-                <h3 class="cap-headline">{cap.headline}</h3>
-                <p class="cap-body">{cap.body}</p>
-                <a href={cap.href} class="cap-link">Explore capability <span>→</span></a>
-              </div>
-            ))}
-          </div>
-
-          <!-- Right column: sticky layered visuals -->
-          <div class="caps-visual-col">
-            <div class="caps-visual-sticky">
+      <!-- Pinned area: inner gets pinned for 5 viewports of scroll -->
+      <div class="caps-pin-wrap">
+        <div class="caps-pin-inner">
+          <div class="caps-pin-grid">
+            <!-- LEFT: text slot — only active visible, others cross-fade -->
+            <div class="caps-text-slot">
               {capabilities.map((cap, i) => (
-                <img
-                  class={`cap-visual${i === 0 ? ' active' : ''}`}
-                  data-index={i}
-                  src={cap.image}
-                  alt={cap.alt}
-                  loading={i === 0 ? 'eager' : 'lazy'}
-                  width="800"
-                  height="1000"
-                >
+                <article class={`cap-text${i === 0 ? ' active' : ''}`} data-index={i}>
+                  <div class="cap-eyebrow">{cap.num} — {cap.tag}</div>
+                  <h3 class="cap-headline">{cap.headline}</h3>
+                  <p class="cap-body">{cap.body}</p>
+                  <a href={cap.href} class="cap-link">Explore capability <span>→</span></a>
+                </article>
               ))}
             </div>
+
+            <!-- RIGHT: visual slot — layered bg+fg per category -->
+            <div class="caps-visual-slot">
+              {capabilities.map((cap, i) => (
+                <div
+                  class={`cap-visual-stack${i === 0 ? ' active' : ''}`}
+                  data-index={i}
+                  data-cap={cap.id}
+                >
+                  <div class="cap-visual-bg">
+                    <img src={cap.bgImage} alt="" loading={i === 0 ? 'eager' : 'lazy'} width="800" height="500">
+                  </div>
+                  <div class="cap-visual-fg">
+                    <img src={cap.fgImage} alt={cap.fgAlt} loading={i === 0 ? 'eager' : 'lazy'} width="600" height="400">
+                  </div>
+                  <div class="cap-visual-label">{cap.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Progress indicator at the bottom of pinned view -->
+          <div class="caps-pin-progress">
+            <span class="caps-pin-current">01</span>
+            <div class="caps-pin-bar"><div class="caps-pin-bar-fill" id="capsPinBarFill"></div></div>
+            <span class="caps-pin-total">05</span>
           </div>
         </div>
       </div>
@@ -306,40 +333,62 @@ const capabilities = [
           videos.forEach(function (v) { io.observe(v); });
         }
 
-        // ── Capabilities scrollytelling ──
-        var blocks = Array.prototype.slice.call(document.querySelectorAll('.cap-block'));
-        var visuals = Array.prototype.slice.call(document.querySelectorAll('.caps-visual-sticky .cap-visual'));
-        if (!blocks.length || !visuals.length) return;
+        // ── Capabilities pinned scrolly ──
+        var pinWrap = document.querySelector('.caps-pin-wrap');
+        var pinInner = document.querySelector('.caps-pin-inner');
+        var texts = Array.prototype.slice.call(document.querySelectorAll('.cap-text'));
+        var visualStacks = Array.prototype.slice.call(document.querySelectorAll('.cap-visual-stack'));
+        var barFill = document.getElementById('capsPinBarFill');
+        var currentLabel = document.querySelector('.caps-pin-current');
+
+        if (!pinWrap || !pinInner || !texts.length || !visualStacks.length) return;
+
+        var total = texts.length;
+        var currentIndex = -1;
 
         function setActive(i) {
-          blocks.forEach(function (b, j) { b.classList.toggle('active', j === i); });
-          visuals.forEach(function (v, j) { v.classList.toggle('active', j === i); });
+          if (i === currentIndex) return;
+          currentIndex = i;
+          texts.forEach(function (t, j) { t.classList.toggle('active', j === i); });
+          visualStacks.forEach(function (v, j) { v.classList.toggle('active', j === i); });
+          if (currentLabel) currentLabel.textContent = String(i + 1).padStart(2, '0');
+        }
+
+        // Disable pin on small screens — fall back to vertical stack via CSS
+        var enablePin = window.innerWidth >= 900;
+        if (!enablePin) {
+          // Just keep all .active classes off except 0; let CSS show them stacked
+          return;
         }
 
         if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
           gsap.registerPlugin(ScrollTrigger);
-          blocks.forEach(function (block, i) {
-            ScrollTrigger.create({
-              trigger: block,
-              start: 'top 55%',
-              end: 'bottom 55%',
-              onEnter: function () { setActive(i); },
-              onEnterBack: function () { setActive(i); },
-            });
+
+          ScrollTrigger.create({
+            trigger: pinWrap,
+            start: 'top top',
+            end: '+=' + (total * window.innerHeight),
+            pin: pinInner,
+            pinSpacing: true,
+            scrub: 0.5,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+            onUpdate: function (self) {
+              var progress = self.progress;
+              var idx = Math.min(total - 1, Math.floor(progress * total));
+              setActive(idx);
+              if (barFill) {
+                barFill.style.width = Math.round(progress * 100) + '%';
+              }
+            },
           });
-        } else {
-          // Fallback: IntersectionObserver
-          if ('IntersectionObserver' in window) {
-            var cio = new IntersectionObserver(function (entries) {
-              entries.forEach(function (e) {
-                if (e.isIntersecting) {
-                  var idx = parseInt(e.target.getAttribute('data-index'), 10);
-                  if (!isNaN(idx)) setActive(idx);
-                }
-              });
-            }, { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
-            blocks.forEach(function (b) { cio.observe(b); });
-          }
+
+          // Recalc on resize — ScrollTrigger handles refresh automatically when
+          // invalidateOnRefresh is set, plus we update the end distance via a
+          // matchMedia-style refresh.
+          window.addEventListener('resize', function () {
+            ScrollTrigger.refresh();
+          });
         }
       })();
     </script>

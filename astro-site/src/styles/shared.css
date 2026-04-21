@@ -549,6 +549,15 @@ body[data-page="contact"] .nav-links a[href="../contact.html"] {
   }
 }
 
+/* Nav island wrappers should never render a layout box */
+astro-island,
+astro-slot,
+astro-static-slot { display: contents; }
+
+/* Guard against an accidental empty <li> showing a bullet between Careers
+   and the language switcher (happens if any list item has no content). */
+.nav-links > li:empty { display: none; }
+
 /* LinkedIn icon in nav */
 .nav-linkedin a {
   display: inline-flex;
@@ -957,7 +966,14 @@ footer.footer-reveal {
   border-bottom: 1px solid var(--border);
 }
 
-.footer-brand img.footer-logo { height: 56px; margin-bottom: var(--space-sm); }
+.footer-brand img.footer-logo {
+  height: 56px;
+  width: auto;
+  max-width: 200px;
+  object-fit: contain;
+  display: block;
+  margin-bottom: var(--space-sm);
+}
 .footer-brand p { font-size: var(--text-sm); color: var(--text-muted); line-height: 1.7; }
 
 .footer-col h4 {
