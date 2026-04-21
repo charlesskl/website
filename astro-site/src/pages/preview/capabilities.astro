@@ -1,0 +1,205 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/home.css';
+import '../../styles/preview.css';
+
+const capabilities = [
+  { id: 'plastic',  num: '01', tag: 'PLASTIC',     label: 'Plastic Toys', headline: 'Injection-molded precision.',  body: 'Single-shot playsets to multi-material collectibles.', href: '/capabilities/plastic-toys.html', bgImage: '/assets/images/stock/cap-plastic-bg.webp', fgImage: '/assets/images/stock/cap-plastic-fg.webp' },
+  { id: 'plush',    num: '02', tag: 'PLUSH',       label: 'Plush',        headline: 'Soft goods, sewn to brand.',    body: 'Short pile, long pile, weighted, interactive.',         href: '/capabilities/plush.html',        bgImage: '/assets/images/stock/cap-plush-bg.webp',   fgImage: '/assets/images/stock/cap-plush-fg.webp' },
+  { id: 'dolls',    num: '03', tag: 'DOLLS',       label: 'Dolls',        headline: 'Character detail, end-to-end.', body: 'Hair-rooting, face painting, costume work in-house.',   href: '/capabilities/dolls.html',        bgImage: '/assets/images/stock/cap-dolls-bg.webp',   fgImage: '/assets/images/stock/cap-dolls-fg.webp' },
+  { id: 'rc',       num: '04', tag: 'RC VEHICLES', label: 'RC Vehicles',  headline: 'Our hardest category.',         body: 'Mechatronics, tooling, electronics, testing.',          href: '/capabilities/rc-vehicle.html',   bgImage: '/assets/images/stock/cap-rc-bg.webp',      fgImage: '/assets/images/stock/cap-rc-fg.webp' },
+  { id: 'costumes', num: '05', tag: 'COSTUMES',    label: 'Costumes',     headline: 'Theatrical wear, production-grade.', body: 'Licensed character, seasonal, and dress-up.',      href: '/capabilities/costume.html',      bgImage: '/assets/images/stock/cap-costumes-bg.webp',fgImage: '/assets/images/stock/cap-costumes-fg.webp' },
+];
+---
+
+<BaseLayout
+  title="Capabilities variants — Preview"
+  description="Three capability-section style options"
+  lang="en"
+  canonical="https://royalregentgroup.com/preview/capabilities"
+  ogLocale="en_US"
+  ogLocaleAlternates={[]}
+  dataPage="preview"
+>
+  <Nav lang="en" />
+
+  <div class="preview-wrap">
+    <div class="preview-intro">
+      <div class="preview-eyebrow">Capabilities — 3 variants</div>
+      <h1>Pick a style for the capabilities section.</h1>
+      <p>Three different interactions for showing the five product categories.</p>
+    </div>
+
+    <!-- VARIANT A — Pinned scroll (current intent) -->
+    <div class="preview-variant">
+      <div class="preview-label">Variant A · Pinned scroll <em>(viewport locks; scroll advances through 5 categories; then unpins)</em></div>
+      <section class="caps-pin-section" id="capsA">
+        <div class="container caps-pin-header">
+          <div class="section-label">Manufacturing Capabilities</div>
+          <h2 class="section-title">Five categories.<br><span>One trusted partner.</span></h2>
+        </div>
+        <div class="caps-pin-wrap" id="capsPinWrapA">
+          <div class="caps-pin-inner" id="capsPinInnerA">
+            <div class="caps-pin-grid">
+              <div class="caps-text-slot">
+                {capabilities.map((cap, i) => (
+                  <article class={`cap-text${i === 0 ? ' active' : ''}`} data-index={i}>
+                    <div class="cap-eyebrow">{cap.num} — {cap.tag}</div>
+                    <h3 class="cap-headline">{cap.headline}</h3>
+                    <p class="cap-body">{cap.body}</p>
+                    <a href={cap.href} class="cap-link">Explore capability <span>→</span></a>
+                  </article>
+                ))}
+              </div>
+              <div class="caps-visual-slot">
+                {capabilities.map((cap, i) => (
+                  <div class={`cap-visual-stack${i === 0 ? ' active' : ''}`} data-index={i} data-cap={cap.id}>
+                    <div class="cap-visual-bg"><img src={cap.bgImage} alt="" loading="lazy"></div>
+                    <div class="cap-visual-fg"><img src={cap.fgImage} alt="" loading="lazy"></div>
+                    <div class="cap-visual-label">{cap.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div class="caps-pin-progress">
+              <span class="caps-pin-current">01</span>
+              <div class="caps-pin-bar"><div class="caps-pin-bar-fill" id="capsPinBarFillA"></div></div>
+              <span class="caps-pin-total">05</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- VARIANT B — Horizontal drag carousel -->
+    <div class="preview-variant">
+      <div class="preview-label">Variant B · Horizontal carousel <em>(swipe / drag / arrow buttons; card stays large)</em></div>
+      <section class="pv-caps-b">
+        <div class="container">
+          <div class="section-label">Manufacturing Capabilities</div>
+          <h2 class="section-title">Five categories.<br><span>One trusted partner.</span></h2>
+        </div>
+        <div class="pv-caps-b-scroller" id="pvCapsBScroller">
+          {capabilities.map((cap) => (
+            <a href={cap.href} class="pv-caps-b-card" data-cap={cap.id}>
+              <div class="pv-caps-b-bg">
+                <img src={cap.bgImage} alt="" loading="lazy">
+              </div>
+              <div class="pv-caps-b-fg">
+                <img src={cap.fgImage} alt="" loading="lazy">
+              </div>
+              <div class="pv-caps-b-meta">
+                <div class="pv-caps-b-eyebrow">{cap.num} — {cap.tag}</div>
+                <div class="pv-caps-b-label">{cap.label}</div>
+                <div class="pv-caps-b-body">{cap.body}</div>
+                <div class="pv-caps-b-link">Explore capability →</div>
+              </div>
+            </a>
+          ))}
+        </div>
+        <div class="pv-caps-b-controls">
+          <button type="button" id="pvBPrev" aria-label="Previous">←</button>
+          <button type="button" id="pvBNext" aria-label="Next">→</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- VARIANT C — Expandable accordion grid -->
+    <div class="preview-variant">
+      <div class="preview-label">Variant C · Expandable accordion <em>(5 narrow panels; click/hover expands one full-width)</em></div>
+      <section class="pv-caps-c">
+        <div class="container">
+          <div class="section-label">Manufacturing Capabilities</div>
+          <h2 class="section-title">Five categories.<br><span>One trusted partner.</span></h2>
+        </div>
+        <div class="pv-caps-c-accordion" id="pvCapsC">
+          {capabilities.map((cap, i) => (
+            <div class={`pv-caps-c-panel${i === 0 ? ' open' : ''}`} data-cap={cap.id} data-index={i}>
+              <div class="pv-caps-c-bg" style={`background-image: url(${cap.bgImage})`}></div>
+              <div class="pv-caps-c-content">
+                <div class="pv-caps-c-num">{cap.num}</div>
+                <div class="pv-caps-c-label">{cap.label}</div>
+                <div class="pv-caps-c-expanded">
+                  <h3>{cap.headline}</h3>
+                  <p>{cap.body}</p>
+                  <a href={cap.href} class="pv-caps-c-link">Explore capability →</a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <Footer lang="en" />
+
+  <Fragment slot="page-scripts">
+    <script is:inline>
+      (function(){
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', init);
+        } else { init(); }
+
+        function init() {
+          // ── Variant A: pinned scroll ──
+          var pinWrap = document.getElementById('capsPinWrapA');
+          var pinInner = document.getElementById('capsPinInnerA');
+          var texts = Array.prototype.slice.call(document.querySelectorAll('#capsA .cap-text'));
+          var vstacks = Array.prototype.slice.call(document.querySelectorAll('#capsA .cap-visual-stack'));
+          var barFill = document.getElementById('capsPinBarFillA');
+          var curLabel = document.querySelector('#capsA .caps-pin-current');
+          if (pinWrap && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && window.innerWidth >= 900) {
+            gsap.registerPlugin(ScrollTrigger);
+            var total = texts.length;
+            var last = -1;
+            ScrollTrigger.create({
+              trigger: pinWrap,
+              start: 'top top',
+              end: '+=' + (total * window.innerHeight),
+              pin: pinInner,
+              scrub: 0.5,
+              invalidateOnRefresh: true,
+              onUpdate: function(self){
+                var p = self.progress;
+                var idx = Math.min(total - 1, Math.floor(p * total));
+                if (idx !== last) {
+                  last = idx;
+                  texts.forEach(function(t, j){ t.classList.toggle('active', j === idx); });
+                  vstacks.forEach(function(v, j){ v.classList.toggle('active', j === idx); });
+                  if (curLabel) curLabel.textContent = String(idx + 1).padStart(2, '0');
+                }
+                if (barFill) barFill.style.width = Math.round(p * 100) + '%';
+              }
+            });
+          }
+
+          // ── Variant B: horizontal carousel ──
+          var scroller = document.getElementById('pvCapsBScroller');
+          var prev = document.getElementById('pvBPrev');
+          var next = document.getElementById('pvBNext');
+          if (scroller && prev && next) {
+            var step = function(){ return scroller.querySelector('.pv-caps-b-card').getBoundingClientRect().width + 24; };
+            prev.addEventListener('click', function(){ scroller.scrollBy({ left: -step(), behavior: 'smooth' }); });
+            next.addEventListener('click', function(){ scroller.scrollBy({ left: step(), behavior: 'smooth' }); });
+          }
+
+          // ── Variant C: accordion panels ──
+          var panels = Array.prototype.slice.call(document.querySelectorAll('#pvCapsC .pv-caps-c-panel'));
+          panels.forEach(function(p){
+            p.addEventListener('mouseenter', function(){
+              panels.forEach(function(x){ x.classList.remove('open'); });
+              p.classList.add('open');
+            });
+            p.addEventListener('click', function(){
+              panels.forEach(function(x){ x.classList.remove('open'); });
+              p.classList.add('open');
+            });
+          });
+        }
+      })();
+    </script>
+  </Fragment>
+</BaseLayout>

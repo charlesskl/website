@@ -558,6 +558,20 @@ astro-static-slot { display: contents; }
    and the language switcher (happens if any list item has no content). */
 .nav-links > li:empty { display: none; }
 
+/* Aggressive reset: kill any stray background on the language-switcher
+   button (browsers apply a default grey buttonface in some contexts). */
+.lang-selector,
+.lang-selector > button,
+.lang-selector button[type="button"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+.lang-selector > button { padding: 4px 8px !important; }
+
 /* LinkedIn icon in nav */
 .nav-linkedin a {
   display: inline-flex;

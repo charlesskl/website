@@ -1,0 +1,173 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/home.css';
+import '../../styles/preview.css';
+
+const milestones = [
+  { year: '1987', text: 'Founded in Sha Tau Kok — the first step in a 39-year manufacturing journey.' },
+  { year: '2000', text: 'First soft toy production line launched — entering plush and costume manufacturing.' },
+  { year: '2010', text: 'Doll production lines integrated sewing craftsmanship with plastic molding technology.' },
+  { year: '2016', text: 'Entered remote control vehicle manufacturing — our highest-complexity category.' },
+  { year: '2023', text: 'Officially entered Indonesia — a key milestone in global supply chain diversification.' },
+  { year: '2025', text: 'Indonesia Phase II commences — strengthening responsiveness to international markets.' },
+];
+
+const locations = [
+  { id: 'hk',    name: 'Hong Kong',    year: '1987', x: 72, y: 42, color: '#7CB342' },
+  { id: 'dg',    name: 'Dongguan',     year: '2000', x: 70, y: 45, color: '#7CB342' },
+  { id: 'heyuan', name: 'Heyuan',      year: '2010', x: 71, y: 44, color: '#7CB342' },
+  { id: 'hunan', name: 'Hunan',        year: '2016', x: 68, y: 42, color: '#7CB342' },
+  { id: 'id',    name: 'Indonesia',    year: '2023', x: 73, y: 58, color: '#7CB342' },
+  { id: 'id2',   name: 'Indonesia Phase II', year: '2025', x: 74, y: 59, color: '#7CB342' },
+];
+---
+
+<BaseLayout
+  title="History variants — Preview"
+  description="Three history-section style options"
+  lang="en"
+  canonical="https://royalregentgroup.com/preview/history"
+  ogLocale="en_US"
+  ogLocaleAlternates={[]}
+  dataPage="preview"
+>
+  <Nav lang="en" />
+
+  <div class="preview-wrap">
+    <div class="preview-intro">
+      <div class="preview-eyebrow">History — 3 variants</div>
+      <h1>Pick a style for the development-history section.</h1>
+      <p>Each variant tells the 1987 → 2025 story differently.</p>
+    </div>
+
+    <!-- VARIANT A — Current: full-bleed video + year watermark + timeline nodes -->
+    <div class="preview-variant">
+      <div class="preview-label">Variant A · Video background + timeline nodes <em>(current)</em></div>
+      <section class="history-section pv-hist-a" data-milestones={JSON.stringify(milestones)}>
+        <div class="history-bg history-bg-video">
+          <video class="history-video" autoplay muted loop playsinline>
+            <source src="/assets/videos/history.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="history-top"><h2 class="history-heading">Development history</h2></div>
+        <div class="history-center">
+          <div class="history-watermark">1987</div>
+          <div class="history-milestone">
+            <p>{milestones[0].text}</p>
+          </div>
+        </div>
+        <div class="history-timeline">
+          <div class="timeline-track">
+            {milestones.map((m, i) => (
+              <button class={`timeline-node${i === 0 ? ' active' : ''}`} data-index={i}>
+                <div class="timeline-dot"><span>{m.year}</span></div>
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- VARIANT B — Vertical scroll timeline -->
+    <div class="preview-variant">
+      <div class="preview-label">Variant B · Vertical scroll timeline <em>(scroll down through years; each milestone enters with animation)</em></div>
+      <section class="pv-hist-b">
+        <div class="container pv-hist-b-header">
+          <div class="section-label">Our Story</div>
+          <h2 class="section-title">39 years.<br><span>One unbroken thread.</span></h2>
+        </div>
+        <div class="pv-hist-b-track">
+          <div class="pv-hist-b-line"></div>
+          {milestones.map((m, i) => (
+            <div class={`pv-hist-b-entry${i % 2 === 0 ? ' left' : ' right'}`} data-index={i}>
+              <div class="pv-hist-b-year">{m.year}</div>
+              <div class="pv-hist-b-card">
+                <p>{m.text}</p>
+              </div>
+              <div class="pv-hist-b-dot"></div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+
+    <!-- VARIANT C — Pinned cinematic year-scroll -->
+    <div class="preview-variant">
+      <div class="preview-label">Variant C · Pinned year-scroll <em>(pins section; scroll scrubs through years; giant number morphs; video stays in background)</em></div>
+      <section class="pv-hist-c" id="histC">
+        <div class="pv-hist-c-wrap" id="histCWrap">
+          <div class="pv-hist-c-inner" id="histCInner">
+            <div class="history-bg history-bg-video">
+              <video class="history-video" autoplay muted loop playsinline>
+                <source src="/assets/videos/history.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="pv-hist-c-content">
+              <div class="pv-hist-c-tag">Development history</div>
+              <div class="pv-hist-c-year" id="histCYear">1987</div>
+              <div class="pv-hist-c-milestones">
+                {milestones.map((m, i) => (
+                  <div class={`pv-hist-c-msg${i === 0 ? ' active' : ''}`} data-index={i}>
+                    <p>{m.text}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div class="pv-hist-c-dots">
+              {milestones.map((m, i) => (
+                <div class={`pv-hist-c-dot${i === 0 ? ' active' : ''}`} data-year={m.year}></div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <Footer lang="en" />
+
+  <Fragment slot="page-scripts">
+    <script is:inline>
+      (function(){
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', init);
+        } else { init(); }
+
+        function init() {
+          // Variant C: pinned year-scroll
+          var wrap = document.getElementById('histCWrap');
+          var inner = document.getElementById('histCInner');
+          var years = ['1987','2000','2010','2016','2023','2025'];
+          var msgs = Array.prototype.slice.call(document.querySelectorAll('#histC .pv-hist-c-msg'));
+          var dots = Array.prototype.slice.call(document.querySelectorAll('#histC .pv-hist-c-dot'));
+          var yearEl = document.getElementById('histCYear');
+
+          if (wrap && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && window.innerWidth >= 900) {
+            gsap.registerPlugin(ScrollTrigger);
+            var last = -1;
+            ScrollTrigger.create({
+              trigger: wrap,
+              start: 'top top',
+              end: '+=' + (years.length * window.innerHeight),
+              pin: inner,
+              scrub: 0.5,
+              invalidateOnRefresh: true,
+              onUpdate: function(self){
+                var p = self.progress;
+                var idx = Math.min(years.length - 1, Math.floor(p * years.length));
+                if (idx !== last) {
+                  last = idx;
+                  if (yearEl) yearEl.textContent = years[idx];
+                  msgs.forEach(function(m, j){ m.classList.toggle('active', j === idx); });
+                  dots.forEach(function(d, j){ d.classList.toggle('active', j === idx); });
+                }
+              }
+            });
+          }
+        }
+      })();
+    </script>
+  </Fragment>
+</BaseLayout>

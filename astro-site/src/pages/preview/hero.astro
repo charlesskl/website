@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/home.css';
+import '../../styles/preview.css';
+---
+
+<BaseLayout
+  title="Hero variants — Preview"
+  description="Three hero-section style options"
+  lang="en"
+  canonical="https://royalregentgroup.com/preview/hero"
+  ogLocale="en_US"
+  ogLocaleAlternates={[]}
+  dataPage="preview"
+>
+  <Nav lang="en" />
+
+  <div class="preview-wrap">
+    <div class="preview-intro">
+      <div class="preview-eyebrow">Hero — 3 variants</div>
+      <h1>Pick a style for the hero section.</h1>
+      <p>Scroll down to compare. Each variant uses <code>Video/Hero.mp4</code>.</p>
+    </div>
+
+    <!-- VARIANT A — Full-bleed video + centered text (current) -->
+    <div class="preview-variant">
+      <div class="preview-label">Variant A · Full-bleed video + centered text <em>(current)</em></div>
+      <section class="hero hero-video-section pv-hero-a">
+        <div class="hero-video-wrap">
+          <video class="hero-video" autoplay muted loop playsinline>
+            <source src="/assets/videos/hero.mp4" type="video/mp4">
+          </video>
+          <div class="hero-video-overlay"></div>
+        </div>
+        <div class="hero-content">
+          <div class="hero-tag">OEM Toy Manufacturer · Est. 1987</div>
+          <h1 class="hero-title">Precision.<br><span class="text-gradient">Craftsmanship.</span><br>Global Scale.</h1>
+          <p class="hero-sub">Great manufacturing isn't just about production — it's about partnership.</p>
+          <div class="hero-actions">
+            <a href="/capabilities/plastic-toys.html" class="btn btn-primary">Explore Capabilities</a>
+            <a href="/about.html" class="btn btn-outline">Our Story →</a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- VARIANT B — Split screen: video right, text left -->
+    <div class="preview-variant">
+      <div class="preview-label">Variant B · Split screen — video right 60%, editorial text left 40%</div>
+      <section class="hero pv-hero-b">
+        <div class="pv-b-left">
+          <div class="hero-tag">OEM Toy Manufacturer · Est. 1987</div>
+          <h1 class="hero-title">Precision.<br><span class="text-gradient">Craftsmanship.</span><br>Global Scale.</h1>
+          <p class="hero-sub">Great manufacturing isn't just about production — it's about partnership. For 39 years, we've worked alongside brands to bring their visions to life.</p>
+          <div class="hero-actions">
+            <a href="/capabilities/plastic-toys.html" class="btn btn-primary">Explore Capabilities</a>
+            <a href="/about.html" class="btn btn-outline">Our Story →</a>
+          </div>
+        </div>
+        <div class="pv-b-right">
+          <video class="pv-b-video" autoplay muted loop playsinline>
+            <source src="/assets/videos/hero.mp4" type="video/mp4">
+          </video>
+        </div>
+      </section>
+    </div>
+
+    <!-- VARIANT C — Cinematic: video + green brand tint + bottom-aligned text -->
+    <div class="preview-variant">
+      <div class="preview-label">Variant C · Cinematic — brand-tint overlay + bottom-aligned text</div>
+      <section class="hero hero-video-section pv-hero-c">
+        <div class="hero-video-wrap">
+          <video class="hero-video" autoplay muted loop playsinline>
+            <source src="/assets/videos/hero.mp4" type="video/mp4">
+          </video>
+          <div class="pv-c-tint"></div>
+        </div>
+        <div class="pv-c-content">
+          <div class="hero-tag">OEM Toy Manufacturer · Est. 1987</div>
+          <h1 class="pv-c-title">Precision. <span>Craftsmanship.</span> Global Scale.</h1>
+          <div class="pv-c-actions">
+            <a href="/capabilities/plastic-toys.html" class="btn btn-primary">Explore Capabilities</a>
+            <a href="/about.html" class="btn btn-outline">Our Story →</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <Footer lang="en" />
+</BaseLayout>

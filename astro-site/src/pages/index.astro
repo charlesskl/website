@@ -320,6 +320,17 @@ const capabilities = [
       (function () {
         'use strict';
 
+        // Wait for GSAP + ScrollTrigger to finish loading (they come after
+        // this slot in BaseLayout). DOMContentLoaded fires after blocking
+        // <script src> tags execute, so gsap is available by then.
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', init);
+        } else {
+          init();
+        }
+
+        function init() {
+
         // ── Pause background videos when off-screen (perf) ──
         var videos = document.querySelectorAll('.hero-video, .history-video');
         if ('IntersectionObserver' in window) {
@@ -390,6 +401,7 @@ const capabilities = [
             ScrollTrigger.refresh();
           });
         }
+        } // end init()
       })();
     </script>
   </Fragment>
