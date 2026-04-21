@@ -1,452 +1,86 @@
-# Website
+# Royal Regent Toys — Website
 
-**This project contains 18,793 lines of code.**
+Live site: [royalregentgroup.com](https://royalregentgroup.com)
 
-**Live Site:** [https://charlesskl.github.io/website/](https://charlesskl.github.io/website/)
+## Stack
 
-**Local Dev:** [http://localhost:8000](http://localhost:8000)
+**Languages**
+- TypeScript — React islands + Astro components
+- JavaScript — animation modules
+- HTML — page templates (`.astro`)
+- CSS — design system + per-page styles
 
----
+**Framework & libraries**
+- [Astro 4.x](https://astro.build/) — static site generator with islands architecture
+- [React 19](https://react.dev/) — hydrated only where interactivity is needed
+- [GSAP 3.14](https://gsap.com/) + ScrollTrigger + SplitText — timeline animations
+- [Three.js r183](https://threejs.org/) — WebGL background (capabilities + misc)
+- [Lenis 1.3](https://github.com/darkroomengineering/lenis) — smooth scroll engine
+- Self-hosted fonts: Clash Display + Satoshi (WOFF2)
 
-## CN Translated Text — All 9 Pages
-
-### Shared (Nav + Footer — appears on all 9 pages)
-
-**NAV:**
-- 關於我們
-- 生產能力
-- 塑膠玩具
-- 毛絨玩具
-- 娃娃
-- 遙控車
-- 服裝
-- 招聘
-- 繁體中文
-- 聯繫我們
-
-**FOOTER:**
-- 自1987年以來，一直是全球領先玩具品牌的製造夥伴。五大產品品類、四個生產基地、一個統一標準——符合美國及歐盟法規。
-- 公司
-- 關於我們
-- 招聘
-- 聯繫我們
-- 生產能力
-- 塑膠玩具
-- 毛絨玩具
-- 遙控車
-- 娃娃
-- 服裝
-- 聯繫方式
-- 版權所有。
-
-> **Note:** Capability sub-pages use slightly different footer wording:
-> - 製造合作夥伴 (instead of 製造夥伴)
-> - 五大產品類別 (instead of 五大產品品類)
+**Deploy:** GitHub Actions → GitHub Pages (`astro-site/dist/`)
 
 ---
 
-### cn/index.html
-
-**TITLE:** Royal Regent — 自1987年的OEM玩具製造商
-
-**HERO:**
-- OEM玩具製造商 · 創立於1987年
-- 精密。
-- 匠心。
-- 全球規模。
-- 卓越的製造不僅僅是生產——更是夥伴關係。38年來，我們與品牌並肩合作，將願景變為現實，以全球最嚴格市場所期望的工藝、合規性和一致性，打造每一件產品。
-- 探索生產能力
-- 我們的故事 →
-- 向下滾動
-
-**MARQUEE:**
-- 遙控車
-- 可動人偶
-- 時裝娃娃
-- 嬰兒娃娃
-- 車輛
-- 遊戲套裝
-- 公仔 / 收藏品
-- 戶外玩具
-- 洗澡玩具
-- 陀螺
-- 水槍
-- 射擊玩具
-- 填充毛絨
-- 卡通毛絨
-- 加重毛絨
-- 音樂 / 發聲毛絨
-- 互動毛絨
-- 服裝
-
-**INTRO STATEMENT:**
-- 建立於信任之上。
-- 歷經數十年精煉。
-- 隨時滿足您的下一個需求。
-
-**CAPABILITIES SECTION:**
-- 製造能力
-- 五大品類。
-- 一個值得信賴的夥伴。
-- 塑膠玩具 / 探索此能力
-- 毛絨玩具 / 探索此能力
-- 娃娃 / 探索此能力
-- 遙控車 / 探索此能力
-- 服裝 / 探索此能力
-
-**HISTORY SECTION:**
-- 發展歷程
-- 滾動瀏覽
-
-**HISTORY MILESTONES (in JavaScript):**
-- 創立於沙頭角——38年製造歷程的第一步。
-- 首條軟體玩具生產線投產——進入毛絨玩具和服裝製造領域。
-- 娃娃生產線將縫紉工藝與塑膠成型技術相結合。
-- 進入遙控車製造——我們複雜度最高的產品品類。
-- 正式進入印尼——全球供應鏈多元化的重要里程碑。
-- 印尼二期工程啟動——增強對國際市場的響應能力。
-
----
-
-### cn/about.html
-
-**TITLE:** 關於我們 — Royal Regent
-
-**HERO:**
-- 我們的故事
-- 38年
-- 匠心製造。
-- 從香港沙頭角的一間工廠起步，Royal Regent 已發展成為一家多基地OEM玩具製造商，深受全球領先品牌信賴——從中國和印尼向全球市場交付安全、合規、精密設計的玩具產品。
-- 向下滾動
-
-**INTRO STATEMENT:**
-- 夥伴關係勝於生產。
-- 歷經38年精煉。
-- 隨時滿足您的下一個需求。
-
-**HISTORY SECTION:**
-- 發展歷程
-- 滾動瀏覽
-
-**HISTORY MILESTONES (in JavaScript):**
-- 公司在沙頭角成立，正式開始其製造之路。
-- 遷至龍華，大幅擴大生產規模。
-- 擴展至東莞，以滿足快速增長的市場需求。
-- 東莞工廠擴建完成並投產，引入毛絨玩具和服裝生產線，標誌著公司首次進入軟體玩具製造領域。
-- 將製造業務延伸至河源，建立多地點營運以增強供應鏈韌性。
-- 河源工廠擴建完成，有效支持產品線多元化和產能升級。
-- 推出娃娃生產線，將縫紉工藝與塑膠成型技術相結合。
-- 進入遙控車製造領域，應對更高的技術要求，增強結構複雜性和電子集成方面的能力。
-- 將生產擴展至湖南，大幅提升整體製造產能。
-- 正式進入印尼市場，標誌著公司全球擴張戰略和供應鏈多元化的重要里程碑。
-- 印尼工廠二期投入運營，進一步擴大區域生產能力，增強對國際市場的響應能力。
-
----
-
-### cn/careers.html
-
-**TITLE:** 招聘 — Royal Regent
-
-**HERO:**
-- 加入我們的團隊
-- 共同建造
-- 持久的事業。
-- 38年來，Royal Regent 始終致力於人才投資。我們正在尋找製造、工程、品質和營運領域的專業人才，與我們共同成長。
-
-**VALUES SECTION:**
-- 為什麼選擇 Royal Regent
-- 一家以人為本的
-- 製造企業。
-
-- 38年的穩定發展
-- Royal Regent 創立於1987年，歷經四十年穩步成長——在中國和印尼提供長期職業穩定性和持續發展機會。
-
-- 全球規模
-- 在東莞、河源、湖南和印尼的多個製造基地工作——接觸真正國際化的供應鏈。
-
-- 技能發展
-- 從模具開發到遙控電子技術和軟體玩具生產——我們廣泛的產品品類為培養深入的跨職能專業知識創造了獨特機會。
-
-- 品質文化
-- 我們按照美國和歐盟安全標準生產。品質不僅是一個部門——它融入了從模具到最終檢驗的每個環節。
-
-- 協作團隊
-- 扁平化結構、直接溝通和主人翁文化。我們的團隊跨職能緊密合作——包括工程、生產、採購和品質保證。
-
-- 與我們共同成長
-- 我們正進入印尼及其他地區的全新擴張階段。現在加入，與一家正處於歷史關鍵時刻的製造商共同成長。
-
-**POSITIONS SECTION:**
-- 招聘職位
-- 目前的機會。
-
-**ADMIN PANEL:**
-- 管理職位
-- 儲存
-- 匯出 JSON
-- 請輸入管理員密碼以繼續
-- 密碼
-- 解鎖
-- 密碼錯誤，請重試。
-- 連接 GitHub 以直接儲存
-- 輸入具有 repo 權限的
-- 個人存取權杖
-- 連接
-- 跳過——改用匯出
-- \+ 新增職位
-- 職位名稱
-- 例如：模具設計工程師
-- 部門
-- 工程
-- 品質保證
-- 營運
-- 銷售及業務發展
-- 地點
-- 例如：東莞，中國
-- 類型
-- 全職
-- 兼職
-- 合約
-- 工作安排
-- 現場辦公
-- 遠端
-- 混合
-- 未指定
-- 職位描述
-- 職位描述...
-- 取消
-- 儲存職位
-
-**DYNAMIC JS TEXT:**
-- 無法載入職位列表。
-- 立即申請
-- 管理職位
-- 個職位
-- 編輯
-- 刪除
-- 新增職位
-- 編輯職位
-- 職位名稱為必填項。
-- 刪除「...」？
-- 儲存中...
-- 儲存
-- 已成功儲存至 GitHub
-- 儲存失敗
-
-**CTA:**
-- 沒有看到適合的職位？
-- 向我們發送
-- 自薦申請。
-- 我們隨時歡迎製造工程、品質、採購和營運領域的優秀人才。請將您的履歷和簡短介紹發送給我們的團隊。
-- 發送您的履歷
-- 聯繫我們
-
----
-
-### cn/contact.html
-
-**TITLE:** 聯繫我們 — Royal Regent
-
-**HERO:**
-- 聯繫我們
-- 讓我們一起討論
-- 您的項目。
-- 無論您需要OEM製造、樣品生產，還是只想了解更多——我們的團隊隨時準備回應。
-
-**CONTACT INFO:**
-- 聯繫資訊
-- 每一個諮詢都很重要。我們會盡快回覆您。
-- 從初步諮詢到樣品製作再到全面量產——我們的團隊支持流程的每個階段。無論您是品牌方、零售商還是經銷商，請告訴我們您的項目，我們會迅速回覆。
-- 生產基地
-- 中國和印尼
-- 電子郵件
-
-**CONTACT FORM:**
-- 名字
-- 姓氏
-- 電子郵件地址
-- 公司
-- OEM製造諮詢
-- 樣品要求
-- 塑膠玩具
-- 毛絨玩具
-- 娃娃
-- 遙控車
-- 服裝
-- 授權 / 品牌產品
-- 招聘
-- 其他
-- 主題
-- 留言
-- 發送訊息
-- 發送成功
-
----
-
-### cn/capabilities/plastic-toys.html
-
-**TITLE:** 塑膠玩具 — Royal Regent
-
-**HERO:**
-- 首頁
-- 塑膠玩具
-- 塑膠公仔與
-- 功能性玩具
-- 自主模具開發與精密注塑成型，專為角色公仔和功能性玩具打造，完全按照客戶設計和規格進行定制生產。
-
-**EDITORIAL:**
-- 製造概覽
-- 精密加工模具。
-- 客戶自第一天起擁有。
-- 為量產規模而建。
-
-- 從首件樣品到最終裝箱
-- 生產的每個環節都在同一屋簷下完成——從最初的3D列印原型到注塑成型、噴漆、組裝和出貨裝箱。無需交接、無第三方延誤，全程可見可控。
-
-- 為量產而建，應對複雜設計
-- 無論您的產品是簡單公仔還是多組件功能性玩具，我們的一體化製造體系都能高效擴展產能——在訂單量增長的同時，保持交期緊湊、成本可控。
-
-- 自主自動化部門
-- 我們設有專門的自動化部門，為大批量生產設計和部署定制自動化流程。這確保了產出的一致性，減少了人工差異，使我們的單位成本在規模化生產中極具競爭力。
-
-**PHOTO PANELS:**
-- 模具開發
-- 注塑成型
-- 品質管控
-
-**CTA:**
-- 準備好討論您的項目了嗎？
-- 告訴我們您的需求，我們的團隊將盡快與您聯繫。
-- 聯繫我們
-
----
-
-### cn/capabilities/plush.html
-
-**TITLE:** 毛絨玩具 — Royal Regent
-
-**HERO:**
-- 首頁
-- 毛絨玩具
-- 毛絨公仔與
-- 軟體玩具
-- 授權IP、禮品及品牌周邊毛絨產品，配備完整的自有軟體玩具生產線——裁剪、縫紉、填充及最終檢驗均在同一工廠內完成。
-
-**EDITORIAL:**
-- 製造概覽
-- 從版型到成品。
-- 每一針都在廠內完成。
-- 授權及品牌就緒。
-
-- 電子及混合毛絨玩具，輕鬆搞定
-- 憑藉自有的SMT電子部門和塑膠製造能力，我們可以生產互動毛絨、電子毛絨及任何需要整合塑膠組件的軟體玩具——全部在同一屋簷下完成。無需協調多個供應商，品質毫不妥協。
-
-- 全流程自主生產
-- 從面料選擇和版型裁剪到縫紉、填充、刺繡及最終檢驗——每一步都在內部完成，絕不外包。我們在所有品類中貫徹同樣的品質標準。
-
-- 授權IP及禮品市場經驗
-- 我們為授權IP持有者、禮品品牌和促銷客戶生產角色毛絨玩具——具備這些合作所要求的色彩準確性、審批流程經驗和批量一致性。
-
-**PHOTO PANELS:**
-- 版型裁剪
-- 縫紉產線
-- 品質檢驗
-
----
-
-### cn/capabilities/dolls.html
-
-**TITLE:** 娃娃 — Royal Regent
-
-**HERO:**
-- 首頁
-- 娃娃
-- 時尚與嬰兒
-- 娃娃
-- 完整的OEM娃娃製造——面部彩繪、植髮及服裝組裝——按照EN 71和ASTM F963安全標準生產，適用於美國及歐盟市場。
-
-**EDITORIAL:**
-- 製造概覽
-- 每個尺寸都注重細節。
-- 從面部彩繪到最後一針。
-- 全流程生產。
-
-- 面部裝飾與精加工
-- 配備專門的面部裝飾車間，具備數碼噴墨（DIJ）、精密噴漆和移印能力——我們有能力按照您的設計要求，在大批量生產中始終如一地完成任何面部妝容。嬰兒娃娃和時尚娃娃產線均在廠內完成。
-
-- 植髮工藝
-- 尼龍及合成纖維植髮，支持定制顏色和造型——專為產品全生命週期的耐用性和玩耍安全性而設計。
-
-- 服裝與配件組裝
-- 廠內完成完整的服裝生產和配件組裝——支持授權IP需求、定制設計及完整的換裝娃娃套裝。
-
-**PHOTO PANELS:**
-- 面部彩繪
-- 植髮
-- 組裝
-
----
-
-### cn/capabilities/rc-vehicle.html
-
-**TITLE:** 遙控車 — Royal Regent
-
-**HERO:**
-- 首頁
-- 遙控車
-- 遙控
-- 車輛
-- 全面的遙控玩具車OEM製造，從基礎到高階車型——結構強度、操控精度及完整的電子安全合規。
-
-**EDITORIAL:**
-- 製造概覽
-- 我們最複雜的品類。
-- 機械與電子的結合。
-- 從概念到認證產品。
-
-- 自有SMT電子部門
-- 我們的專屬表面貼裝技術部門在內部完成電路板組裝和電子整合——使我們對電機性能、操控響應及每台出貨產品的一致性擁有完全掌控。
-
-- 為玩耍耐久性設計的結構工程
-- 多年的遙控車生產經驗使我們不斷優化底盤和車身結構的設計與加固方式。我們的車輛經過壓力測試，能承受兒童遙控玩具在實際玩耍中的操控和衝擊。
-
-- 全系列生產能力
-- 從簡單的前進/後退車型到配備燈光、音效和複雜控制系統的高階多功能車輛——我們結合SMT、塑膠成型和自動化能力，在同一工廠內涵蓋整個遙控車產品線。
-
-**PHOTO PANELS:**
-- 電子元件
-- 組裝
-- 測試
-
----
-
-### cn/capabilities/costume.html
-
-**TITLE:** 服裝 — Royal Regent
-
-**HERO:**
-- 首頁
-- 服裝
-- 角色與
-- 服裝
-- 柔軟安全的面料搭配精細的加工工藝，適用於授權及定制角色服裝設計——從扮裝服到兒童主題系列。
-
-**EDITORIAL:**
-- 製造概覽
-- 裁剪、縫製、精加工。
-- 全部在同一屋簷下。
-- 授權角色就緒。
-
-- 從簡單到複雜的服裝製作
-- 我們的縫紉和製造產線涵蓋全系列——從簡單的公主裙到高度結構化的角色服裝，包含多組件、泡棉填充、塑膠配件及精細裝飾。複雜度不會改變工廠的能力。
-
-- 塑膠與軟體產品一站完成
-- 角色服裝通常需要塑膠面具、武器、盔甲件和道具搭配服裝本體。憑藉我們的塑膠成型和縫紉部門在同一工廠內，我們無需拆分訂單即可生產完整的服裝套裝。
-
-- 專為玩具行業打造
-- 我們與持有授權的玩具公司和品牌方合作——深諳將角色服裝推向全球零售市場所需的生產標準、品質期望和交貨要求。
-
-**PHOTO PANELS:**
-- 面料裁剪
-- 縫製
-- 精加工
+## Effects & Animations
+
+### Hero
+- Full-bleed autoplay video (`Video/Hero.mp4`, loops, muted)
+- Gradient overlay for text readability
+- IntersectionObserver pauses playback when scrolled off-screen
+- `prefers-reduced-motion` → falls back to brand gradient
+- Text reveal on load (tag → title → sub → actions), staggered
+
+### Marquee
+- Continuous horizontal ticker of 18 product categories
+- Pauses on hover
+- Drag-to-scrub cursor hint
+
+### Intro Statement
+- 3-line manifesto with SplitText character-by-character reveal
+- Vertical brand-green bar animates in from top
+- Giant "1987" watermark (right column)
+
+### Capabilities — Scrollytelling
+- Left column: 5 text blocks scroll through
+- Right column: sticky image stack, cross-fades between 5 layered images
+- Active block changes:
+  - Eyebrow color → brand green
+  - Headline color → grey to solid black
+  - Body opacity → 55 % to 100 %
+  - "Explore capability →" link reveals
+- GSAP ScrollTrigger drives active state (IntersectionObserver fallback)
+- Mobile (<900 px) stacks vertically with per-block inline image
+
+### History
+- Full-bleed autoplay video (`Video/History.mp4`) with dark overlay
+- 6-node timeline (1987 → 2025) with animated progress bar
+- Active year scales up, turns brand green, with active dot shadow
+- Giant year watermark synchronized with active milestone
+- Click/scroll to switch milestone
+
+### CTA Banner
+- Magnetic button with cursor attraction
+- Clip-path section reveal on scroll
+
+### Navigation
+- Smart hide-on-scroll-down / reveal-on-scroll-up
+- Dropdown for capability sub-pages (with SVG category icons)
+- Language switcher (EN / 繁中 / ID) as React island
+- Keyboard shortcut indicator (React island)
+- Mobile hamburger with animated panel
+
+### Global
+- Brand loader (SVG ring + % counter + per-letter tagline reveal)
+- Smooth scroll via Lenis (synchronized with ScrollTrigger)
+- Scroll progress bar at top of viewport
+- Page transition clip-path wipe between routes
+- Custom cursor with magnetic button attraction
+- 21 modular IIFE animation scripts registered via `window.RR.register()`
+
+### Accessibility
+- `prefers-reduced-motion` respected across all motion
+- Skip-to-content link
+- All interactive elements keyboard reachable
+- Images have explicit `width`/`height` (prevents CLS)
+- Focus-visible styles preserved on all controls
