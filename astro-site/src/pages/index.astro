@@ -132,8 +132,8 @@ const capabilities = [
 
   <Nav lang={lang} />
 
-  <!-- HERO — Full-bleed video -->
-  <section class="hero hero-video-section page-reveal" id="hero">
+  <!-- HERO — Cinematic video with brand tint + bottom text -->
+  <section class="hero hero-cinematic page-reveal" id="hero">
     <div class="hero-video-wrap">
       <video
         class="hero-video"
@@ -146,18 +146,16 @@ const capabilities = [
       >
         <source src="/assets/videos/hero.mp4" type="video/mp4">
       </video>
-      <div class="hero-video-overlay"></div>
+      <div class="hero-cinematic-tint"></div>
     </div>
 
-    <div class="hero-content">
+    <div class="hero-cinematic-content">
       <div class="hero-tag" id="heroTag">OEM Toy Manufacturer · Est. 1987</div>
-      <h1 class="hero-title" id="heroTitle">
-        Precision.<br>
-        <span class="text-gradient">Craftsmanship.</span><br>
-        Global Scale.
+      <h1 class="hero-cinematic-title" id="heroTitle">
+        Precision. <span>Craftsmanship.</span> Global Scale.
       </h1>
-      <p class="hero-sub" id="heroSub">Great manufacturing isn't just about production — it's about partnership. For 39 years, we've worked alongside brands to bring their visions to life, with the craftsmanship, compliance, and consistency the world's most demanding markets expect.</p>
-      <div class="hero-actions" id="heroActions">
+      <p class="hero-cinematic-sub" id="heroSub">Great manufacturing isn't just about production — it's about partnership. For 39 years, we've worked alongside brands to bring their visions to life.</p>
+      <div class="hero-cinematic-actions" id="heroActions">
         <a href="/capabilities/plastic-toys.html" class="btn btn-primary magnetic" data-strength="0.2">Explore Capabilities</a>
         <a href="/about.html" class="btn btn-outline magnetic" data-strength="0.2">Our Story →</a>
       </div>
@@ -199,11 +197,16 @@ const capabilities = [
       </div>
     </section>
 
-    <!-- CAPABILITIES — Pinned scrollytelling -->
-    <section class="caps-pin-section clip-section" id="capsSection">
+    <!-- CAPABILITIES — Cinematic pin-scroll with design elements -->
+    <section class="caps-pin-section caps-pin-cinematic clip-section" id="capsSection">
+      <!-- Decorative grid texture -->
+      <div class="caps-grid-pattern" aria-hidden="true"></div>
+      <div class="caps-glow caps-glow-tl" aria-hidden="true"></div>
+      <div class="caps-glow caps-glow-br" aria-hidden="true"></div>
+
       <!-- Header shown before the pinned area -->
       <div class="container caps-pin-header">
-        <div class="section-label reveal-up">Manufacturing Capabilities</div>
+        <div class="section-label reveal-up"><span class="caps-header-bar"></span>Manufacturing Capabilities</div>
         <h2 class="section-title reveal-up">Five categories.<br><span>One trusted partner.</span></h2>
       </div>
 
@@ -211,43 +214,65 @@ const capabilities = [
       <div class="caps-pin-wrap">
         <div class="caps-pin-inner">
           <div class="caps-pin-grid">
-            <!-- LEFT: text slot — only active visible, others cross-fade -->
+            <!-- LEFT: text slot with giant ghost numerals + accent -->
             <div class="caps-text-slot">
+              <div class="caps-ghost-num" id="capsGhostNum">01</div>
               {capabilities.map((cap, i) => (
                 <article class={`cap-text${i === 0 ? ' active' : ''}`} data-index={i}>
-                  <div class="cap-eyebrow">{cap.num} — {cap.tag}</div>
+                  <div class="cap-eyebrow">
+                    <span class="cap-eyebrow-bar"></span>
+                    <span class="cap-eyebrow-num">{cap.num}</span>
+                    <span class="cap-eyebrow-sep">/</span>
+                    <span class="cap-eyebrow-tag">{cap.tag}</span>
+                  </div>
                   <h3 class="cap-headline">{cap.headline}</h3>
                   <p class="cap-body">{cap.body}</p>
-                  <a href={cap.href} class="cap-link">Explore capability <span>→</span></a>
+                  <a href={cap.href} class="cap-link"><span class="cap-link-line"></span>Explore capability <span class="cap-link-arrow">→</span></a>
                 </article>
               ))}
             </div>
 
-            <!-- RIGHT: visual slot — layered bg+fg per category -->
+            <!-- RIGHT: visual slot — framed, with corner accents -->
             <div class="caps-visual-slot">
-              {capabilities.map((cap, i) => (
-                <div
-                  class={`cap-visual-stack${i === 0 ? ' active' : ''}`}
-                  data-index={i}
-                  data-cap={cap.id}
-                >
-                  <div class="cap-visual-bg">
-                    <img src={cap.bgImage} alt="" loading={i === 0 ? 'eager' : 'lazy'} width="800" height="500">
+              <div class="caps-visual-frame">
+                {capabilities.map((cap, i) => (
+                  <div
+                    class={`cap-visual-stack${i === 0 ? ' active' : ''}`}
+                    data-index={i}
+                    data-cap={cap.id}
+                  >
+                    <div class="cap-visual-bg">
+                      <img src={cap.bgImage} alt="" loading={i === 0 ? 'eager' : 'lazy'} width="800" height="500">
+                    </div>
+                    <div class="cap-visual-fg">
+                      <img src={cap.fgImage} alt={cap.fgAlt} loading={i === 0 ? 'eager' : 'lazy'} width="600" height="400">
+                    </div>
+                    <div class="cap-visual-cinematic-overlay" aria-hidden="true"></div>
+                    <div class="cap-visual-tag">{cap.tag}</div>
+                    <div class="cap-visual-label">{cap.label}</div>
                   </div>
-                  <div class="cap-visual-fg">
-                    <img src={cap.fgImage} alt={cap.fgAlt} loading={i === 0 ? 'eager' : 'lazy'} width="600" height="400">
-                  </div>
-                  <div class="cap-visual-label">{cap.label}</div>
-                </div>
-              ))}
+                ))}
+                <!-- Corner brackets -->
+                <span class="cap-frame-corner cap-frame-corner-tl"></span>
+                <span class="cap-frame-corner cap-frame-corner-tr"></span>
+                <span class="cap-frame-corner cap-frame-corner-bl"></span>
+                <span class="cap-frame-corner cap-frame-corner-br"></span>
+              </div>
             </div>
           </div>
 
-          <!-- Progress indicator at the bottom of pinned view -->
-          <div class="caps-pin-progress">
-            <span class="caps-pin-current">01</span>
-            <div class="caps-pin-bar"><div class="caps-pin-bar-fill" id="capsPinBarFill"></div></div>
-            <span class="caps-pin-total">05</span>
+          <!-- Bottom strip: category names + progress -->
+          <div class="caps-pin-footer">
+            <div class="caps-pin-categories">
+              {capabilities.map((cap, i) => (
+                <span class={`caps-pin-cat${i === 0 ? ' active' : ''}`} data-index={i}>{cap.label}</span>
+              ))}
+            </div>
+            <div class="caps-pin-progress">
+              <span class="caps-pin-current">01</span>
+              <div class="caps-pin-bar"><div class="caps-pin-bar-fill" id="capsPinBarFill"></div></div>
+              <span class="caps-pin-total">05</span>
+            </div>
           </div>
         </div>
       </div>
@@ -349,8 +374,10 @@ const capabilities = [
         var pinInner = document.querySelector('.caps-pin-inner');
         var texts = Array.prototype.slice.call(document.querySelectorAll('.cap-text'));
         var visualStacks = Array.prototype.slice.call(document.querySelectorAll('.cap-visual-stack'));
+        var cats = Array.prototype.slice.call(document.querySelectorAll('.caps-pin-cat'));
         var barFill = document.getElementById('capsPinBarFill');
         var currentLabel = document.querySelector('.caps-pin-current');
+        var ghostNum = document.getElementById('capsGhostNum');
 
         if (!pinWrap || !pinInner || !texts.length || !visualStacks.length) return;
 
@@ -362,7 +389,10 @@ const capabilities = [
           currentIndex = i;
           texts.forEach(function (t, j) { t.classList.toggle('active', j === i); });
           visualStacks.forEach(function (v, j) { v.classList.toggle('active', j === i); });
-          if (currentLabel) currentLabel.textContent = String(i + 1).padStart(2, '0');
+          cats.forEach(function (c, j) { c.classList.toggle('active', j === i); });
+          var pad = String(i + 1).padStart(2, '0');
+          if (currentLabel) currentLabel.textContent = pad;
+          if (ghostNum) ghostNum.textContent = pad;
         }
 
         // Disable pin on small screens — fall back to vertical stack via CSS

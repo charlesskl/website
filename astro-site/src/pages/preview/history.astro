@@ -13,20 +13,11 @@ const milestones = [
   { year: '2023', text: 'Officially entered Indonesia — a key milestone in global supply chain diversification.' },
   { year: '2025', text: 'Indonesia Phase II commences — strengthening responsiveness to international markets.' },
 ];
-
-const locations = [
-  { id: 'hk',    name: 'Hong Kong',    year: '1987', x: 72, y: 42, color: '#7CB342' },
-  { id: 'dg',    name: 'Dongguan',     year: '2000', x: 70, y: 45, color: '#7CB342' },
-  { id: 'heyuan', name: 'Heyuan',      year: '2010', x: 71, y: 44, color: '#7CB342' },
-  { id: 'hunan', name: 'Hunan',        year: '2016', x: 68, y: 42, color: '#7CB342' },
-  { id: 'id',    name: 'Indonesia',    year: '2023', x: 73, y: 58, color: '#7CB342' },
-  { id: 'id2',   name: 'Indonesia Phase II', year: '2025', x: 74, y: 59, color: '#7CB342' },
-];
 ---
 
 <BaseLayout
-  title="History variants — Preview"
-  description="Three history-section style options"
+  title="History variants (parallax) — Preview"
+  description="Three parallax-driven history layouts"
   lang="en"
   canonical="https://royalregentgroup.com/preview/history"
   ogLocale="en_US"
@@ -37,88 +28,103 @@ const locations = [
 
   <div class="preview-wrap">
     <div class="preview-intro">
-      <div class="preview-eyebrow">History — 3 variants</div>
-      <h1>Pick a style for the development-history section.</h1>
-      <p>Each variant tells the 1987 → 2025 story differently.</p>
+      <div class="preview-eyebrow">History — 3 parallax variants</div>
+      <h1>Pick a parallax style for the history section.</h1>
+      <p>All three are scroll-driven: the visual responds to scroll position frame-by-frame.</p>
     </div>
 
-    <!-- VARIANT A — Current: full-bleed video + year watermark + timeline nodes -->
+    <!-- VARIANT A — Scroll-scrubbed video playback -->
     <div class="preview-variant">
-      <div class="preview-label">Variant A · Video background + timeline nodes <em>(current)</em></div>
-      <section class="history-section pv-hist-a" data-milestones={JSON.stringify(milestones)}>
-        <div class="history-bg history-bg-video">
-          <video class="history-video" autoplay muted loop playsinline>
-            <source src="/assets/videos/history.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="history-top"><h2 class="history-heading">Development history</h2></div>
-        <div class="history-center">
-          <div class="history-watermark">1987</div>
-          <div class="history-milestone">
-            <p>{milestones[0].text}</p>
-          </div>
-        </div>
-        <div class="history-timeline">
-          <div class="timeline-track">
-            {milestones.map((m, i) => (
-              <button class={`timeline-node${i === 0 ? ' active' : ''}`} data-index={i}>
-                <div class="timeline-dot"><span>{m.year}</span></div>
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <!-- VARIANT B — Vertical scroll timeline -->
-    <div class="preview-variant">
-      <div class="preview-label">Variant B · Vertical scroll timeline <em>(scroll down through years; each milestone enters with animation)</em></div>
-      <section class="pv-hist-b">
-        <div class="container pv-hist-b-header">
-          <div class="section-label">Our Story</div>
-          <h2 class="section-title">39 years.<br><span>One unbroken thread.</span></h2>
-        </div>
-        <div class="pv-hist-b-track">
-          <div class="pv-hist-b-line"></div>
-          {milestones.map((m, i) => (
-            <div class={`pv-hist-b-entry${i % 2 === 0 ? ' left' : ' right'}`} data-index={i}>
-              <div class="pv-hist-b-year">{m.year}</div>
-              <div class="pv-hist-b-card">
-                <p>{m.text}</p>
-              </div>
-              <div class="pv-hist-b-dot"></div>
-            </div>
-          ))}
-        </div>
-      </section>
-    </div>
-
-    <!-- VARIANT C — Pinned cinematic year-scroll -->
-    <div class="preview-variant">
-      <div class="preview-label">Variant C · Pinned year-scroll <em>(pins section; scroll scrubs through years; giant number morphs; video stays in background)</em></div>
-      <section class="pv-hist-c" id="histC">
-        <div class="pv-hist-c-wrap" id="histCWrap">
-          <div class="pv-hist-c-inner" id="histCInner">
-            <div class="history-bg history-bg-video">
-              <video class="history-video" autoplay muted loop playsinline>
+      <div class="preview-label">Variant A · Scroll-scrubbed video <em>(scroll controls the video's playhead; year + milestone change with frame)</em></div>
+      <section class="ph-a" id="phA">
+        <div class="ph-a-wrap" id="phAWrap">
+          <div class="ph-a-inner" id="phAInner">
+            <div class="ph-a-video-layer">
+              <video class="ph-a-video" id="phAVideo" muted playsinline preload="auto">
                 <source src="/assets/videos/history.mp4" type="video/mp4">
               </video>
+              <div class="ph-a-video-overlay"></div>
             </div>
-            <div class="pv-hist-c-content">
-              <div class="pv-hist-c-tag">Development history</div>
-              <div class="pv-hist-c-year" id="histCYear">1987</div>
-              <div class="pv-hist-c-milestones">
+            <div class="ph-a-content">
+              <div class="ph-a-tag">Development history</div>
+              <div class="ph-a-year-big" id="phAYear">1987</div>
+              <div class="ph-a-msg-area">
                 {milestones.map((m, i) => (
-                  <div class={`pv-hist-c-msg${i === 0 ? ' active' : ''}`} data-index={i}>
+                  <div class={`ph-a-msg${i === 0 ? ' active' : ''}`} data-index={i}>
                     <p>{m.text}</p>
                   </div>
                 ))}
               </div>
             </div>
-            <div class="pv-hist-c-dots">
+            <div class="ph-a-timeline">
               {milestones.map((m, i) => (
-                <div class={`pv-hist-c-dot${i === 0 ? ' active' : ''}`} data-year={m.year}></div>
+                <div class={`ph-a-tl-node${i === 0 ? ' active' : ''}`} data-index={i}>
+                  <div class="ph-a-tl-dot"></div>
+                  <span>{m.year}</span>
+                </div>
               ))}
+              <div class="ph-a-tl-fill" id="phATlFill"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- VARIANT B — Layered speed-parallax slides -->
+    <div class="preview-variant">
+      <div class="preview-label">Variant B · Layered speed parallax <em>(background, year text, and milestone card each scroll at different speeds)</em></div>
+      <section class="ph-b">
+        <div class="ph-b-header container">
+          <div class="section-label">Our Story</div>
+          <h2 class="section-title">39 years.<br><span>One unbroken thread.</span></h2>
+        </div>
+        {milestones.map((m, i) => (
+          <div class={`ph-b-slide ph-b-slide-${i}`} data-index={i}>
+            <div class="ph-b-bg" data-speed="-0.35"></div>
+            <div class="ph-b-year" data-speed="0.5">{m.year}</div>
+            <div class="ph-b-card" data-speed="0">
+              <div class="ph-b-card-eyebrow">Milestone 0{i + 1} / 06</div>
+              <p>{m.text}</p>
+            </div>
+          </div>
+        ))}
+      </section>
+    </div>
+
+    <!-- VARIANT C — Horizontal pinned parallax -->
+    <div class="preview-variant">
+      <div class="preview-label">Variant C · Horizontal pinned parallax <em>(vertical scroll → horizontal motion; layers drift at different horizontal rates)</em></div>
+      <section class="ph-c" id="phC">
+        <div class="ph-c-wrap" id="phCWrap">
+          <div class="ph-c-inner" id="phCInner">
+            <div class="ph-c-header">
+              <div class="ph-c-tag">Development history</div>
+              <h2>39 years.<br>Four decades of motion.</h2>
+            </div>
+            <div class="ph-c-stage">
+              <!-- Slow drifting background year text -->
+              <div class="ph-c-years-bg" id="phCYearsBg">
+                {milestones.map((m) => <span>{m.year}</span>)}
+              </div>
+              <!-- Medium-speed video layer -->
+              <div class="ph-c-video-layer" id="phCVideoLayer">
+                <video class="ph-c-video" autoplay muted loop playsinline>
+                  <source src="/assets/videos/history.mp4" type="video/mp4">
+                </video>
+                <div class="ph-c-video-tint"></div>
+              </div>
+              <!-- Fast milestone cards -->
+              <div class="ph-c-cards" id="phCCards">
+                {milestones.map((m) => (
+                  <div class="ph-c-card">
+                    <div class="ph-c-card-year">{m.year}</div>
+                    <p>{m.text}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div class="ph-c-progress">
+              <div class="ph-c-progress-fill" id="phCProgressFill"></div>
             </div>
           </div>
         </div>
@@ -136,36 +142,111 @@ const locations = [
         } else { init(); }
 
         function init() {
-          // Variant C: pinned year-scroll
-          var wrap = document.getElementById('histCWrap');
-          var inner = document.getElementById('histCInner');
-          var years = ['1987','2000','2010','2016','2023','2025'];
-          var msgs = Array.prototype.slice.call(document.querySelectorAll('#histC .pv-hist-c-msg'));
-          var dots = Array.prototype.slice.call(document.querySelectorAll('#histC .pv-hist-c-dot'));
-          var yearEl = document.getElementById('histCYear');
+          if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+          gsap.registerPlugin(ScrollTrigger);
 
-          if (wrap && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && window.innerWidth >= 900) {
-            gsap.registerPlugin(ScrollTrigger);
-            var last = -1;
+          // ═══ Variant A — scroll-scrubbed video ═══
+          (function(){
+            var video = document.getElementById('phAVideo');
+            var wrap = document.getElementById('phAWrap');
+            var inner = document.getElementById('phAInner');
+            var yearEl = document.getElementById('phAYear');
+            var msgs = Array.prototype.slice.call(document.querySelectorAll('#phA .ph-a-msg'));
+            var nodes = Array.prototype.slice.call(document.querySelectorAll('#phA .ph-a-tl-node'));
+            var tlFill = document.getElementById('phATlFill');
+            if (!video || !wrap || window.innerWidth < 900) return;
+
+            var years = ['1987','2000','2010','2016','2023','2025'];
+            var lastIdx = -1;
+
+            function ensureDuration(cb) {
+              if (isFinite(video.duration) && video.duration > 0) { cb(); return; }
+              video.addEventListener('loadedmetadata', cb, { once: true });
+            }
+
+            ensureDuration(function(){
+              var dur = video.duration || 8;
+              ScrollTrigger.create({
+                trigger: wrap,
+                start: 'top top',
+                end: '+=' + (years.length * window.innerHeight * 0.9),
+                pin: inner,
+                scrub: 0.4,
+                invalidateOnRefresh: true,
+                onUpdate: function(self){
+                  var p = self.progress;
+                  // Scrub video
+                  video.currentTime = Math.min(dur - 0.05, p * dur);
+                  // Active index
+                  var idx = Math.min(years.length - 1, Math.floor(p * years.length));
+                  if (idx !== lastIdx) {
+                    lastIdx = idx;
+                    if (yearEl) yearEl.textContent = years[idx];
+                    msgs.forEach(function(m, j){ m.classList.toggle('active', j === idx); });
+                    nodes.forEach(function(n, j){ n.classList.toggle('active', j === idx); });
+                  }
+                  if (tlFill) tlFill.style.transform = 'scaleX(' + p + ')';
+                }
+              });
+            });
+          })();
+
+          // ═══ Variant B — layered speed parallax ═══
+          (function(){
+            var slides = document.querySelectorAll('.ph-b-slide');
+            if (!slides.length) return;
+            slides.forEach(function(slide){
+              var layers = slide.querySelectorAll('[data-speed]');
+              layers.forEach(function(layer){
+                var speed = parseFloat(layer.getAttribute('data-speed')) || 0;
+                if (speed === 0) return;
+                gsap.fromTo(layer,
+                  { yPercent: -speed * 40 },
+                  {
+                    yPercent: speed * 40,
+                    ease: 'none',
+                    scrollTrigger: {
+                      trigger: slide,
+                      start: 'top bottom',
+                      end: 'bottom top',
+                      scrub: true,
+                    }
+                  }
+                );
+              });
+            });
+          })();
+
+          // ═══ Variant C — horizontal pinned parallax ═══
+          (function(){
+            var wrap = document.getElementById('phCWrap');
+            var inner = document.getElementById('phCInner');
+            var yearsBg = document.getElementById('phCYearsBg');
+            var videoLayer = document.getElementById('phCVideoLayer');
+            var cards = document.getElementById('phCCards');
+            var fill = document.getElementById('phCProgressFill');
+            if (!wrap || !inner || !yearsBg || !cards || window.innerWidth < 900) return;
+
+            var cardsWidth = cards.scrollWidth;
+            var viewportWidth = window.innerWidth;
+            var horizDistance = cardsWidth - viewportWidth + 200;
+
             ScrollTrigger.create({
               trigger: wrap,
               start: 'top top',
-              end: '+=' + (years.length * window.innerHeight),
+              end: '+=' + (horizDistance * 1.3),
               pin: inner,
               scrub: 0.5,
               invalidateOnRefresh: true,
               onUpdate: function(self){
                 var p = self.progress;
-                var idx = Math.min(years.length - 1, Math.floor(p * years.length));
-                if (idx !== last) {
-                  last = idx;
-                  if (yearEl) yearEl.textContent = years[idx];
-                  msgs.forEach(function(m, j){ m.classList.toggle('active', j === idx); });
-                  dots.forEach(function(d, j){ d.classList.toggle('active', j === idx); });
-                }
+                cards.style.transform = 'translate3d(-' + (p * horizDistance) + 'px,0,0)';
+                yearsBg.style.transform = 'translate3d(-' + (p * horizDistance * 0.35) + 'px,0,0)';
+                if (videoLayer) videoLayer.style.transform = 'translate3d(-' + (p * horizDistance * 0.6) + 'px,0,0) scale(1.05)';
+                if (fill) fill.style.transform = 'scaleX(' + p + ')';
               }
             });
-          }
+          })();
         }
       })();
     </script>
