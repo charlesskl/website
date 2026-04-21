@@ -86,6 +86,9 @@ const hreflangId = isHome ? `${base}/id.html` : `${base}/id${pagePath}`;
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="preconnect" href="https://unpkg.com" crossorigin>
 
+  <!-- Preload critical assets -->
+  <link rel="preload" href="/assets/logo.webp" as="image" type="image/webp">
+
   <!-- Preload critical fonts -->
   <link rel="preload" href="/fonts/clash-display-600.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/clash-display-700.woff2" as="font" type="font/woff2" crossorigin>
