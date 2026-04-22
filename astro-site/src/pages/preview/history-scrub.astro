@@ -1,0 +1,388 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/home.css';
+import '../../styles/preview.css';
+import '../../styles/preview-scrub.css';
+
+const milestones = [
+  { year: '1987', text: 'Founded in Sha Tau Kok — the first step in a 39-year manufacturing journey.' },
+  { year: '2000', text: 'First soft toy production line launched — entering plush and costume manufacturing.' },
+  { year: '2010', text: 'Doll production lines integrated sewing craftsmanship with plastic molding technology.' },
+  { year: '2016', text: 'Entered remote control vehicle manufacturing — our highest-complexity category.' },
+  { year: '2023', text: 'Officially entered Indonesia — a key milestone in global supply chain diversification.' },
+  { year: '2025', text: 'Indonesia Phase II commences — strengthening responsiveness to international markets.' },
+];
+const years = milestones.map((m) => m.year);
+---
+
+<BaseLayout
+  title="History — scroll-scrubbed video display variants"
+  description="Five visual treatments of the scroll-scrubbed video history mechanic"
+  lang="en"
+  canonical="https://royalregentgroup.com/preview/history-scrub"
+  ogLocale="en_US"
+  ogLocaleAlternates={[]}
+  dataPage="preview"
+>
+  <Nav lang="en" />
+
+  <div class="preview-wrap">
+    <div class="preview-intro">
+      <div class="preview-eyebrow">History · Scroll-drops-video · 5 display variants</div>
+      <h1>Same mechanic. Five visual treatments.</h1>
+      <p>All five tie <code>video.currentTime</code> to scroll progress. What differs is how the video is framed and how the year + milestone text live around it.</p>
+    </div>
+
+    <!-- V1 — Full-bleed cinematic (baseline) -->
+    <div class="preview-variant">
+      <div class="preview-label">V1 · Full-bleed cinematic <em>(video covers viewport; year + milestone overlaid; timeline floats at bottom — current baseline)</em></div>
+      <section class="hs-v1" id="hsV1">
+        <div class="hs-v1-wrap" id="hsV1Wrap">
+          <div class="hs-v1-inner" id="hsV1Inner">
+            <div class="hs-v1-video-layer">
+              <video class="hs-scrub-video" id="hsV1Video" muted playsinline preload="auto">
+                <source src="/assets/videos/history.mp4" type="video/mp4">
+              </video>
+              <div class="hs-v1-tint"></div>
+            </div>
+            <div class="hs-v1-content">
+              <div class="hs-v1-tag">Development history</div>
+              <div class="hs-v1-year" id="hsV1Year">1987</div>
+              <div class="hs-v1-msg-area">
+                {milestones.map((m, i) => (
+                  <div class={`hs-v1-msg${i === 0 ? ' active' : ''}`} data-index={i}>
+                    <p>{m.text}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div class="hs-v1-timeline">
+              {milestones.map((m, i) => (
+                <div class={`hs-v1-tl-node${i === 0 ? ' active' : ''}`} data-index={i}>
+                  <div class="hs-v1-tl-dot"></div>
+                  <span>{m.year}</span>
+                </div>
+              ))}
+              <div class="hs-v1-tl-fill" id="hsV1Fill"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- V2 — Framed editorial (letterbox) -->
+    <div class="preview-variant">
+      <div class="preview-label">V2 · Framed editorial <em>(letterboxed 21:9 video on dark canvas; year above frame, milestone below; industrial corner brackets — museum / documentary feel)</em></div>
+      <section class="hs-v2" id="hsV2">
+        <div class="hs-v2-wrap" id="hsV2Wrap">
+          <div class="hs-v2-inner" id="hsV2Inner">
+            <div class="hs-v2-top">
+              <div class="hs-v2-tag"><span class="hs-v2-bar"></span>Development history · 1987 – 2025</div>
+              <div class="hs-v2-year" id="hsV2Year">1987</div>
+            </div>
+            <div class="hs-v2-frame">
+              <video class="hs-scrub-video" id="hsV2Video" muted playsinline preload="auto">
+                <source src="/assets/videos/history.mp4" type="video/mp4">
+              </video>
+              <div class="hs-v2-frame-tint"></div>
+              <span class="hs-v2-corner hs-v2-corner-tl"></span>
+              <span class="hs-v2-corner hs-v2-corner-tr"></span>
+              <span class="hs-v2-corner hs-v2-corner-bl"></span>
+              <span class="hs-v2-corner hs-v2-corner-br"></span>
+              <div class="hs-v2-frame-badge" id="hsV2Badge">Chapter 01 / 06</div>
+            </div>
+            <div class="hs-v2-bottom">
+              <div class="hs-v2-msg-area">
+                {milestones.map((m, i) => (
+                  <div class={`hs-v2-msg${i === 0 ? ' active' : ''}`} data-index={i}>
+                    <p>{m.text}</p>
+                  </div>
+                ))}
+              </div>
+              <div class="hs-v2-timeline">
+                {milestones.map((m, i) => (
+                  <div class={`hs-v2-tl-node${i === 0 ? ' active' : ''}`} data-index={i}>
+                    <span>{m.year}</span>
+                  </div>
+                ))}
+                <div class="hs-v2-tl-fill" id="hsV2Fill"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- V3 — Split panel -->
+    <div class="preview-variant">
+      <div class="preview-label">V3 · Split panel <em>(video left 55% / text + vertical timeline right 45%; editorial documentary feel)</em></div>
+      <section class="hs-v3" id="hsV3">
+        <div class="hs-v3-wrap" id="hsV3Wrap">
+          <div class="hs-v3-inner" id="hsV3Inner">
+            <div class="hs-v3-video-side">
+              <video class="hs-scrub-video" id="hsV3Video" muted playsinline preload="auto">
+                <source src="/assets/videos/history.mp4" type="video/mp4">
+              </video>
+              <div class="hs-v3-video-tint"></div>
+              <div class="hs-v3-video-marker" id="hsV3Marker">01 / 06</div>
+            </div>
+            <div class="hs-v3-text-side">
+              <div class="hs-v3-tag"><span class="hs-v3-tag-dot"></span>Development history</div>
+              <div class="hs-v3-year" id="hsV3Year">1987</div>
+              <div class="hs-v3-msg-area">
+                {milestones.map((m, i) => (
+                  <div class={`hs-v3-msg${i === 0 ? ' active' : ''}`} data-index={i}>
+                    <p>{m.text}</p>
+                  </div>
+                ))}
+              </div>
+              <div class="hs-v3-timeline">
+                <div class="hs-v3-tl-track"></div>
+                <div class="hs-v3-tl-fill" id="hsV3Fill"></div>
+                {milestones.map((m, i) => (
+                  <div class={`hs-v3-tl-node${i === 0 ? ' active' : ''}`} data-index={i}>
+                    <span class="hs-v3-tl-dot"></span>
+                    <span class="hs-v3-tl-year">{m.year}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- V4 — Typographic hero (outline stroke) -->
+    <div class="preview-variant">
+      <div class="preview-label">V4 · Typographic hero — outline <em>(outline-stroke year; light, architectural, lets the video show through)</em></div>
+      <section class="hs-v4" id="hsV4">
+        <div class="hs-v4-wrap" id="hsV4Wrap">
+          <div class="hs-v4-inner" id="hsV4Inner">
+            <div class="hs-v4-video-layer">
+              <video class="hs-scrub-video" id="hsV4Video" muted playsinline preload="auto">
+                <source src="/assets/videos/history.mp4" type="video/mp4">
+              </video>
+              <div class="hs-v4-tint"></div>
+              <div class="hs-v4-grid" aria-hidden="true"></div>
+            </div>
+            <div class="hs-v4-corner-top">
+              <div class="hs-v4-tag">Development history</div>
+              <div class="hs-v4-index" id="hsV4Index">01 — 06</div>
+            </div>
+            <div class="hs-v4-year-stage">
+              <div class="hs-v4-year-solid" id="hsV4YearSolid">1987</div>
+              <div class="hs-v4-year-outline" id="hsV4YearOutline">1987</div>
+            </div>
+            <div class="hs-v4-bottom">
+              <div class="hs-v4-msg-area">
+                {milestones.map((m, i) => (
+                  <div class={`hs-v4-msg${i === 0 ? ' active' : ''}`} data-index={i}>
+                    <p>{m.text}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div class="hs-v4-rail">
+              {milestones.map((m, i) => (
+                <div class={`hs-v4-rail-node${i === 0 ? ' active' : ''}`} data-index={i}>
+                  <span class="hs-v4-rail-dot"></span>
+                  <span class="hs-v4-rail-year">{m.year}</span>
+                </div>
+              ))}
+              <div class="hs-v4-rail-fill" id="hsV4Fill"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- V5 — Typographic hero (neon glow) -->
+    <div class="preview-variant">
+      <div class="preview-label">V5 · Typographic hero — neon glow <em>(same layout as V4, but the year is filled + haloed; mix-blend-mode screen lets it interact with bright parts of the video)</em></div>
+      <section class="hs-v5" id="hsV5">
+        <div class="hs-v5-wrap" id="hsV5Wrap">
+          <div class="hs-v5-inner" id="hsV5Inner">
+            <div class="hs-v5-video-layer">
+              <video class="hs-scrub-video" id="hsV5Video" muted playsinline preload="auto">
+                <source src="/assets/videos/history.mp4" type="video/mp4">
+              </video>
+              <div class="hs-v5-tint"></div>
+              <div class="hs-v5-grid" aria-hidden="true"></div>
+            </div>
+            <div class="hs-v5-corner-top">
+              <div class="hs-v5-tag">Development history</div>
+              <div class="hs-v5-index" id="hsV5Index">01 — 06</div>
+            </div>
+            <div class="hs-v5-year-stage">
+              <div class="hs-v5-year-halo" id="hsV5YearHalo">1987</div>
+              <div class="hs-v5-year-fill" id="hsV5YearFill">1987</div>
+              <div class="hs-v5-year-core" id="hsV5YearCore">1987</div>
+            </div>
+            <div class="hs-v5-bottom">
+              <div class="hs-v5-msg-area">
+                {milestones.map((m, i) => (
+                  <div class={`hs-v5-msg${i === 0 ? ' active' : ''}`} data-index={i}>
+                    <p>{m.text}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div class="hs-v5-rail">
+              {milestones.map((m, i) => (
+                <div class={`hs-v5-rail-node${i === 0 ? ' active' : ''}`} data-index={i}>
+                  <span class="hs-v5-rail-dot"></span>
+                  <span class="hs-v5-rail-year">{m.year}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <Footer lang="en" />
+
+  <Fragment slot="page-scripts">
+    <script is:inline define:vars={{ years }}>
+      (function(){
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', init);
+        } else { init(); }
+
+        function setupScrub(opts) {
+          var wrap = document.getElementById(opts.wrapId);
+          var inner = document.getElementById(opts.innerId);
+          var video = document.getElementById(opts.videoId);
+          if (!wrap || !inner || !video) return;
+          if (window.innerWidth < 900) return;
+
+          var count = years.length;
+          var pinViewports = opts.pinViewports || 3;
+          var lastIdx = -1;
+          var cachedDur = 0;
+
+          function ensureDuration(cb) {
+            if (isFinite(video.duration) && video.duration > 0) { cachedDur = video.duration; cb(); return; }
+            video.addEventListener('loadedmetadata', function(){ cachedDur = video.duration || 8; cb(); }, { once: true });
+            // Fallback if metadata never fires
+            setTimeout(function(){ if (!cachedDur) { cachedDur = 8; cb(); } }, 2500);
+          }
+
+          ensureDuration(function(){
+            var dur = cachedDur;
+            ScrollTrigger.create({
+              trigger: wrap,
+              start: 'top top',
+              end: '+=' + (pinViewports * window.innerHeight),
+              pin: inner,
+              scrub: 0.4,
+              invalidateOnRefresh: true,
+              onUpdate: function(self){
+                var p = self.progress;
+                video.currentTime = Math.min(dur - 0.05, p * dur);
+                var idx = Math.min(count - 1, Math.floor(p * count));
+                if (idx !== lastIdx) {
+                  lastIdx = idx;
+                  opts.onIndexChange(idx);
+                }
+                opts.onProgress(p, idx);
+              }
+            });
+          });
+        }
+
+        function activate(selector, idx) {
+          var items = document.querySelectorAll(selector);
+          for (var i = 0; i < items.length; i++) {
+            items[i].classList.toggle('active', i === idx);
+          }
+        }
+
+        function setText(id, txt) {
+          var el = document.getElementById(id);
+          if (el) el.textContent = txt;
+        }
+
+        function scaleFill(id, p) {
+          var el = document.getElementById(id);
+          if (el) el.style.transform = 'scaleX(' + p + ')';
+        }
+
+        function scaleFillY(id, p) {
+          var el = document.getElementById(id);
+          if (el) el.style.transform = 'scaleY(' + p + ')';
+        }
+
+        function init() {
+          if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+          gsap.registerPlugin(ScrollTrigger);
+
+          // V1 — Full-bleed cinematic
+          setupScrub({
+            wrapId: 'hsV1Wrap', innerId: 'hsV1Inner', videoId: 'hsV1Video', pinViewports: 3,
+            onIndexChange: function(idx){
+              setText('hsV1Year', years[idx]);
+              activate('#hsV1 .hs-v1-msg', idx);
+              activate('#hsV1 .hs-v1-tl-node', idx);
+            },
+            onProgress: function(p){ scaleFill('hsV1Fill', p); }
+          });
+
+          // V2 — Framed editorial
+          setupScrub({
+            wrapId: 'hsV2Wrap', innerId: 'hsV2Inner', videoId: 'hsV2Video', pinViewports: 3,
+            onIndexChange: function(idx){
+              setText('hsV2Year', years[idx]);
+              setText('hsV2Badge', 'Chapter ' + String(idx + 1).padStart(2, '0') + ' / 06');
+              activate('#hsV2 .hs-v2-msg', idx);
+              activate('#hsV2 .hs-v2-tl-node', idx);
+            },
+            onProgress: function(p){ scaleFill('hsV2Fill', p); }
+          });
+
+          // V3 — Split panel
+          setupScrub({
+            wrapId: 'hsV3Wrap', innerId: 'hsV3Inner', videoId: 'hsV3Video', pinViewports: 3,
+            onIndexChange: function(idx){
+              setText('hsV3Year', years[idx]);
+              setText('hsV3Marker', String(idx + 1).padStart(2, '0') + ' / 06');
+              activate('#hsV3 .hs-v3-msg', idx);
+              activate('#hsV3 .hs-v3-tl-node', idx);
+            },
+            onProgress: function(p){ scaleFillY('hsV3Fill', p); }
+          });
+
+          // V4 — Typographic hero (outline)
+          setupScrub({
+            wrapId: 'hsV4Wrap', innerId: 'hsV4Inner', videoId: 'hsV4Video', pinViewports: 3,
+            onIndexChange: function(idx){
+              setText('hsV4YearSolid', years[idx]);
+              setText('hsV4YearOutline', years[idx]);
+              setText('hsV4Index', String(idx + 1).padStart(2, '0') + ' — 06');
+              activate('#hsV4 .hs-v4-msg', idx);
+              activate('#hsV4 .hs-v4-rail-node', idx);
+            },
+            onProgress: function(p){ scaleFillY('hsV4Fill', p); }
+          });
+
+          // V5 — Typographic hero (neon glow)
+          setupScrub({
+            wrapId: 'hsV5Wrap', innerId: 'hsV5Inner', videoId: 'hsV5Video', pinViewports: 3,
+            onIndexChange: function(idx){
+              setText('hsV5YearHalo', years[idx]);
+              setText('hsV5YearFill', years[idx]);
+              setText('hsV5YearCore', years[idx]);
+              setText('hsV5Index', String(idx + 1).padStart(2, '0') + ' — 06');
+              activate('#hsV5 .hs-v5-msg', idx);
+              activate('#hsV5 .hs-v5-rail-node', idx);
+            },
+            onProgress: function(){ /* no extra fill */ }
+          });
+        }
+      })();
+    </script>
+  </Fragment>
+</BaseLayout>
