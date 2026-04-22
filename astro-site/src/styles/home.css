@@ -1883,3 +1883,145 @@ body[data-page="home"] .cta-response-dot {
   .caps-sticky-frame .cap-visual-bg img { transform: none !important; }
   .page-thread-dot { display: none; }
 }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   SECTION REVEAL SYSTEM — uniform entry choreography
+   Every .reveal-section starts in a hidden state; when the section
+   crosses the viewport reveal threshold, JS adds .revealed which
+   triggers a stagger of any .reveal-up descendants inside.
+   Scoped to home only to avoid touching other pages.
+   ═══════════════════════════════════════════════════════════════ */
+body[data-page="home"] .reveal-up {
+  opacity: 0;
+  transform: translate3d(0, 32px, 0);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+body[data-page="home"] .reveal-section.revealed .reveal-up {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+/* Stagger: 1st child 0ms, 2nd 120ms, 3rd 240ms, etc. */
+body[data-page="home"] .reveal-section.revealed .reveal-up:nth-of-type(1) { transition-delay: 0ms; }
+body[data-page="home"] .reveal-section.revealed .reveal-up:nth-of-type(2) { transition-delay: 120ms; }
+body[data-page="home"] .reveal-section.revealed .reveal-up:nth-of-type(3) { transition-delay: 240ms; }
+body[data-page="home"] .reveal-section.revealed .reveal-up:nth-of-type(4) { transition-delay: 360ms; }
+/* Nested stagger within sub-containers (caps header, CTA grid) */
+body[data-page="home"] .reveal-section.revealed .container .reveal-up:nth-of-type(1),
+body[data-page="home"] .reveal-section.revealed .cta-split-left .reveal-up:nth-of-type(1),
+body[data-page="home"] .reveal-section.revealed .caps-sticky-header .reveal-up:nth-of-type(1) {
+  transition-delay: 0ms;
+}
+body[data-page="home"] .reveal-section.revealed .cta-split-left .reveal-up:nth-of-type(2),
+body[data-page="home"] .reveal-section.revealed .caps-sticky-header .reveal-up:nth-of-type(2) {
+  transition-delay: 140ms;
+}
+body[data-page="home"] .reveal-section.revealed .cta-split-right.reveal-up {
+  transition-delay: 280ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-page="home"] .reveal-up {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   TRUST BAND — pill chip introducing the product-category marquee
+   Sits between hero and statement as the "what we build" band.
+   ═══════════════════════════════════════════════════════════════ */
+body[data-page="home"] .trust-band {
+  position: relative;
+  padding: clamp(48px, 6vh, 80px) 0 0;
+}
+body[data-page="home"] .trust-band-heading {
+  padding: 0 var(--space-md) clamp(24px, 3vh, 36px);
+  max-width: 1400px;
+  margin: 0 auto;
+  text-align: center;
+}
+body[data-page="home"] .trust-band-heading .section-chip {
+  margin-bottom: 0;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   STATEMENT — pill chip row above the 3-line philosophy
+   Chip is left-aligned with the statement's left edge for visual
+   continuity with the vertical brand-green bar.
+   ═══════════════════════════════════════════════════════════════ */
+body[data-page="home"] .statement-chip-row {
+  padding: 0 var(--space-md);
+  max-width: 1400px;
+  margin: 0 auto clamp(24px, 3vh, 40px);
+}
+body[data-page="home"] .statement-section {
+  padding-top: clamp(80px, 10vh, 140px);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   HISTORY — pill chip overlay (top-left of the video section)
+   Stays on top of the full-bleed video background. Subtle backdrop
+   blur so it reads against any frame of the video.
+   ═══════════════════════════════════════════════════════════════ */
+body[data-page="home"] .history-chip-row {
+  position: absolute;
+  top: calc(var(--nav-h) + 24px);
+  left: clamp(24px, 4vw, 64px);
+  z-index: 10;
+}
+body[data-page="home"] .history-chip-row .section-chip {
+  background: rgba(10, 10, 10, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-color: rgba(168, 214, 111, 0.4);
+  margin-bottom: 0;
+}
+@media (max-width: 900px) {
+  body[data-page="home"] .history-chip-row {
+    top: calc(var(--nav-h) + 12px);
+    left: 16px;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   CAPABILITY FRAME — 3D mouse-tilt
+   The sticky frame tilts ±6° with mouse movement over the caps
+   section. CSS custom props --tilt-x / --tilt-y are written by JS
+   each frame; the transform picks them up here.
+   ═══════════════════════════════════════════════════════════════ */
+body[data-page="home"] .caps-sticky-right {
+  perspective: 1400px;
+}
+body[data-page="home"] .caps-sticky-frame {
+  transform:
+    rotateX(var(--tilt-x, 0deg))
+    rotateY(var(--tilt-y, 0deg));
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: box-shadow 0.5s ease;
+}
+body[data-page="home"] .caps-sticky-right:hover .caps-sticky-frame {
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.65),
+    0 8px 24px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(124, 179, 66, 0.25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-page="home"] .caps-sticky-frame {
+    transform: none;
+  }
+}
+@media (max-width: 900px) {
+  body[data-page="home"] .caps-sticky-frame {
+    transform: none;
+  }
+}
