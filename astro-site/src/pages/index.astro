@@ -197,22 +197,22 @@ const capabilities = [
       </div>
     </section>
 
-    <!-- CAPABILITIES — Cinematic pin-scroll, header + content on the same panel -->
-    <section class="caps-pin-section caps-pin-cinematic" id="capsSection">
+    <!-- CAPABILITIES — Cinematic pin-scroll with design elements -->
+    <section class="caps-pin-section caps-pin-cinematic clip-section" id="capsSection">
       <!-- Decorative grid texture -->
       <div class="caps-grid-pattern" aria-hidden="true"></div>
       <div class="caps-glow caps-glow-tl" aria-hidden="true"></div>
       <div class="caps-glow caps-glow-br" aria-hidden="true"></div>
 
-      <!-- Pinned area: header + content + category strip all live inside here -->
+      <!-- Header shown before the pinned area -->
+      <div class="container caps-pin-header">
+        <div class="section-label reveal-up"><span class="caps-header-bar"></span>Manufacturing Capabilities</div>
+        <h2 class="section-title reveal-up">Five categories.<br><span>One trusted partner.</span></h2>
+      </div>
+
+      <!-- Pinned area: inner gets pinned for 5 viewports of scroll -->
       <div class="caps-pin-wrap">
         <div class="caps-pin-inner">
-          <!-- Header sits inside the pinned panel so it stays while categories cycle -->
-          <div class="caps-pin-header">
-            <div class="section-label"><span class="caps-header-bar"></span>Manufacturing Capabilities</div>
-            <h2 class="section-title">Five categories.<br><span>One trusted partner.</span></h2>
-          </div>
-
           <div class="caps-pin-grid">
             <!-- LEFT: text slot with giant ghost numerals + accent -->
             <div class="caps-text-slot">
