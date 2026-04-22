@@ -1454,3 +1454,432 @@ body[data-page="home"] .cta-banner h2 {
 body[data-page="home"] .cta-banner p {
   color: rgba(255, 255, 255, 0.72);
 }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   PAGE-WIDE DOTTED THREAD (H0 — Sphinx connecting layer)
+   Runs down the left edge of the page, brand-green dots, with a
+   small glowing progress marker that slides down as the reader
+   scrolls. Home page only.
+   ═══════════════════════════════════════════════════════════════ */
+.page-thread-wrap {
+  position: relative;
+  /* The thread lives inside this wrapper which spans hero → CTA.
+     Keep children above the thread's z-index: 1. */
+}
+
+.page-thread {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: clamp(16px, 3vw, 48px);
+  width: 2px;
+  z-index: 1;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(168, 214, 111, 0.55) 0px,
+    rgba(168, 214, 111, 0.55) 3px,
+    transparent 3px,
+    transparent 14px
+  );
+  opacity: 0.5;
+  /* Fade at top + bottom so it doesn't clash with nav / footer edges */
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    #000 80px,
+    #000 calc(100% - 120px),
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    #000 80px,
+    #000 calc(100% - 120px),
+    transparent 100%
+  );
+}
+
+.page-thread-dot {
+  position: fixed;
+  left: calc(clamp(16px, 3vw, 48px) - 4px);
+  top: 20vh;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #A8D66F;
+  box-shadow:
+    0 0 16px rgba(168, 214, 111, 0.9),
+    0 0 4px rgba(168, 214, 111, 1),
+    0 0 0 3px rgba(10, 10, 10, 0.6);
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  will-change: top, opacity;
+}
+
+@media (max-width: 900px) {
+  .page-thread,
+  .page-thread-dot { display: none; }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   SECTION CHIP — reusable pill eyebrow
+   Used on caps header + CTA header. Tiny letterspaced caps, rounded
+   pill background with brand-green border.
+   ═══════════════════════════════════════════════════════════════ */
+.section-chip {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  padding: 7px 16px;
+  border-radius: 999px;
+  background: rgba(168, 214, 111, 0.08);
+  color: #A8D66F;
+  border: 1px solid rgba(168, 214, 111, 0.28);
+  margin-bottom: 24px;
+  line-height: 1;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   CAPABILITIES — STICKY SPLIT (Sphinx "Agent in Action" pattern)
+   Left: 5 text blocks scroll naturally (one per capability).
+   Right: ONE sticky image frame that swaps + parallaxes.
+   Replaces the pin-scroll mechanic on the home page. Preview pages
+   still use .caps-pin-cinematic (unchanged).
+   ═══════════════════════════════════════════════════════════════ */
+.caps-sticky-section {
+  position: relative;
+  padding: clamp(80px, 10vh, 140px) 0 clamp(60px, 8vh, 120px);
+  /* IMPORTANT: overflow: hidden BREAKS position:sticky on the right column.
+     Use overflow: clip so decorative layers still don't escape visually,
+     but no scroll container is created → sticky works. */
+  overflow: clip;
+  isolation: isolate;
+}
+
+.caps-sticky-cinematic {
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 30%, rgba(124, 179, 66, 0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 50% at 80% 80%, rgba(40, 90, 35, 0.35) 0%, transparent 55%),
+    linear-gradient(180deg, #0a0f0c 0%, #0e1612 50%, #0a0f0c 100%);
+  color: #fff;
+}
+
+.caps-sticky-header {
+  position: relative;
+  z-index: 3;
+  text-align: left;
+  padding-bottom: clamp(48px, 6vh, 80px);
+}
+.caps-sticky-header .section-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 72px);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.02;
+  color: #fff;
+  margin: 0;
+  max-width: 800px;
+}
+.caps-sticky-header .section-title span {
+  color: #A8D66F;
+}
+
+.caps-sticky-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 6vw, 120px);
+  align-items: start;
+}
+
+/* LEFT column — 5 stacked text blocks. Each block fills ~1 viewport so
+   natural scroll pace swaps the right image in sync. */
+.caps-sticky-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.cap-block {
+  position: relative;
+  min-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 0;
+  opacity: 0.35;
+  transition: opacity 0.55s cubic-bezier(.16,1,.3,1);
+}
+.cap-block.in-view {
+  opacity: 1;
+}
+/* Giant ghost number decoration — sits behind the active block text */
+.cap-block-num {
+  position: absolute;
+  top: 50%;
+  left: -4%;
+  transform: translateY(-50%);
+  font-family: var(--font-display);
+  font-size: clamp(200px, 24vw, 360px);
+  font-weight: 800;
+  line-height: 0.85;
+  letter-spacing: -0.06em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(168, 214, 111, 0.16);
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.cap-block.in-view .cap-block-num {
+  opacity: 1;
+}
+/* Text inside each block — re-declare what the pin-variant had under .caps-pin-cinematic */
+.caps-sticky-cinematic .cap-block .cap-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: #A8D66F;
+  margin-bottom: 28px;
+  position: relative;
+  z-index: 1;
+}
+.caps-sticky-cinematic .cap-block .cap-eyebrow .cap-eyebrow-bar {
+  width: 36px;
+  height: 2px;
+  background: #A8D66F;
+  display: inline-block;
+}
+.caps-sticky-cinematic .cap-block .cap-eyebrow .cap-eyebrow-num { color: #fff; letter-spacing: 0.1em; }
+.caps-sticky-cinematic .cap-block .cap-eyebrow .cap-eyebrow-sep { color: rgba(255,255,255,0.3); margin: 0 2px; }
+.caps-sticky-cinematic .cap-block .cap-eyebrow .cap-eyebrow-tag { color: #A8D66F; }
+
+.caps-sticky-cinematic .cap-block .cap-headline {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.04;
+  color: #fff;
+  margin: 0 0 28px 0;
+  position: relative;
+  z-index: 1;
+}
+.caps-sticky-cinematic .cap-block .cap-body {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.72);
+  max-width: 480px;
+  line-height: 1.75;
+  margin: 0 0 32px 0;
+  position: relative;
+  z-index: 1;
+}
+.caps-sticky-cinematic .cap-block .cap-link {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  align-self: flex-start;
+  padding: 14px 0;
+  border-top: 1px solid rgba(168, 214, 111, 0.4);
+  border-bottom: 1px solid rgba(168, 214, 111, 0.4);
+  padding-right: 32px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: border-color 0.3s, color 0.3s;
+  position: relative;
+  z-index: 1;
+}
+.caps-sticky-cinematic .cap-block .cap-link:hover {
+  color: #A8D66F;
+  border-color: #A8D66F;
+}
+.caps-sticky-cinematic .cap-block .cap-link .cap-link-line {
+  width: 32px;
+  height: 1px;
+  background: #A8D66F;
+  display: inline-block;
+  transition: width 0.35s cubic-bezier(.16,1,.3,1);
+}
+.caps-sticky-cinematic .cap-block .cap-link:hover .cap-link-line { width: 56px; }
+.caps-sticky-cinematic .cap-block .cap-link .cap-link-arrow { color: #A8D66F; transition: transform 0.3s ease; }
+.caps-sticky-cinematic .cap-block .cap-link:hover .cap-link-arrow { transform: translateX(4px); }
+
+/* RIGHT column — sticky frame that holds all 5 images stacked, only one active at a time. */
+.caps-sticky-right {
+  position: sticky;
+  top: calc(var(--nav-h) + 40px);
+  height: calc(100vh - var(--nav-h) - 80px);
+  align-self: start;
+  z-index: 2;
+}
+.caps-sticky-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #14181a;
+  border-radius: 2px;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.55),
+    0 4px 16px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(124, 179, 66, 0.2);
+}
+.cap-visual {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.7s cubic-bezier(.16,1,.3,1);
+  will-change: opacity;
+}
+.cap-visual.active {
+  opacity: 1;
+}
+/* Sticky-variant image: the BG img is transformed by JS (parallax); keep its
+   transition short so it follows scroll updates without lag. */
+.caps-sticky-frame .cap-visual-bg img {
+  transition: none;
+  transform-origin: center center;
+}
+
+
+/* Mobile fallback — no sticky, images render inline inside each block */
+@media (max-width: 900px) {
+  .caps-sticky-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .caps-sticky-right {
+    position: static;
+    height: auto;
+    order: 99; /* pushed below on mobile, hidden in favor of inline images */
+    display: none;
+  }
+  .cap-block {
+    min-height: auto;
+    padding: 32px 0 48px;
+    opacity: 1;
+  }
+  .cap-block-num { display: none; }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   CTA BANNER — Sphinx two-column split (home page variant)
+   Left: pill chip + big 2-line statement.
+   Right: action stack — primary CTA, secondary CTA, response chip.
+   Scoped via body[data-page="home"] so only home gets this layout;
+   other pages keep the centered original.
+   ═══════════════════════════════════════════════════════════════ */
+body[data-page="home"] .cta-split {
+  padding: clamp(80px, 10vh, 140px) 0;
+  border-top: 1px solid rgba(124, 179, 66, 0.18);
+}
+body[data-page="home"] .cta-split-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: clamp(48px, 6vw, 120px);
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+body[data-page="home"] .cta-split-left h2 {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5.2vw, 84px);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.02;
+  color: #fff;
+  margin: 0;
+  text-align: left;
+}
+body[data-page="home"] .cta-split-left h2 span {
+  color: #A8D66F;
+}
+body[data-page="home"] .cta-split-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+body[data-page="home"] .cta-split-right .btn {
+  min-width: 280px;
+  justify-content: center;
+}
+/* Outline button on dark CTA needs light stroke + light text — default
+   .btn-outline uses --text (dark) which is invisible on the dark CTA. */
+body[data-page="home"] .cta-split-right .btn-outline {
+  color: #fff;
+  border-color: rgba(168, 214, 111, 0.55);
+  background: transparent;
+}
+body[data-page="home"] .cta-split-right .btn-outline:hover {
+  border-color: #A8D66F;
+  color: #A8D66F;
+  background: rgba(168, 214, 111, 0.08);
+}
+body[data-page="home"] .cta-response-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  margin-top: 8px;
+  border-radius: 999px;
+  background: rgba(168, 214, 111, 0.06);
+  border: 1px solid rgba(168, 214, 111, 0.22);
+  color: rgba(255, 255, 255, 0.72);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+body[data-page="home"] .cta-response-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #A8D66F;
+  box-shadow: 0 0 10px #A8D66F;
+  animation: ctaDotPulse 2s ease-in-out infinite;
+}
+@keyframes ctaDotPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.7; }
+}
+
+@media (max-width: 900px) {
+  body[data-page="home"] .cta-split-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    text-align: left;
+  }
+  body[data-page="home"] .cta-split-right .btn { min-width: 0; width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-response-dot { animation: none; }
+  .cap-block, .cap-block.in-view { opacity: 1; }
+  .cap-block-num { opacity: 1; }
+  .cap-visual { transition: none; }
+  .caps-sticky-frame .cap-visual-bg img { transform: none !important; }
+  .page-thread-dot { display: none; }
+}

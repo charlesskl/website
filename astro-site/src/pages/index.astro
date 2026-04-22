@@ -132,6 +132,11 @@ const capabilities = [
 
   <Nav lang={lang} />
 
+  <!-- Page-wide dotted thread — penetrates hero → statement → caps → history → CTA so the page reads as one coherent journey. The thread itself is a CSS repeating gradient; JS positions the glowing progress marker as the user scrolls. -->
+  <div class="page-thread-wrap">
+    <div class="page-thread" aria-hidden="true"></div>
+    <div class="page-thread-dot" aria-hidden="true"></div>
+
   <!-- HERO — Cinematic video with brand tint + bottom text -->
   <section class="hero hero-cinematic page-reveal" id="hero">
     <div class="hero-video-wrap">
@@ -197,77 +202,62 @@ const capabilities = [
       </div>
     </section>
 
-    <!-- CAPABILITIES — Cinematic pin-scroll with design elements -->
-    <section class="caps-pin-section caps-pin-cinematic clip-section" id="capsSection">
-      <!-- Decorative grid texture -->
+    <!-- CAPABILITIES — Sphinx "Agent in Action" pattern: scroll text left, sticky image right with parallax -->
+    <section class="caps-sticky-section caps-sticky-cinematic clip-section" id="capsSection">
+      <!-- Decorative layers -->
       <div class="caps-grid-pattern" aria-hidden="true"></div>
       <div class="caps-glow caps-glow-tl" aria-hidden="true"></div>
       <div class="caps-glow caps-glow-br" aria-hidden="true"></div>
 
-      <!-- Header shown before the pinned area -->
-      <div class="container caps-pin-header">
-        <div class="section-label reveal-up"><span class="caps-header-bar"></span>Manufacturing Capabilities</div>
+      <!-- Section header -->
+      <div class="container caps-sticky-header">
+        <div class="section-chip reveal-up">Manufacturing Capabilities</div>
         <h2 class="section-title reveal-up">Five categories.<br><span>One trusted partner.</span></h2>
       </div>
 
-      <!-- Pinned area: inner gets pinned for 5 viewports of scroll -->
-      <div class="caps-pin-wrap">
-        <div class="caps-pin-inner">
-          <div class="caps-pin-grid">
-            <!-- LEFT: text slot with giant ghost numerals + accent -->
-            <div class="caps-text-slot">
-              <div class="caps-ghost-num" id="capsGhostNum">01</div>
-              {capabilities.map((cap, i) => (
-                <article class={`cap-text${i === 0 ? ' active' : ''}`} data-index={i}>
-                  <div class="cap-eyebrow">
-                    <span class="cap-eyebrow-bar"></span>
-                    <span class="cap-eyebrow-num">{cap.num}</span>
-                    <span class="cap-eyebrow-sep">/</span>
-                    <span class="cap-eyebrow-tag">{cap.tag}</span>
-                  </div>
-                  <h3 class="cap-headline">{cap.headline}</h3>
-                  <p class="cap-body">{cap.body}</p>
-                  <a href={cap.href} class="cap-link"><span class="cap-link-line"></span>Explore capability <span class="cap-link-arrow">→</span></a>
-                </article>
-              ))}
-            </div>
-
-            <!-- RIGHT: visual slot — framed, with corner accents -->
-            <div class="caps-visual-slot">
-              <div class="caps-visual-frame">
-                {capabilities.map((cap, i) => (
-                  <div
-                    class={`cap-visual-stack${i === 0 ? ' active' : ''}`}
-                    data-index={i}
-                    data-cap={cap.id}
-                  >
-                    <div class="cap-visual-bg">
-                      <img src={cap.bgImage} alt="" loading={i === 0 ? 'eager' : 'lazy'} width="800" height="500">
-                    </div>
-                    <div class="cap-visual-fg">
-                      <img src={cap.fgImage} alt={cap.fgAlt} loading={i === 0 ? 'eager' : 'lazy'} width="600" height="400">
-                    </div>
-                    <div class="cap-visual-cinematic-overlay" aria-hidden="true"></div>
-                    <div class="cap-visual-tag">{cap.tag}</div>
-                    <div class="cap-visual-label">{cap.label}</div>
-                  </div>
-                ))}
-                <!-- Corner brackets -->
-                <span class="cap-frame-corner cap-frame-corner-tl"></span>
-                <span class="cap-frame-corner cap-frame-corner-tr"></span>
-                <span class="cap-frame-corner cap-frame-corner-bl"></span>
-                <span class="cap-frame-corner cap-frame-corner-br"></span>
+      <!-- Split panel: 5 text blocks scroll naturally on the left, sticky image frame on the right -->
+      <div class="caps-sticky-grid container">
+        <div class="caps-sticky-left">
+          {capabilities.map((cap, i) => (
+            <article class={`cap-block${i === 0 ? ' in-view' : ''}`} data-index={i} data-cap={cap.id}>
+              <div class="cap-block-num" aria-hidden="true">{cap.num}</div>
+              <div class="cap-eyebrow">
+                <span class="cap-eyebrow-bar"></span>
+                <span class="cap-eyebrow-num">{cap.num}</span>
+                <span class="cap-eyebrow-sep">/</span>
+                <span class="cap-eyebrow-tag">{cap.tag}</span>
               </div>
-            </div>
-          </div>
+              <h3 class="cap-headline">{cap.headline}</h3>
+              <p class="cap-body">{cap.body}</p>
+              <a href={cap.href} class="cap-link"><span class="cap-link-line"></span>Explore capability <span class="cap-link-arrow">→</span></a>
+            </article>
+          ))}
+        </div>
 
-          <!-- Bottom strip: category names only (progress bar removed) -->
-          <div class="caps-pin-footer">
-            <div class="caps-pin-categories">
-              {capabilities.map((cap, i) => (
-                <span class={`caps-pin-cat${i === 0 ? ' active' : ''}`} data-index={i}>{cap.label}</span>
-              ))}
-            </div>
+        <div class="caps-sticky-right">
+          <div class="caps-sticky-frame">
+            {capabilities.map((cap, i) => (
+              <div
+                class={`cap-visual${i === 0 ? ' active' : ''}`}
+                data-index={i}
+                data-cap={cap.id}
+              >
+                <div class="cap-visual-bg">
+                  <img src={cap.bgImage} alt="" loading={i === 0 ? 'eager' : 'lazy'} width="800" height="500">
+                </div>
+                <div class="cap-visual-fg">
+                  <img src={cap.fgImage} alt={cap.fgAlt} loading={i === 0 ? 'eager' : 'lazy'} width="600" height="400">
+                </div>
+                <div class="cap-visual-cinematic-overlay" aria-hidden="true"></div>
+                <div class="cap-visual-tag">{cap.tag}</div>
+                <div class="cap-visual-label">{cap.label}</div>
+              </div>
+            ))}
+            <!-- Corner brackets -->
+            <span class="cap-frame-corner cap-frame-corner-tl"></span>
+            <span class="cap-frame-corner cap-frame-corner-tr"></span>
+            <span class="cap-frame-corner cap-frame-corner-bl"></span>
+            <span class="cap-frame-corner cap-frame-corner-br"></span>
           </div>
         </div>
       </div>
@@ -320,16 +310,25 @@ const capabilities = [
       </div>
     </section>
 
-    <!-- CTA BANNER -->
-    <section class="cta-banner clip-section" data-reveal>
-      <div class="container">
-        <h2>Ready to bring your next product to life?</h2>
-        <p>39 years of OEM manufacturing expertise, four production sites, one consistent standard.</p>
-        <a href="/contact.html" class="btn btn-primary magnetic" data-strength="0.2">Start a Conversation</a>
+    <!-- CTA BANNER — Sphinx-style two-column: statement left, actions right -->
+    <section class="cta-banner cta-split clip-section" data-reveal>
+      <div class="container cta-split-grid">
+        <div class="cta-split-left">
+          <div class="section-chip">Let's Work Together</div>
+          <h2>Ready to bring your next product<br><span>to life?</span></h2>
+        </div>
+        <div class="cta-split-right">
+          <a href="/contact.html" class="btn btn-primary magnetic" data-strength="0.2">Start a Conversation →</a>
+          <a href="/capabilities/plastic-toys.html" class="btn btn-outline magnetic" data-strength="0.2">See Capabilities →</a>
+          <div class="cta-response-chip">
+            <span class="cta-response-dot" aria-hidden="true"></span>Response within 24 hours
+          </div>
+        </div>
       </div>
     </section>
 
   </div>
+  </div><!-- /.page-thread-wrap -->
 
   <Footer lang={lang} />
 
@@ -364,67 +363,99 @@ const capabilities = [
           videos.forEach(function (v) { io.observe(v); });
         }
 
-        // ── Capabilities pinned scrolly ──
-        var pinWrap = document.querySelector('.caps-pin-wrap');
-        var pinInner = document.querySelector('.caps-pin-inner');
-        var texts = Array.prototype.slice.call(document.querySelectorAll('.cap-text'));
-        var visualStacks = Array.prototype.slice.call(document.querySelectorAll('.cap-visual-stack'));
-        var cats = Array.prototype.slice.call(document.querySelectorAll('.caps-pin-cat'));
-        var barFill = document.getElementById('capsPinBarFill');
-        var currentLabel = document.querySelector('.caps-pin-current');
-        var ghostNum = document.getElementById('capsGhostNum');
+        // ── Capabilities — Sphinx-style sticky split ──
+        // Left: 5 text blocks scroll naturally. Right: ONE sticky frame whose
+        // active image swaps to match whichever left block is centered in the
+        // viewport. Right image also parallaxes subtly as the active block
+        // passes through the viewport (Ken-Burns drift).
+        var capBlocks = Array.prototype.slice.call(document.querySelectorAll('.caps-sticky-section .cap-block'));
+        var capVisuals = Array.prototype.slice.call(document.querySelectorAll('.caps-sticky-section .cap-visual'));
 
-        if (!pinWrap || !pinInner || !texts.length || !visualStacks.length) return;
+        if (capBlocks.length && capVisuals.length) {
+          var activeCapIndex = 0;
+          function activateCap(i) {
+            if (i === activeCapIndex) return;
+            activeCapIndex = i;
+            capBlocks.forEach(function (b, j) { b.classList.toggle('in-view', j === i); });
+            capVisuals.forEach(function (v, j) { v.classList.toggle('active', j === i); });
+          }
 
-        var total = texts.length;
-        var currentIndex = -1;
-
-        function setActive(i) {
-          if (i === currentIndex) return;
-          currentIndex = i;
-          texts.forEach(function (t, j) { t.classList.toggle('active', j === i); });
-          visualStacks.forEach(function (v, j) { v.classList.toggle('active', j === i); });
-          cats.forEach(function (c, j) { c.classList.toggle('active', j === i); });
-          var pad = String(i + 1).padStart(2, '0');
-          if (currentLabel) currentLabel.textContent = pad;
-          if (ghostNum) ghostNum.textContent = pad;
-        }
-
-        // Disable pin on small screens — fall back to vertical stack via CSS
-        var enablePin = window.innerWidth >= 900;
-        if (!enablePin) {
-          // Just keep all .active classes off except 0; let CSS show them stacked
-          return;
-        }
-
-        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-          gsap.registerPlugin(ScrollTrigger);
-
-          ScrollTrigger.create({
-            trigger: pinWrap,
-            start: 'top top',
-            end: '+=' + (total * window.innerHeight),
-            pin: pinInner,
-            pinSpacing: true,
-            scrub: 0.5,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-            onUpdate: function (self) {
-              var progress = self.progress;
-              var idx = Math.min(total - 1, Math.floor(progress * total));
-              setActive(idx);
-              if (barFill) {
-                barFill.style.width = Math.round(progress * 100) + '%';
+          if ('IntersectionObserver' in window) {
+            // Trigger activation when a block's center crosses the viewport center.
+            // rootMargin collapses the activation zone to the middle 20% of the viewport.
+            var capIO = new IntersectionObserver(function (entries) {
+              // Take the most visible entry and activate it.
+              var best = null;
+              entries.forEach(function (e) {
+                if (e.isIntersecting) {
+                  if (!best || e.intersectionRatio > best.intersectionRatio) best = e;
+                }
+              });
+              if (best) {
+                var idx = parseInt(best.target.getAttribute('data-index'), 10);
+                if (!isNaN(idx)) activateCap(idx);
               }
-            },
-          });
+            }, {
+              rootMargin: '-40% 0px -40% 0px', // middle 20% of viewport
+              threshold: [0, 0.1, 0.3, 0.5, 0.7, 1],
+            });
+            capBlocks.forEach(function (b) { capIO.observe(b); });
+          }
 
-          // Recalc on resize — ScrollTrigger handles refresh automatically when
-          // invalidateOnRefresh is set, plus we update the end distance via a
-          // matchMedia-style refresh.
-          window.addEventListener('resize', function () {
-            ScrollTrigger.refresh();
-          });
+          // Ken-Burns parallax on the active image, tied to window scroll progress
+          // through the caps section. Image scales from 1.12 → 1.0 and translates
+          // from -20px → +20px as the section passes through the viewport.
+          var capsSection = document.getElementById('capsSection');
+          if (capsSection && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+            ScrollTrigger.create({
+              trigger: capsSection,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 0.6,
+              onUpdate: function (self) {
+                var p = self.progress; // 0..1 across the whole section
+                var ty = -20 + p * 40;  // -20 → +20 px
+                var sc = 1.12 - p * 0.12; // 1.12 → 1.00
+                capVisuals.forEach(function (v) {
+                  var img = v.querySelector('.cap-visual-bg img');
+                  if (img) {
+                    img.style.transform = 'translate3d(0,' + ty.toFixed(2) + 'px,0) scale(' + sc.toFixed(3) + ')';
+                  }
+                });
+              },
+            });
+
+            window.addEventListener('resize', function () { ScrollTrigger.refresh(); });
+          }
+        }
+
+        // ── Page-wide dotted thread: progress marker ──
+        // Thread SVG is static inside .page-thread-wrap. A small bright dot
+        // (".page-thread-dot") is position:fixed and its top value tracks
+        // scroll progress — so the dot slides from top of the thread to the
+        // bottom as the reader scrolls through the page.
+        var threadDot = document.querySelector('.page-thread-dot');
+        var threadWrap = document.querySelector('.page-thread-wrap');
+        if (threadDot && threadWrap) {
+          function updateThreadDot() {
+            var rect = threadWrap.getBoundingClientRect();
+            var vh = window.innerHeight;
+            // Map scroll position of the wrap relative to viewport top into [0,1]
+            var total = rect.height - vh;
+            if (total <= 0) { threadDot.style.opacity = '0'; return; }
+            var scrolled = Math.min(Math.max(-rect.top, 0), total);
+            var p = scrolled / total;
+            // Dot travels from 12% to 92% down the viewport (keeps it away from nav + footer overlap)
+            var topPct = 12 + p * 80;
+            threadDot.style.top = topPct + 'vh';
+            // Fade in after hero, fade out near footer
+            var op = p <= 0.02 ? p / 0.02 : (p >= 0.98 ? (1 - p) / 0.02 : 1);
+            threadDot.style.opacity = Math.max(0, Math.min(1, op)).toFixed(2);
+          }
+          updateThreadDot();
+          window.addEventListener('scroll', updateThreadDot, { passive: true });
+          window.addEventListener('resize', updateThreadDot);
         }
         } // end init()
       })();
