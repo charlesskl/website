@@ -1,4 +1,18 @@
 ---
+// ═══════════════════════════════════════════════════════════════════
+// Royal Regent Toys — Home page
+// Full page composed as one Sphinx-style scroll journey:
+//   1. HERO          (cinematic video, unchanged)
+//   2. TRUST BAND    (chip + marquee of product categories)
+//   3. STATEMENT     (pill chip + 3-line philosophy + 1987 watermark w/ parallax)
+//   4. CAPABILITY    (sticky-split: scrolling text left, sticky image right)
+//   5. HISTORY       (pill chip + scroll-scrubbed video with year timeline)
+//   6. CTA           (two-column: statement + action stack)
+// A dotted brand-green thread + glowing progress marker penetrate the
+// whole page so it reads as one continuous journey, not separate sessions.
+// Palette: unified dark cinematic (#0a0a0a base) — scoped to home only.
+// ═══════════════════════════════════════════════════════════════════
+
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
@@ -6,8 +20,8 @@ import Loader from '../components/Loader.astro';
 import '../styles/home.css';
 
 const lang = 'en' as const;
-const prefix = '';
 
+// ── Content ────────────────────────────────────────────────────────
 const milestones = [
   { year: '1987', text: 'Founded in Sha Tau Kok — the first step in a 39-year manufacturing journey.' },
   { year: '2000', text: 'First soft toy production line launched — entering plush and costume manufacturing.' },
@@ -22,6 +36,14 @@ const marqueeItems = [
   'Play Sets', 'Figurines / Collectibles', 'Outdoor Toys', 'Bath Toys',
   'Spinning Tops', 'Water Guns', 'Blaster', 'Stuffed Plush', 'Character Plush',
   'Weighted Plush', 'Musical / Sound Plush', 'Interactive Plush', 'Costumes',
+];
+
+const capabilities = [
+  { id: 'plastic',  num: '01', tag: 'PLASTIC',     label: 'Plastic Toys', headline: 'Injection-molded precision.',        body: 'Single-shot playsets to multi-material collectibles. Tooled, molded, assembled, and finished without leaving the floor.',  href: '/capabilities/plastic-toys.html', bgImage: '/assets/images/stock/cap-plastic-bg.webp',  fgImage: '/assets/images/stock/cap-plastic-fg.webp',  fgAlt: 'Colorful plastic toy figures' },
+  { id: 'plush',    num: '02', tag: 'PLUSH',       label: 'Plush',        headline: 'Soft goods, sewn to brand.',          body: 'Short pile, long pile, weighted, interactive. Production scale that still carries a hand-finish.',                         href: '/capabilities/plush.html',        bgImage: '/assets/images/stock/cap-plush-bg.webp',    fgImage: '/assets/images/stock/cap-plush-fg.webp',    fgAlt: 'Plush teddy bear' },
+  { id: 'dolls',    num: '03', tag: 'DOLLS',       label: 'Dolls',        headline: 'Character detail, end-to-end.',       body: 'Fashion, baby, and collector dolls — with hair-rooting, face painting, and costume work all finished in-house.',          href: '/capabilities/dolls.html',        bgImage: '/assets/images/stock/cap-dolls-bg.webp',    fgImage: '/assets/images/stock/cap-dolls-fg.webp',    fgAlt: 'Fashion dolls' },
+  { id: 'rc',       num: '04', tag: 'RC VEHICLES', label: 'RC Vehicles',  headline: 'Our hardest category.',               body: 'Mechatronics, tooling, electronics, and testing under one roof. The reason brands bring their difficult specs to us.',   href: '/capabilities/rc-vehicle.html',   bgImage: '/assets/images/stock/cap-rc-bg.webp',       fgImage: '/assets/images/stock/cap-rc-fg.webp',       fgAlt: 'Toy RC car' },
+  { id: 'costumes', num: '05', tag: 'COSTUMES',    label: 'Costumes',     headline: 'Theatrical wear, production-grade.',  body: 'Licensed character, seasonal, and dress-up. Cut, sewn, trimmed, and certified to US and EU safety standards.',            href: '/capabilities/costume.html',      bgImage: '/assets/images/stock/cap-costumes-bg.webp', fgImage: '/assets/images/stock/cap-costumes-fg.webp', fgAlt: 'Child in superhero costume' },
 ];
 ---
 
@@ -64,205 +86,451 @@ const marqueeItems = [
 
   <Nav lang={lang} />
 
-  <!-- HERO -->
-  <section class="hero page-reveal" id="hero">
-    <div class="hero-bg">
-      <div class="parallax-layer parallax-bg">
-        <div class="hero-grid-pattern"></div>
+  {/* ═════════════════════════════════════════════════════════════════
+       Page-wide dotted thread (H0 connecting layer)
+       Wraps every content section — hero through CTA — so the thread's
+       glowing progress marker tracks the reader across the entire page.
+       ═════════════════════════════════════════════════════════════════ */}
+  <div class="page-thread-wrap">
+    <div class="page-thread" aria-hidden="true"></div>
+    <div class="page-thread-dot" aria-hidden="true"></div>
+
+    {/* ═══════════════ HERO ═══════════════ */}
+    <section class="hero hero-cinematic page-reveal" id="hero">
+      <div class="hero-video-wrap">
+        <video
+          class="hero-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          aria-hidden="true"
+        >
+          <source src="/assets/videos/hero.mp4" type="video/mp4">
+        </video>
+        <div class="hero-cinematic-tint"></div>
       </div>
-      <div class="parallax-layer parallax-mid">
-        <div class="aurora">
-          <div class="aurora-blob"></div>
-          <div class="aurora-blob"></div>
-          <div class="aurora-blob"></div>
+
+      <div class="hero-cinematic-content">
+        <div class="hero-tag" id="heroTag">OEM Toy Manufacturer · Est. 1987</div>
+        <h1 class="hero-cinematic-title" id="heroTitle">
+          Precision. <span>Craftsmanship.</span> Global Scale.
+        </h1>
+        <p class="hero-cinematic-sub" id="heroSub">Great manufacturing isn't just about production — it's about partnership. For 39 years, we've worked alongside brands to bring their visions to life.</p>
+        <div class="hero-cinematic-actions" id="heroActions">
+          <a href="/capabilities/plastic-toys.html" class="btn btn-primary magnetic" data-strength="0.2">Explore Capabilities</a>
+          <a href="/about.html" class="btn btn-outline magnetic" data-strength="0.2">Our Story →</a>
         </div>
       </div>
-      <div class="parallax-layer parallax-fg">
-        <canvas id="heroParticles"></canvas>
-      </div>
-    </div>
 
-    <div class="hero-content parallax-layer parallax-headline">
-      <div class="hero-tag" id="heroTag">OEM Toy Manufacturer · Est. 1987</div>
-      <h1 class="hero-title" id="heroTitle">
-        Precision.<br>
-        <span class="text-gradient">Craftsmanship.</span><br>
-        Global Scale.
-      </h1>
-      <p class="hero-sub" id="heroSub">Great manufacturing isn't just about production — it's about partnership. For 39 years, we've worked alongside brands to bring their visions to life, with the craftsmanship, compliance, and consistency the world's most demanding markets expect.</p>
-      <div class="hero-actions" id="heroActions">
-        <a href="/capabilities/plastic-toys.html" class="btn btn-primary magnetic" data-strength="0.2">Explore Capabilities</a>
-        <a href="/about.html" class="btn btn-outline magnetic" data-strength="0.2">Our Story →</a>
-      </div>
-    </div>
-
-    <div class="hero-3d-container" id="hero3dContainer"></div>
-
-    <div class="hero-scroll-hint" id="heroScroll">
-      <span>Scroll</span>
-      <div class="scroll-line"></div>
-    </div>
-  </section>
-
-  <!-- MARQUEE -->
-  <div class="marquee" data-cursor="Drag">
-    <div class="marquee-track" id="marqueeTrack">
-      {[...marqueeItems, ...marqueeItems].map((item) => (
-        <span class="marquee-item">{item} <span class="marquee-dot"></span></span>
-      ))}
-    </div>
-  </div>
-
-  <!-- Main content wrapper (for footer reveal) -->
-  <div class="main-content" id="main-content">
-
-    <!-- INTRO STATEMENT -->
-    <section class="intro-statement clip-section" id="introStatement">
-      <div class="statement-grid">
-        <div class="statement-left">
-          <div class="statement-line" id="stmtLine"></div>
-          <div class="statement-content">
-            <p class="statement-text">
-              <span class="stmt-line">Built on trust.</span>
-              <span class="stmt-line">Refined over decades.</span>
-              <span class="stmt-line">Ready for what you need next.</span>
-            </p>
-            <div class="statement-rule" id="stmtRule"></div>
-          </div>
-        </div>
-        <div class="statement-accent" id="stmtAccent">1987</div>
+      <div class="hero-scroll-hint" id="heroScroll">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
       </div>
     </section>
 
-    <!-- CAPABILITIES -->
-    <section class="caps-section clip-section" id="capsSection">
-      <div class="container">
-        <div class="section-label reveal-up">Manufacturing Capabilities</div>
-        <h2 class="section-title reveal-up">Five categories.<br><span>One trusted partner.</span></h2>
+    {/* ═══════════════ TRUST BAND ═══════════════
+         Marquee of product categories introduced by a pill chip —
+         positions it as a "what we build" band between hero and
+         philosophy statement. */}
+    <section class="trust-band reveal-section" aria-label="Product categories we manufacture">
+      <div class="container trust-band-heading">
+        <div class="section-chip reveal-up">Categories We Build</div>
       </div>
-
-      <div class="container">
-        <div class="caps-grid" id="capsGrid">
-          <a href="/capabilities/plastic-toys.html" class="cap-card" data-cap="plastic">
-            <div class="cap-card-bg">
-              <img src="/assets/images/stock/cap-plastic-bg.webp" alt="Colorful plastic toy bricks" loading="lazy" width="800" height="500">
-            </div>
-            <div class="cap-card-img">
-              <img src="/assets/images/stock/cap-plastic-fg.webp" alt="Colorful plastic toy figures" loading="lazy" width="600" height="400">
-            </div>
-            <div class="cap-card-info">
-              <div class="cap-card-name">Plastic Toys</div>
-              <div class="cap-card-link">Explore this capability <span>→</span></div>
-            </div>
-          </a>
-
-          <a href="/capabilities/plush.html" class="cap-card" data-cap="plush">
-            <div class="cap-card-bg">
-              <img src="/assets/images/stock/cap-plush-bg.webp" alt="Plush toy workshop" loading="lazy" width="800" height="533">
-            </div>
-            <div class="cap-card-img">
-              <img src="/assets/images/stock/cap-plush-fg.webp" alt="Plush teddy bear" loading="lazy" width="600" height="900">
-            </div>
-            <div class="cap-card-info">
-              <div class="cap-card-name">Plush</div>
-              <div class="cap-card-link">Explore this capability <span>→</span></div>
-            </div>
-          </a>
-
-          <a href="/capabilities/dolls.html" class="cap-card" data-cap="dolls">
-            <div class="cap-card-bg">
-              <img src="/assets/images/stock/cap-dolls-bg.webp" alt="Doll manufacturing" loading="lazy" width="800" height="1200">
-            </div>
-            <div class="cap-card-img">
-              <img src="/assets/images/stock/cap-dolls-fg.webp" alt="Fashion dolls" loading="lazy" width="600" height="401">
-            </div>
-            <div class="cap-card-info">
-              <div class="cap-card-name">Dolls</div>
-              <div class="cap-card-link">Explore this capability <span>→</span></div>
-            </div>
-          </a>
-
-          <a href="/capabilities/rc-vehicle.html" class="cap-card" data-cap="rc">
-            <div class="cap-card-bg">
-              <img src="/assets/images/stock/cap-rc-bg.webp" alt="RC vehicle parts" loading="lazy" width="800" height="533">
-            </div>
-            <div class="cap-card-img">
-              <img src="/assets/images/stock/cap-rc-fg.webp" alt="Toy RC car" loading="lazy" width="600" height="338">
-            </div>
-            <div class="cap-card-info">
-              <div class="cap-card-name">RC Vehicles</div>
-              <div class="cap-card-link">Explore this capability <span>→</span></div>
-            </div>
-          </a>
-
-          <a href="/capabilities/costume.html" class="cap-card" data-cap="costumes">
-            <div class="cap-card-bg">
-              <img src="/assets/images/stock/cap-costumes-bg.webp" alt="Costume display" loading="lazy" width="800" height="533">
-            </div>
-            <div class="cap-card-img">
-              <img src="/assets/images/stock/cap-costumes-fg.webp" alt="Child in superhero costume" loading="lazy" width="600" height="401">
-            </div>
-            <div class="cap-card-info">
-              <div class="cap-card-name">Costumes</div>
-              <div class="cap-card-link">Explore this capability <span>→</span></div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- HISTORY -->
-    <section class="history-section clip-section" id="historySection" data-milestones={JSON.stringify(milestones)}>
-      <div class="history-bg" id="historyBg">
-        <img src="/assets/images/stock/history-bg.webp" alt="Child playing with toys" loading="lazy" width="1920" height="2891">
-      </div>
-
-      <div class="history-top">
-        <h2 class="history-heading">Development history</h2>
-      </div>
-
-      <div class="history-center">
-        <div class="history-watermark" id="historyWatermark">1987</div>
-        <div class="history-milestone" id="historyMilestone">
-          <p>Founded in Sha Tau Kok — the first step in a 39-year manufacturing journey.</p>
-        </div>
-      </div>
-
-      <div class="history-scroll-progress">
-        <div class="history-scroll-fill" id="historyScrollFill"></div>
-      </div>
-
-      <div class="history-scroll-hint" id="historyScrollHint">
-        <span>Scroll to explore</span>
-        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-
-      <div class="history-timeline">
-        <div class="timeline-track" id="timelineTrack">
-          {milestones.map((m, i) => (
-            <button class={`timeline-node${i === 0 ? ' active' : ''}`} data-index={i}>
-              <div class="timeline-dot"><span>{m.year}</span></div>
-            </button>
+      <div class="marquee" data-cursor="Drag">
+        <div class="marquee-track" id="marqueeTrack">
+          {[...marqueeItems, ...marqueeItems].map((item) => (
+            <span class="marquee-item">{item} <span class="marquee-dot"></span></span>
           ))}
         </div>
       </div>
     </section>
 
-    <!-- CTA BANNER -->
-    <section class="cta-banner clip-section" data-reveal>
-      <div class="container">
-        <h2>Ready to bring your next product to life?</h2>
-        <p>39 years of OEM manufacturing expertise, four production sites, one consistent standard.</p>
-        <a href="/contact.html" class="btn btn-primary magnetic" data-strength="0.2">Start a Conversation</a>
-      </div>
-    </section>
+    <main class="main-content" id="main-content">
 
-  </div>
+      {/* ═══════════════ STATEMENT ═══════════════
+           Charles's three-line philosophy. Pill chip introduces it.
+           The giant 1987 watermark on the right drifts upward at a
+           slower scroll rate for subtle depth. */}
+      <section class="statement-section reveal-section clip-section" id="statementSection">
+        <div class="container statement-chip-row">
+          <div class="section-chip reveal-up">Our Philosophy</div>
+        </div>
+        <div class="statement-grid">
+          <div class="statement-left reveal-up">
+            <div class="statement-line" id="stmtLine"></div>
+            <div class="statement-content">
+              <p class="statement-text">
+                <span class="stmt-line">Built on trust.</span>
+                <span class="stmt-line">Refined over decades.</span>
+                <span class="stmt-line">Ready for what you need next.</span>
+              </p>
+              <div class="statement-rule" id="stmtRule"></div>
+            </div>
+          </div>
+          <div class="statement-accent" id="stmtAccent" data-parallax="0.4">1987</div>
+        </div>
+      </section>
+
+      {/* ═══════════════ CAPABILITY ═══════════════
+           Sphinx "Agent in Action": 5 text blocks scroll naturally on
+           the left; a single sticky image frame on the right cross-fades
+           and parallaxes to match the active block. Mouse movement also
+           tilts the frame subtly (CSS vars set by JS). */}
+      <section class="caps-sticky-section caps-sticky-cinematic reveal-section clip-section" id="capsSection">
+        <div class="caps-grid-pattern" aria-hidden="true"></div>
+        <div class="caps-glow caps-glow-tl" aria-hidden="true"></div>
+        <div class="caps-glow caps-glow-br" aria-hidden="true"></div>
+
+        <div class="container caps-sticky-header">
+          <div class="section-chip reveal-up">Manufacturing Capabilities</div>
+          <h2 class="section-title reveal-up">Five categories.<br><span>One trusted partner.</span></h2>
+        </div>
+
+        <div class="caps-sticky-grid container">
+          <div class="caps-sticky-left">
+            {capabilities.map((cap, i) => (
+              <article class={`cap-block${i === 0 ? ' in-view' : ''}`} data-index={i} data-cap={cap.id}>
+                <div class="cap-block-num" aria-hidden="true">{cap.num}</div>
+                <div class="cap-eyebrow">
+                  <span class="cap-eyebrow-bar"></span>
+                  <span class="cap-eyebrow-num">{cap.num}</span>
+                  <span class="cap-eyebrow-sep">/</span>
+                  <span class="cap-eyebrow-tag">{cap.tag}</span>
+                </div>
+                <h3 class="cap-headline">{cap.headline}</h3>
+                <p class="cap-body">{cap.body}</p>
+                <a href={cap.href} class="cap-link"><span class="cap-link-line"></span>Explore capability <span class="cap-link-arrow">→</span></a>
+              </article>
+            ))}
+          </div>
+
+          <div class="caps-sticky-right" id="capsStickyRight">
+            <div class="caps-sticky-frame" id="capsStickyFrame">
+              {capabilities.map((cap, i) => (
+                <div
+                  class={`cap-visual${i === 0 ? ' active' : ''}`}
+                  data-index={i}
+                  data-cap={cap.id}
+                >
+                  <div class="cap-visual-bg">
+                    <img src={cap.bgImage} alt="" loading={i === 0 ? 'eager' : 'lazy'} width="800" height="500">
+                  </div>
+                  <div class="cap-visual-fg">
+                    <img src={cap.fgImage} alt={cap.fgAlt} loading={i === 0 ? 'eager' : 'lazy'} width="600" height="400">
+                  </div>
+                  <div class="cap-visual-cinematic-overlay" aria-hidden="true"></div>
+                  <div class="cap-visual-tag">{cap.tag}</div>
+                  <div class="cap-visual-label">{cap.label}</div>
+                </div>
+              ))}
+              <span class="cap-frame-corner cap-frame-corner-tl"></span>
+              <span class="cap-frame-corner cap-frame-corner-tr"></span>
+              <span class="cap-frame-corner cap-frame-corner-bl"></span>
+              <span class="cap-frame-corner cap-frame-corner-br"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════ HISTORY ═══════════════
+           Scroll-scrubbed video with year watermark + milestone text
+           swap + clickable year timeline. A pill chip overlays the
+           top-left to match the rest of the page. */}
+      <section class="history-section reveal-section clip-section" id="historySection" data-milestones={JSON.stringify(milestones)}>
+        <div class="history-bg history-bg-video" id="historyBg">
+          <video
+            class="history-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            aria-hidden="true"
+          >
+            <source src="/assets/videos/history.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <div class="history-chip-row">
+          <div class="section-chip reveal-up">Our Journey · 1987–2025</div>
+        </div>
+
+        <div class="history-top">
+          <h2 class="history-heading">Development history</h2>
+        </div>
+
+        <div class="history-center">
+          <div class="history-watermark" id="historyWatermark">1987</div>
+          <div class="history-milestone" id="historyMilestone">
+            <p>Founded in Sha Tau Kok — the first step in a 39-year manufacturing journey.</p>
+          </div>
+        </div>
+
+        <div class="history-scroll-progress">
+          <div class="history-scroll-fill" id="historyScrollFill"></div>
+        </div>
+
+        <div class="history-scroll-hint" id="historyScrollHint">
+          <span>Scroll to explore</span>
+          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+
+        <div class="history-timeline">
+          <div class="timeline-track" id="timelineTrack">
+            {milestones.map((m, i) => (
+              <button class={`timeline-node${i === 0 ? ' active' : ''}`} data-index={i}>
+                <div class="timeline-dot"><span>{m.year}</span></div>
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════ CTA ═══════════════
+           Two-column: statement left, action stack right. No numeric
+           copy (per feedback_website_no_stats). */}
+      <section class="cta-banner cta-split reveal-section clip-section" data-reveal>
+        <div class="container cta-split-grid">
+          <div class="cta-split-left">
+            <div class="section-chip reveal-up">Let's Work Together</div>
+            <h2 class="reveal-up">Ready to bring your next product<br><span>to life?</span></h2>
+          </div>
+          <div class="cta-split-right reveal-up">
+            <a href="/contact.html" class="btn btn-primary magnetic" data-strength="0.2">Start a Conversation →</a>
+            <a href="/capabilities/plastic-toys.html" class="btn btn-outline magnetic" data-strength="0.2">See Capabilities →</a>
+            <div class="cta-response-chip">
+              <span class="cta-response-dot" aria-hidden="true"></span>Response within 24 hours
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>{/* /.page-thread-wrap */}
 
   <Footer lang={lang} />
 
   <Fragment slot="page-scripts">
     <script is:inline src="/assets/home-canvas.js"></script>
     <script is:inline src="/assets/home-animations.js"></script>
+    <script is:inline>
+      // ═════════════════════════════════════════════════════════════
+      // Home page — scroll cinema orchestration
+      // GSAP + ScrollTrigger load AFTER this slot (see BaseLayout.astro
+      // line order), so we wait for DOMContentLoaded before using them.
+      // ═════════════════════════════════════════════════════════════
+      (function () {
+        'use strict';
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', init);
+        } else {
+          init();
+        }
+
+        function init() {
+          var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          var desktop = window.innerWidth >= 900;
+          var hasGSAP = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
+          if (hasGSAP) gsap.registerPlugin(ScrollTrigger);
+
+          // ── (1) Background videos: pause when off-screen ─────────
+          if ('IntersectionObserver' in window) {
+            var videoIO = new IntersectionObserver(function (entries) {
+              entries.forEach(function (e) {
+                var v = e.target;
+                if (e.isIntersecting) v.play().catch(function () {});
+                else v.pause();
+              });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.hero-video, .history-video')
+              .forEach(function (v) { videoIO.observe(v); });
+          }
+
+          // ── (2) Section reveal stagger ───────────────────────────
+          // Any .reveal-section adds .revealed on entry; its .reveal-up
+          // descendants stagger fade-up via CSS transition-delay.
+          if ('IntersectionObserver' in window) {
+            var sectionIO = new IntersectionObserver(function (entries) {
+              entries.forEach(function (e) {
+                if (e.isIntersecting) {
+                  e.target.classList.add('revealed');
+                  sectionIO.unobserve(e.target);
+                }
+              });
+            }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+            document.querySelectorAll('.reveal-section')
+              .forEach(function (s) { sectionIO.observe(s); });
+          } else {
+            document.querySelectorAll('.reveal-section')
+              .forEach(function (s) { s.classList.add('revealed'); });
+          }
+
+          // ── (3) Capability sticky-split ──────────────────────────
+          var capBlocks  = [].slice.call(document.querySelectorAll('.caps-sticky-section .cap-block'));
+          var capVisuals = [].slice.call(document.querySelectorAll('.caps-sticky-section .cap-visual'));
+          if (capBlocks.length && capVisuals.length && 'IntersectionObserver' in window) {
+            var activeIdx = 0;
+            function activateCap(i) {
+              if (i === activeIdx) return;
+              activeIdx = i;
+              capBlocks.forEach(function (b, j)  { b.classList.toggle('in-view', j === i); });
+              capVisuals.forEach(function (v, j) { v.classList.toggle('active',  j === i); });
+            }
+            var capIO = new IntersectionObserver(function (entries) {
+              var best = null;
+              entries.forEach(function (e) {
+                if (e.isIntersecting && (!best || e.intersectionRatio > best.intersectionRatio)) best = e;
+              });
+              if (best) {
+                var idx = parseInt(best.target.getAttribute('data-index'), 10);
+                if (!isNaN(idx)) activateCap(idx);
+              }
+            }, { rootMargin: '-40% 0px -40% 0px', threshold: [0, 0.1, 0.3, 0.5, 0.7, 1] });
+            capBlocks.forEach(function (b) { capIO.observe(b); });
+          }
+
+          // ── (4) Capability Ken-Burns parallax on active image ────
+          var capsSection = document.getElementById('capsSection');
+          if (capsSection && hasGSAP && !reduced) {
+            ScrollTrigger.create({
+              trigger: capsSection,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 0.6,
+              onUpdate: function (self) {
+                var p = self.progress;
+                var ty = -20 + p * 40;
+                var sc = 1.12 - p * 0.12;
+                capVisuals.forEach(function (v) {
+                  var img = v.querySelector('.cap-visual-bg img');
+                  if (img) img.style.transform = 'translate3d(0,' + ty.toFixed(2) + 'px,0) scale(' + sc.toFixed(3) + ')';
+                });
+              },
+            });
+          }
+
+          // ── (5) Capability frame — mouse-tilt 3D ─────────────────
+          // Tracks pointer movement over the entire caps section; tilts
+          // the sticky frame ±6° on both axes using CSS custom properties
+          // (--tilt-x / --tilt-y). Sphinx uses a similar subtle tilt.
+          var capsFrame = document.getElementById('capsStickyFrame');
+          if (capsFrame && capsSection && desktop && !reduced) {
+            var tiltX = 0, tiltY = 0, targetX = 0, targetY = 0, rafId = 0;
+            function onMove(e) {
+              var rect = capsSection.getBoundingClientRect();
+              var cx = (e.clientX - rect.left) / rect.width - 0.5;  // -0.5 .. 0.5
+              var cy = (e.clientY - rect.top) / rect.height - 0.5;
+              targetX = cx * 6;  // degrees
+              targetY = -cy * 6;
+              if (!rafId) rafId = requestAnimationFrame(tick);
+            }
+            function onLeave() {
+              targetX = 0; targetY = 0;
+              if (!rafId) rafId = requestAnimationFrame(tick);
+            }
+            function tick() {
+              tiltX += (targetX - tiltX) * 0.08;
+              tiltY += (targetY - tiltY) * 0.08;
+              capsFrame.style.setProperty('--tilt-x', tiltY.toFixed(2) + 'deg');
+              capsFrame.style.setProperty('--tilt-y', tiltX.toFixed(2) + 'deg');
+              if (Math.abs(targetX - tiltX) > 0.01 || Math.abs(targetY - tiltY) > 0.01) {
+                rafId = requestAnimationFrame(tick);
+              } else {
+                rafId = 0;
+              }
+            }
+            capsSection.addEventListener('mousemove', onMove);
+            capsSection.addEventListener('mouseleave', onLeave);
+          }
+
+          // ── (5.5) History — scroll-driven parallax depth ──────────
+          // Replaces the old idle pan loop with scroll-tied layer motion.
+          // BG video drifts down at ~0.6× scroll while the year watermark
+          // drifts up at ~1.2× scroll — gives depth as the section passes.
+          // Click timeline navigation in home-animations.js still works.
+          var historySection = document.getElementById('historySection');
+          var historyVideo = historySection ? historySection.querySelector('.history-video') : null;
+          var historyWatermark = document.getElementById('historyWatermark');
+          if (historySection && hasGSAP && !reduced) {
+            if (historyVideo) {
+              gsap.fromTo(historyVideo,
+                { yPercent: -10, scale: 1.08 },
+                {
+                  yPercent: 10, scale: 1.12,
+                  ease: 'none',
+                  scrollTrigger: {
+                    trigger: historySection,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: 0.6,
+                  },
+                }
+              );
+            }
+            if (historyWatermark) {
+              gsap.fromTo(historyWatermark,
+                { yPercent: 25 },
+                {
+                  yPercent: -25,
+                  ease: 'none',
+                  scrollTrigger: {
+                    trigger: historySection,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: 0.8,
+                  },
+                }
+              );
+            }
+          }
+
+          // ── (6) Statement 1987 watermark — slow parallax ─────────
+          // Drifts upward at 0.4× scroll rate as the statement passes
+          // through the viewport. Gives depth without moving the text.
+          var stmtAccent = document.getElementById('stmtAccent');
+          var stmtSection = document.getElementById('statementSection');
+          if (stmtAccent && stmtSection && hasGSAP && !reduced) {
+            gsap.to(stmtAccent, {
+              yPercent: -24,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: stmtSection,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 0.8,
+              },
+            });
+          }
+
+          // ── (7) Page-wide thread: glowing progress marker ────────
+          var threadDot = document.querySelector('.page-thread-dot');
+          var threadWrap = document.querySelector('.page-thread-wrap');
+          if (threadDot && threadWrap) {
+            function updateThreadDot() {
+              var rect = threadWrap.getBoundingClientRect();
+              var vh = window.innerHeight;
+              var total = rect.height - vh;
+              if (total <= 0) { threadDot.style.opacity = '0'; return; }
+              var scrolled = Math.min(Math.max(-rect.top, 0), total);
+              var p = scrolled / total;
+              threadDot.style.top = (12 + p * 80) + 'vh';
+              var op = p <= 0.02 ? p / 0.02 : (p >= 0.98 ? (1 - p) / 0.02 : 1);
+              threadDot.style.opacity = Math.max(0, Math.min(1, op)).toFixed(2);
+            }
+            updateThreadDot();
+            window.addEventListener('scroll', updateThreadDot, { passive: true });
+            window.addEventListener('resize', updateThreadDot);
+          }
+
+          // ── (8) Global resize → ScrollTrigger refresh ────────────
+          if (hasGSAP) {
+            window.addEventListener('resize', function () { ScrollTrigger.refresh(); });
+          }
+        }
+      })();
+    </script>
   </Fragment>
 </BaseLayout>

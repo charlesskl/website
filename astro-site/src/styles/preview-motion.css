@@ -1,0 +1,182 @@
+/* ════════════════════════════════════════════════════════════════
+   Preview — capabilities transition effects (capabilities-motion)
+   Info structure is unchanged; each variant overrides the .cap-text
+   and .cap-visual-stack transitions to test a different feel.
+   ════════════════════════════════════════════════════════════════ */
+
+/* Shared: slightly compress pin height so 4 variants fit on one page.
+   Only affects the preview showcase — live home.astro section is untouched. */
+.caps-mo.caps-pin-cinematic {
+  padding-top: 80px;
+}
+.caps-mo .caps-pin-header {
+  margin-bottom: 32px;
+}
+
+/* ─────────── E1 — Cross-fade (baseline) ─────────── */
+.caps-mo-e1 .cap-text {
+  transform: none;
+  transition: opacity 0.55s cubic-bezier(.16,1,.3,1);
+}
+.caps-mo-e1 .cap-text.active {
+  transform: none;
+}
+.caps-mo-e1 .cap-visual-stack {
+  transform: scale(1);
+  transition: opacity 0.65s cubic-bezier(.16,1,.3,1);
+}
+.caps-mo-e1 .cap-visual-stack.active {
+  transform: scale(1);
+}
+
+/* ─────────── E2 — Slide + depth parallax ─────────── */
+.caps-mo-e2 .cap-text {
+  opacity: 0;
+  transform: translateY(48px);
+  transition:
+    opacity 0.7s cubic-bezier(.16,1,.3,1),
+    transform 0.75s cubic-bezier(.16,1,.3,1);
+}
+.caps-mo-e2 .cap-text.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+.caps-mo-e2 .cap-visual-stack {
+  opacity: 0;
+  transform: scale(1.12) translateY(24px);
+  transition:
+    opacity 0.85s cubic-bezier(.16,1,.3,1),
+    transform 1.1s cubic-bezier(.16,1,.3,1);
+}
+.caps-mo-e2 .cap-visual-stack.active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+/* Visual foreground floats slightly slower for depth */
+.caps-mo-e2 .cap-visual-stack .cap-visual-fg {
+  transition: transform 1.3s cubic-bezier(.16,1,.3,1);
+  transform: translateY(20px);
+}
+.caps-mo-e2 .cap-visual-stack.active .cap-visual-fg {
+  transform: translateY(0);
+}
+/* Ghost numeral gets a kinetic slide too for consistency */
+.caps-mo-e2 .caps-ghost-num {
+  transition: transform 0.8s cubic-bezier(.16,1,.3,1), opacity 0.6s ease;
+}
+
+/* ─────────── E3 — Clip-path diagonal wipe ─────────── */
+.caps-mo-e3 .cap-text {
+  opacity: 1;
+  transform: none;
+  clip-path: polygon(0 0, 0 0, 0 100%, -20% 100%);
+  -webkit-clip-path: polygon(0 0, 0 0, 0 100%, -20% 100%);
+  transition:
+    clip-path 0.85s cubic-bezier(.76,0,.24,1),
+    -webkit-clip-path 0.85s cubic-bezier(.76,0,.24,1);
+}
+.caps-mo-e3 .cap-text.active {
+  clip-path: polygon(0 0, 110% -10%, 110% 100%, -20% 100%);
+  -webkit-clip-path: polygon(0 0, 110% -10%, 110% 100%, -20% 100%);
+}
+.caps-mo-e3 .cap-visual-stack {
+  opacity: 1;
+  transform: none;
+  clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  -webkit-clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  transition:
+    clip-path 1s cubic-bezier(.76,0,.24,1),
+    -webkit-clip-path 1s cubic-bezier(.76,0,.24,1);
+}
+.caps-mo-e3 .cap-visual-stack.active {
+  clip-path: polygon(0 0, 112% -8%, 112% 108%, 0 100%);
+  -webkit-clip-path: polygon(0 0, 112% -8%, 112% 108%, 0 100%);
+}
+/* Tiny leading edge accent as wipe crosses */
+.caps-mo-e3 .cap-visual-stack::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 0;
+  width: 2px;
+  background: #A8D66F;
+  z-index: 6;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.45s ease, transform 0.9s cubic-bezier(.76,0,.24,1);
+  pointer-events: none;
+}
+.caps-mo-e3 .cap-visual-stack.active::before {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+/* ─────────── E4 — Text scramble + zoom blur ─────────── */
+.caps-mo-e4 .cap-text {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.55s cubic-bezier(.16,1,.3,1),
+    transform 0.6s cubic-bezier(.16,1,.3,1);
+}
+.caps-mo-e4 .cap-text.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Lock the width of scrambled bits so letters don't reflow much */
+.caps-mo-e4 [data-scramble] {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+  display: inline-block;
+}
+.caps-mo-e4 .cap-eyebrow-num[data-scramble] { min-width: 2ch; text-align: left; }
+.caps-mo-e4 .cap-eyebrow-tag[data-scramble] { min-width: 9ch; text-align: left; }
+.caps-mo-e4 .cap-headline[data-scramble] { min-height: 1.1em; }
+
+.caps-mo-e4 .cap-visual-stack {
+  opacity: 0;
+  transform: scale(1.18);
+  filter: blur(16px);
+  transition:
+    opacity 0.75s cubic-bezier(.16,1,.3,1),
+    transform 1s cubic-bezier(.16,1,.3,1),
+    filter 0.95s cubic-bezier(.16,1,.3,1);
+}
+.caps-mo-e4 .cap-visual-stack.active {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+}
+/* Scanline overlay on active visual — film/tech feel */
+.caps-mo-e4 .cap-visual-stack.active::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(168,214,111,0.04) 0px,
+      rgba(168,214,111,0.04) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* ─────────── Mobile fallback (pin disables, all caps render stacked) ─────────── */
+@media (max-width: 900px) {
+  .caps-mo-e2 .cap-text,
+  .caps-mo-e3 .cap-text,
+  .caps-mo-e4 .cap-text,
+  .caps-mo-e2 .cap-visual-stack,
+  .caps-mo-e3 .cap-visual-stack,
+  .caps-mo-e4 .cap-visual-stack {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+    -webkit-clip-path: none;
+    filter: none;
+  }
+}

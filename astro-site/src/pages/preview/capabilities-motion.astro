@@ -1,0 +1,234 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/home.css';
+import '../../styles/preview.css';
+import '../../styles/preview-motion.css';
+
+const capabilities = [
+  { id: 'plastic',  num: '01', tag: 'PLASTIC',     label: 'Plastic Toys', headline: 'Injection-molded precision.',        body: 'Single-shot playsets to multi-material collectibles. Tooled, molded, assembled, and finished without leaving the floor.',  href: '/capabilities/plastic-toys.html', bgImage: '/assets/images/stock/cap-plastic-bg.webp', fgImage: '/assets/images/stock/cap-plastic-fg.webp' },
+  { id: 'plush',    num: '02', tag: 'PLUSH',       label: 'Plush',        headline: 'Soft goods, sewn to brand.',          body: 'Short pile, long pile, weighted, interactive. Production scale that still carries a hand-finish.',                         href: '/capabilities/plush.html',        bgImage: '/assets/images/stock/cap-plush-bg.webp',   fgImage: '/assets/images/stock/cap-plush-fg.webp' },
+  { id: 'dolls',    num: '03', tag: 'DOLLS',       label: 'Dolls',        headline: 'Character detail, end-to-end.',       body: 'Fashion, baby, and collector dolls — with hair-rooting, face painting, and costume work all finished in-house.',          href: '/capabilities/dolls.html',        bgImage: '/assets/images/stock/cap-dolls-bg.webp',   fgImage: '/assets/images/stock/cap-dolls-fg.webp' },
+  { id: 'rc',       num: '04', tag: 'RC VEHICLES', label: 'RC Vehicles',  headline: 'Our hardest category.',               body: 'Mechatronics, tooling, electronics, and testing under one roof. The reason brands bring their difficult specs to us.',   href: '/capabilities/rc-vehicle.html',   bgImage: '/assets/images/stock/cap-rc-bg.webp',      fgImage: '/assets/images/stock/cap-rc-fg.webp' },
+  { id: 'costumes', num: '05', tag: 'COSTUMES',    label: 'Costumes',     headline: 'Theatrical wear, production-grade.',  body: 'Licensed character, seasonal, and dress-up. Cut, sewn, trimmed, and certified to US and EU safety standards.',            href: '/capabilities/costume.html',      bgImage: '/assets/images/stock/cap-costumes-bg.webp',fgImage: '/assets/images/stock/cap-costumes-fg.webp' },
+];
+
+// Helper that renders the cinematic caps structure Charles approved, but with
+// per-variant class modifiers so each effect has its own transition rules.
+const effects = [
+  { id: 'e1', code: 'E1', title: 'Cross-fade', note: '(opacity only; the current baseline — clean and fast)' },
+  { id: 'e2', code: 'E2', title: 'Slide + depth parallax', note: '(text slides up; visual scales and drifts — kinetic and dimensional)' },
+  { id: 'e3', code: 'E3', title: 'Clip-path diagonal wipe', note: '(geometric wipe across the frame — graphic, industrial, fast)' },
+  { id: 'e4', code: 'E4', title: 'Text scramble + zoom blur', note: '(matrix-style text shuffles; visual zooms from blur to sharp — tech/film)' },
+];
+---
+
+<BaseLayout
+  title="Capabilities — transition effect variants"
+  description="Four transition effects for the approved cinematic capabilities layout"
+  lang="en"
+  canonical="https://royalregentgroup.com/preview/capabilities-motion"
+  ogLocale="en_US"
+  ogLocaleAlternates={[]}
+  dataPage="preview"
+>
+  <Nav lang="en" />
+
+  <div class="preview-wrap">
+    <div class="preview-intro">
+      <div class="preview-eyebrow">Capabilities · Motion · 4 effect variants</div>
+      <h1>Same layout. Four ways to change between categories.</h1>
+      <p>Information structure is unchanged — ghost numerals, eyebrow, headline + body, framed visual with corner brackets, footer strip. What varies is the <em>transition</em> between the five categories as you scroll.</p>
+    </div>
+
+    {effects.map((fx) => (
+      <div class="preview-variant">
+        <div class="preview-label">{fx.code} · {fx.title} <em>{fx.note}</em></div>
+        <section class={`caps-pin-section caps-pin-cinematic caps-mo caps-mo-${fx.id} clip-section`} id={`capsMo-${fx.id}`}>
+          <div class="caps-grid-pattern" aria-hidden="true"></div>
+          <div class="caps-glow caps-glow-tl" aria-hidden="true"></div>
+          <div class="caps-glow caps-glow-br" aria-hidden="true"></div>
+
+          <div class="container caps-pin-header">
+            <div class="section-label"><span class="caps-header-bar"></span>Manufacturing Capabilities</div>
+            <h2 class="section-title">Five categories.<br><span>One trusted partner.</span></h2>
+          </div>
+
+          <div class="caps-pin-wrap" id={`capsMoWrap-${fx.id}`}>
+            <div class="caps-pin-inner" id={`capsMoInner-${fx.id}`}>
+              <div class="caps-pin-grid">
+                <div class="caps-text-slot">
+                  <div class="caps-ghost-num" id={`capsMoGhost-${fx.id}`}>01</div>
+                  {capabilities.map((cap, i) => (
+                    <article class={`cap-text${i === 0 ? ' active' : ''}`} data-index={i} data-cap={cap.id}>
+                      <div class="cap-eyebrow">
+                        <span class="cap-eyebrow-bar"></span>
+                        <span class="cap-eyebrow-num" data-scramble data-final={cap.num}>{cap.num}</span>
+                        <span class="cap-eyebrow-sep">/</span>
+                        <span class="cap-eyebrow-tag" data-scramble data-final={cap.tag}>{cap.tag}</span>
+                      </div>
+                      <h3 class="cap-headline" data-scramble data-final={cap.headline}>{cap.headline}</h3>
+                      <p class="cap-body">{cap.body}</p>
+                      <a href={cap.href} class="cap-link"><span class="cap-link-line"></span>Explore capability <span class="cap-link-arrow">→</span></a>
+                    </article>
+                  ))}
+                </div>
+
+                <div class="caps-visual-slot">
+                  <div class="caps-visual-frame">
+                    {capabilities.map((cap, i) => (
+                      <div
+                        class={`cap-visual-stack${i === 0 ? ' active' : ''}`}
+                        data-index={i}
+                        data-cap={cap.id}
+                      >
+                        <div class="cap-visual-bg">
+                          <img src={cap.bgImage} alt="" loading={i === 0 ? 'eager' : 'lazy'} width="800" height="500">
+                        </div>
+                        <div class="cap-visual-fg">
+                          <img src={cap.fgImage} alt="" loading={i === 0 ? 'eager' : 'lazy'} width="600" height="400">
+                        </div>
+                        <div class="cap-visual-cinematic-overlay" aria-hidden="true"></div>
+                        <div class="cap-visual-tag">{cap.tag}</div>
+                        <div class="cap-visual-label">{cap.label}</div>
+                      </div>
+                    ))}
+                    <span class="cap-frame-corner cap-frame-corner-tl"></span>
+                    <span class="cap-frame-corner cap-frame-corner-tr"></span>
+                    <span class="cap-frame-corner cap-frame-corner-bl"></span>
+                    <span class="cap-frame-corner cap-frame-corner-br"></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="caps-pin-footer">
+                <div class="caps-pin-categories">
+                  {capabilities.map((cap, i) => (
+                    <span class={`caps-pin-cat${i === 0 ? ' active' : ''}`} data-index={i}>{cap.label}</span>
+                  ))}
+                </div>
+                <div class="caps-pin-progress">
+                  <span class="caps-pin-current">01</span>
+                  <div class="caps-pin-bar"><div class="caps-pin-bar-fill" id={`capsMoBar-${fx.id}`}></div></div>
+                  <span class="caps-pin-total">05</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    ))}
+  </div>
+
+  <Footer lang="en" />
+
+  <Fragment slot="page-scripts">
+    <script is:inline>
+      (function(){
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', init);
+        } else { init(); }
+
+        // ── Matrix-style text scramble ─────────────────────────
+        function scrambleEl(el, duration) {
+          if (!el) return;
+          var finalText = el.getAttribute('data-final') || el.textContent;
+          var len = finalText.length;
+          var glyphs = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/#*_-';
+          var startTime = performance.now();
+          duration = duration || 480;
+          // Cancel prior animation
+          if (el._scrambleRAF) cancelAnimationFrame(el._scrambleRAF);
+          function tick(now) {
+            var p = Math.min(1, (now - startTime) / duration);
+            var settleIdx = Math.floor(p * len);
+            var out = '';
+            for (var i = 0; i < len; i++) {
+              var ch = finalText[i];
+              if (i < settleIdx || ch === ' ' || ch === '.' || ch === ',') {
+                out += ch;
+              } else {
+                out += glyphs[Math.floor(Math.random() * glyphs.length)];
+              }
+            }
+            el.textContent = out;
+            if (p < 1) {
+              el._scrambleRAF = requestAnimationFrame(tick);
+            } else {
+              el.textContent = finalText;
+              el._scrambleRAF = null;
+            }
+          }
+          el._scrambleRAF = requestAnimationFrame(tick);
+        }
+
+        function setupVariant(fxId) {
+          var wrap = document.getElementById('capsMoWrap-' + fxId);
+          var inner = document.getElementById('capsMoInner-' + fxId);
+          var root = document.getElementById('capsMo-' + fxId);
+          if (!wrap || !inner || !root) return;
+
+          var texts = Array.prototype.slice.call(root.querySelectorAll('.cap-text'));
+          var stacks = Array.prototype.slice.call(root.querySelectorAll('.cap-visual-stack'));
+          var cats = Array.prototype.slice.call(root.querySelectorAll('.caps-pin-cat'));
+          var barFill = document.getElementById('capsMoBar-' + fxId);
+          var ghost = document.getElementById('capsMoGhost-' + fxId);
+          var currentLabel = root.querySelector('.caps-pin-current');
+
+          var total = texts.length;
+          var currentIndex = -1;
+
+          function setActive(i) {
+            if (i === currentIndex) return;
+            currentIndex = i;
+            texts.forEach(function(t, j){ t.classList.toggle('active', j === i); });
+            stacks.forEach(function(v, j){ v.classList.toggle('active', j === i); });
+            cats.forEach(function(c, j){ c.classList.toggle('active', j === i); });
+            var pad = String(i + 1).padStart(2, '0');
+            if (currentLabel) currentLabel.textContent = pad;
+            if (ghost) ghost.textContent = pad;
+
+            // E4 only — scramble the text of the newly active article
+            if (fxId === 'e4') {
+              var active = texts[i];
+              if (active) {
+                var scrambleTargets = active.querySelectorAll('[data-scramble]');
+                scrambleTargets.forEach(function(t){ scrambleEl(t, 480); });
+              }
+            }
+          }
+
+          if (window.innerWidth < 900) return;
+
+          ScrollTrigger.create({
+            trigger: wrap,
+            start: 'top top',
+            // Preview-only: shorter pin than production so all 4 variants are browsable
+            end: '+=' + (total * window.innerHeight * 0.7),
+            pin: inner,
+            pinSpacing: true,
+            scrub: 0.5,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+            onUpdate: function(self){
+              var p = self.progress;
+              var idx = Math.min(total - 1, Math.floor(p * total));
+              setActive(idx);
+              if (barFill) barFill.style.width = Math.round(p * 100) + '%';
+            }
+          });
+        }
+
+        function init() {
+          if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+          gsap.registerPlugin(ScrollTrigger);
+
+          ['e1', 'e2', 'e3', 'e4'].forEach(setupVariant);
+
+          window.addEventListener('resize', function(){ ScrollTrigger.refresh(); });
+        }
+      })();
+    </script>
+  </Fragment>
+</BaseLayout>
