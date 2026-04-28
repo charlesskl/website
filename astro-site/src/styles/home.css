@@ -1617,10 +1617,14 @@ body[data-page="home"] .cta-banner p {
   justify-content: center;
   padding: 40px 0;
   opacity: 0.35;
-  transition: opacity 0.55s cubic-bezier(.16,1,.3,1);
+  transform: translateY(48px);
+  transition:
+    opacity 0.7s cubic-bezier(.16,1,.3,1),
+    transform 0.75s cubic-bezier(.16,1,.3,1);
 }
 .cap-block.in-view {
   opacity: 1;
+  transform: translateY(0);
 }
 /* Giant ghost number decoration — sits behind the active block text */
 .cap-block-num {
@@ -1747,14 +1751,26 @@ body[data-page="home"] .cta-banner p {
   position: absolute;
   inset: 0;
   opacity: 0;
-  transition: opacity 0.7s cubic-bezier(.16,1,.3,1);
-  will-change: opacity;
+  transform: scale(1.12) translateY(24px);
+  transition:
+    opacity 0.85s cubic-bezier(.16,1,.3,1),
+    transform 1.1s cubic-bezier(.16,1,.3,1);
+  will-change: opacity, transform;
 }
 .cap-visual.active {
   opacity: 1;
+  transform: scale(1) translateY(0);
 }
-/* Sticky-variant image: the BG img is transformed by JS (parallax); keep its
-   transition short so it follows scroll updates without lag. */
+/* E2 depth: foreground layer parallaxes a touch slower than background. */
+.caps-sticky-frame .cap-visual .cap-visual-fg {
+  transition: transform 1.3s cubic-bezier(.16,1,.3,1);
+  transform: translateY(20px);
+}
+.caps-sticky-frame .cap-visual.active .cap-visual-fg {
+  transform: translateY(0);
+}
+/* Sticky-variant image: the BG img is transformed by JS (Ken-Burns parallax);
+   keep its transition short so it follows scroll updates without lag. */
 .caps-sticky-frame .cap-visual-bg img {
   transition: none;
   transform-origin: center center;

@@ -446,6 +446,47 @@ const capabilities = [
             capsSection.addEventListener('mouseleave', onLeave);
           }
 
+          // ── (5.5) History — scroll-driven parallax depth ──────────
+          // Replaces the old idle pan loop with scroll-tied layer motion.
+          // BG video drifts down at ~0.6× scroll while the year watermark
+          // drifts up at ~1.2× scroll — gives depth as the section passes.
+          // Click timeline navigation in home-animations.js still works.
+          var historySection = document.getElementById('historySection');
+          var historyVideo = historySection ? historySection.querySelector('.history-video') : null;
+          var historyWatermark = document.getElementById('historyWatermark');
+          if (historySection && hasGSAP && !reduced) {
+            if (historyVideo) {
+              gsap.fromTo(historyVideo,
+                { yPercent: -10, scale: 1.08 },
+                {
+                  yPercent: 10, scale: 1.12,
+                  ease: 'none',
+                  scrollTrigger: {
+                    trigger: historySection,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: 0.6,
+                  },
+                }
+              );
+            }
+            if (historyWatermark) {
+              gsap.fromTo(historyWatermark,
+                { yPercent: 25 },
+                {
+                  yPercent: -25,
+                  ease: 'none',
+                  scrollTrigger: {
+                    trigger: historySection,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: 0.8,
+                  },
+                }
+              );
+            }
+          }
+
           // ── (6) Statement 1987 watermark — slow parallax ─────────
           // Drifts upward at 0.4× scroll rate as the statement passes
           // through the viewport. Gives depth without moving the text.
