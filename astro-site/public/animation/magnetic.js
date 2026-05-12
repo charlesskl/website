@@ -35,7 +35,7 @@
     // Reduced motion gate — skip magnetic pull
     if (window.RR && window.RR.state && window.RR.state.hasReducedMotion) return;
 
-    var targets = document.querySelectorAll('[data-magnetic], .btn, .nav-cta, .magnetic');
+    var targets = document.querySelectorAll('[data-magnetic], .btn, .magnetic');
     if (!targets.length) return;
 
     isActive = true;

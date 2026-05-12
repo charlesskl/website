@@ -93,7 +93,7 @@
   function initButtonPulse() {
     if (!hasGsap) return;
 
-    var buttons = document.querySelectorAll('.btn-primary, .btn-outline, .nav-cta');
+    var buttons = document.querySelectorAll('.btn-primary, .btn-outline');
     buttons.forEach(function (btn) {
       addListener(btn, 'mouseenter', function () {
         var tween = gsap.to(btn, {

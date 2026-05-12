@@ -599,7 +599,6 @@ body[data-page="contact"] .nav-links a[href="../contact.html"] {
 }
 @media (hover: hover) and (pointer: fine) {
   .nav-cta:hover {
-    transform: translateY(-2px) !important;
     box-shadow: 0 8px 32px rgba(124,179,66,0.3) !important;
     background: var(--gradient) !important;
   }
