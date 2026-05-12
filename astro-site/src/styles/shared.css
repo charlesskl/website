@@ -1617,14 +1617,14 @@ textarea:focus-visible, select:focus-visible, [tabindex]:focus-visible {
   pointer-events: none;
 }
 
-/* ── Page content fade-in after loader ── */
-.page-reveal {
+/* ── Page content fade-in after loader (scoped: only when a loader is present) ── */
+body[data-has-loader] .page-reveal {
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.page-reveal.revealed {
+body[data-has-loader] .page-reveal.revealed {
   opacity: 1;
   transform: translateY(0);
 }
