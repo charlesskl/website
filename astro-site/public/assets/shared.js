@@ -1243,7 +1243,14 @@
   // ─── BRAND LOADER (P0) — Lusion-inspired ────────────────
   function initLoader() {
     var loader = document.getElementById('brandLoader');
-    if (!loader) return;
+    if (!loader) {
+      // No brand loader on this page — reveal page-reveal elements directly.
+      var reveals = document.querySelectorAll('.page-reveal');
+      reveals.forEach(function(el, i) {
+        setTimeout(function() { el.classList.add('revealed'); }, i * 80);
+      });
+      return;
+    }
     document.body.style.overflow = 'hidden';
 
     var logoEl = loader.querySelector('.loader-logo');
