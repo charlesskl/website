@@ -360,15 +360,14 @@ body.rr-cursor-active select { cursor: none; }
   top: 0; left: 0; right: 0;
   height: var(--nav-h);
   z-index: var(--z-header);
-  border-top: 1px solid transparent;
-  transition: background 0.5s, backdrop-filter 0.5s, box-shadow 0.5s, border-top 0.5s;
-}
-
-#navbar.scrolled {
   background: rgba(255,255,255,0.88);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+  transition: box-shadow 0.5s;
+}
+
+#navbar.scrolled {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
