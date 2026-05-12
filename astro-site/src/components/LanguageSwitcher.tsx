@@ -54,16 +54,26 @@ export default function LanguageSwitcher({ lang }: Props) {
         localStorage.setItem('rr-lang', targetLang);
       } catch {}
 
-      // Compute new URL: strip current locale prefix, add new one
+      // Compute new URL. Build uses format:'file', so locale homepages are
+      // /cn.html and /id.html (not /cn/ or /id/), while sub-pages are
+      // /cn/about.html, /id/contact.html, etc.
       let path = window.location.pathname;
 
-      // Remove current locale prefix
-      if (lang === 'cn') path = path.replace(/^\/cn(\/|$)/, '/');
-      else if (lang === 'id') path = path.replace(/^\/id(\/|$)/, '/');
+      // Reduce to canonical EN path
+      if (lang === 'cn') {
+        path = path === '/cn.html' ? '/' : path.replace(/^\/cn\//, '/');
+      } else if (lang === 'id') {
+        path = path === '/id.html' ? '/' : path.replace(/^\/id\//, '/');
+      } else if (path === '/index.html') {
+        path = '/';
+      }
 
-      // Add new locale prefix
-      if (targetLang === 'cn') path = '/cn' + (path === '/' ? '/' : path);
-      else if (targetLang === 'id') path = '/id' + (path === '/' ? '/' : path);
+      // Add target locale prefix
+      if (targetLang === 'cn') {
+        path = path === '/' ? '/cn.html' : '/cn' + path;
+      } else if (targetLang === 'id') {
+        path = path === '/' ? '/id.html' : '/id' + path;
+      }
 
       window.location.href = path;
     },
