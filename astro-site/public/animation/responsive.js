@@ -38,7 +38,7 @@
           });
           // Reset any gsap.set() initial states applied by controller.js
           // so above-fold content is immediately visible
-          var immediateTargets = document.querySelectorAll('.hero-title, .hero-sub, .hero-actions, .hero-tag');
+          var immediateTargets = document.querySelectorAll('.hero-title, .hero-sub, .hero-actions, .hero-tag, .hero-cinematic-title, .hero-cinematic-sub, .hero-cinematic-actions');
           if (typeof gsap !== 'undefined' && immediateTargets.length) {
             gsap.set(immediateTargets, { clearProps: 'all' });
           }

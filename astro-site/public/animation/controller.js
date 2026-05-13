@@ -65,10 +65,9 @@
 
     // Hero content elements (hide before animation takes over in Phase 2)
     // Set opacity:0 on elements that Phase 2 hero.js will animate in
-    // Using data attributes so Phase 2 can target without guessing selectors
-    var heroTitle = document.querySelector('.hero-title');
-    var heroSub   = document.querySelector('.hero-sub');
-    var heroActions = document.querySelector('.hero-actions');
+    var heroTitle = document.querySelector('.hero-title, .hero-cinematic-title');
+    var heroSub   = document.querySelector('.hero-sub, .hero-cinematic-sub');
+    var heroActions = document.querySelector('.hero-actions, .hero-cinematic-actions');
     var heroTag   = document.querySelector('.hero-tag');
 
     if (heroTitle)   gsap.set(heroTitle,   { opacity: 0, y: 30 });
