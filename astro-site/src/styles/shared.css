@@ -366,13 +366,10 @@ body.rr-cursor-active select { cursor: none; }
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-#navbar.scrolled {
-  box-shadow: none;
-}
-
 /* Scroll-linked morph (>=901px): nav converges into a centered pill as
-   --nav-progress goes 0→1 (driven by navbar.js). Background stays transparent;
-   only layout properties interpolate so items naturally slide toward the middle. */
+   --nav-progress goes 0→1 (driven by navbar.js). Frosted-glass background
+   fades in alongside the layout morph so the pill reads as a distinct
+   floating element once consolidated. */
 @media (min-width: 901px) {
   #navbar {
     left: 50%;
@@ -383,6 +380,13 @@ body.rr-cursor-active select { cursor: none; }
     max-width: 100vw;
     height: calc(var(--nav-h) - var(--nav-progress) * (var(--nav-h) - 56px));
     border-radius: calc(var(--nav-progress) * 9999px);
+    background: rgba(255, 255, 255, calc(var(--nav-progress) * 0.85));
+    backdrop-filter: blur(calc(var(--nav-progress) * 24px));
+    -webkit-backdrop-filter: blur(calc(var(--nav-progress) * 24px));
+    border: 1px solid rgba(0, 0, 0, calc(var(--nav-progress) * 0.04));
+    box-shadow:
+      0 calc(var(--nav-progress) * 12px) calc(var(--nav-progress) * 36px)
+      rgba(0, 0, 0, calc(var(--nav-progress) * 0.14));
   }
 
   #navbar.rr-nav-hidden {
@@ -450,23 +454,20 @@ body.rr-cursor-active select { cursor: none; }
   text-decoration: none;
 }
 
+/* Home page: nav text blends from white (transparent baseline over dark hero)
+   to muted (centered pill with frosted white background) in sync with the
+   morph progress, so contrast stays correct throughout the scroll-linked
+   consolidation. */
 body[data-page="home"] .nav-links a,
 body[data-page="home"] .nav-links button {
-  color: var(--white);
+  color: color-mix(in srgb, var(--text-muted), white calc((1 - var(--nav-progress, 0)) * 100%));
 }
 body[data-page="home"] .nav-linkedin a {
-  color: var(--white) !important;
+  color: color-mix(in srgb, var(--text-muted), white calc((1 - var(--nav-progress, 0)) * 100%)) !important;
 }
 body[data-page="home"] .nav-links .dropdown a,
 body[data-page="home"] .nav-links .dropdown button {
   color: var(--text-muted);
-}
-body[data-page="home"] #navbar.scrolled .nav-links a,
-body[data-page="home"] #navbar.scrolled .nav-links button {
-  color: var(--text-muted);
-}
-body[data-page="home"] #navbar.scrolled .nav-linkedin a {
-  color: var(--text-muted) !important;
 }
 
 @media (hover: hover) and (pointer: fine) {

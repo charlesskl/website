@@ -72,13 +72,7 @@
     else if (raw > 1) raw = 1;
     var progress = raw * raw * (3 - 2 * raw);
     navbar.style.setProperty('--nav-progress', progress);
-
-    // .scrolled controls text-color: on home page the hero is full-screen and dark,
-    // so delay the switch until the user has actually scrolled past it so the
-    // baseline white nav text stays legible against the hero.
-    var isHome = document.body.dataset.page === 'home';
-    var threshold = isHome ? (window.innerHeight - 100) : 60;
-    navbar.classList.toggle('scrolled', scrollY > threshold);
+    navbar.classList.toggle('scrolled', progress > 0.01);
   }
 
   function onLenisScroll(e) {
