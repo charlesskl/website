@@ -65,38 +65,35 @@ const marqueeItems = [
   <Nav lang={lang} />
 
   <!-- HERO -->
-  <section class="hero page-reveal" id="hero">
-    <div class="hero-bg">
-      <div class="parallax-layer parallax-bg">
-        <div class="hero-grid-pattern"></div>
-      </div>
-      <div class="parallax-layer parallax-mid">
-        <div class="aurora">
-          <div class="aurora-blob"></div>
-          <div class="aurora-blob"></div>
-          <div class="aurora-blob"></div>
-        </div>
-      </div>
-      <div class="parallax-layer parallax-fg">
-        <canvas id="heroParticles"></canvas>
-      </div>
+  <section class="hero hero-cinematic page-reveal" id="hero">
+    <div class="hero-video-wrap">
+      <video
+        class="hero-video"
+        width="1280"
+        height="720"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        aria-hidden="true"
+      >
+        <source src="/assets/videos/hero.mp4" type="video/mp4">
+      </video>
+      <div class="hero-cinematic-tint"></div>
     </div>
 
-    <div class="hero-content parallax-layer parallax-headline">
+    <div class="hero-cinematic-content">
       <div class="hero-tag" id="heroTag">OEM Toy Manufacturer · Est. 1987</div>
-      <h1 class="hero-title" id="heroTitle">
-        Precision.<br>
-        <span class="text-gradient">Craftsmanship.</span><br>
-        Global Scale.
+      <h1 class="hero-cinematic-title" id="heroTitle">
+        Precision. <span>Craftsmanship.</span> Global Scale.
       </h1>
-      <p class="hero-sub" id="heroSub">Great manufacturing isn't just about production — it's about partnership. For 39 years, we've worked alongside brands to bring their visions to life, with the craftsmanship, compliance, and consistency the world's most demanding markets expect.</p>
-      <div class="hero-actions" id="heroActions">
+      <p class="hero-cinematic-sub" id="heroSub">Great manufacturing isn't just about production — it's about partnership. For 39 years, we've worked alongside brands to bring their visions to life.</p>
+      <div class="hero-cinematic-actions" id="heroActions">
         <a href="/capabilities/plastic-toys.html" class="btn btn-primary magnetic" data-strength="0.2">Explore Capabilities</a>
         <a href="/about.html" class="btn btn-outline magnetic" data-strength="0.2">Our Story →</a>
       </div>
     </div>
-
-    <div class="hero-3d-container" id="hero3dContainer"></div>
 
     <div class="hero-scroll-hint" id="heroScroll">
       <span>Scroll</span>
