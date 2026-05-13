@@ -65,29 +65,8 @@
   }
 
   function handleScroll(scrollY, direction) {
-    // Scrolled class for frosted glass background
+    // Frosted-glass background after slight scroll. Navbar stays pinned at all times.
     navbar.classList.toggle('scrolled', scrollY > 60);
-
-    // Near top: always show
-    if (scrollY < topThreshold) {
-      show();
-      lastScrollY = scrollY;
-      return;
-    }
-
-    // Check scroll distance threshold to prevent jitter
-    var delta = scrollY - lastScrollY;
-    if (Math.abs(delta) < scrollThreshold) return;
-
-    if (delta > 0) {
-      // Scrolling down
-      hide();
-    } else {
-      // Scrolling up
-      show();
-    }
-
-    lastScrollY = scrollY;
   }
 
   function onLenisScroll(e) {

@@ -360,16 +360,56 @@ body.rr-cursor-active select { cursor: none; }
   top: 0; left: 0; right: 0;
   height: var(--nav-h);
   z-index: var(--z-header);
-  border-top: 1px solid transparent;
-  transition: background 0.5s, backdrop-filter 0.5s, box-shadow 0.5s, border-top 0.5s;
-}
-
-#navbar.scrolled {
   background: rgba(255,255,255,0.88);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+  transition:
+    top 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    left 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    right 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    width 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    height 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    border-radius 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.5s,
+    background 0.4s;
+}
+
+#navbar.scrolled {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Scroll-consolidate: nav pulls into a centered pill, stays frozen at the top */
+@media (min-width: 901px) {
+  #navbar.scrolled {
+    top: 14px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    width: max-content;
+    max-width: calc(100vw - 32px);
+    height: 56px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.14);
+  }
+
+  #navbar.scrolled .nav-container {
+    max-width: none;
+    padding: 0 18px;
+    gap: 8px;
+  }
+
+  #navbar.scrolled .nav-logo img {
+    height: 32px;
+    transition: height 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .nav-logo img {
+    transition: height 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
 }
 
 .nav-container {
@@ -391,8 +431,24 @@ body.rr-cursor-active select { cursor: none; }
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 14px;
   list-style: none;
+}
+
+/* All nav items share the same row height + center alignment */
+.nav-links > li,
+.nav-links > astro-island > li {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+}
+
+.nav-links a,
+.nav-links button {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  box-sizing: border-box;
 }
 
 .nav-links a {
@@ -400,7 +456,7 @@ body.rr-cursor-active select { cursor: none; }
   font-size: var(--text-sm);
   font-weight: 500;
   color: var(--text-muted);
-  padding: 10px 16px;
+  padding: 0 16px;
   border-radius: var(--radius-sm);
   transition: color 0.3s, background 0.3s;
   position: relative;
@@ -440,9 +496,7 @@ body[data-page="contact"] .nav-links a[href="../contact.html"] {
   font-size: 0.7rem;
   margin-left: 3px;
   display: inline-block;
-  transition: transform 0.3s var(--ease-out);
 }
-.has-dropdown.dd-open > a .arrow { transform: rotate(180deg); }
 
 /* Invisible bridge between nav item and dropdown */
 .has-dropdown::after {
@@ -460,6 +514,7 @@ body[data-page="contact"] .nav-links a[href="../contact.html"] {
   position: absolute;
   top: calc(100% + 8px);
   left: 50%;
+  transform: translateX(-50%);
   background: var(--white);
   border: 1px solid var(--border);
   border-radius: 12px;
@@ -469,15 +524,12 @@ body[data-page="contact"] .nav-links a[href="../contact.html"] {
   border-top: 3px solid var(--brand);
   /* Hidden by default — JS controls visibility */
   opacity: 0;
-  transform: translateX(-50%) scale(0.95);
-  transform-origin: top center;
   pointer-events: none;
   visibility: hidden;
-  transition: opacity 0.2s ease-out, transform 0.2s ease-out, visibility 0.2s;
+  transition: opacity 0.2s ease-out, visibility 0.2s;
 }
 .has-dropdown.dd-open .dropdown {
   opacity: 1;
-  transform: translateX(-50%) scale(1);
   pointer-events: auto;
   visibility: visible;
 }
@@ -527,7 +579,7 @@ body[data-page="contact"] .nav-links a[href="../contact.html"] {
   stroke-linejoin: round;
   flex-shrink: 0;
 }
-/* Arrow that slides in on hover */
+/* Arrow next to dropdown items — appears on hover (no movement) */
 .dropdown .dd-arrow {
   margin-left: auto;
   width: 14px;
@@ -538,53 +590,28 @@ body[data-page="contact"] .nav-links a[href="../contact.html"] {
   stroke-linecap: round;
   stroke-linejoin: round;
   opacity: 0;
-  transform: translateX(-8px);
-  transition: opacity 0.2s, transform 0.2s;
+  transition: opacity 0.2s;
 }
 @media (hover: hover) and (pointer: fine) {
   .dropdown a:hover .dd-arrow,
   .dropdown button:hover .dd-arrow {
     opacity: 1;
-    transform: translateX(0);
   }
 }
 
-/* Nav island wrappers should never render a layout box */
-astro-island,
-astro-slot,
-astro-static-slot { display: contents; }
-
-/* Guard against an accidental empty <li> showing a bullet between Careers
-   and the language switcher (happens if any list item has no content). */
-.nav-links > li:empty { display: none; }
-
-/* Aggressive reset: kill any stray background on the language-switcher
-   button (browsers apply a default grey buttonface in some contexts). */
-.lang-selector,
-.lang-selector > button,
-.lang-selector button[type="button"] {
-  background: transparent !important;
-  background-color: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  -webkit-appearance: none !important;
-  appearance: none !important;
-}
-.lang-selector > button { padding: 4px 8px !important; }
-
-/* LinkedIn icon in nav */
+/* LinkedIn icon in nav — share height + padding rhythm with text items */
 .nav-linkedin a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 8px !important;
-  color: #444 !important;
+  padding: 0 16px !important;
+  color: var(--text-muted) !important;
   background: none !important;
   transition: color 0.3s;
 }
 @media (hover: hover) and (pointer: fine) {
   .nav-linkedin a:hover {
-    color: var(--brand) !important;
+    color: var(--brand-dark) !important;
     background: none !important;
   }
 }
@@ -598,15 +625,17 @@ astro-static-slot { display: contents; }
 .nav-cta {
   background: var(--gradient) !important;
   color: var(--white) !important;
-  padding: 10px 24px !important;
+  padding: 0 24px !important;
+  /* Extra breathing room before the solid-background CTA so the visible
+     gap (icon edge → pill edge) matches the text↔text rhythm */
+  margin-left: 18px !important;
   border-radius: var(--radius-sm) !important;
   font-weight: 600 !important;
   box-shadow: 0 0 0 2px rgba(124,179,66,0.3) !important;
-  transition: transform 0.3s var(--ease-spring), box-shadow 0.3s !important;
+  transition: box-shadow 0.3s !important;
 }
 @media (hover: hover) and (pointer: fine) {
   .nav-cta:hover {
-    transform: translateY(-2px) !important;
     box-shadow: 0 8px 32px rgba(124,179,66,0.3) !important;
     background: var(--gradient) !important;
   }
@@ -633,7 +662,7 @@ astro-static-slot { display: contents; }
   display: block;
 }
 
-/* ───── NAV BUTTON RESET ───── */
+/* ───── NAV BUTTON RESET — match .nav-links a ───── */
 .nav-links button,
 .nav-item button {
   background: none;
@@ -641,10 +670,19 @@ astro-static-slot { display: contents; }
   font-family: var(--font-body);
   font-size: var(--text-sm);
   font-weight: 500;
-  color: inherit;
-  cursor: default;
-  padding: 0;
+  color: var(--text-muted);
+  padding: 0 16px;
+  border-radius: var(--radius-sm);
+  transition: color 0.3s, background 0.3s;
   letter-spacing: 0.01em;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .nav-links button:hover,
+  .nav-item button:hover {
+    color: var(--brand-dark);
+    background: var(--brand-5);
+  }
 }
 
 .nav-links button:focus-visible,
@@ -798,26 +836,7 @@ h4, h5 {
   }
 }
 
-/* Also apply shimmer to nav CTA */
-.nav-cta {
-  position: relative;
-  overflow: hidden;
-}
-.nav-cta::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
-  pointer-events: none;
-}
-@media (hover: hover) and (pointer: fine) {
-  .nav-cta:hover::after {
-    animation: shimmer 0.6s ease-in-out;
-  }
-}
+/* Nav CTA — shimmer disabled by request */
 
 
 /* ───── MAGNETIC BUTTON WRAPPER ───── */
@@ -980,14 +999,7 @@ footer.footer-reveal {
   border-bottom: 1px solid var(--border);
 }
 
-.footer-brand img.footer-logo {
-  height: 56px;
-  width: auto;
-  max-width: 200px;
-  object-fit: contain;
-  display: block;
-  margin-bottom: var(--space-sm);
-}
+.footer-brand img.footer-logo { height: 56px; margin-bottom: var(--space-sm); }
 .footer-brand p { font-size: var(--text-sm); color: var(--text-muted); line-height: 1.7; }
 
 .footer-col h4 {
@@ -1409,7 +1421,7 @@ h1 .char, h1 .word {
 }
 
 /* ───── LANGUAGE SELECTOR ───── */
-.lang-selector > a, .lang-selector > button { font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.05em; }
+/* Trigger inherits .nav-links a / .nav-links button styling for unified nav look */
 .lang-dropdown { min-width: 160px; }
 .lang-dropdown a, .lang-dropdown button { font-size: var(--text-sm); }
 .lang-dropdown a.active, .lang-dropdown button.active { color: var(--brand); font-weight: 600; }
@@ -1647,14 +1659,14 @@ textarea:focus-visible, select:focus-visible, [tabindex]:focus-visible {
   pointer-events: none;
 }
 
-/* ── Page content fade-in after loader ── */
-.page-reveal {
+/* ── Page content fade-in after loader (scoped: only when a loader is present) ── */
+body[data-has-loader] .page-reveal {
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.page-reveal.revealed {
+body[data-has-loader] .page-reveal.revealed {
   opacity: 1;
   transform: translateY(0);
 }
