@@ -124,7 +124,8 @@
     if (isTouch || !hasHover) return;
     if (typeof gsap === 'undefined') return;
 
-    document.querySelectorAll('button, .nav-links a, .nav-cta, .btn, .magnetic').forEach(function (el) {
+    // Exclude nav items — magnetic pull on nav is disabled by request
+    document.querySelectorAll('.btn, .magnetic').forEach(function (el) {
       var strength = parseFloat(el.dataset.strength) || 0.35;
 
       el.addEventListener('mousemove', function (e) {
@@ -453,13 +454,6 @@
         clearTimeout(closeTimer);
         dd.classList.add('dd-open');
         if (toggle) toggle.setAttribute('aria-expanded', 'true');
-        // Stagger items (desktop only)
-        if (!mq.matches && typeof gsap !== 'undefined' && items.length) {
-          gsap.fromTo(items,
-            { opacity: 0, y: 8 },
-            { opacity: 1, y: 0, duration: 0.25, ease: 'power2.out', stagger: 0.06 }
-          );
-        }
       }
 
       function closeDropdown() {

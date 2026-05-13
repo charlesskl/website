@@ -455,9 +455,7 @@ body[data-page="contact"] .nav-links a[href="../contact.html"] {
   font-size: 0.7rem;
   margin-left: 3px;
   display: inline-block;
-  transition: transform 0.3s var(--ease-out);
 }
-.has-dropdown.dd-open > a .arrow { transform: rotate(180deg); }
 
 /* Invisible bridge between nav item and dropdown */
 .has-dropdown::after {
@@ -475,6 +473,7 @@ body[data-page="contact"] .nav-links a[href="../contact.html"] {
   position: absolute;
   top: calc(100% + 8px);
   left: 50%;
+  transform: translateX(-50%);
   background: var(--white);
   border: 1px solid var(--border);
   border-radius: 12px;
@@ -484,15 +483,12 @@ body[data-page="contact"] .nav-links a[href="../contact.html"] {
   border-top: 3px solid var(--brand);
   /* Hidden by default — JS controls visibility */
   opacity: 0;
-  transform: translateX(-50%) scale(0.95);
-  transform-origin: top center;
   pointer-events: none;
   visibility: hidden;
-  transition: opacity 0.2s ease-out, transform 0.2s ease-out, visibility 0.2s;
+  transition: opacity 0.2s ease-out, visibility 0.2s;
 }
 .has-dropdown.dd-open .dropdown {
   opacity: 1;
-  transform: translateX(-50%) scale(1);
   pointer-events: auto;
   visibility: visible;
 }
@@ -542,7 +538,7 @@ body[data-page="contact"] .nav-links a[href="../contact.html"] {
   stroke-linejoin: round;
   flex-shrink: 0;
 }
-/* Arrow that slides in on hover */
+/* Arrow next to dropdown items — appears on hover (no movement) */
 .dropdown .dd-arrow {
   margin-left: auto;
   width: 14px;
@@ -553,14 +549,12 @@ body[data-page="contact"] .nav-links a[href="../contact.html"] {
   stroke-linecap: round;
   stroke-linejoin: round;
   opacity: 0;
-  transform: translateX(-8px);
-  transition: opacity 0.2s, transform 0.2s;
+  transition: opacity 0.2s;
 }
 @media (hover: hover) and (pointer: fine) {
   .dropdown a:hover .dd-arrow,
   .dropdown button:hover .dd-arrow {
     opacity: 1;
-    transform: translateX(0);
   }
 }
 
@@ -595,7 +589,7 @@ body[data-page="contact"] .nav-links a[href="../contact.html"] {
   border-radius: var(--radius-sm) !important;
   font-weight: 600 !important;
   box-shadow: 0 0 0 2px rgba(124,179,66,0.3) !important;
-  transition: transform 0.3s var(--ease-spring), box-shadow 0.3s !important;
+  transition: box-shadow 0.3s !important;
 }
 @media (hover: hover) and (pointer: fine) {
   .nav-cta:hover {
@@ -799,26 +793,7 @@ h4, h5 {
   }
 }
 
-/* Also apply shimmer to nav CTA */
-.nav-cta {
-  position: relative;
-  overflow: hidden;
-}
-.nav-cta::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
-  pointer-events: none;
-}
-@media (hover: hover) and (pointer: fine) {
-  .nav-cta:hover::after {
-    animation: shimmer 0.6s ease-in-out;
-  }
-}
+/* Nav CTA — shimmer disabled by request */
 
 
 /* ───── MAGNETIC BUTTON WRAPPER ───── */

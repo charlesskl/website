@@ -69,7 +69,7 @@
 
   /* ── Shimmer effect for primary CTAs (CURSOR-04) ── */
   function initShimmer() {
-    var ctas = document.querySelectorAll('.btn-primary, .nav-cta');
+    var ctas = document.querySelectorAll('.btn-primary');
     ctas.forEach(function (btn) {
       addClass(btn, 'rr-shimmer');
 
