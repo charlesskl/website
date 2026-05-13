@@ -65,38 +65,33 @@ const marqueeItems = [
   <Nav lang={lang} />
 
   <!-- HERO -->
-  <section class="hero page-reveal" id="hero">
-    <div class="hero-bg">
-      <div class="parallax-layer parallax-bg">
-        <div class="hero-grid-pattern"></div>
-      </div>
-      <div class="parallax-layer parallax-mid">
-        <div class="aurora">
-          <div class="aurora-blob"></div>
-          <div class="aurora-blob"></div>
-          <div class="aurora-blob"></div>
-        </div>
-      </div>
-      <div class="parallax-layer parallax-fg">
-        <canvas id="heroParticles"></canvas>
-      </div>
+  <section class="hero hero-cinematic page-reveal" id="hero">
+    <div class="hero-video-wrap">
+      <video
+        class="hero-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        aria-hidden="true"
+      >
+        <source src="/assets/videos/hero.mp4" type="video/mp4">
+      </video>
+      <div class="hero-cinematic-tint"></div>
     </div>
 
-    <div class="hero-content parallax-layer parallax-headline">
+    <div class="hero-cinematic-content">
       <div class="hero-tag" id="heroTag">OEM玩具製造商 · 創立於1987年</div>
-      <h1 class="hero-title" id="heroTitle">
-        精密。<br>
-        <span class="text-gradient">匠心。</span><br>
-        全球規模。
+      <h1 class="hero-cinematic-title" id="heroTitle">
+        精密。<span>匠心。</span>全球規模。
       </h1>
-      <p class="hero-sub" id="heroSub">卓越的製造不僅僅是生產——更是夥伴關係。39年來，我們與品牌方並肩合作，將願景變為現實，以全球最嚴格市場所期望的工藝、合規性和一致性，打造每一件產品。</p>
-      <div class="hero-actions" id="heroActions">
+      <p class="hero-cinematic-sub" id="heroSub">卓越的製造不僅僅是生產——更是夥伴關係。39年來，我們與品牌方並肩合作，將願景變為現實。</p>
+      <div class="hero-cinematic-actions" id="heroActions">
         <a href={`${prefix}/capabilities/plastic-toys.html`} class="btn btn-primary magnetic" data-strength="0.2">探索生產能力</a>
         <a href={`${prefix}/about.html`} class="btn btn-outline magnetic" data-strength="0.2">我們的故事 →</a>
       </div>
     </div>
-
-    <div class="hero-3d-container" id="hero3dContainer"></div>
 
     <div class="hero-scroll-hint" id="heroScroll">
       <span>向下滾動</span>
