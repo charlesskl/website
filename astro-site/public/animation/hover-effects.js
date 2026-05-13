@@ -33,38 +33,9 @@
     taggedElements.push({ el: el, cls: cls });
   }
 
-  /* ── Underline draw effect for nav links (CURSOR-04) ── */
+  /* ── Underline draw effect for nav links — disabled by request ── */
   function initUnderlines() {
-    var navLinks = document.querySelectorAll('.nav-links > li > a:not(.nav-cta)');
-    navLinks.forEach(function (link) {
-      // Skip dropdown toggles and lang selector
-      if (link.closest('.has-dropdown')) return;
-
-      addClass(link, 'rr-underline');
-
-      if (hasGsap) {
-        addListener(link, 'mouseenter', function () {
-          var after = link;
-          gsap.to(after, {
-            '--rr-underline-scale': 1,
-            '--rr-underline-origin': '0% 50%',
-            duration: 0.3,
-            ease: 'power2.out',
-            overwrite: true
-          });
-        });
-        addListener(link, 'mouseleave', function () {
-          gsap.to(link, {
-            '--rr-underline-scale': 0,
-            '--rr-underline-origin': '100% 50%',
-            duration: 0.25,
-            ease: 'power2.in',
-            overwrite: true
-          });
-        });
-      }
-      // Without GSAP, CSS handles the transition via :hover
-    });
+    // Intentionally a no-op. Nav has no hover-movement effects.
   }
 
   /* ── Shimmer effect for primary CTAs (CURSOR-04) ── */
@@ -120,7 +91,8 @@
   function initLinkNudge() {
     if (!hasGsap) return;
 
-    var links = document.querySelectorAll('.footer-col a, .dropdown a');
+    /* .dropdown a removed — dropdown is part of the navbar, kept static */
+    var links = document.querySelectorAll('.footer-col a');
     links.forEach(function (link) {
       addListener(link, 'mouseenter', function () {
         var tween = gsap.to(link, {

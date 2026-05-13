@@ -390,7 +390,7 @@ body.rr-cursor-active select { cursor: none; }
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 14px;
   list-style: none;
 }
 
