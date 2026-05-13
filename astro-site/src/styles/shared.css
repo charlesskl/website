@@ -360,15 +360,12 @@ body.rr-cursor-active select { cursor: none; }
   top: 0; left: 0; right: 0;
   height: var(--nav-h);
   z-index: var(--z-header);
-  background: rgba(255,255,255,0.88);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  background: transparent;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  transition: box-shadow 0.5s;
 }
 
 #navbar.scrolled {
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: none;
 }
 
 .nav-container {
@@ -421,6 +418,25 @@ body.rr-cursor-active select { cursor: none; }
   position: relative;
   letter-spacing: 0.01em;
   text-decoration: none;
+}
+
+body[data-page="home"] .nav-links a,
+body[data-page="home"] .nav-links button {
+  color: var(--white);
+}
+body[data-page="home"] .nav-linkedin a {
+  color: var(--white) !important;
+}
+body[data-page="home"] .nav-links .dropdown a,
+body[data-page="home"] .nav-links .dropdown button {
+  color: var(--text-muted);
+}
+body[data-page="home"] #navbar.scrolled .nav-links a,
+body[data-page="home"] #navbar.scrolled .nav-links button {
+  color: var(--text-muted);
+}
+body[data-page="home"] #navbar.scrolled .nav-linkedin a {
+  color: var(--text-muted) !important;
 }
 
 @media (hover: hover) and (pointer: fine) {
