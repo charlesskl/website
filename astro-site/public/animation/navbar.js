@@ -65,8 +65,20 @@
   }
 
   function handleScroll(scrollY, direction) {
-    // Frosted-glass background after slight scroll. Navbar stays pinned at all times.
-    navbar.classList.toggle('scrolled', scrollY > 60);
+    // Scroll-linked morph: 0 → 1 over the first 160px of scroll.
+    // smoothstep easing so the buttons ease into the middle instead of snapping.
+    var raw = scrollY / 160;
+    if (raw < 0) raw = 0;
+    else if (raw > 1) raw = 1;
+    var progress = raw * raw * (3 - 2 * raw);
+    navbar.style.setProperty('--nav-progress', progress);
+
+    // .scrolled controls text-color: on home page the hero is full-screen and dark,
+    // so delay the switch until the user has actually scrolled past it so the
+    // baseline white nav text stays legible against the hero.
+    var isHome = document.body.dataset.page === 'home';
+    var threshold = isHome ? (window.innerHeight - 100) : 60;
+    navbar.classList.toggle('scrolled', scrollY > threshold);
   }
 
   function onLenisScroll(e) {
@@ -135,6 +147,7 @@
       }
       navbar.classList.remove('rr-nav-hidden');
       navbar.classList.remove('scrolled');
+      navbar.style.removeProperty('--nav-progress');
     }
 
     isActive = false;
