@@ -1065,19 +1065,19 @@
     var key = lang === 'zh-Hant' || lang === 'zh' ? 'zh' : lang;
     var messages = [el.textContent.trim()].concat(extraMessages[key] || extraMessages.en);
 
-    // Create cursor element
+    // Cursor lives inside el so it sits inline next to the last typed char
+    el.textContent = '';
+    var textNode = document.createTextNode(messages[0]);
+    el.appendChild(textNode);
     var cursor = document.createElement('span');
     cursor.className = 'typewriter-cursor';
     cursor.textContent = '|';
-    el.parentNode.insertBefore(cursor, el.nextSibling);
+    el.appendChild(cursor);
 
     var msgIndex = 0;
     var charIndex = messages[0].length; // start fully typed
     var isDeleting = false;
     var pauseTimer = null;
-
-    // Show first message fully, then start cycling after a pause
-    el.textContent = messages[0];
 
     function type() {
       var current = messages[msgIndex];
@@ -1085,10 +1085,10 @@
 
       if (isDeleting) {
         charIndex--;
-        el.textContent = current.substring(0, charIndex);
+        textNode.data = current.substring(0, charIndex);
       } else {
         charIndex++;
-        el.textContent = current.substring(0, charIndex);
+        textNode.data = current.substring(0, charIndex);
       }
 
       if (!isDeleting && charIndex === current.length) {
