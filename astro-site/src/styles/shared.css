@@ -558,13 +558,12 @@ body[data-page="contact"] .nav-links a[href="../contact.html"] {
   }
 }
 
-/* LinkedIn icon in nav — share height + muted color with other items */
+/* LinkedIn icon in nav — share height + padding rhythm with text items */
 .nav-linkedin a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 10px !important;
-  width: 40px;
+  padding: 0 16px !important;
   color: var(--text-muted) !important;
   background: none !important;
   transition: color 0.3s;
@@ -586,6 +585,9 @@ body[data-page="contact"] .nav-links a[href="../contact.html"] {
   background: var(--gradient) !important;
   color: var(--white) !important;
   padding: 0 24px !important;
+  /* Extra breathing room before the solid-background CTA so the visible
+     gap (icon edge → pill edge) matches the text↔text rhythm */
+  margin-left: 18px !important;
   border-radius: var(--radius-sm) !important;
   font-weight: 600 !important;
   box-shadow: 0 0 0 2px rgba(124,179,66,0.3) !important;
